@@ -1937,7 +1937,48 @@ export const regionalPlaces: Place[] = [
   }
 ];
 
-export const places: Place[] = [...pilotPlaces, ...regionalPlaces, ...greekPlaces, ...bulgarianPlaces, ...serbianPlaces, ...bosnianPlaces, ...albanianPlaces];
+// Aynı yerleşimi temsil eden mükerrer kayıtlar: ikincil kayıt birincile birleştirilir.
+const MERGED_DUPLICATES: Record<string, string> = { 'reg-gostivar': 'research-GOS-001' };
+// Başka bir yerleşimle birebir aynı değeri taşıyan, kaynağıyla henüz doğrulanmamış gözlemler.
+const UNVERIFIED_IDENTICAL: { id: string; year: number }[] = [
+  { id: 'bos-jajce', year: 1530 }, { id: 'bos-srebrenica', year: 1530 },
+  { id: 'bos-doboj', year: 1530 }, { id: 'bos-gacko', year: 1530 }
+];
+function assemblePlaces(all: Place[]): Place[] {
+  const byId = new Map(all.map(p => [p.id, p]));
+  const result: Place[] = [];
+  for (const p of all) {
+    if (MERGED_DUPLICATES[p.id] && byId.has(MERGED_DUPLICATES[p.id])) continue;
+    let merged = p;
+    for (const [dupId, targetId] of Object.entries(MERGED_DUPLICATES)) {
+      const dup = byId.get(dupId);
+      if (targetId !== p.id || !dup) continue;
+      const key = (o: Observation) => `${o.year}|${o.dimension}`;
+      const existing = new Set(p.observations.map(key));
+      merged = {
+        ...p,
+        aliases: [...new Set([...p.aliases, ...dup.aliases, dup.name])].filter(a => a !== p.name),
+        observations: [...p.observations, ...dup.observations.filter(o => !existing.has(key(o)))],
+        events: [...p.events, ...dup.events.filter(e => !p.events.some(x => x.year === e.year))],
+        additionalSources: [...new Set([...(p.additionalSources || []), dup.source])]
+      };
+    }
+    const flags = UNVERIFIED_IDENTICAL.filter(f => f.id === merged.id);
+    if (flags.length) {
+      merged = {
+        ...merged,
+        observations: merged.observations.map(o => flags.some(f => f.year === o.year && o.values) ? {
+          ...o,
+          disputed: true,
+          note: [o.note, 'Doğrulanmadı: Bu hâne değerleri başka bir Bosna kasabasının aynı yıl kaydıyla birebir aynı; defter sayfasıyla karşılaştırılmalı.'].filter(Boolean).join(' ')
+        } : o)
+      };
+    }
+    result.push(merged);
+  }
+  return result;
+}
+export const places: Place[] = assemblePlaces([...pilotPlaces, ...regionalPlaces, ...greekPlaces, ...bulgarianPlaces, ...serbianPlaces, ...bosnianPlaces, ...albanianPlaces]);
 
 // Observations are shown in their explicit period; counts are never interpolated.
 export function observationsAt(p:Place,year:number,dimension?:string){return p.observations.filter(o=>(!dimension||o.dimension===dimension)&&year>=o.year&&year<=(o.end??o.year));}
@@ -2292,15 +2333,36 @@ export function findRegionPresetForPlace(place: Place): RegionPreset | undefined
 }
 
 // ==========================================
-// BALKANLAR TÜRK & MÜSLÜMAN TARİHSEL DEMOGRAFİSİ
-// (Kemal Karpat, Ömer Lütfi Barkan, Justin McCarthy, BOA Salnâmeleri)
+// BALKANLARDA MÜSLÜMAN NÜFUSUN TARİHSEL SEYRİ
+// (Kemal Karpat, Ömer Lütfi Barkan, Justin McCarthy, BOA Salnâmeleri, resmî sayımlar)
+//
+// YÖNTEM NOTU:
+// - Osmanlı kayıtları etnik köken değil din ayrımı yapar (Millet-i İslâm). Bu seri bu nedenle
+//   "Müslüman" nüfusu gösterir; Türk, Boşnak, Arnavut, Pomak, Torbeş ayrımı yapılmaz.
+// - 2026 değeri sabit bir çerçeveye dayanır: bugünkü Bosna-Hersek, Karadağ, Sırbistan, Kosova,
+//   K. Makedonya, Arnavutluk, Bulgaristan ve Yunanistan (Türkiye, Romanya, Hırvatistan, Slovenya hariç).
+// - 1912 öncesi çıpalar farklı kaynakların farklı coğrafi tanımlarını sentezler; çerçeve birebir
+//   örtüşmez. Uzun dönemli oran değişiminin bir kısmı çerçeve farkından kaynaklanabilir.
+// - Çıpalar arası yıllar doğrusal ara değerdir, kayıt değildir.
 // ==========================================
+export type DemographicEvidenceKind = 'editoryal-tahmin' | 'kaynak-sentezi' | 'sayim-temelli';
+
+export const DEMOGRAPHIC_EVIDENCE_LABELS: Record<DemographicEvidenceKind, string> = {
+  'editoryal-tahmin': 'Editoryal tahmin',
+  'kaynak-sentezi': 'Kaynak sentezi',
+  'sayim-temelli': 'Sayım temelli'
+};
+
+export const DEMOGRAPHIC_SCOPE_NOTE =
+  'Müslüman nüfus (tüm etnik gruplar). 2026: Bosna, Karadağ, Sırbistan, Kosova, K. Makedonya, Arnavutluk, Bulgaristan, Yunanistan; Türkiye hariç. Eski dönem çıpalarının coğrafi çerçevesi birebir aynı değildir.';
+
 export interface BalkanDemographicAnchor {
   year: number;
   muslim: number;
   total: number;
   source: string;
   note: string;
+  kind: DemographicEvidenceKind;
 }
 
 export interface BalkanDemographicsResult {
@@ -2310,38 +2372,35 @@ export interface BalkanDemographicsResult {
   pct: number;
   source: string;
   note: string;
+  kind: DemographicEvidenceKind;
+  interpolated: boolean;
 }
 
 export const BALKAN_DEMOGRAPHICS_ANCHORS: BalkanDemographicAnchor[] = [
-  { year: 1354, muslim: 15000, total: 5000000, source: 'Erken İskân (Halil İnalcık)', note: 'Çimpe Kalesi ve ilk Rumeli Yörük geçişleri' },
-  { year: 1389, muslim: 220000, total: 5200000, source: 'I. Kosova Dönemi', note: 'Karesi ve Saruhan Türkmenlerinin Trakya ve Meriç vadisi iskânı' },
-  { year: 1453, muslim: 680000, total: 5500000, source: 'Fatih Dönemi (İnalcık)', note: 'İstanbul fethi arifesinde Trakya ve Makedonya kentleşmesi' },
-  { year: 1485, muslim: 1050000, total: 5600000, source: 'II. Bayezid Tahrirleri (Ö. L. Barkan)', note: 'Balkanlarda ilk geniş ölçekli mufassal tahrir dökümü' },
-  { year: 1530, muslim: 1280000, total: 5900000, source: 'Kanuni Tahrirleri (BOA TD 167)', note: 'Bosna ve İlbasan kentleşmesi; Barkan nüfus tabloları' },
-  { year: 1580, muslim: 2150000, total: 7100000, source: 'Klasik Dönem Zirvesi', note: 'Bosna ve Arnavutluk ihtidaları ile şehirli Türk nüfus artışı' },
-  { year: 1699, muslim: 2420000, total: 7400000, source: 'Karlofça Antlaşması (McCarthy)', note: 'Macaristan kayıpları sonrası güneye çekilen Müslüman nüfus' },
-  { year: 1780, muslim: 2850000, total: 8100000, source: '18. yy Sonu Sentezi', note: 'Ayanlar dönemi, Balkan kentlerinde ticaret ve zanaat Müslümanları' },
-  { year: 1831, muslim: 3350000, total: 8900000, source: 'II. Mahmud İlk Sayımı (Karpat)', note: 'İlk resmi Osmanlı erkek sayımı; Rumeli Vilayeti dökümü' },
-  { year: 1876, muslim: 4350000, total: 10200000, source: '93 Harbi Arifesi (Kemal Karpat)', note: 'Tuna Vilayeti ve Makedonya’da en yüksek Müslüman yoğunluğu (%42.6)' },
-  { year: 1881, muslim: 3850000, total: 10600000, source: 'Berlin Sonrası Göçler (McCarthy)', note: '93 Harbi muhacir dalgası; Bulgaristan ve Sırbistan tahliyeleri' },
-  { year: 1894, muslim: 4120000, total: 12100000, source: 'Osmanlı Salnâmeleri (Karpat)', note: 'Tüm Balkanlarda %34.0; Osmanlı Rumeli Vilayetlerinde %52.4 Müslüman' },
-  { year: 1912, muslim: 4450000, total: 14800000, source: 'Balkan Harbi Arifesi (Karpat)', note: 'Rumeli vilayetlerinde 3.1 milyon Müslüman (%51)' },
-  { year: 1924, muslim: 2850000, total: 17500000, source: 'Lozan Mübadelesi Sonrası', note: 'Yunanistan mübadelesi sonrası Batı Trakya, Bulgaristan ve Yug. Türkleri' },
-  { year: 1950, muslim: 3200000, total: 22000000, source: '1950 Göç Anlaşması', note: 'Bulgaristan ve Yugoslavya’dan Türkiye’ye kitlesel göçler' },
-  { year: 1989, muslim: 4100000, total: 30500000, source: 'Büyük Gezi / Asimilasyon Göçü', note: '360.000 Bulgaristan Türkünün zorunlu tahliyesi' },
-  { year: 2026, muslim: 6450000, total: 36900000, source: '2021–2024 Resmi Sayımlar (BHAS, INSTAT, ASK, NSI)', note: 'Bosna (%51), Kosova (%95), Arnavutluk (%55), K. Makedonya (%32), Bulgaristan (%11), Batı Trakya & Sancak' }
+  { year: 1354, muslim: 15000, total: 5000000, kind: 'editoryal-tahmin', source: 'Erken İskân (Halil İnalcık)', note: 'Çimpe Kalesi ve ilk Rumeli Yörük geçişleri' },
+  { year: 1389, muslim: 220000, total: 5200000, kind: 'editoryal-tahmin', source: 'I. Kosova Dönemi', note: 'Karesi ve Saruhan Türkmenlerinin Trakya ve Meriç vadisi iskânı' },
+  { year: 1453, muslim: 680000, total: 5500000, kind: 'editoryal-tahmin', source: 'Fatih Dönemi (İnalcık)', note: 'İstanbul fethi arifesinde Trakya ve Makedonya kentleşmesi' },
+  { year: 1485, muslim: 1050000, total: 5600000, kind: 'editoryal-tahmin', source: 'II. Bayezid Tahrirleri (Ö. L. Barkan)', note: 'Barkan’ın hâne tablolarından türetilmiş kişi tahmini; hâne → kişi çarpanı varsayımdır' },
+  { year: 1530, muslim: 1280000, total: 5900000, kind: 'editoryal-tahmin', source: 'Kanuni Tahrirleri (Ö. L. Barkan)', note: 'Barkan’ın 1520–1535 hâne tablolarından türetilmiş kişi tahmini' },
+  { year: 1580, muslim: 2150000, total: 7100000, kind: 'editoryal-tahmin', source: 'Klasik Dönem', note: 'Bosna ve Arnavutluk ihtidaları ile kentli Müslüman nüfus artışı' },
+  { year: 1699, muslim: 2420000, total: 7400000, kind: 'editoryal-tahmin', source: 'Karlofça sonrası', note: 'Macaristan kayıpları sonrası güneye çekilen Müslüman nüfus' },
+  { year: 1780, muslim: 2850000, total: 8100000, kind: 'editoryal-tahmin', source: '18. yüzyıl sonu', note: 'Ayanlar dönemi; doğrudan sayım yoktur' },
+  { year: 1831, muslim: 3350000, total: 8900000, kind: 'kaynak-sentezi', source: '1831 sayımı (Karpat)', note: 'Yalnız erkek nüfus sayıldı; toplam nüfus Karpat’ın düzeltmesine dayanır' },
+  { year: 1876, muslim: 4350000, total: 10200000, kind: 'kaynak-sentezi', source: '93 Harbi arifesi (Karpat, McCarthy)', note: 'Tuna Vilayeti ve Makedonya’da en yüksek Müslüman yoğunluğu' },
+  { year: 1881, muslim: 3850000, total: 10600000, kind: 'kaynak-sentezi', source: 'Berlin sonrası (McCarthy)', note: '93 Harbi muhacir dalgası; Bulgaristan ve Sırbistan tahliyeleri' },
+  { year: 1894, muslim: 4120000, total: 12100000, kind: 'kaynak-sentezi', source: 'Osmanlı salnâmeleri (Karpat)', note: 'Osmanlı Rumeli vilayetlerinde Müslüman çoğunluk; bağımsız Balkan devletlerinde azınlık' },
+  { year: 1912, muslim: 4450000, total: 14800000, kind: 'kaynak-sentezi', source: 'Balkan Harbi arifesi (Karpat)', note: 'Rumeli vilayetlerinde yaklaşık 3,1 milyon Müslüman' },
+  { year: 1924, muslim: 2850000, total: 17500000, kind: 'kaynak-sentezi', source: 'Lozan mübadelesi sonrası', note: 'Yunanistan’dan ~355.000–400.000 Müslüman mübadele edildi; Batı Trakya muaf tutuldu' },
+  { year: 1950, muslim: 3200000, total: 22000000, kind: 'kaynak-sentezi', source: 'Ulusal sayımlar (1946–1953)', note: 'Bulgaristan ve Yugoslavya’dan Türkiye’ye göçler sürüyor' },
+  { year: 1989, muslim: 4100000, total: 30500000, kind: 'kaynak-sentezi', source: 'Ulusal sayımlar (1981–1991)', note: 'Bulgaristan’dan ~360.000 Türkün zorunlu göçü (yaklaşık 150.000’i sonra geri döndü)' },
+  { year: 2026, muslim: 6100000, total: 33150000, kind: 'sayim-temelli', source: 'Resmî sayımlar: BHAS 2013, ASK 2024, INSTAT 2023, MakStat 2021, NSI 2021, RZS 2022, MONSTAT 2023', note: 'Bosna ~1,62M (2013 oranı, güncel nüfusa uygulanmış tahmin) · Kosova ~1,5M · Arnavutluk ~1,22M (%45,9 Müslüman + %4,8 Bektaşi) · Bulgaristan ~0,64M · K. Makedonya ~0,59M · Sırbistan ~0,28M · Karadağ ~0,13M · Yunanistan ~0,12M' }
 ];
 
 export function getBalkanDemographicsForYear(year: number): BalkanDemographicsResult {
   const anchors = BALKAN_DEMOGRAPHICS_ANCHORS;
-  if (year <= anchors[0].year) {
-    const a = anchors[0];
-    return { ...a, pct: (a.muslim / a.total) * 100 };
-  }
-  if (year >= anchors[anchors.length - 1].year) {
-    const last = anchors[anchors.length - 1];
-    return { ...last, pct: (last.muslim / last.total) * 100 };
-  }
+  const exact = (a: BalkanDemographicAnchor): BalkanDemographicsResult => ({ ...a, pct: (a.muslim / a.total) * 100, interpolated: false });
+  if (year <= anchors[0].year) return exact(anchors[0]);
+  if (year >= anchors[anchors.length - 1].year) return exact(anchors[anchors.length - 1]);
 
   let i = 0;
   while (i < anchors.length - 1 && anchors[i + 1].year <= year) {
@@ -2351,21 +2410,27 @@ export function getBalkanDemographicsForYear(year: number): BalkanDemographicsRe
   const a1 = anchors[i];
   const a2 = anchors[i + 1];
 
-  if (a1.year === year) return { ...a1, pct: (a1.muslim / a1.total) * 100 };
-  if (a2.year === year) return { ...a2, pct: (a2.muslim / a2.total) * 100 };
+  if (a1.year === year) return exact(a1);
+  if (a2.year === year) return exact(a2);
 
   const factor = (year - a1.year) / (a2.year - a1.year);
   const muslim = Math.round(a1.muslim + factor * (a2.muslim - a1.muslim));
   const total = Math.round(a1.total + factor * (a2.total - a1.total));
   const pct = (muslim / total) * 100;
 
+  // Ara değerin güvenilirliği, iki çıpadan daha zayıf olanınki kadardır.
+  const order: DemographicEvidenceKind[] = ['editoryal-tahmin', 'kaynak-sentezi', 'sayim-temelli'];
+  const kind = order[Math.min(order.indexOf(a1.kind), order.indexOf(a2.kind))];
+
   return {
     year,
     muslim,
     total,
     pct,
-    source: a1.source,
-    note: a1.note
+    source: `${a1.year}–${a2.year} arası doğrusal ara değer (${a1.source} → ${a2.source})`,
+    note: a1.note,
+    kind,
+    interpolated: true
   };
 }
 

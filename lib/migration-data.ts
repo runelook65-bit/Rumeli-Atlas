@@ -39,7 +39,7 @@ export const MIGRATION_WAVES: MigrationWave[] = [
     badge: 'Kalenin Terki & Şehirleşme',
     summary: '1862 Kanlıca Konferansı ve 1867 Osmanlı garnizon tahliyesi sonrası Belgrad, Şabac, Smederevo, Kladovo, Užice ve Soko şehirlerindeki Müslüman ahalinin Bosna vilayetine sığınması.',
     details: [
-      'Sultan Abdülaziz’in fermanıyla Sava Nehri boyunca yeni model muhacir şehirleri kuruldu: Bosanska Kostajnica karşısında Bosanska Kostajnica (Aziziye), Bosanski Šamac (Aziziye), Brezovo Polje ve Orašje.',
+      'Sultan Abdülaziz döneminde Sava Nehri boyunca yeni muhacir yerleşimleri kuruldu (Bosanski Šamac, Orašje, Brezovo Polje çevresi). Bu yerleşimlere verilen "Aziziye" adının hangi kasabaya ait olduğu kaynakla doğrulanmalıdır.',
       'Göçmenler ızgara planlı yeni mahallelere yerleştirildi; cami, medrese ve rüştiye mektepleri inşa edildi.',
       'Bir kısım ahali ise Sancak (Yeni Pazar) ve Kosova Vilayeti merkezlerine iskân edildi.'
     ],
@@ -47,7 +47,7 @@ export const MIGRATION_WAVES: MigrationWave[] = [
       { from: 'Belgrad / Užice / Soko', to: 'Bosna Sava Boyu (Šamac, Kostajnica, Bijeljina)', route: 'Sava ve Drina nehir yolları' },
       { from: 'Şabac / Smederevo', to: 'Yeni Pazar Sancağı & Priştine', route: 'İbar vadisi kervan yolu' }
     ],
-    settlementModels: ['Aziziye (Bosanska Kostajnica)', 'Bosanski Šamac', 'Brezovo Polje', 'Bijeljina', 'Yeni Pazar'],
+    settlementModels: ['Bosanski Šamac', 'Orašje', 'Brezovo Polje', 'Bijeljina', 'Yeni Pazar'],
     sources: ['BOA İ.DH (Dahiliye İradeleri)', 'Ahmed Cevdet Paşa, Maruzat', 'Noel Malcolm, Bosnia: A Short History'],
     bounds: [[16.5, 43.5], [21.5, 45.2]]
   },
@@ -124,12 +124,12 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1923',
-    title: '1923 Lozan Nüfus Mübadelesi',
+    title: 'Lozan Nüfus Mübadelesi',
     period: '1923–1926',
     anchorYear: 1923,
     scope: 'Yunanistan (Makedonya, Epir, Tesalya, Girit) ↔ Türkiye',
-    estimatedPopulation: '~500.000 Müslüman (1.200.000 Rum ile Değişim)',
-    shortPopulation: '500.000 Mübadele',
+    estimatedPopulation: '~355.000–400.000 Müslüman (~1.200.000 Ortodoks ile değişim)',
+    shortPopulation: '~400.000 Mübadil',
     badge: 'İlk Uluslararası Hukuki Mübadele',
     summary: '30 Ocak 1923 tarihli Türk-Yunan Nüfus Mübadelesi Sözleşmesi ile Batı Trakya ve İstanbul hariç tutularak iki devlet arasında din esasına dayalı zorunlu nüfus aktarımı yapılmıştır.',
     details: [
@@ -158,7 +158,7 @@ export const MIGRATION_WAVES: MigrationWave[] = [
     summary: 'Bulgaristan komünist yönetiminin 154.000 Türk’ü zorunlu tehciri ve Yugoslavya ile 1953 Serbest Göçmen Protokolü sonrası yüz binlerce soydaşın Türkiye’ye gelişi.',
     details: [
       '1950–1951 yıllarında Bulgaristan kolektifleştirme baskısı altında Türkleri sınır dışı etti; Kapıkule’de aylarca çadır kamplar kuruldu.',
-      '1953 Köprülü-Kardelj "Centilmenler Anlaşması" ile Üsküp, Kalkandelen, Gostivar, Prizren ve Yeni Pazar’dan Türkler ve Boşnaklar Türkiye’ye aktı.',
+      '1953’te Türkiye ile Yugoslavya arasında varılan sözlü "centilmenlik anlaşması" sonrasında Üsküp, Kalkandelen, Gostivar, Prizren ve Yeni Pazar’dan Türkler, Boşnaklar ve Türk kimliği beyan eden Arnavutlar Türkiye’ye göç etti. (Anlaşmanın tarafları ve metni kaynakla doğrulanmalıdır.)',
       'Göçmenler İstanbul’da Gaziosmanpaşa (Taşlıtarla), Bayrampaşa ve Zeytinburnu; Bursa’da ise Yavuzselim ve Zafer mahallelerini inşa etti.'
     ],
     corridors: [
@@ -171,18 +171,18 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1989',
-    title: '1989 Bulgaristan "Büyük Gezi" (Golyama Ekskursiya)',
+    title: 'Bulgaristan "Büyük Gezi" (Golyama Ekskursiya)',
     period: '1989',
     anchorYear: 1989,
     scope: 'Bulgaristan (Kırcaali, Şumnu, Razgrad, Haskovo) → Edirne, Bursa, İstanbul',
     estimatedPopulation: '360.000 Bulgaristan Türkü',
-    shortPopulation: '360.000 Muhacir',
+    shortPopulation: '~360.000 Muhacir',
     badge: 'Soğuk Savaş’ın Son Büyük Sürgünü',
     summary: 'Jivkov rejiminin zorla isim değiştirme ve Türkçe konuşma yasağına (Vızroditelen Protses) karşı Türklerin direnişi sonrası sınırların açılmasıyla 360.000 soydaşın Türkiye’ye sığınması.',
     details: [
       '1984–1989 arası Türk mezar taşları kırıldı, Türkçe konuşanlara para cezası kesildi, direnen aydınlar Belene Toplama Kampı’na kapatıldı.',
       'Mayıs 1989 protestoları sonrası Jivkov sınır kapılarını açtı; Haziran–Ağustos aylarında 360.000 insan eşyalarıyla Kapıkule ve Dereköy’den Türkiye’ye giriş yaptı.',
-      'Bu kitlesel trajedi dünya kamuoyunda büyük yankı uyandırdı ve Kasım 1989’da Jivkov diktatörlüğünün çöküşünü tetikledi.'
+      'Göç edenlerin yaklaşık 150.000’i 1990 sonrasında Bulgaristan’a geri döndü. Kitlesel göç, Kasım 1989’da Jivkov’un düşüşüne giden süreci hızlandıran etkenlerden biri oldu.'
     ],
     corridors: [
       { from: 'Kırcaali & Haskovo', to: 'Kapıkule → Edirne, Bursa, İzmir', route: 'E80 otoyolu ve Kapıkule kapısı' },
@@ -194,7 +194,7 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1992',
-    title: '1992–1995 Bosna Savaşı & Sürgünler',
+    title: 'Bosna Savaşı & Sürgünler',
     period: '1992–1995',
     anchorYear: 1992,
     scope: 'Bosna-Hersek (Srebrenitsa, Foça, Vişegrad, Saraybosna) → Türkiye & Avrupa',
