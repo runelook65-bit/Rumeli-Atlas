@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { ChevronDown, MapPin, Search, X, Check, Globe, Landmark } from 'lucide-react';
 import { regionPresets, type RegionPreset, regionalModules } from '@/lib/atlas-data';
+import { useStore } from '@/lib/store';
 
 interface RegionSelectorProps {
   onSelectRegion?: (preset: RegionPreset) => void;
@@ -12,11 +13,25 @@ interface RegionSelectorProps {
 }
 
 export function RegionSelector({ 
-  onSelectRegion,
+  onSelectRegion: propOnSelectRegion,
   onSelectBounds, 
-  selectedRegionId = 'all',
-  currentRegionName = 'Balkanların tamamı' 
-}: RegionSelectorProps) {
+  selectedRegionId: propSelectedRegionId,
+  currentRegionName: propCurrentRegionName 
+}: RegionSelectorProps = {}) {
+  const storeRegion = useStore(s => s.selectedRegion);
+  const storeSetRegion = useStore(s => s.setSelectedRegion);
+  const mapHandle = useStore(s => s.mapHandle);
+  const setSelectedPlace = useStore(s => s.setSelectedPlace);
+
+  const selectedRegionId = propSelectedRegionId !== undefined ? propSelectedRegionId : storeRegion.id;
+  const currentRegionName = propCurrentRegionName !== undefined ? propCurrentRegionName : storeRegion.name;
+
+  const onSelectRegion = propOnSelectRegion || ((preset: RegionPreset) => {
+    storeSetRegion(preset);
+    mapHandle?.fitBounds(preset.bounds, { padding: 30, duration: 800 });
+    setSelectedPlace(null);
+  });
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedName, setSelectedName] = useState(currentRegionName);
   const [search, setSearch] = useState('');

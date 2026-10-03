@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Users,
   Landmark,
@@ -6,13 +8,23 @@ import {
   Map as MapIcon,
   BookOpen
 } from 'lucide-react';
+import { useStore } from '@/lib/store';
 
 interface MapToolbarProps {
-  activeCategory: string | null;
-  onSelectCategory: (category: string | null) => void;
+  activeCategory?: string | null;
+  onSelectCategory?: (category: string | null) => void;
 }
 
-export function MapToolbar({activeCategory, onSelectCategory}: MapToolbarProps) {
+export function MapToolbar({
+  activeCategory: propCategory,
+  onSelectCategory: propOnSelectCategory
+}: MapToolbarProps = {}) {
+  const storeCategory = useStore(s => s.activeCategory);
+  const storeSetCategory = useStore(s => s.setActiveCategory);
+
+  const activeCategory = propCategory !== undefined ? propCategory : storeCategory;
+  const onSelectCategory = propOnSelectCategory || storeSetCategory;
+
   const categories = [
     {id: 'human', icon: Users, label: 'İnsan'},
     {id: 'ottoman', icon: Landmark, label: 'Osmanlı'},
@@ -23,7 +35,7 @@ export function MapToolbar({activeCategory, onSelectCategory}: MapToolbarProps) 
   ];
 
   return (
-    <div className="map-toolbar">
+    <div className="map-toolbar" role="toolbar" aria-label="Atlas katman çubuğu">
       {categories.map(c => {
         const Icon = c.icon;
         const isActive = activeCategory === c.id;

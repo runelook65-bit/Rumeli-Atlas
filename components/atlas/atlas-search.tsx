@@ -1,22 +1,39 @@
+'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import { Search, X, MapPin } from 'lucide-react';
 import { places, searchPlaces, type Place } from '@/lib/atlas-data';
+import { useStore } from '@/lib/store';
 
 interface AtlasSearchProps {
-  query: string;
-  onQueryChange: (q: string) => void;
-  onSelectPlace: (place: Place) => void;
-  onFlyToCoordinates: (coords: [number, number], zoom: number) => void;
-  onNotice: (msg: string) => void;
+  query?: string;
+  onQueryChange?: (q: string) => void;
+  onSelectPlace?: (place: Place) => void;
+  onFlyToCoordinates?: (coords: [number, number], zoom: number) => void;
+  onNotice?: (msg: string) => void;
 }
 
 export function AtlasSearch({
-  query,
-  onQueryChange,
-  onSelectPlace,
-  onFlyToCoordinates,
-  onNotice
-}: AtlasSearchProps) {
+  query: propQuery,
+  onQueryChange: propOnQueryChange,
+  onSelectPlace: propOnSelectPlace,
+  onFlyToCoordinates: propOnFlyToCoordinates,
+  onNotice: propOnNotice
+}: AtlasSearchProps = {}) {
+  const storeQuery = useStore(s => s.query);
+  const storeSetQuery = useStore(s => s.setQuery);
+  const storeSetSelectedPlace = useStore(s => s.setSelectedPlace);
+  const storeSetNotice = useStore(s => s.setNotice);
+  const mapHandle = useStore(s => s.mapHandle);
+
+  const query = propQuery !== undefined ? propQuery : storeQuery;
+  const onQueryChange = propOnQueryChange || storeSetQuery;
+  const onSelectPlace = propOnSelectPlace || storeSetSelectedPlace;
+  const onFlyToCoordinates = propOnFlyToCoordinates || ((coords: [number, number], zoom: number) => {
+    mapHandle?.flyTo({ center: coords, zoom });
+  });
+  const onNotice = propOnNotice || storeSetNotice;
+
   const [focused, setFocused] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +70,7 @@ export function AtlasSearch({
 
       <div className={`search-wrap ${focused ? 'focused' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         {mobileOpen && (
-          <button className="search-back" onClick={() => setMobileOpen(false)}>
+          <button className="search-back" onClick={() => setMobileOpen(false)} aria-label="Aramayı kapat">
             <X size={18} />
           </button>
         )}

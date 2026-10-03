@@ -1,132 +1,138 @@
 'use client';
 
-import {useEffect, useRef, useState, useCallback, useMemo} from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import {
   Compass,
-  ChevronDown,
   Plus,
   Minus,
   LocateFixed,
-  PanelLeft,
-  MapPin,
   X
 } from 'lucide-react';
-import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import {
-  places, 
-  visiblePlaces, 
-  regionPresets, 
-  type RegionPreset, 
-  filterPlacesByRegionPreset, 
-  findRegionPresetForPlace, 
-  type Place, 
+  places,
+  visiblePlaces,
+  filterPlacesByRegionPreset,
+  type Place,
   type Layer
 } from '@/lib/atlas-data';
-import {ResearchCatalog} from '@/components/research-catalog';
-import {AtlasBasemap} from '@/components/atlas-basemap';
-import type {AtlasMapHandle} from '@/lib/atlas-map';
+import { ResearchCatalog } from '@/components/research-catalog';
+import { AtlasBasemap } from '@/components/atlas-basemap';
+import type { AtlasMapHandle } from '@/lib/atlas-map';
 
-import {AtlasHeader} from '@/components/atlas/atlas-header';
-import {MapToolbar} from '@/components/atlas/map-toolbar';
-import {LayerDrawer} from '@/components/atlas/layer-drawer';
-import {MapLegend} from '@/components/atlas/map-legend';
-import {AtlasSidebar} from '@/components/atlas/atlas-sidebar';
-import {AtlasSearch} from '@/components/atlas/atlas-search';
-import {TemporalNavigator} from '@/components/atlas/temporal-navigator';
-import {PlaceStoryDrawer} from '@/components/atlas/place-story-drawer';
-import {AtlasRecordsSheet} from '@/components/atlas/atlas-records-sheet';
-import {AtlasSourcesSheet} from '@/components/atlas/atlas-sources-sheet';
-import {RegionSelector} from '@/components/atlas/region-selector';
+import { useStore } from '@/lib/store';
+import { useUrlSync } from '@/lib/use-url-sync';
+import { useKeyboard } from '@/lib/use-keyboard';
+import { useDeferredYear } from '@/lib/use-deferred-year';
+
+import { AtlasHeader } from '@/components/atlas/atlas-header';
+import { MapToolbar } from '@/components/atlas/map-toolbar';
+import { LayerDrawer } from '@/components/atlas/layer-drawer';
+import { MapLegend } from '@/components/atlas/map-legend';
+import { AtlasSidebar } from '@/components/atlas/atlas-sidebar';
+import { AtlasSearch } from '@/components/atlas/atlas-search';
+import { TemporalNavigator } from '@/components/atlas/temporal-navigator';
+import { PlaceStoryDrawer } from '@/components/atlas/place-story-drawer';
+import { AtlasRecordsSheet } from '@/components/atlas/atlas-records-sheet';
+import { AtlasSourcesSheet } from '@/components/atlas/atlas-sources-sheet';
+import { RegionSelector } from '@/components/atlas/region-selector';
+import { LayerChoicePopup } from '@/components/atlas/layer-choice-popup';
+import { AtlasToast } from '@/components/atlas/atlas-toast';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'leaflet/dist/leaflet.css';
 
 export default function Atlas() {
-  const [year, setYear] = useState(1894);
-  const [active, setActive] = useState<Layer[]>(['settlement', 'heritage']);
-  const [mode, setMode] = useState<'atlas' | 'lost'>('atlas');
-  const [temporalMode, setTemporalMode] = useState<'snapshot' | 'history'>('snapshot');
-  const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState<Place | null>(null);
-  const [selectedRegion, setSelectedRegion] = useState<RegionPreset>(regionPresets[0]);
+  // Global Navigation & Input Hooks (Strata architecture)
+  useUrlSync();
+  useKeyboard();
+  const deferredYear = useDeferredYear(70);
 
-  // Sheets state
-  const [sourcesOpen, setSourcesOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [recordsOpen, setRecordsOpen] = useState(false);
-  const [clusterPlaces, setClusterPlaces] = useState<Place[] | null>(null);
-  const [archiveOpen, setArchiveOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  // Store Subscriptions
+  const year = useStore((s) => s.year);
+  const activeLayers = useStore((s) => s.activeLayers);
+  const mode = useStore((s) => s.mode);
+  const temporalMode = useStore((s) => s.temporalMode);
+  const selectedRegion = useStore((s) => s.selectedRegion);
+  const names = useStore((s) => s.names);
+  const boundaries = useStore((s) => s.boundaries);
+  const streets = useStore((s) => s.streets);
+  const selectedPlace = useStore((s) => s.selectedPlace);
+  const setSelectedPlace = useStore((s) => s.setSelectedPlace);
+  const clusterPlaces = useStore((s) => s.clusterPlaces);
+  const setClusterPlaces = useStore((s) => s.setClusterPlaces);
+  const activeCategory = useStore((s) => s.activeCategory);
+  const setActiveCategory = useStore((s) => s.setActiveCategory);
+  const sourcesOpen = useStore((s) => s.sourcesOpen);
+  const setSourcesOpen = useStore((s) => s.setSourcesOpen);
+  const archiveOpen = useStore((s) => s.archiveOpen);
+  const setArchiveOpen = useStore((s) => s.setArchiveOpen);
+  const recordsOpen = useStore((s) => s.recordsOpen);
+  const setRecordsOpen = useStore((s) => s.setRecordsOpen);
+  const menuOpen = useStore((s) => s.menuOpen);
+  const setMenuOpen = useStore((s) => s.setMenuOpen);
+  const playing = useStore((s) => s.playing);
+  const setPlaying = useStore((s) => s.setPlaying);
+  const notice = useStore((s) => s.notice);
+  const setNotice = useStore((s) => s.setNotice);
+  const setMapHandle = useStore((s) => s.setMapHandle);
+  const flyToPilot = useStore((s) => s.flyToPilot);
 
-  // Map layer switches
-  const [names, setNames] = useState(true);
-  const [boundaries, setBoundaries] = useState(true);
-  const [streets, setStreets] = useState(true);
-
-  // Map and timeline state
-  const [playing, setPlaying] = useState(false);
+  // Local Component State for Map Lifecycle
   const [ready, setReady] = useState(false);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-
   const mapEl = useRef<HTMLDivElement>(null);
-  const map = useRef<AtlasMapHandle | null>(null);
-  const pickRef = useRef<(p: Place) => void>(() => {});
+  const mapInstanceRef = useRef<AtlasMapHandle | null>(null);
 
+  // Filter places consuming deferredYear for 60fps buttery scrubbing
   const filtered = useMemo(() => {
     let list: Place[];
     if (temporalMode === 'history') {
-      const obsLayers = ['religion', 'language', 'administration', 'migration', 'ethnicity', 'community'] as Layer[];
-      list = places.filter(p => {
-        if (p.start > year) return false;
+      const obsLayers = [
+        'religion',
+        'language',
+        'administration',
+        'migration',
+        'ethnicity',
+        'community'
+      ] as Layer[];
+      list = places.filter((p) => {
+        if (p.start > deferredYear) return false;
         if (mode === 'lost') return p.lost || p.partialLoss;
-        if (active.includes(p.layer)) return true;
-        return obsLayers.some(d => active.includes(d) && (p.observations || []).some(o => o.dimension === d && o.year <= year));
+        if (activeLayers.includes(p.layer)) return true;
+        return obsLayers.some(
+          (d) =>
+            activeLayers.includes(d) &&
+            (p.observations || []).some((o) => o.dimension === d && o.year <= deferredYear)
+        );
       });
     } else {
-      list = visiblePlaces(year, active, mode === 'lost');
+      list = visiblePlaces(deferredYear, activeLayers, mode === 'lost');
     }
     return filterPlacesByRegionPreset(list, selectedRegion);
-  }, [year, active, mode, temporalMode, selectedRegion]);
+  }, [deferredYear, activeLayers, mode, temporalMode, selectedRegion]);
 
-  const select = useCallback((p: Place) => {
+  // Selection Handler
+  const handleSelectPlace = (p: Place) => {
     setRecordsOpen(false);
-    setSelected(p);
-    setQuery('');
+    setSelectedPlace(p);
+  };
 
-    // Eğer seçilen yer mevcut bölge filtresinde gizlenmişse, bölgeyi bu yerin ülkesine otomatik ayarla
-    const placeRegion = findRegionPresetForPlace(p);
-    if (placeRegion && selectedRegion.id !== 'all' && selectedRegion.id !== placeRegion.id) {
-      setSelectedRegion(placeRegion);
-    }
-
-    map.current?.flyTo({center: p.coordinates, zoom: 13, duration: 1000});
-  }, [selectedRegion]);
-
-  pickRef.current = select;
-
-  const toggleLayer = useCallback((id: Layer) => {
-    setActive(a => (a.includes(id) ? a.filter(x => x !== id) : [...a, id]));
-  }, []);
-
-  const flyToPilot = useCallback(() => {
-    map.current?.flyTo({center: [21.13, 42.06], zoom: 9});
-    setSelected(null);
-  }, []);
-
-  // Initialize Map Engine (Leaflet default)
+  // Initialize Map Engine
   useEffect(() => {
     let disposed = false;
     let instance: AtlasMapHandle | null = null;
 
     import('@/lib/atlas-map')
-      .then(async runtime => {
-        instance = await runtime.createAtlasMap(mapEl.current!);
+      .then(async (runtime) => {
+        if (!mapEl.current || disposed) return;
+        instance = await runtime.createAtlasMap(mapEl.current);
         if (disposed) {
           instance.remove();
           return;
         }
-        map.current = instance;
+        mapInstanceRef.current = instance;
+        setMapHandle(instance);
         await instance.ready;
         if (!disposed) {
           setReady(true);
@@ -135,7 +141,7 @@ export default function Atlas() {
           });
         }
       })
-      .catch(mapError => {
+      .catch((mapError) => {
         console.error('Rumelia map loading failed', mapError);
         if (!disposed) {
           setError('Etkileşimli görünüm açılamadı; Balkan haritası ve tarihsel kayıtlar kullanılabilir.');
@@ -145,44 +151,46 @@ export default function Atlas() {
     return () => {
       disposed = true;
       instance?.remove();
-      map.current = null;
+      mapInstanceRef.current = null;
+      setMapHandle(null);
     };
-  }, []);
+  }, [setMapHandle]);
 
-  // Update map features on state change
+  // Update map features whenever filtered data, layer switches or selections change
   useEffect(() => {
-    if (!ready || !map.current) return;
-    map.current.update({
+    if (!ready || !mapInstanceRef.current) return;
+    mapInstanceRef.current.update({
       places: filtered,
       names,
       boundaries,
       streets,
-      onSelect: p => pickRef.current(p),
-      onCluster: items => {
+      onSelect: (p) => handleSelectPlace(p),
+      onCluster: (items) => {
         setClusterPlaces(items);
         setRecordsOpen(true);
       }
     });
-  }, [ready, year, active, mode, names, boundaries, streets, filtered]);
+  }, [ready, filtered, names, boundaries, streets]);
 
-  // Timeline player timer
+  // Timeline playback timer
   useEffect(() => {
     if (!playing) return;
     const timer = setInterval(() => {
-      setYear(v => {
-        if (v >= 2026) {
-          setPlaying(false);
-          return 2026;
-        }
-        return Math.min(2026, v + 5);
-      });
+      const cur = useStore.getState().year;
+      if (cur >= 2026) {
+        useStore.getState().setPlaying(false);
+      } else {
+        useStore.getState().setYear(Math.min(2026, cur + 5));
+      }
     }, 600);
     return () => clearInterval(timer);
   }, [playing]);
 
-  // ModelContext tool registration (WebMCP)
+  // WebMCP ModelContext tool registration
   useEffect(() => {
-    const ctx = (document as unknown as {modelContext?: {registerTool: (t: unknown, o: unknown) => Promise<void>}}).modelContext;
+    const ctx = (document as unknown as {
+      modelContext?: { registerTool: (t: unknown, o: unknown) => Promise<void> };
+    }).modelContext;
     if (!ctx) return;
     const lifecycle = new AbortController();
 
@@ -194,33 +202,39 @@ export default function Atlas() {
           inputSchema: {
             type: 'object',
             properties: {
-              year: {type: 'integer', minimum: 1354, maximum: 2026},
-              mode: {type: 'string', enum: ['atlas', 'lost']},
-              placeId: {type: 'string'}
+              year: { type: 'integer', minimum: 1354, maximum: 2026 },
+              mode: { type: 'string', enum: ['atlas', 'lost'] },
+              placeId: { type: 'string' }
             },
             additionalProperties: false
           },
-          annotations: {readOnlyHint: false},
-          execute: async (input: {year?: number; mode?: string; placeId?: string}) => {
+          annotations: { readOnlyHint: false },
+          execute: async (input: { year?: number; mode?: string; placeId?: string }) => {
             if (
               !input ||
               typeof input !== 'object' ||
-              Object.keys(input).some(k => !['year', 'mode', 'placeId'].includes(k)) ||
+              Object.keys(input).some((k) => !['year', 'mode', 'placeId'].includes(k)) ||
               (input.year !== undefined && (!Number.isInteger(input.year) || input.year < 1354 || input.year > 2026)) ||
               (input.mode !== undefined && !['atlas', 'lost'].includes(input.mode)) ||
-              (input.placeId !== undefined && !places.some(p => p.id === input.placeId))
+              (input.placeId !== undefined && !places.some((p) => p.id === input.placeId))
             ) {
               throw new Error('Invalid atlas configuration');
             }
-            if (input.year !== undefined) setYear(input.year);
-            if (input.mode) setMode(input.mode as 'atlas' | 'lost');
-            if (input.placeId) pickRef.current(places.find(p => p.id === input.placeId)!);
+            const store = useStore.getState();
+            if (input.year !== undefined) store.setYear(input.year);
+            if (input.mode) store.setMode(input.mode as 'atlas' | 'lost');
+            if (input.placeId) {
+              const target = places.find((p) => p.id === input.placeId);
+              if (target) store.setSelectedPlace(target);
+            }
 
-            await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-            return {accepted: true, ...input};
+            await new Promise<void>((resolve) =>
+              requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+            );
+            return { accepted: true, ...input };
           }
         },
-        {signal: lifecycle.signal}
+        { signal: lifecycle.signal }
       )
     ).catch(() => {});
 
@@ -229,67 +243,19 @@ export default function Atlas() {
 
   return (
     <main className="atlas-shell">
-      <AtlasHeader
-        mode={mode}
-        onModeChange={newMode => {
-          setMode(newMode);
-          setSelected(null);
-          if (newMode === 'lost') {
-            map.current?.flyTo({center: [21.435, 42.001], zoom: 13, duration: 700});
-          }
-        }}
-        onOpenSources={() => setSourcesOpen(true)}
-      >
-        <AtlasSearch
-          query={query}
-          onQueryChange={setQuery}
-          onSelectPlace={select}
-          onFlyToCoordinates={(coords, zoom) => map.current?.flyTo({center: coords, zoom})}
-          onNotice={setNotice}
-        />
+      {/* Toast and Overlap Popups */}
+      <AtlasToast />
+      <LayerChoicePopup />
+
+      {/* Top Header */}
+      <AtlasHeader>
+        <AtlasSearch />
       </AtlasHeader>
 
+      {/* Main Workspace Layout */}
       <div className="workspace">
-        <MapToolbar 
-          activeCategory={activeCategory} 
-          onSelectCategory={setActiveCategory} 
-        />
-        <LayerDrawer 
-          activeCategory={activeCategory}
-          onClose={() => setActiveCategory(null)}
-          activeLayers={active}
-          mode={mode}
-          onModeChange={setMode}
-          year={year}
-          onYearChange={y => {
-            setYear(y);
-            setPlaying(false);
-          }}
-          onToggleLayer={toggleLayer}
-          names={names}
-          onNamesChange={setNames}
-          boundaries={boundaries}
-          onBoundariesChange={setBoundaries}
-          streets={streets}
-          onStreetsChange={setStreets}
-          onFlyToPilot={flyToPilot}
-          onSelectBounds={bounds => {
-            const matchingPreset = regionPresets.find(r => 
-              Math.abs(r.bounds[0][0] - bounds[0][0]) < 0.2 && 
-              Math.abs(r.bounds[1][1] - bounds[1][1]) < 0.2
-            );
-            if (matchingPreset) {
-              setSelectedRegion(matchingPreset);
-            } else {
-              setSelectedRegion(regionPresets[0]);
-            }
-            map.current?.fitBounds(bounds, {padding: 30, duration: 800});
-            setSelected(null);
-          }}
-          onOpenArchive={() => setArchiveOpen(true)}
-          onOpenSources={() => setSourcesOpen(true)}
-        />
-
+        <MapToolbar />
+        <LayerDrawer />
 
         <section
           className={`map-surface ${ready ? 'map-ready' : 'map-pending'} ${mode === 'lost' ? 'lost-mode' : ''}`}
@@ -299,26 +265,15 @@ export default function Atlas() {
             places={filtered}
             names={names}
             boundaries={boundaries}
-            onSelect={select}
+            onSelect={handleSelectPlace}
           />
           {mode === 'lost' && <MapLegend />}
-          
+
           <div ref={mapEl} className="map-canvas" />
 
           <div className="map-top">
-            <RegionSelector
-              selectedRegionId={selectedRegion.id}
-              currentRegionName={selectedRegion.name}
-              onSelectRegion={preset => {
-                setSelectedRegion(preset);
-                map.current?.fitBounds(preset.bounds, {padding: 30, duration: 800});
-                setSelected(null);
-              }}
-            />
+            <RegionSelector />
           </div>
-
-
-
 
           {mode === 'lost' && (
             <div className="lost-note">
@@ -336,10 +291,10 @@ export default function Atlas() {
           )}
 
           <div className="map-controls">
-            <button aria-label="Yakınlaştır" onClick={() => map.current?.zoomIn()}>
+            <button aria-label="Yakınlaştır" onClick={() => mapInstanceRef.current?.zoomIn()}>
               <Plus size={19} />
             </button>
-            <button aria-label="Uzaklaştır" onClick={() => map.current?.zoomOut()}>
+            <button aria-label="Uzaklaştır" onClick={() => mapInstanceRef.current?.zoomOut()}>
               <Minus size={19} />
             </button>
             <button aria-label="Pilot bölgeye odaklan" onClick={flyToPilot}>
@@ -375,29 +330,13 @@ export default function Atlas() {
               </>
             )}
           </div>
-          
-          <PlaceStoryDrawer
-            place={selected}
-            year={year}
-            onClose={() => setSelected(null)}
-          />
+
+          <PlaceStoryDrawer />
         </section>
       </div>
 
-      <TemporalNavigator
-        year={year}
-        onYearChange={y => {
-          setYear(y);
-          setPlaying(false);
-        }}
-        playing={playing}
-        onPlayingToggle={() => {
-          if (year === 2026) setYear(1354);
-          setPlaying(!playing);
-        }}
-        temporalMode={temporalMode}
-        onTemporalModeChange={setTemporalMode}
-      />
+      {/* Bottom Temporal Navigator */}
+      <TemporalNavigator />
 
       {/* Research Package Archive Sheet */}
       <Sheet open={archiveOpen} onOpenChange={setArchiveOpen}>
@@ -420,7 +359,7 @@ export default function Atlas() {
         filteredPlaces={filtered}
         year={year}
         mode={mode}
-        onSelectPlace={select}
+        onSelectPlace={handleSelectPlace}
       />
 
       {/* Mobile Sidebar Sheet */}
@@ -431,15 +370,15 @@ export default function Atlas() {
             <SheetDescription>Görmek istediğiniz kayıtları seçin.</SheetDescription>
           </SheetHeader>
           <AtlasSidebar
-            active={active}
+            active={activeLayers}
             mode={mode}
-            onToggleLayer={toggleLayer}
+            onToggleLayer={(l) => useStore.getState().toggleLayer(l)}
             names={names}
-            onNamesChange={setNames}
+            onNamesChange={(val) => useStore.getState().setNames(val)}
             boundaries={boundaries}
-            onBoundariesChange={setBoundaries}
+            onBoundariesChange={(val) => useStore.getState().setBoundaries(val)}
             streets={streets}
-            onStreetsChange={setStreets}
+            onStreetsChange={(val) => useStore.getState().setStreets(val)}
             onFlyToPilot={() => {
               flyToPilot();
               setMenuOpen(false);

@@ -1,16 +1,35 @@
-import {Compass, Map as MapIcon, History, BookOpen, Search} from 'lucide-react';
+'use client';
+
+import { Compass, Map as MapIcon, History, BookOpen } from 'lucide-react';
+import { useStore, type AtlasMode } from '@/lib/store';
 
 interface AtlasHeaderProps {
-  mode: 'atlas' | 'lost';
-  onModeChange: (mode: 'atlas' | 'lost') => void;
-  onOpenSources: () => void;
-  // We'll pass children for the Search component to be injected here
+  mode?: AtlasMode;
+  onModeChange?: (mode: AtlasMode) => void;
+  onOpenSources?: () => void;
   children?: React.ReactNode;
 }
 
-export function AtlasHeader({mode, onModeChange, onOpenSources, children}: AtlasHeaderProps) {
+export function AtlasHeader({
+  mode: propMode,
+  onModeChange: propOnModeChange,
+  onOpenSources: propOnOpenSources,
+  children
+}: AtlasHeaderProps = {}) {
+  const storeMode = useStore(s => s.mode);
+  const storeSetMode = useStore(s => s.setMode);
+  const storeSetSourcesOpen = useStore(s => s.setSourcesOpen);
+  const storeSetSelectedPlace = useStore(s => s.setSelectedPlace);
+
+  const mode = propMode !== undefined ? propMode : storeMode;
+  const onModeChange = propOnModeChange || ((newMode: AtlasMode) => {
+    storeSetMode(newMode);
+    storeSetSelectedPlace(null);
+  });
+  const onOpenSources = propOnOpenSources || (() => storeSetSourcesOpen(true));
+
   return (
-    <header className="topbar">
+    <header className={`topbar ${mode === 'lost' ? 'topbar-lost' : ''}`}>
       <a className="brand" href="/" aria-label="Rumelia Atlas">
         <Compass className="brand-icon" size={28} />
         <div>

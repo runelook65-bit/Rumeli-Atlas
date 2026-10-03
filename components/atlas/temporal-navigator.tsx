@@ -4,13 +4,15 @@ import { Slider } from '@/components/ui/slider';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { getBalkanDemographicsForYear, DEMOGRAPHIC_EVIDENCE_LABELS, DEMOGRAPHIC_SCOPE_NOTE } from '@/lib/atlas-data';
 
+import { useStore, type TemporalMode } from '@/lib/store';
+
 interface TemporalNavigatorProps {
-  year: number;
-  onYearChange: (y: number) => void;
-  playing: boolean;
-  onPlayingToggle: () => void;
-  temporalMode?: 'snapshot' | 'history';
-  onTemporalModeChange?: (m: 'snapshot' | 'history') => void;
+  year?: number;
+  onYearChange?: (y: number) => void;
+  playing?: boolean;
+  onPlayingToggle?: () => void;
+  temporalMode?: TemporalMode;
+  onTemporalModeChange?: (m: TemporalMode) => void;
 }
 
 const MILESTONES = [
@@ -26,13 +28,32 @@ const MILESTONES = [
 ];
 
 export function TemporalNavigator({
-  year,
-  onYearChange,
-  playing,
-  onPlayingToggle,
-  temporalMode = 'snapshot',
-  onTemporalModeChange
-}: TemporalNavigatorProps) {
+  year: propYear,
+  onYearChange: propOnYearChange,
+  playing: propPlaying,
+  onPlayingToggle: propOnPlayingToggle,
+  temporalMode: propTemporalMode,
+  onTemporalModeChange: propOnTemporalModeChange
+}: TemporalNavigatorProps = {}) {
+  const storeYear = useStore(s => s.year);
+  const storeSetYear = useStore(s => s.setYear);
+  const storePlaying = useStore(s => s.playing);
+  const storeSetPlaying = useStore(s => s.setPlaying);
+  const storeTemporalMode = useStore(s => s.temporalMode);
+  const storeSetTemporalMode = useStore(s => s.setTemporalMode);
+
+  const year = propYear !== undefined ? propYear : storeYear;
+  const onYearChange = propOnYearChange || ((y: number) => {
+    storeSetYear(y);
+    storeSetPlaying(false);
+  });
+  const playing = propPlaying !== undefined ? propPlaying : storePlaying;
+  const onPlayingToggle = propOnPlayingToggle || (() => {
+    if (year >= 2026) storeSetYear(1354);
+    storeSetPlaying(!playing);
+  });
+  const temporalMode = propTemporalMode !== undefined ? propTemporalMode : storeTemporalMode;
+  const onTemporalModeChange = propOnTemporalModeChange || storeSetTemporalMode;
   const [isDesktop, setIsDesktop] = useState(true);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [editing, setEditing] = useState(false);

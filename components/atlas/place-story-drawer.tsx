@@ -18,14 +18,27 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { sources, isOttomanFoundation, type Place } from '@/lib/atlas-data';
 import { Evidence } from './atlas-evidence';
 import { PopulationChart } from './population-chart';
+import { useStore } from '@/lib/store';
 
 interface PlaceStoryDrawerProps {
-  place: Place | null;
-  year: number;
-  onClose: () => void;
+  place?: Place | null;
+  year?: number;
+  onClose?: () => void;
 }
 
-export function PlaceStoryDrawer({ place, year, onClose }: PlaceStoryDrawerProps) {
+export function PlaceStoryDrawer({
+  place: propPlace,
+  year: propYear,
+  onClose: propOnClose
+}: PlaceStoryDrawerProps = {}) {
+  const storePlace = useStore(s => s.selectedPlace);
+  const storeYear = useStore(s => s.year);
+  const storeSetPlace = useStore(s => s.setSelectedPlace);
+
+  const place = propPlace !== undefined ? propPlace : storePlace;
+  const year = propYear !== undefined ? propYear : storeYear;
+  const onClose = propOnClose || (() => storeSetPlace(null));
+
   const [isDesktop, setIsDesktop] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 

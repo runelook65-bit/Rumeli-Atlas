@@ -5,51 +5,103 @@ import {
   Landmark, History, Search 
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { places, sources, type Layer, regionalModules, type RegionalModule } from '@/lib/atlas-data';
+import { places, sources, type Layer, regionalModules, type RegionalModule, regionPresets } from '@/lib/atlas-data';
 import { MIGRATION_WAVES, TOPONYM_TRANSFORMATIONS, type MigrationWave } from '@/lib/migration-data';
 import { layerInfo } from './atlas-sidebar';
+import { useStore } from '@/lib/store';
 
 interface LayerDrawerProps {
-  activeCategory: string | null;
-  onClose: () => void;
-  activeLayers: Layer[];
-  mode: 'atlas' | 'lost';
+  activeCategory?: string | null;
+  onClose?: () => void;
+  activeLayers?: Layer[];
+  mode?: 'atlas' | 'lost';
   onModeChange?: (mode: 'atlas' | 'lost') => void;
   year?: number;
   onYearChange?: (year: number) => void;
-  onToggleLayer: (id: Layer) => void;
-  names: boolean;
-  onNamesChange: (checked: boolean) => void;
-  boundaries: boolean;
-  onBoundariesChange: (checked: boolean) => void;
-  streets: boolean;
-  onStreetsChange: (checked: boolean) => void;
-  onFlyToPilot: () => void;
+  onToggleLayer?: (id: Layer) => void;
+  names?: boolean;
+  onNamesChange?: (checked: boolean) => void;
+  boundaries?: boolean;
+  onBoundariesChange?: (checked: boolean) => void;
+  streets?: boolean;
+  onStreetsChange?: (checked: boolean) => void;
+  onFlyToPilot?: () => void;
   onSelectBounds?: (bounds: [[number, number], [number, number]]) => void;
-  onOpenArchive: () => void;
-  onOpenSources: () => void;
+  onOpenArchive?: () => void;
+  onOpenSources?: () => void;
 }
 
 export function LayerDrawer({
-  activeCategory,
-  onClose,
-  activeLayers,
-  mode,
-  onModeChange,
-  year,
-  onYearChange,
-  onToggleLayer,
-  names,
-  onNamesChange,
-  boundaries,
-  onBoundariesChange,
-  streets,
-  onStreetsChange,
-  onFlyToPilot,
-  onSelectBounds,
-  onOpenArchive,
-  onOpenSources
-}: LayerDrawerProps) {
+  activeCategory: propActiveCategory,
+  onClose: propOnClose,
+  activeLayers: propActiveLayers,
+  mode: propMode,
+  onModeChange: propOnModeChange,
+  year: propYear,
+  onYearChange: propOnYearChange,
+  onToggleLayer: propOnToggleLayer,
+  names: propNames,
+  onNamesChange: propOnNamesChange,
+  boundaries: propBoundaries,
+  onBoundariesChange: propOnBoundariesChange,
+  streets: propStreets,
+  onStreetsChange: propOnStreetsChange,
+  onFlyToPilot: propOnFlyToPilot,
+  onSelectBounds: propOnSelectBounds,
+  onOpenArchive: propOnOpenArchive,
+  onOpenSources: propOnOpenSources
+}: LayerDrawerProps = {}) {
+  const storeCategory = useStore(s => s.activeCategory);
+  const storeSetCategory = useStore(s => s.setActiveCategory);
+  const storeLayers = useStore(s => s.activeLayers);
+  const storeToggleLayer = useStore(s => s.toggleLayer);
+  const storeMode = useStore(s => s.mode);
+  const storeSetMode = useStore(s => s.setMode);
+  const storeYear = useStore(s => s.year);
+  const storeSetYear = useStore(s => s.setYear);
+  const storeNames = useStore(s => s.names);
+  const storeSetNames = useStore(s => s.setNames);
+  const storeBoundaries = useStore(s => s.boundaries);
+  const storeSetBoundaries = useStore(s => s.setBoundaries);
+  const storeStreets = useStore(s => s.streets);
+  const storeSetStreets = useStore(s => s.setStreets);
+  const storeSetArchiveOpen = useStore(s => s.setArchiveOpen);
+  const storeSetSourcesOpen = useStore(s => s.setSourcesOpen);
+  const storeFlyToPilot = useStore(s => s.flyToPilot);
+  const storeSetRegion = useStore(s => s.setSelectedRegion);
+  const storeMapHandle = useStore(s => s.mapHandle);
+  const storeSetSelectedPlace = useStore(s => s.setSelectedPlace);
+
+  const activeCategory = propActiveCategory !== undefined ? propActiveCategory : storeCategory;
+  const onClose = propOnClose || (() => storeSetCategory(null));
+  const activeLayers = propActiveLayers !== undefined ? propActiveLayers : storeLayers;
+  const onToggleLayer = propOnToggleLayer || storeToggleLayer;
+  const mode = propMode !== undefined ? propMode : storeMode;
+  const onModeChange = propOnModeChange || storeSetMode;
+  const year = propYear !== undefined ? propYear : storeYear;
+  const onYearChange = propOnYearChange || ((y: number) => { storeSetYear(y); useStore.getState().setPlaying(false); });
+  const names = propNames !== undefined ? propNames : storeNames;
+  const onNamesChange = propOnNamesChange || storeSetNames;
+  const boundaries = propBoundaries !== undefined ? propBoundaries : storeBoundaries;
+  const onBoundariesChange = propOnBoundariesChange || storeSetBoundaries;
+  const streets = propStreets !== undefined ? propStreets : storeStreets;
+  const onStreetsChange = propOnStreetsChange || storeSetStreets;
+  const onFlyToPilot = propOnFlyToPilot || storeFlyToPilot;
+  const onOpenArchive = propOnOpenArchive || (() => storeSetArchiveOpen(true));
+  const onOpenSources = propOnOpenSources || (() => storeSetSourcesOpen(true));
+  const onSelectBounds = propOnSelectBounds || ((bounds: [[number, number], [number, number]]) => {
+    const matchingPreset = regionPresets.find(r => 
+      Math.abs(r.bounds[0][0] - bounds[0][0]) < 0.2 && 
+      Math.abs(r.bounds[1][1] - bounds[1][1]) < 0.2
+    );
+    if (matchingPreset) {
+      storeSetRegion(matchingPreset);
+    } else {
+      storeSetRegion(regionPresets[0]);
+    }
+    storeMapHandle?.fitBounds(bounds, {padding: 30, duration: 800});
+    storeSetSelectedPlace(null);
+  });
   const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null);
   const [expandedWaveId, setExpandedWaveId] = useState<string | null>(null);
   const [showToponyms, setShowToponyms] = useState(false);

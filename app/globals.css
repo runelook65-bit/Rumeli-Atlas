@@ -995,3 +995,125 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
 .mobile-record-list b { display: block; font-size: 15px; font-weight: 500; font-family: Georgia, serif; }
 .mobile-record-list small { display: block; font-size: 12px; color: var(--atlas-text-secondary); margin-top: 2px; }
 
+/* --- Strata UI / State Architecture: Choice Popup & Toast --- */
+.layer-choice-popup {
+  background: rgba(250, 248, 242, 0.98);
+  border: 1px solid rgba(157, 73, 58, 0.28);
+  border-radius: 10px;
+  box-shadow: 0 10px 32px rgba(37, 53, 47, 0.18);
+  backdrop-filter: blur(8px);
+  padding: 8px;
+  animation: fadeIn 120ms ease;
+}
+.layer-choice-popup .choice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 8px;
+  border-bottom: 1px solid var(--atlas-border);
+}
+.layer-choice-popup .choice-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--atlas-burgundy);
+}
+.layer-choice-popup .choice-close {
+  color: var(--atlas-text-secondary);
+  padding: 2px;
+  border-radius: 4px;
+}
+.layer-choice-popup .choice-close:hover {
+  color: var(--atlas-burgundy);
+  background: rgba(157, 73, 58, 0.08);
+}
+.layer-choice-popup .choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.layer-choice-popup .choice-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  text-align: left;
+  width: 100%;
+  transition: background var(--transition-hover);
+}
+.layer-choice-popup .choice-item:hover {
+  background: rgba(157, 73, 58, 0.08);
+}
+.layer-choice-popup .choice-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.layer-choice-popup .choice-icon.settlement {
+  background: rgba(0, 105, 76, 0.12);
+  color: #00694c;
+}
+.layer-choice-popup .choice-icon.heritage {
+  background: rgba(157, 73, 58, 0.12);
+  color: var(--atlas-burgundy);
+}
+.layer-choice-popup .choice-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.layer-choice-popup .choice-name {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--atlas-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.layer-choice-popup .choice-sub {
+  font-size: 11px;
+  color: var(--atlas-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.atlas-toast-container {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+  animation: fadeIn 160ms ease;
+}
+.atlas-toast-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37, 53, 47, 0.94);
+  color: #faf8f2;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.atlas-toast-pill .toast-icon {
+  color: #5fd1a0;
+  flex-shrink: 0;
+}
+
+
