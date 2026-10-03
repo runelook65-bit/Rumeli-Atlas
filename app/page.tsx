@@ -76,10 +76,13 @@ export default function Atlas() {
   const filtered = useMemo(() => {
     let list: Place[];
     if (temporalMode === 'history') {
-      list = places.filter(p => 
-        p.start <= year && 
-        (mode === 'lost' ? (p.lost || p.partialLoss) : active.includes(p.layer))
-      );
+      const obsLayers = ['religion', 'language', 'administration', 'migration', 'ethnicity', 'community'] as Layer[];
+      list = places.filter(p => {
+        if (p.start > year) return false;
+        if (mode === 'lost') return p.lost || p.partialLoss;
+        if (active.includes(p.layer)) return true;
+        return obsLayers.some(d => active.includes(d) && (p.observations || []).some(o => o.dimension === d && o.year <= year));
+      });
     } else {
       list = visiblePlaces(year, active, mode === 'lost');
     }
@@ -277,6 +280,8 @@ export default function Atlas() {
             );
             if (matchingPreset) {
               setSelectedRegion(matchingPreset);
+            } else {
+              setSelectedRegion(regionPresets[0]);
             }
             map.current?.fitBounds(bounds, {padding: 30, duration: 800});
             setSelected(null);

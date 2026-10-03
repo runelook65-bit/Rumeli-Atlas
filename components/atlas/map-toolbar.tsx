@@ -14,12 +14,12 @@ interface MapToolbarProps {
 
 export function MapToolbar({activeCategory, onSelectCategory}: MapToolbarProps) {
   const categories = [
-    {id: 'human', icon: Users, label: 'Human'},
-    {id: 'ottoman', icon: Landmark, label: 'Ottoman'},
-    {id: 'heritage', icon: Building2, label: 'Heritage'},
-    {id: 'change', icon: ArrowRightLeft, label: 'Change'},
-    {id: 'basemap', icon: MapIcon, label: 'Basemap'},
-    {id: 'research', icon: BookOpen, label: 'Research'}
+    {id: 'human', icon: Users, label: 'İnsan'},
+    {id: 'ottoman', icon: Landmark, label: 'Osmanlı'},
+    {id: 'heritage', icon: Building2, label: 'Miras'},
+    {id: 'change', icon: ArrowRightLeft, label: 'Değişim'},
+    {id: 'basemap', icon: MapIcon, label: 'Harita'},
+    {id: 'research', icon: BookOpen, label: 'Kaynak'}
   ];
 
   return (

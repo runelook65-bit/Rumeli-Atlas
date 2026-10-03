@@ -14,6 +14,8 @@ export interface MigrationWave {
   id: string;
   title: string;
   period: string;
+  startYear: number;
+  endYear: number;
   anchorYear: number;
   scope: string;
   estimatedPopulation: string;
@@ -30,6 +32,8 @@ export interface MigrationWave {
 export const MIGRATION_WAVES: MigrationWave[] = [
   {
     id: 'wave-1862',
+    startYear: 1862,
+    endYear: 1867,
     title: 'Sırbistan Kaleleri Tahliyesi & Aziziye İskânı',
     period: '1862–1867',
     anchorYear: 1862,
@@ -53,6 +57,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1878',
+    startYear: 1877,
+    endYear: 1878,
     title: '93 Harbi & Berlin Antlaşması Felaketi',
     period: '1877–1878',
     anchorYear: 1878,
@@ -77,6 +83,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-bosnia1878',
+    startYear: 1879,
+    endYear: 1908,
     title: 'Avusturya-Macaristan Bosna İşgali Hicreti',
     period: '1878–1908',
     anchorYear: 1878,
@@ -100,6 +108,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1912',
+    startYear: 1912,
+    endYear: 1913,
     title: 'Balkan Savaşları & Rumeli’nin Tasfiyesi',
     period: '1912–1913',
     anchorYear: 1912,
@@ -124,6 +134,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1923',
+    startYear: 1923,
+    endYear: 1926,
     title: 'Lozan Nüfus Mübadelesi',
     period: '1923–1926',
     anchorYear: 1923,
@@ -148,6 +160,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1950',
+    startYear: 1950,
+    endYear: 1958,
     title: 'Soğuk Savaş Yugoslavya & Bulgaristan Göçleri',
     period: '1950–1958',
     anchorYear: 1950,
@@ -171,6 +185,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1989',
+    startYear: 1989,
+    endYear: 1990,
     title: 'Bulgaristan "Büyük Gezi" (Golyama Ekskursiya)',
     period: '1989',
     anchorYear: 1989,
@@ -194,6 +210,8 @@ export const MIGRATION_WAVES: MigrationWave[] = [
   },
   {
     id: 'wave-1992',
+    startYear: 1992,
+    endYear: 1995,
     title: 'Bosna Savaşı & Sürgünler',
     period: '1992–1995',
     anchorYear: 1992,

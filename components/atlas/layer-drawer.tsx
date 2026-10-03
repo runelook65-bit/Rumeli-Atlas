@@ -5,7 +5,7 @@ import {
   Landmark, History, Search 
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { places, type Layer, regionalModules, type RegionalModule } from '@/lib/atlas-data';
+import { places, sources, type Layer, regionalModules, type RegionalModule } from '@/lib/atlas-data';
 import { MIGRATION_WAVES, TOPONYM_TRANSFORMATIONS, type MigrationWave } from '@/lib/migration-data';
 import { layerInfo } from './atlas-sidebar';
 
@@ -55,6 +55,10 @@ export function LayerDrawer({
   const [showToponyms, setShowToponyms] = useState(false);
   const [toponymSearch, setToponymSearch] = useState('');
 
+  const settlementCount = places.filter(p => p.layer === 'settlement').length;
+  const heritageCount = places.filter(p => p.layer === 'heritage').length;
+  const sourceCount = sources.length;
+
   if (!activeCategory) return null;
 
   const renderLayer = (id: Layer) => {
@@ -99,7 +103,7 @@ export function LayerDrawer({
       <div className="drawer-content">
         {activeCategory === 'human' && (
           <>
-            <h3>Human Geography</h3>
+            <h3>İnsan Coğrafyası</h3>
             <div className="layer-list mt-6">
               {renderLayer('settlement')}
               {renderLayer('ethnicity')}
@@ -111,7 +115,7 @@ export function LayerDrawer({
               <span className="font-semibold text-emerald-950 block mb-1">
                 🟢 Osmanlı Kuruluşu & 🔴 Tarihsel Yerleşimler:
               </span>
-              Osmanlı Devleti tarafından sıfırdan kurulan yerleşim yerleri (Saraybosna, Tiran, İlbasan, Yeni Pazar, Tatar Pazarcık, Kırcaali vb.) <strong>yeşil</strong> renkle; fethedilen ve devralınan tarihsel şehirler (Selanik, Belgrad, Filibe, Sofya, Mostar vb.) <strong>kırmızı</strong> renkle işaretlenmiştir. Tüm yerleşimlerde (168/168) tahrir defterleri, salnâmeler ve resmî sayımları içeren interaktif nüfus grafiği yer almaktadır.
+              Osmanlı Devleti tarafından sıfırdan kurulan yerleşim yerleri (Saraybosna, Tiran, İlbasan, Yeni Pazar, Tatar Pazarcık, Kırcaali vb.) <strong>yeşil</strong> renkle; fethedilen ve devralınan tarihsel şehirler (Selanik, Belgrad, Filibe, Sofya, Mostar vb.) <strong>kırmızı</strong> renkle işaretlenmiştir. Tüm yerleşimlerde ({settlementCount}/{settlementCount}) tahrir defterleri, salnâmeler ve resmî sayımları içeren interaktif nüfus grafiği yer almaktadır.
             </div>
             <div className="mt-4 p-3 bg-[#FAF8F2] border border-[#25352F]/10 rounded-md text-xs text-[#6F786F] leading-relaxed">
               <span className="font-semibold text-[#25352F] block mb-1">Metodolojik Çerçeve:</span>
@@ -122,7 +126,7 @@ export function LayerDrawer({
 
         {activeCategory === 'ottoman' && (
           <>
-            <h3>Ottoman Geography</h3>
+            <h3>Osmanlı Coğrafyası</h3>
             <div className="layer-list mt-6">
               {renderLayer('administration')}
               <div className="layer-row unavailable mt-4">
@@ -139,7 +143,7 @@ export function LayerDrawer({
             <div className="mt-8 pt-6 border-t border-[#25352F]/10">
               <div className="flex items-center justify-between mb-3">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-[#25352F]">
-                  Bölgesel Araştırma Modülleri (13)
+                  Bölgesel Araştırma Modülleri ({regionalModules.length})
                 </h4>
                 <span className="text-[10px] font-mono text-[#6F786F]">v1 Faz Planı</span>
               </div>
@@ -221,12 +225,12 @@ export function LayerDrawer({
 
         {activeCategory === 'heritage' && (
           <>
-            <h3>Cultural Heritage</h3>
+            <h3>Kültürel Miras</h3>
             <div className="layer-list mt-6">
               {renderLayer('heritage')}
               <div className="mt-4 text-xs text-[#6F786F] leading-relaxed p-3 bg-[#FAF8F2] border border-[#25352F]/10 rounded-md">
                 <span className="font-semibold text-[#25352F] block mb-1">Miras Katmanı (Bosna-Hersek, Sırbistan, Bulgaristan ve Yunanistan Envanteri):</span>
-                Balkanlar genelinde (Bosna-Hersek: Saraybosna, Mostar, Travnik, Banyaluka, Foça, Vişegrad, Poçitel; Sırbistan: Belgrad, Sancak/Yeni Pazar, Niş; Bulgaristan: Sofya, Filibe, Şumnu; Yunanistan: Selanik, Batı Trakya, Tesalya, Mora, Girit) 260’ı aşkın Osmanlı anıtı; ayakta kalan yapılar, ihya edilen anıtlar ve geçmişte yıkılıp yerine ne inşa edildiği (otel bahçesi/arkeoloji parkı, belediye konağı, parlamento, üniversite, çarşı, anıt meydan, park) bilgisiyle tescillenmiştir.
+                Balkanlar genelinde (Bosna-Hersek: Saraybosna, Mostar, Travnik, Banyaluka, Foça, Vişegrad, Poçitel; Sırbistan: Belgrad, Sancak/Yeni Pazar, Niş; Bulgaristan: Sofya, Filibe, Şumnu; Yunanistan: Selanik, Batı Trakya, Tesalya, Mora, Girit) {heritageCount} Osmanlı anıtı; ayakta kalan yapılar, ihya edilen anıtlar ve geçmişte yıkılıp yerine ne inşa edildiği (otel bahçesi/arkeoloji parkı, belediye konağı, parlamento, üniversite, çarşı, anıt meydan, park) bilgisiyle tescillenmiştir.
               </div>
             </div>
           </>
@@ -235,7 +239,7 @@ export function LayerDrawer({
         {activeCategory === 'change' && (
           <>
             <div className="flex items-center justify-between">
-              <h3>Change & Migration</h3>
+              <h3>Değişim ve Göç</h3>
               <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-[#9D493A]/10 text-[#9D493A]">
                 1862–1995
               </span>
@@ -278,7 +282,7 @@ export function LayerDrawer({
               <div className="flex items-center justify-between mb-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#25352F] flex items-center gap-1.5">
                   <ArrowRightLeft size={15} className="text-[#9D493A]" />
-                  Tarihsel Göç Dalgaları (8)
+                  Tarihsel Göç Dalgaları ({MIGRATION_WAVES.length})
                 </h4>
                 <span className="text-[10px] font-mono text-[#6F786F] bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
                   BOA & Resmî Sayımlar
@@ -291,12 +295,12 @@ export function LayerDrawer({
               <div className="flex flex-col gap-2.5 max-h-[520px] overflow-y-auto pr-1">
                 {MIGRATION_WAVES.map(wave => {
                   const isExpanded = expandedWaveId === wave.id;
-                  const isCurrentYear = year === wave.anchorYear;
+                  const isCurrentPeriod = year !== undefined && year >= wave.startYear && year <= wave.endYear;
                   return (
                     <div
                       key={wave.id}
                       className={`border rounded-lg overflow-hidden transition-all shadow-2xs ${
-                        isCurrentYear 
+                        isCurrentPeriod 
                           ? 'border-[#9D493A] bg-[#FFFBF8] ring-1 ring-[#9D493A]/30' 
                           : 'border-[#25352F]/15 bg-[#FAF8F2] hover:border-[#25352F]/30'
                       }`}
@@ -503,7 +507,7 @@ export function LayerDrawer({
 
         {activeCategory === 'basemap' && (
           <>
-            <h3>Map Appearance</h3>
+            <h3>Harita Görünümü</h3>
             <div className="mt-6">
               <label className="view-row">
                 Tarihsel adlar
@@ -531,7 +535,7 @@ export function LayerDrawer({
 
         {activeCategory === 'research' && (
           <>
-            <h3>Research & Sources</h3>
+            <h3>Araştırma ve Kaynaklar</h3>
             <div className="mt-6 flex flex-col gap-3">
               <button className="package-button" onClick={onOpenArchive}>
                 <BookOpen size={16} />
@@ -539,31 +543,31 @@ export function LayerDrawer({
               </button>
               <button className="package-button" onClick={onOpenSources}>
                 <FileText size={16} />
-                Kaynaklar ve yöntem (38)
+                Kaynaklar ve yöntem ({sourceCount})
               </button>
             </div>
 
-            {/* Research v1 Scope Metrics */}
+            {/* Research Scope Metrics */}
             <div className="mt-6 p-3 bg-[#FAF8F2] border border-[#25352F]/15 rounded-lg">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[#9D493A] block mb-2">
-                Rumelia Research v1 Kapsamı
+                Rumelia Research Kapsamı
               </span>
               <div className="grid grid-cols-2 gap-2 text-center mb-3">
                 <div className="p-2 bg-[#F5F2E9] rounded">
-                  <span className="block text-base font-serif font-bold text-[#25352F]">13</span>
+                  <span className="block text-base font-serif font-bold text-[#25352F]">{regionalModules.length}</span>
                   <span className="text-[10px] text-[#6F786F]">Bölgesel Modül</span>
                 </div>
                 <div className="p-2 bg-[#F5F2E9] rounded">
-                  <span className="block text-base font-serif font-bold text-[#25352F]">80</span>
-                  <span className="text-[10px] text-[#6F786F]">Aday Çıpa Şehir</span>
+                  <span className="block text-base font-serif font-bold text-[#25352F]">{settlementCount}</span>
+                  <span className="text-[10px] text-[#6F786F]">Tarihsel Yerleşim</span>
                 </div>
                 <div className="p-2 bg-[#F5F2E9] rounded">
-                  <span className="block text-base font-serif font-bold text-[#25352F]">38</span>
+                  <span className="block text-base font-serif font-bold text-[#25352F]">{sourceCount}</span>
                   <span className="text-[10px] text-[#6F786F]">Doğrulanmış Kaynak</span>
                 </div>
                 <div className="p-2 bg-[#F5F2E9] rounded">
-                  <span className="block text-base font-serif font-bold text-[#25352F]">44</span>
-                  <span className="text-[10px] text-[#6F786F]">Çekirdek Varlık</span>
+                  <span className="block text-base font-serif font-bold text-[#25352F]">{places.length}</span>
+                  <span className="text-[10px] text-[#6F786F]">Kayıtlı Varlık</span>
                 </div>
               </div>
 

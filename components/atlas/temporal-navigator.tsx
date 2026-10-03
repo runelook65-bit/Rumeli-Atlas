@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Play, Pause, ChevronLeft, ChevronRight, Info, Users, BookOpen } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { getBalkanDemographicsForYear } from '@/lib/atlas-data';
+import { getBalkanDemographicsForYear, DEMOGRAPHIC_EVIDENCE_LABELS, DEMOGRAPHIC_SCOPE_NOTE } from '@/lib/atlas-data';
 
 interface TemporalNavigatorProps {
   year: number;
@@ -98,16 +98,16 @@ export function TemporalNavigator({
 
       {/* Orta Bölüm: Demografi Oranı + Zaman Çizgisi Slider */}
       <div className="flex-1 min-w-0 flex flex-col justify-center py-1">
-        {/* Balkanlar Türk & Müslüman Nüfusu ve Yüzdelik Oranı */}
+        {/* Balkanlar Müslüman Nüfusu ve Yüzdelik Oranı */}
         <div className="flex items-center justify-between text-xs mb-1.5 flex-wrap gap-x-3 gap-y-1">
           <div className="flex items-center gap-2">
             <div 
               className="flex items-center gap-1.5 bg-[#f0fdf7] border border-[#00694C]/25 px-2.5 py-0.5 rounded-full shadow-2xs"
-              title={`${demo.note} · Kaynak: ${demo.source}`}
+              title={`${demo.note}\nKaynak: ${demo.source}\n${DEMOGRAPHIC_SCOPE_NOTE}`}
             >
               <span className="w-2 h-2 rounded-full bg-[#00694C]" />
               <span className="text-[11px] font-bold text-[#00694C]">
-                Balkanlar Türk & Müslüman Nüfusu:
+                Balkanlar Müslüman Nüfusu:
               </span>
               <span className="font-serif font-bold text-xs text-[#0f172a] font-mono">
                 {demo.muslim.toLocaleString('tr')}
@@ -118,13 +118,27 @@ export function TemporalNavigator({
               >
                 %{demo.pct.toFixed(1)}
               </span>
+
+              {/* Güvenilirlik / Yöntem Rozeti */}
+              <span 
+                className={`text-[9px] font-medium px-1.5 py-0.2 rounded ${
+                  demo.kind === 'sayim-temelli' 
+                    ? 'bg-emerald-100 text-emerald-800' 
+                    : demo.kind === 'kaynak-sentezi' 
+                    ? 'bg-blue-100 text-blue-800' 
+                    : 'bg-amber-100 text-amber-800'
+                }`}
+                title={DEMOGRAPHIC_EVIDENCE_LABELS[demo.kind]}
+              >
+                {demo.interpolated ? 'Ara Değer' : DEMOGRAPHIC_EVIDENCE_LABELS[demo.kind]}
+              </span>
             </div>
 
             {/* Yüzdelik Dağılım Mini Çubuğu */}
             <div className="hidden xl:flex items-center gap-1.5 text-[10px] text-gray-500">
               <div 
                 className="w-20 h-2 bg-stone-200 rounded-full overflow-hidden flex shadow-inner border border-black/5"
-                title={`Türk & Müslüman: %${demo.pct.toFixed(1)} | Gayrimüslim: %${(100 - demo.pct).toFixed(1)}`}
+                title={`Müslüman (Millet-i İslâm): %${demo.pct.toFixed(1)} | Gayrimüslim: %${(100 - demo.pct).toFixed(1)}`}
               >
                 <div 
                   className="h-full transition-all duration-300" 
@@ -144,7 +158,7 @@ export function TemporalNavigator({
             </span>
             <span className="hidden lg:inline text-stone-300">·</span>
             <span 
-              className="hidden lg:inline text-[10px] text-[#6F786F] max-w-[220px] truncate" 
+              className="hidden lg:inline text-[10px] text-[#6F786F] max-w-[240px] truncate" 
               title={`${demo.note} (${demo.source})`}
             >
               {demo.source}
