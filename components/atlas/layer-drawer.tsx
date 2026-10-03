@@ -73,6 +73,14 @@ export function LayerDrawer({
   const storeSetRegion = useStore(s => s.setSelectedRegion);
   const storeMapHandle = useStore(s => s.mapHandle);
   const storeSetSelectedPlace = useStore(s => s.setSelectedPlace);
+  const storeActiveEvent = useStore(s => s.activeEvent);
+  const storeSetActiveEvent = useStore(s => s.setActiveEvent);
+  const storePeriodBasemap = useStore(s => s.periodBasemap);
+  const storeSetPeriodBasemap = useStore(s => s.setPeriodBasemap);
+  const storePeriodOpacity = useStore(s => s.periodOpacity);
+  const storeSetPeriodOpacity = useStore(s => s.setPeriodOpacity);
+  const storeOhmBasemap = useStore(s => s.ohmBasemap);
+  const storeSetOhmBasemap = useStore(s => s.setOhmBasemap);
 
   const activeCategory = propActiveCategory !== undefined ? propActiveCategory : storeCategory;
   const onClose = propOnClose || (() => storeSetCategory(null));
@@ -348,13 +356,13 @@ export function LayerDrawer({
 
               <div className="grid grid-cols-1 gap-2 mb-4">
                 {RUMELIA_EVENTS.map(ev => {
-                  const isActive = useStore(s => s.activeEvent)?.id === ev.id;
+                  const isActive = storeActiveEvent?.id === ev.id;
                   return (
                     <button
                       key={ev.id}
                       type="button"
                       onClick={() => {
-                        useStore.getState().setActiveEvent(isActive ? null : ev);
+                        storeSetActiveEvent(isActive ? null : ev);
                         if (!isActive) onClose();
                       }}
                       className={`text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1 ${
@@ -623,30 +631,30 @@ export function LayerDrawer({
               <label className="view-row">
                 Dönem Haritası (Tarihsel Rölyef)
                 <Switch 
-                  checked={useStore(s => s.periodBasemap)} 
-                  onCheckedChange={checked => useStore.getState().setPeriodBasemap(checked)} 
+                  checked={storePeriodBasemap} 
+                  onCheckedChange={checked => storeSetPeriodBasemap(checked)} 
                 />
               </label>
               <label className="view-row">
                 OpenHistoricalMap (OHM Arazi & Landcover)
                 <Switch 
-                  checked={useStore(s => s.ohmBasemap)} 
-                  onCheckedChange={checked => useStore.getState().setOhmBasemap(checked)} 
+                  checked={storeOhmBasemap} 
+                  onCheckedChange={checked => storeSetOhmBasemap(checked)} 
                 />
               </label>
-              {useStore(s => s.periodBasemap) && (
+              {storePeriodBasemap && (
                 <div className="px-3 py-2 mt-1 rounded bg-[#F5F2E9] border border-[#25352F]/10 flex flex-col gap-1.5">
                   <div className="flex justify-between text-xs text-[#6F786F]">
                     <span>Dönem Haritası Saydamlığı</span>
-                    <span className="font-mono">%{Math.round(useStore(s => s.periodOpacity) * 100)}</span>
+                    <span className="font-mono">%{Math.round(storePeriodOpacity * 100)}</span>
                   </div>
                   <input
                     type="range"
                     min={0.2}
                     max={1.0}
                     step={0.05}
-                    value={useStore(s => s.periodOpacity)}
-                    onChange={e => useStore.getState().setPeriodOpacity(Number(e.target.value))}
+                    value={storePeriodOpacity}
+                    onChange={e => storeSetPeriodOpacity(Number(e.target.value))}
                     className="w-full accent-[#9D493A]"
                   />
                 </div>
