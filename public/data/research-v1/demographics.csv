@@ -1,0 +1,22 @@
+demographic_id,place_id,year,category_type,category_name_original,category_name_normalized,population,households,percentage,measurement_type,source_id,confidence,notes
+DEM-0001,SKP-001,1833,religion,Müslüman,Muslim,2692,NULL,NULL,persons,SRC-010,HIGH,Skopje city; BOA NFS.d.5624 fol.1
+DEM-0002,SKP-001,1833,religion,Christian,Christian,1541,NULL,NULL,persons,SRC-010,HIGH,Includes 165 temporary residents as reported; source total non-Muslims 1705 also includes Yahudiyan.
+DEM-0003,SKP-001,1833,religion/community,Yahudiyân,Jewish,144,73,NULL,persons_households,SRC-010,HIGH,BOA NFS.d.5624 fol.6; original category retained.
+DEM-0004,SKP-001,1833,community/legal,Kıbtî Müslümanlar,Kıbtî Muslim,343,117,NULL,persons_households,SRC-010,HIGH,Not normalized to Turkish/Roma.
+DEM-0005,SKP-001,1833,community/legal,Kıbtî reaya,Kıbtî reaya,59,24,NULL,persons_households,SRC-010,HIGH,Fiscal/legal category; no ethnic inference.
+DEM-0006,TET-001,1452,religion,Muslim section,Muslim,60,NULL,NULL,households,SRC-011,HIGH,Tetovo/Htetova village-marketplace.
+DEM-0007,TET-001,1452,religion,Christian section (table),Christian,146,NULL,NULL,families,SRC-011,HIGH,Internal conflict: prose gives 159; retained as separate DEM-0008.
+DEM-0008,TET-001,1452,religion,Christian section (prose),Christian,159,NULL,NULL,families,SRC-011,DISPUTED,Conflicts with comparative table value 146; do not average.
+DEM-0009,TET-001,1467,religion,Muslim,Muslim,41,NULL,NULL,families,SRC-011,HIGH,Tetovo city/admin-military centre.
+DEM-0010,TET-001,1467,religion,Christian,Christian,180,NULL,NULL,families,SRC-011,HIGH,Plus 43 widows and 16 bachelors in source.
+DEM-0011,TET-001,1569,religion/community,Cemaat-i Müslümanan,Muslim community,392,NULL,NULL,registered persons,SRC-012,HIGH,Kalkandelen urban registered-person measure.
+DEM-0012,TET-001,1569,religion/community,Cemaat-i Gebran,non-Muslim community,160,NULL,NULL,registered persons,SRC-012,HIGH,Source heading retained; translation qualified.
+DEM-0013,PRI-001,1477,religion,Muslim households,Muslim,0,NULL,NULL,households,SRC-013,HIGH,Prizren sancak census; no Muslim household reported.
+DEM-0014,PRI-001,1571,religion,Muslim registered population,Muslim,50,NULL,50,percentage,SRC-013,HIGH,Prizren town reached about 50% Muslims among registered population; source-specific denominator.
+DEM-0015,SKP-001,2021,ethnicity,Macedonians,Macedonian,309107,NULL,NULL,persons,SRC-015,HIGH,City of Skopje administrative unit; Table 05.
+DEM-0016,SKP-001,2021,ethnicity,Albanians,Albanian,120293,NULL,NULL,persons,SRC-015,HIGH,City of Skopje administrative unit; Table 05.
+DEM-0017,SKP-001,2021,ethnicity,Turks,Turkish,8524,NULL,NULL,persons,SRC-015,HIGH,City of Skopje administrative unit; Table 05.
+DEM-0018,SKP-001,2021,language,Albanian mother tongue,Albanian mother tongue,120269,NULL,NULL,persons,SRC-015,HIGH,Separate from ethnicity; Table 08.
+DEM-0019,TET-001,2021,ethnicity,Albanians,Albanian,60460,NULL,NULL,persons,SRC-015,HIGH,"Tetovo municipality, not town-only."
+DEM-0020,TET-001,2021,ethnicity,Turks,Turkish,1746,NULL,NULL,persons,SRC-015,HIGH,"Tetovo municipality, not town-only."
+DEM-0021,TET-001,2021,language,Albanian mother tongue,Albanian mother tongue,61006,NULL,NULL,persons,SRC-015,HIGH,Tetovo municipality; Table 08.

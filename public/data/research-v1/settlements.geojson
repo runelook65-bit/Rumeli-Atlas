@@ -1,0 +1,344 @@
+{
+  "type": "FeatureCollection",
+  "name": "rumelia_atlas_pilot_settlements",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "SKP-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4313889,
+          41.9963889
+        ]
+      },
+      "properties": {
+        "place_id": "SKP-001",
+        "modern_name": "Skopje",
+        "historical_primary_name": "Üsküp",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Living city; Ottoman provincial/kaza/sancak role varies by date; name variants grouped.",
+        "source_id": "SRC-001",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SKP-002",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.391437,
+          42.016885
+        ]
+      },
+      "properties": {
+        "place_id": "SKP-002",
+        "modern_name": "Scupi",
+        "historical_primary_name": "Σκούποι",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "historical_estimate",
+        "place_type": "archaeological_site",
+        "first_known_date": "2nd c. BCE/81-518 CE",
+        "last_known_date": "518",
+        "current_status": "abandoned",
+        "notes": "Ancient predecessor site kept separate from modern Skopje; Digital Atlas precision 2 km.",
+        "source_id": "SRC-030",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TET-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9713889,
+          42.0097222
+        ]
+      },
+      "properties": {
+        "place_id": "TET-001",
+        "modern_name": "Tetovo",
+        "historical_primary_name": "Тетово",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "1452/53",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Village-marketplace in 1452/53; city/admin-military centre by 1467/68.",
+        "source_id": "SRC-011",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "GOS-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9077778,
+          41.7961111
+        ]
+      },
+      "properties": {
+        "place_id": "GOS-001",
+        "modern_name": "Gostivar",
+        "historical_primary_name": "Гостивар",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Late-Ottoman nahiye centre under Tetova kaza in cited reference.",
+        "source_id": "SRC-011",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "KUM-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.7158333,
+          42.1327778
+        ]
+      },
+      "properties": {
+        "place_id": "KUM-001",
+        "modern_name": "Kumanovo",
+        "historical_primary_name": "Куманово",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "1519",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Village in 1519 and 1570-72; kasaba by Evliya 1660.",
+        "source_id": "SRC-006",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PRI-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7397222,
+          42.2138889
+        ]
+      },
+      "properties": {
+        "place_id": "PRI-001",
+        "modern_name": "Prizren",
+        "historical_primary_name": "Призрен",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "1452/53",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Medieval and Ottoman urban/sancak centre; Ottoman variants not all dated.",
+        "source_id": "SRC-013",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PRI-003",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.1666667,
+          42.6725
+        ]
+      },
+      "properties": {
+        "place_id": "PRI-003",
+        "modern_name": "Prishtina",
+        "historical_primary_name": "Prishtinë",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "1389",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Late-Ottoman kasaba and sandjak capital; adjoining administrative frame.",
+        "source_id": "SRC-001",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "VUS-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9675,
+          42.8230556
+        ]
+      },
+      "properties": {
+        "place_id": "VUS-001",
+        "modern_name": "Vushtrri",
+        "historical_primary_name": "Vushtrria",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "town",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Late-Ottoman kasaba/kaza capital; Ottoman form from undated gazetteer alias.",
+        "source_id": "SRC-030",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "KAC-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.2594444,
+          42.2319444
+        ]
+      },
+      "properties": {
+        "place_id": "KAC-001",
+        "modern_name": "Kaçanik",
+        "historical_primary_name": "Kačanik",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "town",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Strategic pass/corridor settlement; Ottoman name not asserted.",
+        "source_id": "SRC-010",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "FER-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.1552778,
+          42.3705556
+        ]
+      },
+      "properties": {
+        "place_id": "FER-001",
+        "modern_name": "Ferizaj",
+        "historical_primary_name": "Ferizovik",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "city",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Co-reference secure; date table for variants remains NULL.",
+        "source_id": "SRC-030",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "RAH-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.6547222,
+          42.3994444
+        ]
+      },
+      "properties": {
+        "place_id": "RAH-001",
+        "modern_name": "Rahovec",
+        "historical_primary_name": "Rahoveci",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "town",
+        "first_known_date": "1889",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Late-Ottoman nahiye under Prizren kaza; Ottoman script not extracted.",
+        "source_id": "SRC-010",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "BRN-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7247,
+          42.11
+        ]
+      },
+      "properties": {
+        "place_id": "BRN-001",
+        "modern_name": "Bresanë",
+        "historical_primary_name": "Bresana",
+        "country_current": "Kosovo",
+        "coordinate_precision": "settlement_centroid",
+        "place_type": "village",
+        "first_known_date": "1538",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Village location for Kukli Beu Mosque; coordinate is village centroid.",
+        "source_id": "SRC-017",
+        "confidence": "MEDIUM"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "GNR-001",
+      "geometry": null,
+      "properties": {
+        "place_id": "GNR-001",
+        "modern_name": "Gorno Nerezi",
+        "historical_primary_name": "Nerezi",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "unknown",
+        "place_type": "village",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Village associated with St Panteleimon church; no defensible point from opened source.",
+        "source_id": "SRC-030",
+        "confidence": "HIGH"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "STN-001",
+      "geometry": null,
+      "properties": {
+        "place_id": "STN-001",
+        "modern_name": "Staro Nagoričane",
+        "historical_primary_name": "NULL",
+        "country_current": "North Macedonia",
+        "coordinate_precision": "unknown",
+        "place_type": "village",
+        "first_known_date": "NULL",
+        "last_known_date": "2026",
+        "current_status": "extant",
+        "notes": "Historically relevant locality identified in gazetteer memo; coordinate withheld pending stronger crosswalk.",
+        "source_id": "SRC-006",
+        "confidence": "LOW"
+      }
+    }
+  ]
+}

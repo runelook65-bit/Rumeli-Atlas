@@ -1,0 +1,196 @@
+{
+  "type": "FeatureCollection",
+  "name": "rumelia_atlas_pilot_migrations",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "MIG-001",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-001",
+        "origin_place_id": "NULL",
+        "destination_place_id": "SKP-001",
+        "start_year": "14th-16th c.",
+        "end_year": "16th c.",
+        "community": "Türkmen/Turks; Muslims",
+        "estimated_population": "37435",
+        "migration_type": "organized settlement/sedentarization",
+        "cause": "Ottoman conquest and consolidation",
+        "source_id": "SRC-021",
+        "confidence": "MEDIUM",
+        "notes": "37,435 is Rumelia-wide; not corridor total."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-002",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-002",
+        "origin_place_id": "NULL",
+        "destination_place_id": "SKP-001",
+        "start_year": "1877",
+        "end_year": "1879",
+        "community": "Muslims; muhacirs",
+        "estimated_population": "11581",
+        "migration_type": "flight/organized resettlement",
+        "cause": "1877-78 war; male figure in Skopje sanjak",
+        "source_id": "SRC-021",
+        "confidence": "MEDIUM",
+        "notes": "40,895 male muhacirs in Kosovo vilayet; 11,581 in Skopje sanjak."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-003",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-003",
+        "origin_place_id": "NULL",
+        "destination_place_id": "TET-001",
+        "start_year": "1877",
+        "end_year": "1879",
+        "community": "Muslims; muhacirs",
+        "estimated_population": "NULL",
+        "migration_type": "flight/organized resettlement",
+        "cause": "Refugees from Pirot and other new Serbian regions routed to Tetovo/Gostivar",
+        "source_id": "SRC-021",
+        "confidence": "HIGH",
+        "notes": "Route documented; number not supplied."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-004",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-004",
+        "origin_place_id": "NULL",
+        "destination_place_id": "PRI-001",
+        "start_year": "1877",
+        "end_year": "1879",
+        "community": "Muslims; mainly Albanians in countryside and Turks in towns per reconstruction",
+        "estimated_population": "71000",
+        "migration_type": "flight/expulsion",
+        "cause": "Serbian military advance and violence",
+        "source_id": "SRC-021",
+        "confidence": "MEDIUM",
+        "notes": "Kingdom of Serbia new regions; wider geography."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-005",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-005",
+        "origin_place_id": "NULL",
+        "destination_place_id": "SKP-001",
+        "start_year": "1912",
+        "end_year": "1931",
+        "community": "Turks / Turkish mother tongue",
+        "estimated_population": "195000 to 105407",
+        "migration_type": "flight/expulsion/emigration",
+        "cause": "Balkan Wars and postwar Muslim emigration",
+        "source_id": "SRC-021",
+        "confidence": "MEDIUM",
+        "notes": "Regional Vardar Macedonia comparison; not net migration or city count."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-006",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-006",
+        "origin_place_id": "NULL",
+        "destination_place_id": "PRI-001",
+        "start_year": "1918",
+        "end_year": "1918",
+        "community": "refugees; local Macedonians, Albanians and Turks",
+        "estimated_population": "NULL",
+        "migration_type": "flight",
+        "cause": "WWI occupation, requisition, retreat after Dobro Pole",
+        "source_id": "SRC-021",
+        "confidence": "LOW",
+        "notes": "Source says thousands followed retreat; no corridor total."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-007",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-007",
+        "origin_place_id": "NULL",
+        "destination_place_id": "PRI-001",
+        "start_year": "1918",
+        "end_year": "1940",
+        "community": "Serbs; Croats; Slovenes; affected Albanians and Muslims",
+        "estimated_population": "87600",
+        "migration_type": "organized colonization",
+        "cause": "Interwar agrarian reform and colonization",
+        "source_id": "SRC-022",
+        "confidence": "MEDIUM",
+        "notes": "Wider southern regions; includes 1,400 Montenegrin families in Metohija in 1931."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-008",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-008",
+        "origin_place_id": "NULL",
+        "destination_place_id": "PRI-001",
+        "start_year": "1938",
+        "end_year": "1944",
+        "community": "Turkish-origin population and Muslim Albanians",
+        "estimated_population": "40000 families planned",
+        "migration_type": "planned relocation/expulsion",
+        "cause": "Draft Yugoslav-Turkish convention; ratification/completion unproven",
+        "source_id": "SRC-023",
+        "confidence": "LOW",
+        "notes": "Plan, not completed movement."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-009",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-009",
+        "origin_place_id": "NULL",
+        "destination_place_id": "TET-001",
+        "start_year": "1945",
+        "end_year": "1967",
+        "community": "Muslims; Muslim Macedonians; Albanians; Turks",
+        "estimated_population": "173000 / 175392",
+        "migration_type": "organized bilateral migration plus pressured emigration",
+        "cause": "Yugoslavia-Turkey agreements and socialist transformation",
+        "source_id": "SRC-023",
+        "confidence": "MEDIUM",
+        "notes": "Competing denominators; not additive and not city-level."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MIG-010",
+      "geometry": null,
+      "properties": {
+        "migration_id": "MIG-010",
+        "origin_place_id": "PRI-001",
+        "destination_place_id": "NULL",
+        "start_year": "1998",
+        "end_year": "1999",
+        "community": "Kosovo Albanians; also Roma, Serbs and others",
+        "estimated_population": "133000 in Macedonia by 1999-04-24",
+        "migration_type": "flight/expulsion",
+        "cause": "Kosovo war; refuge via Blace/Skopje gateway",
+        "source_id": "SRC-024",
+        "confidence": "HIGH",
+        "notes": "Host-country figure; no Prizren-only breakdown."
+      }
+    }
+  ]
+}

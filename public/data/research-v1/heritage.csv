@@ -1,0 +1,32 @@
+heritage_id,place_id,name,type,latitude,longitude,construction_date,founder,status,destruction_date,current_use,source_id,confidence,coordinate_precision
+SK-01,SKP-001,Sultan Murat Camii,mosque,42.001566,21.441413,1436-37,Sultan Murat II,extant,NULL,worship context; repeated restoration,SRC-005,HIGH,building
+SK-02,SKP-001,Aladza Camii,mosque,42.004655,21.43977,1438-39,Ishak Bey,extant,NULL,altered; decoration lost; courtyard markers survive,SRC-018,HIGH,building
+SK-03,SKP-001,Gazi Isa Bey Camii,mosque,42.003,21.441,1475-76,Isa Bey,extant,NULL,damaged/repaired decoration,SRC-018,HIGH,approximate
+SK-04,SKP-001,Mustafa Paşa Camii,mosque,42.002025,21.43541,1492,Mustafa Pasha,partially_extant,NULL,"caravanserai, medrese, imaret and mekteb no longer survive as components",SRC-018,HIGH,building
+SK-05,SKP-001,Daut Paşa Hamamı,hamam,41.998724,21.435724,15th c.,Daut Pasha,converted,NULL,gallery; reconstruction 1935-36; permanent exhibition 2000,SRC-018,HIGH,building
+SK-06,SKP-001,Çifte Hamam,hamam,42.001129,21.437277,mid-15th c.,Isa Bey,converted,1916-17,gallery; conserved after 1963,SRC-018,HIGH,building
+SK-07,SKP-001,Kapan Hanı,han,42.000108,21.436648,15th c.,Isa Bey,partially_extant,NULL,shops/restaurants; heavily altered,SRC-018,HIGH,building
+SK-08,SKP-001,Suli Hanı,han,42.00166,21.437566,1444-45,Ishak Bey,reconstructed,1963 damage,academy/museum uses,SRC-018,HIGH,building
+SK-09,SKP-001,Kurşumli Hanı,han,42.003149,21.436844,16th c.,Muslihudin Abdul Gani,converted,NULL,lapidarium/cultural venue,SRC-018,HIGH,building
+SK-10,SKP-001,Bedesten / Bezisten,bedesten,42.00147,21.437036,15th c.,Ishak Bey,reconstructed,1689,present building shops/galleries; original destroyed,SRC-018,HIGH,building
+SK-11,SKP-001,Taş Köprü,bridge,41.997115,21.43325,15th c. disputed,Murat II or Mehmed II disputed,reconstructed,NULL,pedestrian bridge; reconstruction 1992-2004,SRC-018,MEDIUM,building
+SK-12,SKP-001,Sultan Murat complex necropolis,cemetery,42.0016,21.4414,1556-57/1774 components,NULL,partially_extant,NULL,grave markers around türbes survive; extent unknown,SRC-018,HIGH,quarter
+SK-13,SKP-001,Ishak Bey courtyard grave markers,cemetery,42.0047,21.4398,16th-19th c.,NULL,partially_extant,NULL,markers survive; full cemetery boundary unknown,SRC-018,HIGH,quarter
+TE-01,TET-001,Alaca Cami,mosque,42.005731,20.966761,1833-34 present building,Abdurrahman Pasha,extant,NULL,conserved 2010-11; multi-phase attribution,SRC-019,HIGH,building
+TE-02,TET-001,Harabati Baba Tekke,tekke,42.003953,20.956847,1538; 18th c. rebuild,Sersem Ali Baba / Recep Pasha waqf,partially_extant,2010 fire,tekke and museum; restoration agreement 2011,SRC-019,HIGH,building
+PR-01,PRI-001,Xhamia e Sinan Pashës,mosque,42.20903,20.741379,1615,Sofi Sinan Pasha,extant,1919 porch demolition,restored; worship reopened 2011,SRC-017,HIGH,building
+PR-02,PRI-001,Xhamia e Mehmed Pashës,mosque,42.211405,20.74317,1563-74,Gazi Mehmed Pasha,extant,NULL,restored; part of waqf complex,SRC-017,HIGH,building
+PR-03,PRI-001,Gazi Mehmed Pasha külliye,vakif_complex,42.2114,20.7432,1563-74,Gazi Mehmed Pasha,partially_extant,NULL,"mosque, türbe, medrese/library, fountains; auxiliary survival varies",SRC-017,HIGH,quarter
+PR-04,PRI-001,Xhamia e Emin Pashës,mosque,42.211286,20.741317,1831,Emin Pasha,extant,NULL,meçteb and courtyard graves; restored 2014,SRC-017,HIGH,building
+PR-05,PRI-001,Xhamia e Terzi-Mëhallës,mosque,42.2124,20.7399,1721,Terzi Memishi,extant,NULL,former cemetery no longer exists; fountain inscription preserved,SRC-017,HIGH,approximate
+PR-06,BRN-001,Xhamia e Kukli Beut,mosque,42.11,20.7247,1538,Kukli Mehmed Bey,extant,NULL,türbe and old village cemetery,SRC-017,HIGH,village_centroid
+PR-07,PRI-001,Teqja Halveti,tekke,42.211,20.742,1835 surviving fabric,Sheh Osman Baba association,extant,NULL,ritual complex survives; original foundation dates disputed,SRC-017,HIGH,approximate
+PR-08,PRI-001,Hamami i Gazi Mehmed Pashës,hamam,42.21135,20.7424,1563-74,Gazi Mehmed Pasha,converted,NULL,gallery since 2000; UNESCO-supported works 2013-18,SRC-017,HIGH,approximate
+PR-09,PRI-001,Kulla e Sahatit / Archaeological Museum,hamam_clock_tower,42.2119,20.742,1498; clock tower 19th c.,Shemsudin Ahmed Bey / Eshref Pasha Rrotulli,converted,NULL,museum since 1975; restoration 2014,SRC-017,HIGH,approximate
+PR-10,PRI-001,Ura e vjetër e gurit në Prizren,bridge,42.2093,20.7391,late 15th/early 16th c.,NULL,reconstructed,1979 flood,rebuilt 1982; pedestrian bridge,SRC-017,HIGH,approximate
+PR-11,PRI-001,Kroi i Shatërvanit,fountain,42.209032,20.737859,probably 17th c.,NULL,extant,NULL,restored 2013; public landmark,SRC-017,HIGH,building
+PR-12,PRI-001,Kompleksi i Teqesë Sinani,tekke,42.2124,20.7399,1768,Sheikh Ali Efendi Rexhep Koro,ruined,NULL,lost function; ruins and cemetery survive,SRC-017,HIGH,approximate
+PR-13,PRI-001,Tyrbja e Kalender Babës,turbe,42.2124,20.7405,NULL,NULL,ruined,NULL,roof and door lost; documentary date unknown,SRC-017,HIGH,approximate
+PR-14,PRI-001,Emin Pasha Mosque cemetery,cemetery,42.211286,20.741317,Ottoman period,NULL,extant,NULL,courtyard graves and founder tomb,SRC-017,HIGH,building
+PR-15,PRI-001,Sinani Tekke cemetery,cemetery,42.2124,20.7399,Ottoman period,NULL,partially_extant,NULL,markers survive; neglected,SRC-017,HIGH,approximate
+PR-16,PRI-001,Terzi-Mëhalla former cemetery,cemetery,42.2124,20.7399,Ottoman period,NULL,destroyed,NULL,DTK explicitly says former cemetery no longer exists,SRC-017,HIGH,approximate

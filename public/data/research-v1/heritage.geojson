@@ -1,0 +1,843 @@
+{
+  "type": "FeatureCollection",
+  "name": "rumelia_atlas_pilot_heritage",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "SK-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.441413,
+          42.001566
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-01",
+        "place_id": "SKP-001",
+        "name": "Sultan Murat Camii",
+        "type": "mosque",
+        "latitude": 42.001566,
+        "longitude": 21.441413,
+        "construction_date": "1436-37",
+        "founder": "Sultan Murat II",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "worship context; repeated restoration",
+        "source_id": "SRC-005",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.43977,
+          42.004655
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-02",
+        "place_id": "SKP-001",
+        "name": "Aladza Camii",
+        "type": "mosque",
+        "latitude": 42.004655,
+        "longitude": 21.43977,
+        "construction_date": "1438-39",
+        "founder": "Ishak Bey",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "altered; decoration lost; courtyard markers survive",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.441,
+          42.003
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-03",
+        "place_id": "SKP-001",
+        "name": "Gazi Isa Bey Camii",
+        "type": "mosque",
+        "latitude": 42.003,
+        "longitude": 21.441,
+        "construction_date": "1475-76",
+        "founder": "Isa Bey",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "damaged/repaired decoration",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.43541,
+          42.002025
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-04",
+        "place_id": "SKP-001",
+        "name": "Mustafa Paşa Camii",
+        "type": "mosque",
+        "latitude": 42.002025,
+        "longitude": 21.43541,
+        "construction_date": "1492",
+        "founder": "Mustafa Pasha",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "caravanserai, medrese, imaret and mekteb no longer survive as components",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.435724,
+          41.998724
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-05",
+        "place_id": "SKP-001",
+        "name": "Daut Paşa Hamamı",
+        "type": "hamam",
+        "latitude": 41.998724,
+        "longitude": 21.435724,
+        "construction_date": "15th c.",
+        "founder": "Daut Pasha",
+        "status": "converted",
+        "destruction_date": "NULL",
+        "current_use": "gallery; reconstruction 1935-36; permanent exhibition 2000",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-06",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437277,
+          42.001129
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-06",
+        "place_id": "SKP-001",
+        "name": "Çifte Hamam",
+        "type": "hamam",
+        "latitude": 42.001129,
+        "longitude": 21.437277,
+        "construction_date": "mid-15th c.",
+        "founder": "Isa Bey",
+        "status": "converted",
+        "destruction_date": "1916-17",
+        "current_use": "gallery; conserved after 1963",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-07",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.436648,
+          42.000108
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-07",
+        "place_id": "SKP-001",
+        "name": "Kapan Hanı",
+        "type": "han",
+        "latitude": 42.000108,
+        "longitude": 21.436648,
+        "construction_date": "15th c.",
+        "founder": "Isa Bey",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "shops/restaurants; heavily altered",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-08",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437566,
+          42.00166
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-08",
+        "place_id": "SKP-001",
+        "name": "Suli Hanı",
+        "type": "han",
+        "latitude": 42.00166,
+        "longitude": 21.437566,
+        "construction_date": "1444-45",
+        "founder": "Ishak Bey",
+        "status": "reconstructed",
+        "destruction_date": "1963 damage",
+        "current_use": "academy/museum uses",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-09",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.436844,
+          42.003149
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-09",
+        "place_id": "SKP-001",
+        "name": "Kurşumli Hanı",
+        "type": "han",
+        "latitude": 42.003149,
+        "longitude": 21.436844,
+        "construction_date": "16th c.",
+        "founder": "Muslihudin Abdul Gani",
+        "status": "converted",
+        "destruction_date": "NULL",
+        "current_use": "lapidarium/cultural venue",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437036,
+          42.00147
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-10",
+        "place_id": "SKP-001",
+        "name": "Bedesten / Bezisten",
+        "type": "bedesten",
+        "latitude": 42.00147,
+        "longitude": 21.437036,
+        "construction_date": "15th c.",
+        "founder": "Ishak Bey",
+        "status": "reconstructed",
+        "destruction_date": "1689",
+        "current_use": "present building shops/galleries; original destroyed",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.43325,
+          41.997115
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-11",
+        "place_id": "SKP-001",
+        "name": "Taş Köprü",
+        "type": "bridge",
+        "latitude": 41.997115,
+        "longitude": 21.43325,
+        "construction_date": "15th c. disputed",
+        "founder": "Murat II or Mehmed II disputed",
+        "status": "reconstructed",
+        "destruction_date": "NULL",
+        "current_use": "pedestrian bridge; reconstruction 1992-2004",
+        "source_id": "SRC-018",
+        "confidence": "MEDIUM",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4414,
+          42.0016
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-12",
+        "place_id": "SKP-001",
+        "name": "Sultan Murat complex necropolis",
+        "type": "cemetery",
+        "latitude": 42.0016,
+        "longitude": 21.4414,
+        "construction_date": "1556-57/1774 components",
+        "founder": "NULL",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "grave markers around türbes survive; extent unknown",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "quarter"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "SK-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4398,
+          42.0047
+        ]
+      },
+      "properties": {
+        "heritage_id": "SK-13",
+        "place_id": "SKP-001",
+        "name": "Ishak Bey courtyard grave markers",
+        "type": "cemetery",
+        "latitude": 42.0047,
+        "longitude": 21.4398,
+        "construction_date": "16th-19th c.",
+        "founder": "NULL",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "markers survive; full cemetery boundary unknown",
+        "source_id": "SRC-018",
+        "confidence": "HIGH",
+        "coordinate_precision": "quarter"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TE-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.966761,
+          42.005731
+        ]
+      },
+      "properties": {
+        "heritage_id": "TE-01",
+        "place_id": "TET-001",
+        "name": "Alaca Cami",
+        "type": "mosque",
+        "latitude": 42.005731,
+        "longitude": 20.966761,
+        "construction_date": "1833-34 present building",
+        "founder": "Abdurrahman Pasha",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "conserved 2010-11; multi-phase attribution",
+        "source_id": "SRC-019",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TE-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.956847,
+          42.003953
+        ]
+      },
+      "properties": {
+        "heritage_id": "TE-02",
+        "place_id": "TET-001",
+        "name": "Harabati Baba Tekke",
+        "type": "tekke",
+        "latitude": 42.003953,
+        "longitude": 20.956847,
+        "construction_date": "1538; 18th c. rebuild",
+        "founder": "Sersem Ali Baba / Recep Pasha waqf",
+        "status": "partially_extant",
+        "destruction_date": "2010 fire",
+        "current_use": "tekke and museum; restoration agreement 2011",
+        "source_id": "SRC-019",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741379,
+          42.20903
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-01",
+        "place_id": "PRI-001",
+        "name": "Xhamia e Sinan Pashës",
+        "type": "mosque",
+        "latitude": 42.20903,
+        "longitude": 20.741379,
+        "construction_date": "1615",
+        "founder": "Sofi Sinan Pasha",
+        "status": "extant",
+        "destruction_date": "1919 porch demolition",
+        "current_use": "restored; worship reopened 2011",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.74317,
+          42.211405
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-02",
+        "place_id": "PRI-001",
+        "name": "Xhamia e Mehmed Pashës",
+        "type": "mosque",
+        "latitude": 42.211405,
+        "longitude": 20.74317,
+        "construction_date": "1563-74",
+        "founder": "Gazi Mehmed Pasha",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "restored; part of waqf complex",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7432,
+          42.2114
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-03",
+        "place_id": "PRI-001",
+        "name": "Gazi Mehmed Pasha külliye",
+        "type": "vakif_complex",
+        "latitude": 42.2114,
+        "longitude": 20.7432,
+        "construction_date": "1563-74",
+        "founder": "Gazi Mehmed Pasha",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "mosque, türbe, medrese/library, fountains; auxiliary survival varies",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "quarter"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741317,
+          42.211286
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-04",
+        "place_id": "PRI-001",
+        "name": "Xhamia e Emin Pashës",
+        "type": "mosque",
+        "latitude": 42.211286,
+        "longitude": 20.741317,
+        "construction_date": "1831",
+        "founder": "Emin Pasha",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "meçteb and courtyard graves; restored 2014",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-05",
+        "place_id": "PRI-001",
+        "name": "Xhamia e Terzi-Mëhallës",
+        "type": "mosque",
+        "latitude": 42.2124,
+        "longitude": 20.7399,
+        "construction_date": "1721",
+        "founder": "Terzi Memishi",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "former cemetery no longer exists; fountain inscription preserved",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-06",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7247,
+          42.11
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-06",
+        "place_id": "BRN-001",
+        "name": "Xhamia e Kukli Beut",
+        "type": "mosque",
+        "latitude": 42.11,
+        "longitude": 20.7247,
+        "construction_date": "1538",
+        "founder": "Kukli Mehmed Bey",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "türbe and old village cemetery",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "village_centroid"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-07",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.742,
+          42.211
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-07",
+        "place_id": "PRI-001",
+        "name": "Teqja Halveti",
+        "type": "tekke",
+        "latitude": 42.211,
+        "longitude": 20.742,
+        "construction_date": "1835 surviving fabric",
+        "founder": "Sheh Osman Baba association",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "ritual complex survives; original foundation dates disputed",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-08",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7424,
+          42.21135
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-08",
+        "place_id": "PRI-001",
+        "name": "Hamami i Gazi Mehmed Pashës",
+        "type": "hamam",
+        "latitude": 42.21135,
+        "longitude": 20.7424,
+        "construction_date": "1563-74",
+        "founder": "Gazi Mehmed Pasha",
+        "status": "converted",
+        "destruction_date": "NULL",
+        "current_use": "gallery since 2000; UNESCO-supported works 2013-18",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-09",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.742,
+          42.2119
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-09",
+        "place_id": "PRI-001",
+        "name": "Kulla e Sahatit / Archaeological Museum",
+        "type": "hamam_clock_tower",
+        "latitude": 42.2119,
+        "longitude": 20.742,
+        "construction_date": "1498; clock tower 19th c.",
+        "founder": "Shemsudin Ahmed Bey / Eshref Pasha Rrotulli",
+        "status": "converted",
+        "destruction_date": "NULL",
+        "current_use": "museum since 1975; restoration 2014",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7391,
+          42.2093
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-10",
+        "place_id": "PRI-001",
+        "name": "Ura e vjetër e gurit në Prizren",
+        "type": "bridge",
+        "latitude": 42.2093,
+        "longitude": 20.7391,
+        "construction_date": "late 15th/early 16th c.",
+        "founder": "NULL",
+        "status": "reconstructed",
+        "destruction_date": "1979 flood",
+        "current_use": "rebuilt 1982; pedestrian bridge",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.737859,
+          42.209032
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-11",
+        "place_id": "PRI-001",
+        "name": "Kroi i Shatërvanit",
+        "type": "fountain",
+        "latitude": 42.209032,
+        "longitude": 20.737859,
+        "construction_date": "probably 17th c.",
+        "founder": "NULL",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "restored 2013; public landmark",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-12",
+        "place_id": "PRI-001",
+        "name": "Kompleksi i Teqesë Sinani",
+        "type": "tekke",
+        "latitude": 42.2124,
+        "longitude": 20.7399,
+        "construction_date": "1768",
+        "founder": "Sheikh Ali Efendi Rexhep Koro",
+        "status": "ruined",
+        "destruction_date": "NULL",
+        "current_use": "lost function; ruins and cemetery survive",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7405,
+          42.2124
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-13",
+        "place_id": "PRI-001",
+        "name": "Tyrbja e Kalender Babës",
+        "type": "turbe",
+        "latitude": 42.2124,
+        "longitude": 20.7405,
+        "construction_date": "NULL",
+        "founder": "NULL",
+        "status": "ruined",
+        "destruction_date": "NULL",
+        "current_use": "roof and door lost; documentary date unknown",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741317,
+          42.211286
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-14",
+        "place_id": "PRI-001",
+        "name": "Emin Pasha Mosque cemetery",
+        "type": "cemetery",
+        "latitude": 42.211286,
+        "longitude": 20.741317,
+        "construction_date": "Ottoman period",
+        "founder": "NULL",
+        "status": "extant",
+        "destruction_date": "NULL",
+        "current_use": "courtyard graves and founder tomb",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-15",
+        "place_id": "PRI-001",
+        "name": "Sinani Tekke cemetery",
+        "type": "cemetery",
+        "latitude": 42.2124,
+        "longitude": 20.7399,
+        "construction_date": "Ottoman period",
+        "founder": "NULL",
+        "status": "partially_extant",
+        "destruction_date": "NULL",
+        "current_use": "markers survive; neglected",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PR-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "heritage_id": "PR-16",
+        "place_id": "PRI-001",
+        "name": "Terzi-Mëhalla former cemetery",
+        "type": "cemetery",
+        "latitude": 42.2124,
+        "longitude": 20.7399,
+        "construction_date": "Ottoman period",
+        "founder": "NULL",
+        "status": "destroyed",
+        "destruction_date": "NULL",
+        "current_use": "DTK explicitly says former cemetery no longer exists",
+        "source_id": "SRC-017",
+        "confidence": "HIGH",
+        "coordinate_precision": "approximate"
+      }
+    }
+  ]
+}

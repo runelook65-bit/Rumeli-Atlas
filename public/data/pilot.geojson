@@ -1,0 +1,4651 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "skopje",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.431,
+          41.997
+        ]
+      },
+      "properties": {
+        "id": "skopje",
+        "name": "Üsküp",
+        "modern": "Skopje",
+        "layer": "settlement",
+        "start": 1354,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezini temsil eden yaklaşık nokta; mahalle sınırı değildir",
+        "source": "uskup",
+        "datePrecision": "1354 atlas alt sınırı; şehrin kuruluş tarihi değildir · Paketin ilk tarih kaydı: bilinmiyor. 1392 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tetovo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.971,
+          42.009
+        ]
+      },
+      "properties": {
+        "id": "tetovo",
+        "name": "Kalkandelen",
+        "modern": "Tetovo",
+        "layer": "settlement",
+        "start": 1354,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Yaklaşık şehir merkezi",
+        "source": "tetovo",
+        "datePrecision": "1354 atlas alt sınırı; yerleşim daha eskidir · Paketin ilk tarih kaydı: 1452/53. 1452 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "prizren",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741,
+          42.21
+        ]
+      },
+      "properties": {
+        "id": "prizren",
+        "name": "Prizren",
+        "modern": "Prizren",
+        "layer": "settlement",
+        "start": 1354,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yaklaşık şehir merkezi",
+        "source": "prizren",
+        "datePrecision": "1354 atlas alt sınırı; şehir daha eskidir · Paketin ilk tarih kaydı: 1452/53. 1452 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "burmali",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4312,
+          41.9967
+        ]
+      },
+      "properties": {
+        "id": "burmali",
+        "name": "Burmalı Camii",
+        "modern": "Burmali Mosque (former site)",
+        "layer": "heritage",
+        "start": 1495,
+        "end": 1925,
+        "confidence": "medium",
+        "locationAccuracy": "Taş Köprü güneyindeki yaklaşık eski konum; parsel doğrulanmadı",
+        "source": "burmali",
+        "datePrecision": "Kaynakta yıl; yıkım 1925, yıl içi tarih bilinmiyor"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ishak",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4393,
+          42.0046
+        ]
+      },
+      "properties": {
+        "id": "ishak",
+        "name": "Alaca İshak Bey Camii",
+        "modern": "Ishak Bey Mosque",
+        "layer": "heritage",
+        "start": 1438,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yaklaşık yapı konumu; ölçülmüş yapı izi değildir",
+        "source": "ishak",
+        "datePrecision": "İnşa 1438–1439; haritada aralığın ilk yılı kullanılır · Yapı tarihi: 1438-39. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sinan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7418,
+          42.2091
+        ]
+      },
+      "properties": {
+        "id": "sinan",
+        "name": "Sinan Paşa Camii",
+        "modern": "Sinan Pasha Mosque",
+        "layer": "heritage",
+        "start": 1615,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yaklaşık yapı konumu",
+        "source": "sinan",
+        "datePrecision": "TDV kitâbe yorumunda 1615 · Yapı tarihi: 1615. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "alaca-tetovo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9711,
+          42.0054
+        ]
+      },
+      "properties": {
+        "id": "alaca-tetovo",
+        "name": "Alaca Cami",
+        "modern": "Šarena Džamija",
+        "layer": "heritage",
+        "start": 1833,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Yaklaşık yapı konumu",
+        "source": "tetovo",
+        "datePrecision": "2001 kaynakta varlık kaydı; inşa tarihi bu kayıtta işlenmedi · Yapı tarihi: 1833-34 present building. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "harabati",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9565,
+          42.0031
+        ]
+      },
+      "properties": {
+        "id": "harabati",
+        "name": "Harâbâtî Baba Tekkesi",
+        "modern": "Arabati Baba Tekke",
+        "layer": "heritage",
+        "start": 1538,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Yaklaşık külliye konumu",
+        "source": "tetovo",
+        "datePrecision": "2001 kaynakta varlık kaydı; kuruluş tarihi işlenmedi · Yapı tarihi: 1538; 18th c. rebuild. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SKP-002",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.391437,
+          42.016885
+        ]
+      },
+      "properties": {
+        "id": "research-SKP-002",
+        "name": "Σκούποι",
+        "modern": "Scupi",
+        "layer": "settlement",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "historical_estimate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-030",
+        "datePrecision": "Paketin ilk tarih kaydı: 2nd c. BCE/81-518 CE. 2026 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-GOS-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9077778,
+          41.7961111
+        ]
+      },
+      "properties": {
+        "id": "research-GOS-001",
+        "name": "Гостивар",
+        "modern": "Gostivar",
+        "layer": "settlement",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-011",
+        "datePrecision": "Paketin ilk tarih kaydı: bilinmiyor. 2026 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-KUM-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.7158333,
+          42.1327778
+        ]
+      },
+      "properties": {
+        "id": "research-KUM-001",
+        "name": "Куманово",
+        "modern": "Kumanovo",
+        "layer": "settlement",
+        "start": 1519,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-006",
+        "datePrecision": "Paketin ilk tarih kaydı: 1519. 1519 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PRI-003",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.1666667,
+          42.6725
+        ]
+      },
+      "properties": {
+        "id": "research-PRI-003",
+        "name": "Prishtinë",
+        "modern": "Prishtina",
+        "layer": "settlement",
+        "start": 1389,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-001",
+        "datePrecision": "Paketin ilk tarih kaydı: 1389. 1389 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-VUS-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9675,
+          42.8230556
+        ]
+      },
+      "properties": {
+        "id": "research-VUS-001",
+        "name": "Vushtrria",
+        "modern": "Vushtrri",
+        "layer": "settlement",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-030",
+        "datePrecision": "Paketin ilk tarih kaydı: bilinmiyor. 2026 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-KAC-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.2594444,
+          42.2319444
+        ]
+      },
+      "properties": {
+        "id": "research-KAC-001",
+        "name": "Kačanik",
+        "modern": "Kaçanik",
+        "layer": "settlement",
+        "start": 1833,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-010",
+        "datePrecision": "Paketin ilk tarih kaydı: bilinmiyor. 1833 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-FER-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.1552778,
+          42.3705556
+        ]
+      },
+      "properties": {
+        "id": "research-FER-001",
+        "name": "Ferizovik",
+        "modern": "Ferizaj",
+        "layer": "settlement",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-030",
+        "datePrecision": "Paketin ilk tarih kaydı: bilinmiyor. 2026 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-RAH-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.6547222,
+          42.3994444
+        ]
+      },
+      "properties": {
+        "id": "research-RAH-001",
+        "name": "Rahoveci",
+        "modern": "Rahovec",
+        "layer": "settlement",
+        "start": 1889,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-010",
+        "datePrecision": "Paketin ilk tarih kaydı: 1889. 1889 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-BRN-001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7247,
+          42.11
+        ]
+      },
+      "properties": {
+        "id": "research-BRN-001",
+        "name": "Bresana",
+        "modern": "Bresanë",
+        "layer": "settlement",
+        "start": 1538,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "settlement_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Paketin ilk tarih kaydı: 1538. 1538 ilk sayısal kanıt/güncel varlık kaydı; kuruluş yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.441413,
+          42.001566
+        ]
+      },
+      "properties": {
+        "id": "research-SK-01",
+        "name": "Sultan Murat Camii",
+        "modern": "Sultan Murat Camii",
+        "layer": "heritage",
+        "start": 1436,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-005",
+        "datePrecision": "Yapı tarihi: 1436-37. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.441,
+          42.003
+        ]
+      },
+      "properties": {
+        "id": "research-SK-03",
+        "name": "Gazi Isa Bey Camii",
+        "modern": "Gazi Isa Bey Camii",
+        "layer": "heritage",
+        "start": 1475,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 1475-76. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.43541,
+          42.002025
+        ]
+      },
+      "properties": {
+        "id": "research-SK-04",
+        "name": "Mustafa Paşa Camii",
+        "modern": "Mustafa Paşa Camii",
+        "layer": "heritage",
+        "start": 1492,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 1492. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.435724,
+          41.998724
+        ]
+      },
+      "properties": {
+        "id": "research-SK-05",
+        "name": "Daut Paşa Hamamı",
+        "modern": "Daut Paşa Hamamı",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 15th c.. Yüzyıl aralığının üst sınırından (1500) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-06",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437277,
+          42.001129
+        ]
+      },
+      "properties": {
+        "id": "research-SK-06",
+        "name": "Çifte Hamam",
+        "modern": "Çifte Hamam",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: mid-15th c.. Yüzyıl aralığının üst sınırından (1500) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-07",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.436648,
+          42.000108
+        ]
+      },
+      "properties": {
+        "id": "research-SK-07",
+        "name": "Kapan Hanı",
+        "modern": "Kapan Hanı",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 15th c.. Yüzyıl aralığının üst sınırından (1500) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-08",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437566,
+          42.00166
+        ]
+      },
+      "properties": {
+        "id": "research-SK-08",
+        "name": "Suli Hanı",
+        "modern": "Suli Hanı",
+        "layer": "heritage",
+        "start": 1444,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 1444-45. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-09",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.436844,
+          42.003149
+        ]
+      },
+      "properties": {
+        "id": "research-SK-09",
+        "name": "Kurşumli Hanı",
+        "modern": "Kurşumli Hanı",
+        "layer": "heritage",
+        "start": 1600,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 16th c.. Yüzyıl aralığının üst sınırından (1600) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.437036,
+          42.00147
+        ]
+      },
+      "properties": {
+        "id": "research-SK-10",
+        "name": "Bedesten / Bezisten",
+        "modern": "Bedesten / Bezisten",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 15th c.. Yüzyıl aralığının üst sınırından (1500) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.43325,
+          41.997115
+        ]
+      },
+      "properties": {
+        "id": "research-SK-11",
+        "name": "Taş Köprü",
+        "modern": "Taş Köprü",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 15th c. disputed. Yüzyıl aralığının üst sınırından (1500) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4414,
+          42.0016
+        ]
+      },
+      "properties": {
+        "id": "research-SK-12",
+        "name": "Sultan Murat complex necropolis",
+        "modern": "Sultan Murat complex necropolis",
+        "layer": "heritage",
+        "start": 1556,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "quarter · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 1556-57/1774 components. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-SK-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.4398,
+          42.0047
+        ]
+      },
+      "properties": {
+        "id": "research-SK-13",
+        "name": "Ishak Bey courtyard grave markers",
+        "modern": "Ishak Bey courtyard grave markers",
+        "layer": "heritage",
+        "start": 1900,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "quarter · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-018",
+        "datePrecision": "Yapı tarihi: 16th-19th c.. Yüzyıl aralığının üst sınırından (1900) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.74317,
+          42.211405
+        ]
+      },
+      "properties": {
+        "id": "research-PR-02",
+        "name": "Xhamia e Mehmed Pashës",
+        "modern": "Xhamia e Mehmed Pashës",
+        "layer": "heritage",
+        "start": 1563,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1563-74. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7432,
+          42.2114
+        ]
+      },
+      "properties": {
+        "id": "research-PR-03",
+        "name": "Gazi Mehmed Pasha külliye",
+        "modern": "Gazi Mehmed Pasha külliye",
+        "layer": "heritage",
+        "start": 1563,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "quarter · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1563-74. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741317,
+          42.211286
+        ]
+      },
+      "properties": {
+        "id": "research-PR-04",
+        "name": "Xhamia e Emin Pashës",
+        "modern": "Xhamia e Emin Pashës",
+        "layer": "heritage",
+        "start": 1831,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1831. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "id": "research-PR-05",
+        "name": "Xhamia e Terzi-Mëhallës",
+        "modern": "Xhamia e Terzi-Mëhallës",
+        "layer": "heritage",
+        "start": 1721,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1721. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-06",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7247,
+          42.11
+        ]
+      },
+      "properties": {
+        "id": "research-PR-06",
+        "name": "Xhamia e Kukli Beut",
+        "modern": "Xhamia e Kukli Beut",
+        "layer": "heritage",
+        "start": 1538,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "village_centroid · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1538. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-07",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.742,
+          42.211
+        ]
+      },
+      "properties": {
+        "id": "research-PR-07",
+        "name": "Teqja Halveti",
+        "modern": "Teqja Halveti",
+        "layer": "heritage",
+        "start": 1835,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1835 surviving fabric. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-08",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7424,
+          42.21135
+        ]
+      },
+      "properties": {
+        "id": "research-PR-08",
+        "name": "Hamami i Gazi Mehmed Pashës",
+        "modern": "Hamami i Gazi Mehmed Pashës",
+        "layer": "heritage",
+        "start": 1563,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1563-74. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-09",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.742,
+          42.2119
+        ]
+      },
+      "properties": {
+        "id": "research-PR-09",
+        "name": "Kulla e Sahatit / Archaeological Museum",
+        "modern": "Kulla e Sahatit / Archaeological Museum",
+        "layer": "heritage",
+        "start": 1498,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1498; clock tower 19th c.. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7391,
+          42.2093
+        ]
+      },
+      "properties": {
+        "id": "research-PR-10",
+        "name": "Ura e vjetër e gurit në Prizren",
+        "modern": "Ura e vjetër e gurit në Prizren",
+        "layer": "heritage",
+        "start": 1600,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: late 15th/early 16th c.. Yüzyıl aralığının üst sınırından (1600) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.737859,
+          42.209032
+        ]
+      },
+      "properties": {
+        "id": "research-PR-11",
+        "name": "Kroi i Shatërvanit",
+        "modern": "Kroi i Shatërvanit",
+        "layer": "heritage",
+        "start": 1700,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: probably 17th c.. Yüzyıl aralığının üst sınırından (1700) itibaren gösterilir; bu kesin inşa yılı değildir."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "id": "research-PR-12",
+        "name": "Kompleksi i Teqesë Sinani",
+        "modern": "Kompleksi i Teqesë Sinani",
+        "layer": "heritage",
+        "start": 1768,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: 1768. Yıl/çok evreli tarih kaynakta belirtildiği biçimde korunur."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7405,
+          42.2124
+        ]
+      },
+      "properties": {
+        "id": "research-PR-13",
+        "name": "Tyrbja e Kalender Babës",
+        "modern": "Tyrbja e Kalender Babës",
+        "layer": "heritage",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: bilinmiyor. Tarih sayısallaştırılmadı; yalnız 2026 kaynak kaydı görünür."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.741317,
+          42.211286
+        ]
+      },
+      "properties": {
+        "id": "research-PR-14",
+        "name": "Emin Pasha Mosque cemetery",
+        "modern": "Emin Pasha Mosque cemetery",
+        "layer": "heritage",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "building · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: Ottoman period. Tarih sayısallaştırılmadı; yalnız 2026 kaynak kaydı görünür."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "id": "research-PR-15",
+        "name": "Sinani Tekke cemetery",
+        "modern": "Sinani Tekke cemetery",
+        "layer": "heritage",
+        "start": 2026,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: Ottoman period. Tarih sayısallaştırılmadı; yalnız 2026 kaynak kaydı görünür."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "research-PR-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.7399,
+          42.2124
+        ]
+      },
+      "properties": {
+        "id": "research-PR-16",
+        "name": "Terzi-Mëhalla former cemetery",
+        "modern": "Terzi-Mëhalla former cemetery",
+        "layer": "heritage",
+        "start": 2026,
+        "end": 2026,
+        "confidence": "medium",
+        "locationAccuracy": "approximate · paket konumu, bağımsız ölçüm yapılmadı",
+        "source": "research-SRC-017",
+        "datePrecision": "Yapı tarihi: Ottoman period. Tarih sayısallaştırılmadı; yalnız 2026 kaynak kaydı görünür."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "plovdiv",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.75,
+          42.143
+        ]
+      },
+      "properties": {
+        "id": "plovdiv",
+        "name": "Filibe",
+        "modern": "Plovdiv",
+        "layer": "settlement",
+        "start": 1364,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Tarihsel şehir merkezini temsil eden kentsel nokta",
+        "source": "uskup",
+        "datePrecision": "1364 Lala Şahin Paşa fethi; Rumeli Beylerbeyliği ilk idari merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-edirne",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.556,
+          41.677
+        ]
+      },
+      "properties": {
+        "id": "reg-edirne",
+        "name": "Edirne",
+        "modern": "Edirne",
+        "layer": "settlement",
+        "start": 1361,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Tarihsel başkent ve şehir merkezi koordinatı",
+        "source": "research-SRC-001",
+        "datePrecision": "1361 I. Murad fethi; Osmanlı Devleti ikinci başkenti"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tekirdag",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.511,
+          40.978
+        ]
+      },
+      "properties": {
+        "id": "reg-tekirdag",
+        "name": "Tekirdağ",
+        "modern": "Tekirdağ",
+        "layer": "settlement",
+        "start": 1357,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1357 Süleyman Paşa fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kirklareli",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.224,
+          41.735
+        ]
+      },
+      "properties": {
+        "id": "reg-kirklareli",
+        "name": "Kırklareli",
+        "modern": "Kırklareli",
+        "layer": "settlement",
+        "start": 1368,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1368 fethi; Edirne Vilayeti sancağı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-corlu",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.8,
+          41.16
+        ]
+      },
+      "properties": {
+        "id": "reg-corlu",
+        "name": "Çorlu",
+        "modern": "Çorlu",
+        "layer": "settlement",
+        "start": 1359,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Kasaba merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1359 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-luleburgaz",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.359,
+          41.405
+        ]
+      },
+      "properties": {
+        "id": "reg-luleburgaz",
+        "name": "Lüleburgaz",
+        "modern": "Lüleburgaz",
+        "layer": "settlement",
+        "start": 1361,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Kasaba merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1361 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-enez",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.082,
+          40.725
+        ]
+      },
+      "properties": {
+        "id": "reg-enez",
+        "name": "Enez",
+        "modern": "Enez",
+        "layer": "settlement",
+        "start": 1456,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Tarihî kale ve liman",
+        "source": "research-SRC-001",
+        "datePrecision": "1456 Fatih devri fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-ruse",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.966,
+          43.844
+        ]
+      },
+      "properties": {
+        "id": "reg-ruse",
+        "name": "Rusçuk",
+        "modern": "Ruse",
+        "layer": "settlement",
+        "start": 1388,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Tuna kıyısı şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1388 Çandarlı Ali Paşa fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-shumen",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.936,
+          43.271
+        ]
+      },
+      "properties": {
+        "id": "reg-shumen",
+        "name": "Şumnu",
+        "modern": "Shumen",
+        "layer": "settlement",
+        "start": 1388,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1388 fethi; Tuna Vilayeti müstahkem mevkii"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-silistra",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.267,
+          44.117
+        ]
+      },
+      "properties": {
+        "id": "reg-silistra",
+        "name": "Silistre",
+        "modern": "Silistra",
+        "layer": "settlement",
+        "start": 1388,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Tuna kıyısı kale merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1388 fethi; Silistre Eyaleti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-razgrad",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.525,
+          43.527
+        ]
+      },
+      "properties": {
+        "id": "reg-razgrad",
+        "name": "Razgrad",
+        "modern": "Razgrad",
+        "layer": "settlement",
+        "start": 1388,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1388 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-dobrich",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.833,
+          43.573
+        ]
+      },
+      "properties": {
+        "id": "reg-dobrich",
+        "name": "Hacıoğlu Pazarcık",
+        "modern": "Dobrich",
+        "layer": "settlement",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "16. yüzyıl kuruluşu"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kardzhali",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.378,
+          41.642
+        ]
+      },
+      "properties": {
+        "id": "reg-kardzhali",
+        "name": "Kırcaali",
+        "modern": "Kardzhali",
+        "layer": "settlement",
+        "start": 1371,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Arda nehri kıyısı şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1371 Çirmen sonrası yerleşim"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-haskovo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.556,
+          41.934
+        ]
+      },
+      "properties": {
+        "id": "reg-haskovo",
+        "name": "Hasköy",
+        "modern": "Haskovo",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 tahrir kaydı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-smolyan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.7,
+          41.575
+        ]
+      },
+      "properties": {
+        "id": "reg-smolyan",
+        "name": "Paşmaklı",
+        "modern": "Smolyan",
+        "layer": "settlement",
+        "start": 1372,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Orta Rodop dağ merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1372 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-constanta",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.638,
+          44.179
+        ]
+      },
+      "properties": {
+        "id": "reg-constanta",
+        "name": "Köstence",
+        "modern": "Constanța",
+        "layer": "settlement",
+        "start": 1420,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Karadeniz liman merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1420 Çelebi Mehmed fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-babadag",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.712,
+          44.893
+        ]
+      },
+      "properties": {
+        "id": "reg-babadag",
+        "name": "Babadağı",
+        "modern": "Babadag",
+        "layer": "settlement",
+        "start": 1393,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kasaba merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1393 Yıldırım Bayezid fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tulcea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.799,
+          45.179
+        ]
+      },
+      "properties": {
+        "id": "reg-tulcea",
+        "name": "Tulça",
+        "modern": "Tulcea",
+        "layer": "settlement",
+        "start": 1420,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Tuna deltasında şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1420 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-medgidia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.261,
+          44.25
+        ]
+      },
+      "properties": {
+        "id": "reg-medgidia",
+        "name": "Mecidiye",
+        "modern": "Medgidia",
+        "layer": "settlement",
+        "start": 1500,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Karasu vadisi şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "Karasu tahrir kaydı; 1856 Mecidiye iskânı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-mangalia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.583,
+          43.817
+        ]
+      },
+      "properties": {
+        "id": "reg-mangalia",
+        "name": "Mangalya",
+        "modern": "Mangalia",
+        "layer": "settlement",
+        "start": 1452,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Sahil kasabası",
+        "source": "research-SRC-001",
+        "datePrecision": "1452 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-isaccea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.458,
+          45.269
+        ]
+      },
+      "properties": {
+        "id": "reg-isaccea",
+        "name": "İshakçı",
+        "modern": "Isaccea",
+        "layer": "settlement",
+        "start": 1484,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Tuna geçit mevkii",
+        "source": "research-SRC-001",
+        "datePrecision": "1484 II. Bayezid fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-bitola",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.334,
+          41.031
+        ]
+      },
+      "properties": {
+        "id": "reg-bitola",
+        "name": "Manastır",
+        "modern": "Bitola",
+        "layer": "settlement",
+        "start": 1382,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1382 Timürtaş Paşa fethi; Manastır Vilayeti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-ohrid",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.801,
+          41.117
+        ]
+      },
+      "properties": {
+        "id": "reg-ohrid",
+        "name": "Ohri",
+        "modern": "Ohrid",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Göl kıyısı şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi; Ohri Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-prilep",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.554,
+          41.346
+        ]
+      },
+      "properties": {
+        "id": "reg-prilep",
+        "name": "Pirlepe",
+        "modern": "Prilep",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-stip",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.195,
+          41.745
+        ]
+      },
+      "properties": {
+        "id": "reg-stip",
+        "name": "İştip",
+        "modern": "Štip",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-veles",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.776,
+          41.716
+        ]
+      },
+      "properties": {
+        "id": "reg-veles",
+        "name": "Köprülü",
+        "modern": "Veles",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Vardar vadisi şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kicevo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.963,
+          41.513
+        ]
+      },
+      "properties": {
+        "id": "reg-kicevo",
+        "name": "Kırçova",
+        "modern": "Kičevo",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-gostivar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.908,
+          41.796
+        ]
+      },
+      "properties": {
+        "id": "reg-gostivar",
+        "name": "Gostivar",
+        "modern": "Gostivar",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Polog vadisi şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-strumica",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.643,
+          41.437
+        ]
+      },
+      "properties": {
+        "id": "reg-strumica",
+        "name": "Ustrumca",
+        "modern": "Strumica",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1395 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-shkoder",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.512,
+          42.068
+        ]
+      },
+      "properties": {
+        "id": "reg-shkoder",
+        "name": "İşkodra",
+        "modern": "Shkodër",
+        "layer": "settlement",
+        "start": 1479,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Rozafa kalesi ve şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1479 Fatih fethi; İşkodra Vilayeti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tirana",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.818,
+          41.327
+        ]
+      },
+      "properties": {
+        "id": "reg-tirana",
+        "name": "Tiran",
+        "modern": "Tirana",
+        "layer": "settlement",
+        "start": 1614,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1614 Süleyman Paşa kuruluşu"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-berat",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.952,
+          40.705
+        ]
+      },
+      "properties": {
+        "id": "reg-berat",
+        "name": "Berat",
+        "modern": "Berat",
+        "layer": "settlement",
+        "start": 1417,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kale ve Mangalem mahallesi",
+        "source": "research-SRC-001",
+        "datePrecision": "1417 fethi; Berat Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-elbasan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.082,
+          41.112
+        ]
+      },
+      "properties": {
+        "id": "reg-elbasan",
+        "name": "İlbasan",
+        "modern": "Elbasan",
+        "layer": "settlement",
+        "start": 1466,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Fatih Kalesi içi şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1466 Fatih fethi; İlbasan Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-korce",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.781,
+          40.618
+        ]
+      },
+      "properties": {
+        "id": "reg-korce",
+        "name": "Görice",
+        "modern": "Korçë",
+        "layer": "settlement",
+        "start": 1487,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1487 İlyas Bey fethi ve vakfı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-gjirokaster",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.138,
+          40.075
+        ]
+      },
+      "properties": {
+        "id": "reg-gjirokaster",
+        "name": "Ergiri",
+        "modern": "Gjirokastër",
+        "layer": "settlement",
+        "start": 1419,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Taş konaklar ve kale",
+        "source": "research-SRC-001",
+        "datePrecision": "1419 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-durres",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.45,
+          41.323
+        ]
+      },
+      "properties": {
+        "id": "reg-durres",
+        "name": "Dıraç",
+        "modern": "Durrës",
+        "layer": "settlement",
+        "start": 1501,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Adriyatik limanı",
+        "source": "research-SRC-001",
+        "datePrecision": "1501 II. Bayezid fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-vlora",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.491,
+          40.466
+        ]
+      },
+      "properties": {
+        "id": "reg-vlora",
+        "name": "Avlonya",
+        "modern": "Vlora",
+        "layer": "settlement",
+        "start": 1417,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Liman ve şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1417 fethi; Avlonya Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-belgrade",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.461,
+          44.817
+        ]
+      },
+      "properties": {
+        "id": "reg-belgrade",
+        "name": "Belgrad",
+        "modern": "Belgrade",
+        "layer": "settlement",
+        "start": 1521,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kalemegdan ve Tuna-Sava kavşağı",
+        "source": "research-SRC-001",
+        "datePrecision": "1521 Kanuni Sultan Süleyman fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-novipazar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.512,
+          43.14
+        ]
+      },
+      "properties": {
+        "id": "reg-novipazar",
+        "name": "Yeni Pazar",
+        "modern": "Novi Pazar",
+        "layer": "settlement",
+        "start": 1461,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Sancak merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1461 İsa Bey İshakoviç kuruluşu"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-sjenica",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.004,
+          43.272
+        ]
+      },
+      "properties": {
+        "id": "reg-sjenica",
+        "name": "Seniçe",
+        "modern": "Sjenica",
+        "layer": "settlement",
+        "start": 1465,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1465 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tutin",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.551,
+          42.99
+        ]
+      },
+      "properties": {
+        "id": "reg-tutin",
+        "name": "Tutin",
+        "modern": "Tutin",
+        "layer": "settlement",
+        "start": 1465,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Kasaba merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1465 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-nis",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.895,
+          43.32
+        ]
+      },
+      "properties": {
+        "id": "reg-nis",
+        "name": "Niş",
+        "modern": "Niš",
+        "layer": "settlement",
+        "start": 1386,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Niş Kalesi ve şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1386 I. Murad fethi; Niş Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-leskovac",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.946,
+          42.998
+        ]
+      },
+      "properties": {
+        "id": "reg-leskovac",
+        "name": "Leskofça",
+        "modern": "Leskovac",
+        "layer": "settlement",
+        "start": 1454,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1454 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-vranje",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.9,
+          42.554
+        ]
+      },
+      "properties": {
+        "id": "reg-vranje",
+        "name": "Vranye",
+        "modern": "Vranje",
+        "layer": "settlement",
+        "start": 1455,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1455 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-sarajevo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.413,
+          43.856
+        ]
+      },
+      "properties": {
+        "id": "reg-sarajevo",
+        "name": "Saraybosna",
+        "modern": "Sarajevo",
+        "layer": "settlement",
+        "start": 1463,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Başçarşı ve Gazi Hüsrev Bey Külliyesi",
+        "source": "research-SRC-001",
+        "datePrecision": "1463 Fatih fethi; Bosna Eyaleti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-mostar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.807,
+          43.343
+        ]
+      },
+      "properties": {
+        "id": "reg-mostar",
+        "name": "Mostar",
+        "modern": "Mostar",
+        "layer": "settlement",
+        "start": 1468,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Mostar Köprüsü ve Neretva vadisi",
+        "source": "research-SRC-001",
+        "datePrecision": "1468 fethi; Hersek Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-travnik",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.666,
+          44.226
+        ]
+      },
+      "properties": {
+        "id": "reg-travnik",
+        "name": "Travnik",
+        "modern": "Travnik",
+        "layer": "settlement",
+        "start": 1463,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Alaca Cami ve kale",
+        "source": "research-SRC-001",
+        "datePrecision": "1463 fethi; 1699-1850 Bosna vezirleri merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-banjaluka",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.191,
+          44.772
+        ]
+      },
+      "properties": {
+        "id": "reg-banjaluka",
+        "name": "Banyaluka",
+        "modern": "Banja Luka",
+        "layer": "settlement",
+        "start": 1527,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Vrbas nehri kıyısı",
+        "source": "research-SRC-001",
+        "datePrecision": "1527 fethi; Bosna Paşalığı ilk merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tuzla",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.673,
+          44.538
+        ]
+      },
+      "properties": {
+        "id": "reg-tuzla",
+        "name": "Tuzla",
+        "modern": "Tuzla",
+        "layer": "settlement",
+        "start": 1510,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1510 tahrir kaydı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-bihac",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.868,
+          44.816
+        ]
+      },
+      "properties": {
+        "id": "reg-bihac",
+        "name": "Bihke",
+        "modern": "Bihać",
+        "layer": "settlement",
+        "start": 1592,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Una nehri kıyısı kale merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1592 Hasan Paşa Predojević fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-podgorica",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.263,
+          42.441
+        ]
+      },
+      "properties": {
+        "id": "reg-podgorica",
+        "name": "Podgoriçe",
+        "modern": "Podgorica",
+        "layer": "settlement",
+        "start": 1474,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Depedöğen kalesi ve Eski Çarşı",
+        "source": "research-SRC-001",
+        "datePrecision": "1474 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-pljevlja",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.358,
+          43.356
+        ]
+      },
+      "properties": {
+        "id": "reg-pljevlja",
+        "name": "Taşlıca",
+        "modern": "Pljevlja",
+        "layer": "settlement",
+        "start": 1465,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1465 fethi; 1576-1833 Hersek Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-bijelopolje",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.747,
+          43.038
+        ]
+      },
+      "properties": {
+        "id": "reg-bijelopolje",
+        "name": "Akova",
+        "modern": "Bijelo Polje",
+        "layer": "settlement",
+        "start": 1465,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Lim vadisi şehir merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1465 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-rozaje",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.166,
+          42.836
+        ]
+      },
+      "properties": {
+        "id": "reg-rozaje",
+        "name": "Rojaye",
+        "modern": "Rožaje",
+        "layer": "settlement",
+        "start": 1465,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "İbre vadisi kasaba merkezi",
+        "source": "research-SRC-001",
+        "datePrecision": "1465 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-bar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.1,
+          42.093
+        ]
+      },
+      "properties": {
+        "id": "reg-bar",
+        "name": "Bar",
+        "modern": "Bar",
+        "layer": "settlement",
+        "start": 1571,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Eski Bar kalesi",
+        "source": "research-SRC-001",
+        "datePrecision": "1571 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-ulcinj",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.206,
+          41.929
+        ]
+      },
+      "properties": {
+        "id": "reg-ulcinj",
+        "name": "Ülgün",
+        "modern": "Ulcinj",
+        "layer": "settlement",
+        "start": 1571,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kıyı kalesi ve liman",
+        "source": "research-SRC-001",
+        "datePrecision": "1571 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-thessaloniki",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.944,
+          40.64
+        ]
+      },
+      "properties": {
+        "id": "reg-thessaloniki",
+        "name": "Selanik",
+        "modern": "Thessaloniki",
+        "layer": "settlement",
+        "start": 1430,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Liman ve şehir merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1430 II. Murad fethi; Selanik Vilayeti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-komotini",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.405,
+          41.119
+        ]
+      },
+      "properties": {
+        "id": "reg-komotini",
+        "name": "Gümülcine",
+        "modern": "Komotini",
+        "layer": "settlement",
+        "start": 1361,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-turan-gokce",
+        "datePrecision": "1361 Gazi Evrenos Bey fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-xanthi",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.888,
+          41.134
+        ]
+      },
+      "properties": {
+        "id": "reg-xanthi",
+        "name": "İskeçe",
+        "modern": "Xanthi",
+        "layer": "settlement",
+        "start": 1373,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-salname-edirne-1894",
+        "datePrecision": "1373 Osmanlı fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-dimetoka",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.495,
+          41.349
+        ]
+      },
+      "properties": {
+        "id": "reg-dimetoka",
+        "name": "Dimetoka",
+        "modern": "Didymoteicho",
+        "layer": "settlement",
+        "start": 1361,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kale ve nehir kavşağı kentsel merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1361 Orhan Gazi devri fethi; erken Rumeli idare üssü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-alexandroupoli",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.875,
+          40.849
+        ]
+      },
+      "properties": {
+        "id": "reg-alexandroupoli",
+        "name": "Dedeağaç",
+        "modern": "Alexandroupoli",
+        "layer": "settlement",
+        "start": 1870,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Liman ve demiryolu merkezi",
+        "source": "src-salname-edirne-1894",
+        "datePrecision": "1870 Rumeli Demiryolu ve liman kenti kuruluşu"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-genisea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.962,
+          41.066
+        ]
+      },
+      "properties": {
+        "id": "reg-genisea",
+        "name": "Yenice",
+        "modern": "Genisea",
+        "layer": "settlement",
+        "start": 1380,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Kaza merkezi",
+        "source": "src-salname-edirne-1894",
+        "datePrecision": "1380 Osmanlı fethi ve kaza tesisi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kavala",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.412,
+          40.939
+        ]
+      },
+      "properties": {
+        "id": "reg-kavala",
+        "name": "Kavala",
+        "modern": "Kavala",
+        "layer": "settlement",
+        "start": 1387,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Liman ve kale merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1387 Osmanlı fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-drama",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.147,
+          41.152
+        ]
+      },
+      "properties": {
+        "id": "reg-drama",
+        "name": "Drama",
+        "modern": "Drama",
+        "layer": "settlement",
+        "start": 1371,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1371 Çirmen Zaferi sonrası fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-serres",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.553,
+          41.091
+        ]
+      },
+      "properties": {
+        "id": "reg-serres",
+        "name": "Serez",
+        "modern": "Serres",
+        "layer": "settlement",
+        "start": 1383,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1383 Çandarlı Hayreddin Paşa fethi; Serez Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-florina",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.41,
+          40.783
+        ]
+      },
+      "properties": {
+        "id": "reg-florina",
+        "name": "Filorina",
+        "modern": "Florina",
+        "layer": "settlement",
+        "start": 1385,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-karpat-pop",
+        "datePrecision": "1385 Osmanlı fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-edessa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.049,
+          40.803
+        ]
+      },
+      "properties": {
+        "id": "reg-edessa",
+        "name": "Vodina",
+        "modern": "Edessa",
+        "layer": "settlement",
+        "start": 1389,
+        "end": null,
+        "confidence": "medium",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-karpat-pop",
+        "datePrecision": "1389 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-veria",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.202,
+          40.523
+        ]
+      },
+      "properties": {
+        "id": "reg-veria",
+        "name": "Karaferye",
+        "modern": "Veria",
+        "layer": "settlement",
+        "start": 1385,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1385 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-yenice-vardar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.413,
+          40.793
+        ]
+      },
+      "properties": {
+        "id": "reg-yenice-vardar",
+        "name": "Yenice-i Vardar",
+        "modern": "Giannitsa",
+        "layer": "settlement",
+        "start": 1387,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi ve Evrenosoğulları vakıf alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1387 Gazi Evrenos Bey tarafından kuruluş"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kayalar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.678,
+          40.512
+        ]
+      },
+      "properties": {
+        "id": "reg-kayalar",
+        "name": "Kayalar",
+        "modern": "Ptolemaida",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Şehir merkezi",
+        "source": "src-balta-ottoman-greece",
+        "datePrecision": "1395 Konya/Karaman Yörük Türkmen iskânı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kastoria",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.266,
+          40.518
+        ]
+      },
+      "properties": {
+        "id": "reg-kastoria",
+        "name": "Kesriye",
+        "modern": "Kastoria",
+        "layer": "settlement",
+        "start": 1385,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yarımada göl şehri merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1385 Osmanlı fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-larissa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.417,
+          39.639
+        ]
+      },
+      "properties": {
+        "id": "reg-larissa",
+        "name": "Yenişehir-i Fener",
+        "modern": "Larissa",
+        "layer": "settlement",
+        "start": 1393,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Pinios nehri kıyısı Frourio tepesi ve merkez",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1393 Gazi Turahan Bey fethi; Tesalya’nın Osmanlı başkenti"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-trikala",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.768,
+          39.555
+        ]
+      },
+      "properties": {
+        "id": "reg-trikala",
+        "name": "Tırhala",
+        "modern": "Trikala",
+        "layer": "settlement",
+        "start": 1395,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Litheos nehri ve Sinan Camii çevresi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1395 Osmanlı fethi; Tırhala Sancağı merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-ioannina",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.856,
+          39.667
+        ]
+      },
+      "properties": {
+        "id": "reg-ioannina",
+        "name": "Yanya",
+        "modern": "Ioannina",
+        "layer": "settlement",
+        "start": 1430,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Pamvotis gölü ve İç Kale",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "1430 Sinan Paşa fethi; Yanya Vilayeti başkenti"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-arta",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.985,
+          39.16
+        ]
+      },
+      "properties": {
+        "id": "reg-arta",
+        "name": "Narda",
+        "modern": "Arta",
+        "layer": "settlement",
+        "start": 1449,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Arachthos nehri ve kale",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1449 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-preveza",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.751,
+          38.957
+        ]
+      },
+      "properties": {
+        "id": "reg-preveza",
+        "name": "Preveze",
+        "modern": "Preveza",
+        "layer": "settlement",
+        "start": 1477,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Ambracian körfezi giriş kalesi ve liman",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "1477 fethi; Preveze Deniz Zaferi üssü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-athens",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.727,
+          37.975
+        ]
+      },
+      "properties": {
+        "id": "reg-athens",
+        "name": "Atina",
+        "modern": "Athens",
+        "layer": "settlement",
+        "start": 1456,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Plaka, Roman Agorası ve Akropolis çevresi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1456 Ömer Bey ve 1458 Fatih fethi; Eğriboz Sancağı kazası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-chalkida",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.593,
+          38.463
+        ]
+      },
+      "properties": {
+        "id": "reg-chalkida",
+        "name": "Eğriboz",
+        "modern": "Chalkida",
+        "layer": "settlement",
+        "start": 1470,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Euripus boğazı ve Karababa kalesi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1470 Fatih Sultan Mehmed fethi; Kaptanpaşa Eyaleti sancağı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-tripoli",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.375,
+          37.511
+        ]
+      },
+      "properties": {
+        "id": "reg-tripoli",
+        "name": "Tripoliçe",
+        "modern": "Tripoli",
+        "layer": "settlement",
+        "start": 1460,
+        "end": 1821,
+        "confidence": "high",
+        "locationAccuracy": "Mora valilik sarayı ve merkez meydan",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1460 fethi; 1715-1821 Mora Eyaleti başkenti"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-nafplio",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.797,
+          37.566
+        ]
+      },
+      "properties": {
+        "id": "reg-nafplio",
+        "name": "Anabolu",
+        "modern": "Nafplio",
+        "layer": "settlement",
+        "start": 1540,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Palamidi kalesi ve liman kenti",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1540 Osmanlı fethi; Mora Sancağı üssü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-patras",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.735,
+          38.246
+        ]
+      },
+      "properties": {
+        "id": "reg-patras",
+        "name": "Balya Badra",
+        "modern": "Patras",
+        "layer": "settlement",
+        "start": 1458,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kale ve liman",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1458 Fatih Sultan Mehmed fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-chania",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.018,
+          35.514
+        ]
+      },
+      "properties": {
+        "id": "reg-chania",
+        "name": "Hanya",
+        "modern": "Chania",
+        "layer": "settlement",
+        "start": 1645,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Venedik-Osmanlı limanı ve kale",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1645 fethi; Girit Vilayeti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-heraklion",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.133,
+          35.338
+        ]
+      },
+      "properties": {
+        "id": "reg-heraklion",
+        "name": "Kandiye",
+        "modern": "Heraklion",
+        "layer": "settlement",
+        "start": 1669,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Devasa Venedik-Osmanlı surları ve liman",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1669 Köprülü Fazıl Ahmed Paşa fethi (21 yıllık kuşatma sonu)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-rethymno",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.474,
+          35.368
+        ]
+      },
+      "properties": {
+        "id": "reg-rethymno",
+        "name": "Resmo",
+        "modern": "Rethymno",
+        "layer": "settlement",
+        "start": 1646,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Fortezza kalesi ve eski liman",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1646 fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-rhodes",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.225,
+          36.443
+        ]
+      },
+      "properties": {
+        "id": "reg-rhodes",
+        "name": "Rodos",
+        "modern": "Rhodes",
+        "layer": "settlement",
+        "start": 1522,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Sur içi eski şehir ve liman",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1522 Kanuni Sultan Süleyman fethi; Cezayir-i Bahr-i Sefid Eyaleti merkezi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-kos",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.289,
+          36.893
+        ]
+      },
+      "properties": {
+        "id": "reg-kos",
+        "name": "İstanköy",
+        "modern": "Kos",
+        "layer": "settlement",
+        "start": 1523,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Hipokrat Çınarı ve Eleftherias meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1523 Kanuni devri fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-mytilene",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.555,
+          39.105
+        ]
+      },
+      "properties": {
+        "id": "reg-mytilene",
+        "name": "Midilli",
+        "modern": "Mytilene",
+        "layer": "settlement",
+        "start": 1462,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kale ve Epano Skala semti",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1462 Fatih Sultan Mehmed fethi; Barbaros Hayreddin Paşa memleketi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "reg-chios",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.136,
+          38.368
+        ]
+      },
+      "properties": {
+        "id": "reg-chios",
+        "name": "Sakız",
+        "modern": "Chios",
+        "layer": "settlement",
+        "start": 1566,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kale içi ve Vounaki meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1566 Piyale Paşa fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-hamza-bey",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9421,
+          40.6373
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-hamza-bey",
+        "name": "Hamza Bey Camii (Alcázar)",
+        "modern": "Hamza Bey Mosque (Alcazar Cinema)",
+        "layer": "heritage",
+        "start": 1467,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Egnatia ve Venizelou caddeleri kesişimi köşe parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1467/68 Hafsa Hatun (Hamza Bey kızı) inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-ishak-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9482,
+          40.6402
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-ishak-pasa",
+        "name": "Alaca İmaret Camii (İshak Paşa)",
+        "modern": "Alaca Imaret Mosque",
+        "layer": "heritage",
+        "start": 1484,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kassandrou Caddesi üzerindeki tarihî ada",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1484 Sadrazam İshak Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-yeni-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9556,
+          40.6133
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-yeni-cami",
+        "name": "Yeni Cami (Dönmeh Camisi)",
+        "modern": "Yeni Mosque (Old Archaeological Museum)",
+        "layer": "heritage",
+        "start": 1902,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Arkeoloji Müzesi Caddesi parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1902 İtalyan Mimar Vitaliano Poselli tasarımı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-burmali",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9405,
+          40.6415
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-burmali",
+        "name": "Süleymaniye / Burmalı Camii",
+        "modern": "Burmali Mosque of Thessaloniki (former site)",
+        "layer": "heritage",
+        "start": 1530,
+        "end": 1922,
+        "confidence": "high",
+        "locationAccuracy": "Dioikitiriou ve Dimitriou Karatasou sokakları kesişimindeki eski ada",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1530 Kanuni devri inşası; 1922 sonrası yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-yali",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.941,
+          40.633
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-yali",
+        "name": "Selanik Yalı Camii (Sahil Kordonu)",
+        "modern": "Yali Mosque (Waterfront Promenade site)",
+        "layer": "heritage",
+        "start": 1750,
+        "end": 1918,
+        "confidence": "medium",
+        "locationAccuracy": "Nikis Caddesi sahil kordonu hizası",
+        "source": "src-tdv-kiel",
+        "datePrecision": "18. yüzyıl sahil camisi; 1917 yangını sonrası yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-bey-hamami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9443,
+          40.6367
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-bey-hamami",
+        "name": "Bey Hamamı (Loutra Paradeisos)",
+        "modern": "Bey Hamam (Baths of Paradise)",
+        "layer": "heritage",
+        "start": 1444,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Egnatia Caddesi üzerinde Panagia Chalkeon yanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1444 Sultan II. Murad inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-yeni-hamam",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9478,
+          40.6409
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-yeni-hamam",
+        "name": "Yeni Hamam / Aigli",
+        "modern": "Yeni Hamam (Aigli Complex)",
+        "layer": "heritage",
+        "start": 1580,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Agios Dimitrios ve Kassandrou caddeleri arası",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl sonu Hüsrev Kethüda vakfı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-kasimiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9472,
+          40.6389
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-kasimiye",
+        "name": "Kasımiye Camii (Agios Dimitrios)",
+        "modern": "Church of Saint Demetrios (former Kasimiye Mosque)",
+        "layer": "heritage",
+        "start": 1493,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Agios Dimitrios Caddesi ana bazilika parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1493 II. Bayezid devri camiye dönüşüm; 1912 geri dönüşüm"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-hortac",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9528,
+          40.6331
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-hortac",
+        "name": "Sultan Hortac Camii (Rotonda)",
+        "modern": "Rotunda of Galerius (former Hortaci Suleyman Mosque)",
+        "layer": "heritage",
+        "start": 1590,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Galerius Zafer Takı kuzeyi Rotonda anıtı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1590 Şeyh Hortacı Sinan Efendi cami dönüşümü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-selanik-beyaz-kule",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.9485,
+          40.6263
+        ]
+      },
+      "properties": {
+        "id": "her-selanik-beyaz-kule",
+        "name": "Beyaz Kule (Ak Kule)",
+        "modern": "White Tower of Thessaloniki",
+        "layer": "heritage",
+        "start": 1535,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Sahil şeridi ve deniz surları kesişimi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1535 Kanuni Sultan Süleyman devri Mimar Sinan ekolü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-gumulcine-imaret",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.4055,
+          41.1192
+        ]
+      },
+      "properties": {
+        "id": "her-gumulcine-imaret",
+        "name": "Gazi Evrenos Bey İmareti",
+        "modern": "Imaret of Komotini (Ecclesiastical Museum)",
+        "layer": "heritage",
+        "start": 1365,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Tarihî kale surları dışındaki eski vakıf külliyesi",
+        "source": "src-turan-gokce",
+        "datePrecision": "1364–1382 Gazi Evrenos Bey inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-gumulcine-yeni-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.4022,
+          41.1198
+        ]
+      },
+      "properties": {
+        "id": "her-gumulcine-yeni-cami",
+        "name": "Gümülcine Yeni Cami & Saat Kulesi",
+        "modern": "Yeni Mosque and Clock Tower of Komotini",
+        "layer": "heritage",
+        "start": 1585,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Gümülcine çarşı merkezi",
+        "source": "src-turan-gokce",
+        "datePrecision": "1585 Defterdar Ahmed Paşa inşası; 1884 saat kulesi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-dimetoka-celebi-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.495,
+          41.3497
+        ]
+      },
+      "properties": {
+        "id": "her-dimetoka-celebi-cami",
+        "name": "Çelebi Sultan Mehmed Camii (Büyük Cami)",
+        "modern": "Bayezid / Mehmed I Mosque of Didymoteicho",
+        "layer": "heritage",
+        "start": 1420,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Dimetoka merkez meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1420 Çelebi Sultan Mehmed inşası, II. Murad tamamlama"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-dimetoka-oruc-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.4942,
+          41.3486
+        ]
+      },
+      "properties": {
+        "id": "her-dimetoka-oruc-pasa",
+        "name": "Oruç Paşa Hamamı (Fısıltı Hamamı)",
+        "modern": "Oruc Pasha Hamam (Baths of Whispers)",
+        "layer": "heritage",
+        "start": 1398,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kızıldeli çayı kenarı Dimetoka",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1398 Oruç Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rusenler-tekke",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.152,
+          41.314
+        ]
+      },
+      "properties": {
+        "id": "her-rusenler-tekke",
+        "name": "Seyyid Ali Sultan (Kızıldeli) Tekkesi",
+        "modern": "Seyyid Ali Sultan Tekke of Roussa",
+        "layer": "heritage",
+        "start": 1402,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Dimetoka Ruşenler köyü kırsal tepe",
+        "source": "src-turan-gokce",
+        "datePrecision": "1402 Seyyid Ali Sultan kuruluşu"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kavala-imaret",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.414,
+          40.9328
+        ]
+      },
+      "properties": {
+        "id": "her-kavala-imaret",
+        "name": "Kavalalı Mehmed Ali Paşa İmareti",
+        "modern": "Imaret of Kavala (Imaret Luxury Hotel)",
+        "layer": "heritage",
+        "start": 1817,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kavala Panagia yarımadası batı yamacı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1817–1821 Kavalalı Mehmed Ali Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kavala-ibrahim-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.4125,
+          40.935
+        ]
+      },
+      "properties": {
+        "id": "her-kavala-ibrahim-pasa",
+        "name": "Pargalı İbrahim Paşa Camii (Agios Nikolaos)",
+        "modern": "Ibrahim Pasha Mosque (Church of Saint Nicholas)",
+        "layer": "heritage",
+        "start": 1530,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kavala limanı eski mahalle meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1530 Pargalı Sadrazam İbrahim Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kavala-su-kemeri",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.4138,
+          40.9385
+        ]
+      },
+      "properties": {
+        "id": "her-kavala-su-kemeri",
+        "name": "Kanuni Sultan Süleyman Su Kemeri (Kamares)",
+        "modern": "Kavala Aqueduct (Kamares)",
+        "layer": "heritage",
+        "start": 1530,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Eski şehir ile yeni şehir arasındaki vadi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1530–1536 Kanuni Sultan Süleyman inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-drama-arap-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.1438,
+          41.1508
+        ]
+      },
+      "properties": {
+        "id": "her-drama-arap-cami",
+        "name": "Arap Camii",
+        "modern": "Arap Mosque of Drama",
+        "layer": "heritage",
+        "start": 1855,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Drama eski ticaret çarşısı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1855–1875 Geç Osmanlı dönemi inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-drama-halil-bey",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.1465,
+          41.1525
+        ]
+      },
+      "properties": {
+        "id": "her-drama-halil-bey",
+        "name": "Halil Bey Camii ve Külliyesi",
+        "modern": "Halil Bey Mosque site of Drama",
+        "layer": "heritage",
+        "start": 1520,
+        "end": 1925,
+        "confidence": "medium",
+        "locationAccuracy": "Drama merkez meydanı çevresi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl inşası; 1925 yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-serez-bedesten",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.5488,
+          41.0908
+        ]
+      },
+      "properties": {
+        "id": "her-serez-bedesten",
+        "name": "Çandarlı İbrahim Paşa Bedesteni",
+        "modern": "Bedesten of Serres (Archaeological Museum)",
+        "layer": "heritage",
+        "start": 1485,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Eleftherias Meydanı merkezi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1485–1499 Çandarlı İbrahim Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-serez-mehmed-bey",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.5602,
+          41.0855
+        ]
+      },
+      "properties": {
+        "id": "her-serez-mehmed-bey",
+        "name": "Mehmed Bey Camii (Ahmet Paşa / Vilayet Camii)",
+        "modern": "Mehmed Bey Mosque of Serres",
+        "layer": "heritage",
+        "start": 1492,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Serez dere yatağı kenarı park alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1492 Mehmed Bey inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-serez-zincirli",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.5512,
+          41.092
+        ]
+      },
+      "properties": {
+        "id": "her-serez-zincirli",
+        "name": "Zincirli Camii",
+        "modern": "Zincirli Mosque of Serres",
+        "layer": "heritage",
+        "start": 1590,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Serez kent içi sokak dokusu",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl sonu Mimar Sinan ekolü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-yenice-vardar-evrenos",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.408,
+          40.792
+        ]
+      },
+      "properties": {
+        "id": "her-yenice-vardar-evrenos",
+        "name": "Gazi Evrenos Bey Türbesi",
+        "modern": "Mausoleum of Gazi Evrenos Bey",
+        "layer": "heritage",
+        "start": 1417,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Giannitsa merkez parkı yakınındaki türbe alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1417 inşa ve 19. yüzyıl onarımı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-karaferye-hunkar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.2025,
+          40.5235
+        ]
+      },
+      "properties": {
+        "id": "her-karaferye-hunkar",
+        "name": "Hünkâr Camii (Büyük Cami)",
+        "modern": "Hunkar Mosque of Veria",
+        "layer": "heritage",
+        "start": 1430,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Karaferye merkez eski mahalle",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1430 Osmanlı fethi sonrası camiye dönüşüm"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-vodina-yeni-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.0465,
+          40.8032
+        ]
+      },
+      "properties": {
+        "id": "her-vodina-yeni-cami",
+        "name": "Vodina Yeni Cami",
+        "modern": "Yeni Mosque of Edessa",
+        "layer": "heritage",
+        "start": 1904,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Edessa merkez parkı yanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1904 inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-vodina-eski-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.048,
+          40.8015
+        ]
+      },
+      "properties": {
+        "id": "her-vodina-eski-cami",
+        "name": "Vodina Eski Cami",
+        "modern": "Old Mosque of Edessa (former site)",
+        "layer": "heritage",
+        "start": 1480,
+        "end": 1924,
+        "confidence": "medium",
+        "locationAccuracy": "Vodina çarşı meydanı eski parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu; 1924 sonrası yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-filorina-yakup-bey",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.408,
+          40.7815
+        ]
+      },
+      "properties": {
+        "id": "her-filorina-yakup-bey",
+        "name": "Yakup Bey Camii",
+        "modern": "Yakup Bey Mosque of Florina (former site)",
+        "layer": "heritage",
+        "start": 1485,
+        "end": 1935,
+        "confidence": "medium",
+        "locationAccuracy": "Florina merkez çay kenarı eski ada",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu; 1935 civarı tam yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kesriye-kursunlu",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.266,
+          40.518
+        ]
+      },
+      "properties": {
+        "id": "her-kesriye-kursunlu",
+        "name": "Kurşunlu Camii",
+        "modern": "Kursum Mosque of Kastoria",
+        "layer": "heritage",
+        "start": 1490,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kastoria gölü yamacı Mitropoleos caddesi civarı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-larissa-bedesten",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.415,
+          39.6415
+        ]
+      },
+      "properties": {
+        "id": "her-larissa-bedesten",
+        "name": "Bedesten-i Yenişehir (Larissa Bedesteni)",
+        "modern": "Bedesten of Larissa",
+        "layer": "heritage",
+        "start": 1480,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Frourio tepesi akropol alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu Gazi Ömer Bey inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-larissa-bayrakli",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.4165,
+          39.6385
+        ]
+      },
+      "properties": {
+        "id": "her-larissa-bayrakli",
+        "name": "Bayraklı Camii",
+        "modern": "Bayrakli Mosque of Larissa (former site)",
+        "layer": "heritage",
+        "start": 1490,
+        "end": 1890,
+        "confidence": "medium",
+        "locationAccuracy": "Ermou Caddesi ve merkez çarşı kesişimi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu; 1881 sonrası yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-larissa-hasan-bey",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.418,
+          39.639
+        ]
+      },
+      "properties": {
+        "id": "her-larissa-hasan-bey",
+        "name": "Büyük Hasan Bey Camii",
+        "modern": "Hasan Bey Mosque of Larissa (Central Square site)",
+        "layer": "heritage",
+        "start": 1530,
+        "end": 1895,
+        "confidence": "high",
+        "locationAccuracy": "Plateia Kentriki (Merkez Meydanı) eski parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl inşası; 1890’lar yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-larissa-yeni-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.419,
+          39.636
+        ]
+      },
+      "properties": {
+        "id": "her-larissa-yeni-cami",
+        "name": "Yeni Cami (Larissa)",
+        "modern": "Yeni Mosque of Larissa",
+        "layer": "heritage",
+        "start": 1902,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "31 Ağustos Caddesi parseli",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1902 inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-trikala-osman-sah",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.7725,
+          39.551
+        ]
+      },
+      "properties": {
+        "id": "her-trikala-osman-sah",
+        "name": "Osman Şah Camii (Mimar Sinan)",
+        "modern": "Osman Shah / Kursum Mosque (Sinan Mosque)",
+        "layer": "heritage",
+        "start": 1570,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Litheos nehri kıyısındaki külliye alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1570 Mimar Sinan inşası (Yunanistan’da TEK)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-trikala-hamam",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.772,
+          39.5515
+        ]
+      },
+      "properties": {
+        "id": "her-trikala-hamam",
+        "name": "Tırhala Çifte Hamamı (Eski Hapishane Altı)",
+        "modern": "Twin Hamam of Trikala (Tsitsanis Museum)",
+        "layer": "heritage",
+        "start": 1580,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Osman Şah Camii karşısı eski cezaevi alanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl Mimar Sinan külliyesi hamamı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-yanya-aslan-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.861,
+          39.6725
+        ]
+      },
+      "properties": {
+        "id": "her-yanya-aslan-pasa",
+        "name": "Aslan Paşa Camii ve Külliyesi",
+        "modern": "Aslan Pasha Mosque (Municipal Ethnographic Museum)",
+        "layer": "heritage",
+        "start": 1618,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yanya Kalesi kuzeydoğu burcu akropolü",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "1618 Aslan Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-yanya-fethiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.8635,
+          39.6705
+        ]
+      },
+      "properties": {
+        "id": "her-yanya-fethiye",
+        "name": "Fethiye Camii ve Ali Paşa Türbesi",
+        "modern": "Fethiye Mosque of Ioannina",
+        "layer": "heritage",
+        "start": 1430,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yanya Kalesi İç Kale (Its Kale) mevkii",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "1430 fethi; 1795 Tepedelenli Ali Paşa yeniden inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-yanya-veli-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.854,
+          39.668
+        ]
+      },
+      "properties": {
+        "id": "her-yanya-veli-pasa",
+        "name": "Veli Paşa Camii (Tsiekour Cami)",
+        "modern": "Veli Pasha Mosque of Ioannina",
+        "layer": "heritage",
+        "start": 1804,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Yanya kent içi meydan alanı",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "1804 Veli Paşa (Ali Paşa oğlu) inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-yanya-meydan-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.852,
+          39.666
+        ]
+      },
+      "properties": {
+        "id": "her-yanya-meydan-cami",
+        "name": "Yanya Meydan Camii",
+        "modern": "Meydan Mosque of Ioannina (Democracy Square site)",
+        "layer": "heritage",
+        "start": 1650,
+        "end": 1932,
+        "confidence": "medium",
+        "locationAccuracy": "Plateia Dimokratias (Demokrasi Meydanı) eski parseli",
+        "source": "src-salname-yanya-1894",
+        "datePrecision": "17. yüzyıl inşası; 1932 kentsel yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-arta-faik-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.975,
+          39.172
+        ]
+      },
+      "properties": {
+        "id": "her-arta-faik-pasa",
+        "name": "Faik Paşa Camii (Marati)",
+        "modern": "Faik Pasha Mosque of Arta",
+        "layer": "heritage",
+        "start": 1492,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Arta dışında zeytinlikler mevkii",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1492 Narda fatihi Faik Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-arta-feyzullah",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.985,
+          39.161
+        ]
+      },
+      "properties": {
+        "id": "her-arta-feyzullah",
+        "name": "Feyzullah Camii ve Minaresi",
+        "modern": "Feyzullah Mosque Minaret of Arta",
+        "layer": "heritage",
+        "start": 1510,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Arta kent içi konut parselleri arası",
+        "source": "src-tdv-kiel",
+        "datePrecision": "16. yüzyıl başı inşası; 19. yüzyıl cami yıkımı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-arta-koprusu",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.9675,
+          39.152
+        ]
+      },
+      "properties": {
+        "id": "her-arta-koprusu",
+        "name": "Narda Tarihî Taş Köprüsü",
+        "modern": "Bridge of Arta",
+        "layer": "heritage",
+        "start": 1612,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Arachthos nehri geçişi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1612 Osmanlı taş kemer inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-atina-fethiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.7265,
+          37.9752
+        ]
+      },
+      "properties": {
+        "id": "her-atina-fethiye",
+        "name": "Fethiye Camii (Mosque of the Conquest)",
+        "modern": "Fethiye Mosque of Athens",
+        "layer": "heritage",
+        "start": 1458,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Roma Agorası arkeolojik alanı içi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1458 Fatih fethi ziyareti inşası; 1670 yenileme"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-atina-cizderiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.7258,
+          37.9763
+        ]
+      },
+      "properties": {
+        "id": "her-atina-cizderiye",
+        "name": "Cizderiye Camii (Tzistarakis Camisi)",
+        "modern": "Tzistarakis Mosque of Monastiraki",
+        "layer": "heritage",
+        "start": 1759,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Monastiraki Meydanı metro istasyonu yanı",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1759 Atina Voyvodası Mustafa Ağa Tzistarakis inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-atina-medrese",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.7268,
+          37.9748
+        ]
+      },
+      "properties": {
+        "id": "her-atina-medrese",
+        "name": "Medrese-i Atina (Medrese Kapısı)",
+        "modern": "Gate of the Madrasa of Athens",
+        "layer": "heritage",
+        "start": 1721,
+        "end": 1914,
+        "confidence": "high",
+        "locationAccuracy": "Pelopida Sokak, Roma Agorası bitişiği",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1721 Mehmed Fahri inşası; 1914 kraliyet kararıyla yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-atina-ruzgar-hamami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.7272,
+          37.9742
+        ]
+      },
+      "properties": {
+        "id": "her-atina-ruzgar-hamami",
+        "name": "Süleyman Hamamı / Rüzgâr Hamamı",
+        "modern": "Bath House of the Winds (Loutro ton Aeridon)",
+        "layer": "heritage",
+        "start": 1680,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Plaka Kirristou Caddesi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "17. yüzyıl sonu inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-egriboz-emir-zade",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.593,
+          38.4625
+        ]
+      },
+      "properties": {
+        "id": "her-egriboz-emir-zade",
+        "name": "Emir Zade Camii",
+        "modern": "Emir Zade Mosque of Chalkida",
+        "layer": "heritage",
+        "start": 1475,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Chalkida Agias Paraskevis Meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "15. yüzyıl sonu Halil Bey / Emir Zade inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-egriboz-karababa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.587,
+          38.4645
+        ]
+      },
+      "properties": {
+        "id": "her-egriboz-karababa",
+        "name": "Karababa Kalesi",
+        "modern": "Karababa Fortress of Chalkida",
+        "layer": "heritage",
+        "start": 1686,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Euripus boğazına bakan Kanithos tepesi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1686 Venedik kuşatmasına karşı Osmanlı inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-inebahti-fethiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.8315,
+          38.3925
+        ]
+      },
+      "properties": {
+        "id": "her-inebahti-fethiye",
+        "name": "İnebahtı Fethiye Camii (Liman Camisi)",
+        "modern": "Fethiye Mosque of Nafpaktos",
+        "layer": "heritage",
+        "start": 1499,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "İnebahtı tarihî Venedik limanı girişi",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1499 Sultan II. Bayezid fethi inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-tripolice-saray",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.375,
+          37.511
+        ]
+      },
+      "properties": {
+        "id": "her-tripolice-saray",
+        "name": "Tripoliçe Cami-i Kebir ve Mora Valilik Sarayı",
+        "modern": "Grand Mosque & Pasha Palace site of Tripolitsa",
+        "layer": "heritage",
+        "start": 1715,
+        "end": 1821,
+        "confidence": "high",
+        "locationAccuracy": "Areos Meydanı ve Agios Vasilios katedrali çevresi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1715 eyalet başkenti inşası; 1821 kuşatma yıkımı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-nafplio-vouleftiko",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.796,
+          37.5658
+        ]
+      },
+      "properties": {
+        "id": "her-nafplio-vouleftiko",
+        "name": "Ağa Paşa Camii (Vouleftiko / İlk Parlamento)",
+        "modern": "Vouleftiko of Nafplio (former Aga Pasha Mosque)",
+        "layer": "heritage",
+        "start": 1730,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Nafplio eski kent Syntagma meydanı yakını",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1730 Ağa Paşa inşası; 1825 parlamento dönüşümü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-nafplio-trianon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.7972,
+          37.5662
+        ]
+      },
+      "properties": {
+        "id": "her-nafplio-trianon",
+        "name": "Büyük Cami (Trianon Camisi)",
+        "modern": "Trianon Theatre (former Old Mosque of Nafplio)",
+        "layer": "heritage",
+        "start": 1550,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Nafplio Syntagma Meydanı köşesi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "16. yüzyıl inşası; 1828 okul/tiyatro dönüşümü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-methoni-bayezid",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.705,
+          36.815
+        ]
+      },
+      "properties": {
+        "id": "her-methoni-bayezid",
+        "name": "Sultan II. Bayezid Camii (Modon Kalesi)",
+        "modern": "Bayezid Mosque ruins in Methoni Castle",
+        "layer": "heritage",
+        "start": 1500,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Methoni kalesi içi arkeolojik alanı",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1500 Sultan II. Bayezid bizzat fethi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-patras-hamam",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.738,
+          38.2465
+        ]
+      },
+      "properties": {
+        "id": "her-patras-hamam",
+        "name": "Patra Hamamı (Loutra Patras)",
+        "modern": "Turkish Baths of Patras",
+        "layer": "heritage",
+        "start": 1550,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Boukaouri Caddesi Patras eski mahallesi",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "16. yüzyıl Kanuni devri inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-monemvasia-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.056,
+          36.6875
+        ]
+      },
+      "properties": {
+        "id": "her-monemvasia-cami",
+        "name": "Monemvasia Cami-i Kebir",
+        "modern": "Mosque of Monemvasia (Archaeological Collection)",
+        "layer": "heritage",
+        "start": 1540,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Monemvasia kalesi aşağı şehir merkez meydanı",
+        "source": "src-eyice-yunanistan",
+        "datePrecision": "1540 inşası; 1715 fethi yenileme"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-chania-yali",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.0175,
+          35.518
+        ]
+      },
+      "properties": {
+        "id": "her-chania-yali",
+        "name": "Küçük Hasan Paşa Camii (Yalı Camisi)",
+        "modern": "Kucuk Hasan Pasha Mosque (Giali Tzamisi)",
+        "layer": "heritage",
+        "start": 1645,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Hanya Venedik Limanı sahil promenadı",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1645 Girit fethi; adadaki ilk cami"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-chania-hunkar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.0205,
+          35.5165
+        ]
+      },
+      "properties": {
+        "id": "her-chania-hunkar",
+        "name": "Hünkâr Camii (Agios Nikolaos)",
+        "modern": "Church of Saint Nicholas (former Hunkar Mosque)",
+        "layer": "heritage",
+        "start": 1645,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Hanya Splanzia Meydanı",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1645 Sultan İbrahim cami dönüşümü"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rethymno-sultan-ibrahim",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.4715,
+          35.3725
+        ]
+      },
+      "properties": {
+        "id": "her-rethymno-sultan-ibrahim",
+        "name": "Sultan İbrahim Camii (Fortezza Kalesi)",
+        "modern": "Sultan Ibrahim Mosque of the Fortezza",
+        "layer": "heritage",
+        "start": 1646,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Resmo Fortezza Kalesi akropol merkezi",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1646 Resmo fethi inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rethymno-veli-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.479,
+          35.3645
+        ]
+      },
+      "properties": {
+        "id": "her-rethymno-veli-pasa",
+        "name": "Veli Paşa Camii (Mastaba Camisi)",
+        "modern": "Veli Pasha Mosque (Paleontological Museum)",
+        "layer": "heritage",
+        "start": 1650,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Resmo Mastaba semti",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "17. yüzyıl inşası; 1890 minare"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rethymno-nerantze",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.474,
+          35.369
+        ]
+      },
+      "properties": {
+        "id": "her-rethymno-nerantze",
+        "name": "Nerantze Camii (Gazi Hüseyin Paşa)",
+        "modern": "Nerantze Mosque (Municipal Conservatory of Rethymno)",
+        "layer": "heritage",
+        "start": 1657,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Resmo eski şehir merkezi",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1657 Gazi Hüseyin Paşa dönüşümü; 1890 minare"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-heraklion-vezir",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.134,
+          35.34
+        ]
+      },
+      "properties": {
+        "id": "her-heraklion-vezir",
+        "name": "Vezir Camii (Agios Titos)",
+        "modern": "Church of Saint Titus (former Vezir Mosque)",
+        "layer": "heritage",
+        "start": 1669,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Kandiye 25 Ağustos Caddesi ana meydanı",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1669 fethi; 1869 Athanasios Moussis yeniden inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-heraklion-valide-sultan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.133,
+          35.3385
+        ]
+      },
+      "properties": {
+        "id": "her-heraklion-valide-sultan",
+        "name": "Valide Sultan Camii (Kandiye)",
+        "modern": "Valide Sultan Mosque site of Heraklion",
+        "layer": "heritage",
+        "start": 1670,
+        "end": 1930,
+        "confidence": "high",
+        "locationAccuracy": "Kornarou Meydanı ve Bembo çeşmesi yanı",
+        "source": "src-girit-sayim-1881",
+        "datePrecision": "1670 Turhan Hatice Valide Sultan vakfı; 1930 yıkım"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rhodes-suleymaniye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.2235,
+          36.444
+        ]
+      },
+      "properties": {
+        "id": "her-rhodes-suleymaniye",
+        "name": "Süleymaniye Camii (Rodos)",
+        "modern": "Suleymaniye Mosque of Rhodes",
+        "layer": "heritage",
+        "start": 1522,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Rodos Eski Şehri Sokratous Caddesi tepe noktası",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1522 fethi; 1808 Sultan II. Mahmud yenilemesi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rhodes-recep-pasa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.2255,
+          36.442
+        ]
+      },
+      "properties": {
+        "id": "her-rhodes-recep-pasa",
+        "name": "Recep Paşa Camii",
+        "modern": "Rejep Pasha Mosque of Rhodes",
+        "layer": "heritage",
+        "start": 1588,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Rodos Dorieos Meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1588 Sadrazam Recep Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-rhodes-hafiz-ahmed",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.2238,
+          36.4438
+        ]
+      },
+      "properties": {
+        "id": "her-rhodes-hafiz-ahmed",
+        "name": "Hafız Ahmed Ağa Kütüphanesi",
+        "modern": "Hafiz Ahmed Agha Library of Rhodes",
+        "layer": "heritage",
+        "start": 1793,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Süleymaniye Camii karşısı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1793 Hafız Ahmed Ağa vakfı"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kos-gazi-hasan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.291,
+          36.8945
+        ]
+      },
+      "properties": {
+        "id": "her-kos-gazi-hasan",
+        "name": "Gazi Hasan Paşa Camii (Platanos)",
+        "modern": "Gazi Hasan Pasha Mosque of Kos (Platanos)",
+        "layer": "heritage",
+        "start": 1786,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Hipokrat Çınarı yanı Platanos Meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1786 Kaptanıderya Cezayirli Gazi Hasan Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-kos-defterdar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.2885,
+          36.893
+        ]
+      },
+      "properties": {
+        "id": "her-kos-defterdar",
+        "name": "Defterdar İbrahim Paşa Camii",
+        "modern": "Defterdar Mosque of Kos",
+        "layer": "heritage",
+        "start": 1792,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Eleftherias (Özgürlük) Meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1792 Defterdar Hacı İbrahim Paşa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-midilli-yeni-cami",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.554,
+          39.1085
+        ]
+      },
+      "properties": {
+        "id": "her-midilli-yeni-cami",
+        "name": "Yeni Cami (Midilli)",
+        "modern": "Yeni Mosque of Mytilene",
+        "layer": "heritage",
+        "start": 1825,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Midilli Epano Skala semti",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1825 Nazır Mustafa Ağa inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-sakiz-mecidiye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.136,
+          38.3695
+        ]
+      },
+      "properties": {
+        "id": "her-sakiz-mecidiye",
+        "name": "Mecidiye Camii (Sakız Bizans Müzesi)",
+        "modern": "Mecidiye Mosque of Chios (Byzantine Museum)",
+        "layer": "heritage",
+        "start": 1846,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Sakız Vounaki Meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1846 Sultan Abdülmecid inşası"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "her-sakiz-osmaniye",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.1375,
+          38.373
+        ]
+      },
+      "properties": {
+        "id": "her-sakiz-osmaniye",
+        "name": "Osmaniye Camii (Sakız Kalesi)",
+        "modern": "Osmaniye Mosque of Chios Castle",
+        "layer": "heritage",
+        "start": 1891,
+        "end": null,
+        "confidence": "high",
+        "locationAccuracy": "Sakız Kalesi içi Türk mahallesi meydanı",
+        "source": "src-tdv-kiel",
+        "datePrecision": "1891 Sultan II. Abdülhamid inşası"
+      }
+    }
+  ]
+}

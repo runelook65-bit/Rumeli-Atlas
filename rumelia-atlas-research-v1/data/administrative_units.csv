@@ -1,0 +1,15 @@
+admin_id,name,type,parent_admin_id,valid_from,valid_to,geometry_reference,source_id,notes
+ADM-001,Üsküp / Skopje,uçbeyliği,NULL,1392,1463,NULL,SRC-010,Frontier principality; exact date convention varies.
+ADM-002,Skopje / Üsküp,kaza,ADM-003,1463,1530,NULL,SRC-010,Under Paşa Sancağı after absorption of frontier province.
+ADM-003,Paşa Sancağı / Paşa Liva,sancak/liva,NULL,1463,1544,NULL,SRC-010,Terminology changes; do not assume a stable polygon.
+ADM-004,Kalkandelen / Tetovo,vilayet,NULL,1455,1468,NULL,SRC-012,"Early Ottoman vilayet label, not later provincial vilayet."
+ADM-005,Kalkandelen / Tetovo,nahiye,ADM-003,1468,1569,NULL,SRC-012,Affiliated to Paşa Sancağı; status terminology caution.
+ADM-006,Tetovo / Polog,hass of nahiye subaşı,ADM-005,1467,1468,NULL,SRC-011,Tetovo city/admin-military centre in cited register.
+ADM-007,Prizren,sancak,NULL,1455,1530,NULL,SRC-013,Documented by voynuk and tahrir evidence; conquest date disputed.
+ADM-008,Prizren,sancak,Kosova Vilayeti,1879,1900,NULL,SRC-005,Year-specific salname boundaries must be extracted separately.
+ADM-009,Üsküp / Skopje,liva,NULL,1730,1833,NULL,SRC-010,Skopje liva frame; early-19th-century eight-kaza list reported in scholarship.
+ADM-010,Üsküp kaza,kaza,ADM-009,1833,1833,NULL,SRC-009,"47 urban mahalles, 155 villages reported."
+ADM-011,Kaçanik,nahiye,ADM-009,1833,1833,NULL,SRC-009,20 villages in the NFS.d.5624 frame.
+ADM-012,Pristina / Priştine,kaza under Üsküp eyalet,NULL,1845,1845,NULL,SRC-014,"Temettuat heading; adjoining frame, not Prizren census."
+ADM-013,Tetovo municipality,municipality,NULL,2021,2021,NULL,SRC-015,Modern statistical unit; not Ottoman boundary.
+ADM-014,Prizren municipality,municipality,NULL,2011,2024,NULL,SRC-016,Official settlement series; version discrepancy in settlement counts retained.

@@ -1,0 +1,14 @@
+gis_source_id,dataset,provider,license,coverage,format,download_url,usage_restrictions,source_id
+GIS-001,GeoNames export,GeoNames,CC BY,Global; corridor place points,TXT/CSV,https://www.geonames.org/export/,Attribution; current gazetteer only,SRC-030
+GIS-002,OpenStreetMap data,OpenStreetMap contributors,ODbL,"North Macedonia/Kosovo current roads, places, buildings",PBF/GeoJSON via extracts,https://download.geofabrik.de/europe/macedonia.html,ODbL and attribution; current data,SRC-031
+GIS-003,Geofabrik Kosovo extract,OpenStreetMap contributors,ODbL,Kosovo current network,PBF,https://download.geofabrik.de/europe/kosovo.html,ODbL and attribution,SRC-031
+GIS-004,Natural Earth admin-0 countries,Natural Earth,public domain,Current country reference,Shapefile/GeoJSON,https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/,Public domain per provider; reference only,SRC-032
+GIS-005,geoBoundaries,William and Mary / geoBoundaries,varies by dataset,Administrative boundaries,GeoJSON,https://www.geoboundaries.org/,Check per dataset license,SRC-032
+GIS-006,GADM,GADM,restricted,Administrative boundaries,GeoPackage/Shapefile,https://gadm.org/data.html,Do not redistribute without review,SRC-032
+GIS-007,Copernicus DEM,Copernicus,license varies,Terrain/elevation,GeoTIFF,https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM,Verify product terms,SRC-032
+GIS-008,NASA SRTM,NASA/USGS,public access; product terms,Terrain/elevation,GeoTIFF,https://www.earthdata.nasa.gov/data/instruments/srtm,Verify product license,SRC-032
+GIS-009,Pleiades,Institute for the Study of the Ancient World / NYU,CC BY,Ancient gazetteer incl. Scupi,CSV/GeoJSON/API,https://pleiades.stoa.org/,CC BY; ancient place reference,SRC-032
+GIS-010,UNESCO Sites Navigator GIS,UNESCO,terms not stated,World Heritage and tentative sites,GIS/web services,https://whc.unesco.org/en/wh-gis/,Terms to verify,SRC-032
+GIS-011,WDPA,UNEP-WCMC,restricted/license,Protected areas,GIS,https://www.unep-wcmc.org/wdpa-data-license,Restricted; do not redistribute blindly,SRC-032
+GIS-012,Kosovo Cultural Heritage Database,Kosovo Ministry of Culture,official/reuse terms not stated,Heritage points and records,Web database,https://dtk.rks-gov.net/,Request reuse terms; record metadata,SRC-017
+GIS-013,North Macedonia cadastre/geoportal,Agency for Real Estate Cadastre / State Archives routes,official/reuse terms not stated,Modern cadastral and administrative reference,Web services/requests,https://www.katastar.gov.mk/,Access/reuse to verify; no historical geometry claimed,SRC-002

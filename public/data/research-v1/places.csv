@@ -1,0 +1,15 @@
+place_id,modern_name,historical_primary_name,country_current,latitude,longitude,coordinate_precision,place_type,first_known_date,last_known_date,current_status,notes,source_id,confidence
+SKP-001,Skopje,Üsküp,North Macedonia,41.9963889,21.4313889,settlement_centroid,city,NULL,2026,extant,Living city; Ottoman provincial/kaza/sancak role varies by date; name variants grouped.,SRC-001,HIGH
+SKP-002,Scupi,Σκούποι,North Macedonia,42.016885,21.391437,historical_estimate,archaeological_site,2nd c. BCE/81-518 CE,518,abandoned,Ancient predecessor site kept separate from modern Skopje; Digital Atlas precision 2 km.,SRC-030,HIGH
+TET-001,Tetovo,Тетово,North Macedonia,42.0097222,20.9713889,settlement_centroid,city,1452/53,2026,extant,Village-marketplace in 1452/53; city/admin-military centre by 1467/68.,SRC-011,HIGH
+GOS-001,Gostivar,Гостивар,North Macedonia,41.7961111,20.9077778,settlement_centroid,city,NULL,2026,extant,Late-Ottoman nahiye centre under Tetova kaza in cited reference.,SRC-011,HIGH
+KUM-001,Kumanovo,Куманово,North Macedonia,42.1327778,21.7158333,settlement_centroid,city,1519,2026,extant,Village in 1519 and 1570-72; kasaba by Evliya 1660.,SRC-006,HIGH
+PRI-001,Prizren,Призрен,Kosovo,42.2138889,20.7397222,settlement_centroid,city,1452/53,2026,extant,Medieval and Ottoman urban/sancak centre; Ottoman variants not all dated.,SRC-013,HIGH
+PRI-003,Prishtina,Prishtinë,Kosovo,42.6725,21.1666667,settlement_centroid,city,1389,2026,extant,Late-Ottoman kasaba and sandjak capital; adjoining administrative frame.,SRC-001,HIGH
+VUS-001,Vushtrri,Vushtrria,Kosovo,42.8230556,20.9675,settlement_centroid,town,NULL,2026,extant,Late-Ottoman kasaba/kaza capital; Ottoman form from undated gazetteer alias.,SRC-030,HIGH
+KAC-001,Kaçanik,Kačanik,Kosovo,42.2319444,21.2594444,settlement_centroid,town,NULL,2026,extant,Strategic pass/corridor settlement; Ottoman name not asserted.,SRC-010,HIGH
+FER-001,Ferizaj,Ferizovik,Kosovo,42.3705556,21.1552778,settlement_centroid,city,NULL,2026,extant,Co-reference secure; date table for variants remains NULL.,SRC-030,HIGH
+RAH-001,Rahovec,Rahoveci,Kosovo,42.3994444,20.6547222,settlement_centroid,town,1889,2026,extant,Late-Ottoman nahiye under Prizren kaza; Ottoman script not extracted.,SRC-010,HIGH
+BRN-001,Bresanë,Bresana,Kosovo,42.11,20.7247,settlement_centroid,village,1538,2026,extant,Village location for Kukli Beu Mosque; coordinate is village centroid.,SRC-017,MEDIUM
+GNR-001,Gorno Nerezi,Nerezi,North Macedonia,NULL,NULL,unknown,village,NULL,2026,extant,Village associated with St Panteleimon church; no defensible point from opened source.,SRC-030,HIGH
+STN-001,Staro Nagoričane,NULL,North Macedonia,NULL,NULL,unknown,village,NULL,2026,extant,Historically relevant locality identified in gazetteer memo; coordinate withheld pending stronger crosswalk.,SRC-006,LOW

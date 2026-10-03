@@ -1,0 +1,51 @@
+{
+  "type": "FeatureCollection",
+  "name": "rumelia_atlas_pilot_cultural_regions",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "REG-001",
+      "geometry": null,
+      "properties": {
+        "region_id": "REG-001",
+        "name": "Polog",
+        "type": "cultural_region",
+        "geometry_precision": "core_area",
+        "valid_from": "NULL",
+        "valid_to": "NULL",
+        "source_id": "SRC-011",
+        "notes": "Regional label; geometry pending source map extraction."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "REG-002",
+      "geometry": null,
+      "properties": {
+        "region_id": "REG-002",
+        "name": "Kosovo / Metohija",
+        "type": "cultural_region",
+        "geometry_precision": "approximate_extent",
+        "valid_from": "NULL",
+        "valid_to": "NULL",
+        "source_id": "SRC-013",
+        "notes": "Fluid historical-cultural frame; no political boundary asserted."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "REG-003",
+      "geometry": null,
+      "properties": {
+        "region_id": "REG-003",
+        "name": "Skopje–Tetovo–Prizren pilot corridor",
+        "type": "research_scope",
+        "geometry_precision": "approximate_extent",
+        "valid_from": "NULL",
+        "valid_to": "NULL",
+        "source_id": "SRC-032",
+        "notes": "Research scope, not a historical political region or canonical centerline."
+      }
+    }
+  ]
+}

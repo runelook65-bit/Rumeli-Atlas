@@ -1,0 +1,39 @@
+name_id,place_id,name,language,script,valid_from,valid_to,source_id
+NM-0001,SKP-001,Skopje,Macedonian,Cyrillic,NULL,2026,SRC-030
+NM-0002,SKP-001,Скопје,Macedonian,Cyrillic,NULL,2026,SRC-030
+NM-0003,SKP-001,Üsküp,Turkish,Latin,1392,1913,SRC-030
+NM-0004,SKP-001,Usküb,Turkish,Latin,NULL,NULL,SRC-030
+NM-0005,SKP-001,Skoplje,Serbian/Croatian,Latin,NULL,NULL,SRC-030
+NM-0006,SKP-001,Shkup,Albanian,Latin,NULL,2026,SRC-030
+NM-0007,SKP-002,Scupi,Latin,Latin,2nd c. BCE,518,SRC-030
+NM-0008,SKP-002,Σκούποι,Greek,Greek,NULL,NULL,SRC-030
+NM-0009,SKP-002,Colonia Flavia Scupinorum,Latin,Latin,81,518,SRC-030
+NM-0010,TET-001,Tetovo,Macedonian,Latin,NULL,2026,SRC-011
+NM-0011,TET-001,Тетово,Macedonian,Cyrillic,NULL,2026,SRC-011
+NM-0012,TET-001,Tetovë,Albanian,Latin,NULL,2026,SRC-011
+NM-0013,TET-001,Kalkandelen,Turkish/Ottoman,Latin,1467,1912,SRC-011
+NM-0014,TET-001,Htetova (IhTetova),source transcription,Latin,1452,1453,SRC-011
+NM-0015,PRI-001,Prizren,Albanian/Serbian,Latin/Cyrillic,NULL,2026,SRC-013
+NM-0016,PRI-001,Призрен,Serbian,Cyrillic,NULL,2026,SRC-013
+NM-0017,PRI-001,Pürzerrin,Ottoman/Turkish,Latin,NULL,NULL,SRC-013
+NM-0018,PRI-001,Perzerrin,Ottoman/Turkish,Latin,NULL,NULL,SRC-013
+NM-0019,PRI-001,Pürzen,Ottoman/Turkish,Latin,NULL,NULL,SRC-013
+NM-0020,PRI-001,Zerrin,Ottoman/Turkish,Latin,NULL,NULL,SRC-013
+NM-0021,PRI-003,Prishtinë,Albanian,Latin,NULL,2026,SRC-030
+NM-0022,PRI-003,Priština,Serbian,Latin,NULL,2026,SRC-030
+NM-0023,PRI-003,Pristina,English,Latin,NULL,2026,SRC-030
+NM-0024,VUS-001,Vushtrri,Albanian,Latin,NULL,2026,SRC-030
+NM-0025,VUS-001,Vučitrn,Serbian,Latin,NULL,2026,SRC-030
+NM-0026,VUS-001,Vuçitërn,Albanian,Latin,NULL,2026,SRC-030
+NM-0027,VUS-001,Vıçıtırın,Turkish/Ottoman?,Latin,NULL,NULL,SRC-030
+NM-0028,KAC-001,Kaçanik,Albanian,Latin,NULL,2026,SRC-030
+NM-0029,KAC-001,Kačanik,Serbian,Latin,NULL,2026,SRC-030
+NM-0030,KAC-001,Orhanye,undated alternate,Latin,NULL,NULL,SRC-030
+NM-0031,FER-001,Ferizaj,Albanian,Latin,NULL,2026,SRC-030
+NM-0032,FER-001,Ferizovik,undated historical,Latin,NULL,NULL,SRC-030
+NM-0033,FER-001,Ferizović,Serbian/undated,Latin,NULL,NULL,SRC-030
+NM-0034,FER-001,Uroševac,Serbian,Latin,NULL,NULL,SRC-030
+NM-0035,RAH-001,Rahovec,Albanian,Latin,NULL,2026,SRC-030
+NM-0036,RAH-001,Rahoveci,Albanian,Latin,NULL,2026,SRC-030
+NM-0037,RAH-001,Orahovac,Serbian,Latin,NULL,2026,SRC-030
+NM-0038,RAH-001,Ораховац,Serbian,Cyrillic,NULL,2026,SRC-030
