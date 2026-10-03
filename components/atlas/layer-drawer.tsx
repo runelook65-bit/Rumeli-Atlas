@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { 
   X, ShieldCheck, LocateFixed, BookOpen, ChevronDown, ChevronRight, 
   MapPin, Compass, FileText, ArrowRightLeft, Calendar, Building, 
-  Landmark, History, Search 
+  Landmark, History, Search, Sparkles 
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { places, sources, type Layer, regionalModules, type RegionalModule, regionPresets } from '@/lib/atlas-data';
 import { MIGRATION_WAVES, TOPONYM_TRANSFORMATIONS, type MigrationWave } from '@/lib/migration-data';
+import { RUMELIA_EVENTS, type RumeliaEvent } from '@/lib/historia-events';
 import { layerInfo } from './atlas-sidebar';
 import { useStore } from '@/lib/store';
 
@@ -329,6 +330,51 @@ export function LayerDrawer({
               )}
             </div>
 
+            {/* Historia Model: Tarihsel Dönemler & Krizler Bölümü */}
+            <div className="mt-5 pt-4 border-t border-[#25352F]/10">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#25352F] flex items-center gap-1.5">
+                  <Sparkles size={14} className="text-[#9D493A]" />
+                  Tarihsel Dönemler & Krizler ({RUMELIA_EVENTS.length})
+                </h4>
+                <span className="text-[10px] font-mono text-[#6F786F] bg-stone-100 px-1.5 py-0.5 rounded border border-stone-200">
+                  Historia Olayları
+                </span>
+              </div>
+              <p className="text-xs text-[#6F786F] mb-3 leading-relaxed">
+                Tarihsel bir döneme odaklanarak haritayı, sınırları ve kırılma noktalarını bağlamsal olarak inceleyin.
+              </p>
+
+              <div className="grid grid-cols-1 gap-2 mb-4">
+                {RUMELIA_EVENTS.map(ev => {
+                  const isActive = useStore(s => s.activeEvent)?.id === ev.id;
+                  return (
+                    <button
+                      key={ev.id}
+                      type="button"
+                      onClick={() => {
+                        useStore.getState().setActiveEvent(isActive ? null : ev);
+                        if (!isActive) onClose();
+                      }}
+                      className={`text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1 ${
+                        isActive
+                          ? 'bg-[#9D493A]/10 border-[#9D493A] ring-1 ring-[#9D493A]/30'
+                          : 'bg-[#FAF8F2] border-[#25352F]/15 hover:border-[#9D493A]/40'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-serif text-xs font-bold text-[#25352F]">{ev.title}</span>
+                        <span className="font-mono text-[10px] text-[#9D493A] bg-[#9D493A]/10 px-1.5 py-0.5 rounded">
+                          {ev.period}
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-[#6F786F] line-clamp-1">{ev.scope}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Tarihsel Göç Dalgaları Bölümü */}
             <div className="mt-6 pt-5 border-t border-[#25352F]/10">
               <div className="flex items-center justify-between mb-2">
@@ -573,6 +619,30 @@ export function LayerDrawer({
                 Güncel sokak haritası
                 <Switch checked={streets} onCheckedChange={onStreetsChange} />
               </label>
+              <label className="view-row">
+                Dönem Haritası (Tarihsel Rölyef)
+                <Switch 
+                  checked={useStore(s => s.periodBasemap)} 
+                  onCheckedChange={checked => useStore.getState().setPeriodBasemap(checked)} 
+                />
+              </label>
+              {useStore(s => s.periodBasemap) && (
+                <div className="px-3 py-2 mt-1 rounded bg-[#F5F2E9] border border-[#25352F]/10 flex flex-col gap-1.5">
+                  <div className="flex justify-between text-xs text-[#6F786F]">
+                    <span>Dönem Haritası Saydamlığı</span>
+                    <span className="font-mono">%{Math.round(useStore(s => s.periodOpacity) * 100)}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min={0.2}
+                    max={1.0}
+                    step={0.05}
+                    value={useStore(s => s.periodOpacity)}
+                    onChange={e => useStore.getState().setPeriodOpacity(Number(e.target.value))}
+                    className="w-full accent-[#9D493A]"
+                  />
+                </div>
+              )}
             </div>
             
             <div className="pilot-card mt-8">

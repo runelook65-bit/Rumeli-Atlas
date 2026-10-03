@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useStore, MIN_YEAR, MAX_YEAR } from './store';
 import { getShareableUrl } from './url-state';
 import { places, visiblePlaces, filterPlacesByRegionPreset, type Place } from './atlas-data';
+import { getAdjacentBreakpoint } from './historia-events';
 
 const CATEGORY_MAP: Record<string, string> = {
   '1': 'human',
@@ -51,6 +52,14 @@ export function useKeyboard() {
 
       // Escape: Dismiss active drawers / selection
       if (e.key === 'Escape') {
+        if (store.historiaTextPlace) {
+          store.setHistoriaTextPlace(null);
+          return;
+        }
+        if (store.activeEvent) {
+          store.setActiveEvent(null);
+          return;
+        }
         if (store.pendingChoice) {
           store.setPendingChoice(null);
           return;
@@ -82,12 +91,22 @@ export function useKeyboard() {
         return;
       }
 
-      // Arrow navigation: Step year
+      // Arrow navigation: Step year or jump breakpoints (Shift+Arrow)
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault();
         const dir = e.key === 'ArrowRight' ? 1 : -1;
-        const step = e.ctrlKey || e.metaKey ? 100 : e.shiftKey ? 25 : e.altKey ? 10 : 1;
         store.setPlaying(false);
+
+        // Historia pattern: Shift+Arrow jumps to adjacent historical breakpoint
+        if (e.shiftKey) {
+          const bp = getAdjacentBreakpoint(store.year, dir);
+          if (bp !== null) {
+            store.setYear(bp);
+            return;
+          }
+        }
+
+        const step = e.ctrlKey || e.metaKey ? 100 : e.altKey ? 10 : 1;
         store.setYear(store.year + dir * step);
         return;
       }

@@ -5,6 +5,7 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { getBalkanDemographicsForYear, DEMOGRAPHIC_EVIDENCE_LABELS, DEMOGRAPHIC_SCOPE_NOTE } from '@/lib/atlas-data';
 
 import { useStore, type TemporalMode } from '@/lib/store';
+import { getAdjacentBreakpoint } from '@/lib/historia-events';
 
 interface TemporalNavigatorProps {
   year?: number;
@@ -108,14 +109,42 @@ export function TemporalNavigator({
         )}
       </div>
 
-      {/* Oynat / Durdur Butonu */}
-      <button 
-        className="w-10 h-10 rounded-full bg-primary hover:bg-[#7b3225] text-white flex items-center justify-center flex-shrink-0 shadow-sm transition-all duration-150 cursor-pointer"
-        onClick={onPlayingToggle}
-        aria-label={playing ? "Zaman akışını duraklat" : "Zaman akışını oynat"}
-      >
-        {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
-      </button>
+      {/* Oynat / Durdur & Kırılma Noktası Atlama (Historia Modeli) */}
+      <div className="flex items-center gap-1.5 flex-shrink-0">
+        <button
+          type="button"
+          className="w-8 h-8 rounded-full border border-[#dddcd1] bg-white text-[#6F786F] hover:text-[#9D493A] hover:border-[#9D493A]/40 flex items-center justify-center transition-all cursor-pointer"
+          onClick={() => {
+            const bp = getAdjacentBreakpoint(year, -1);
+            if (bp !== null) onYearChange(bp);
+          }}
+          title="Önceki Kırılma Noktası (Shift+←)"
+          aria-label="Önceki Kırılma Noktası"
+        >
+          <ChevronLeft size={16} />
+        </button>
+
+        <button 
+          className="w-10 h-10 rounded-full bg-primary hover:bg-[#7b3225] text-white flex items-center justify-center shadow-sm transition-all duration-150 cursor-pointer"
+          onClick={onPlayingToggle}
+          aria-label={playing ? "Zaman akışını duraklat (Boşluk)" : "Zaman akışını oynat (Boşluk)"}
+        >
+          {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
+        </button>
+
+        <button
+          type="button"
+          className="w-8 h-8 rounded-full border border-[#dddcd1] bg-white text-[#6F786F] hover:text-[#9D493A] hover:border-[#9D493A]/40 flex items-center justify-center transition-all cursor-pointer"
+          onClick={() => {
+            const bp = getAdjacentBreakpoint(year, 1);
+            if (bp !== null) onYearChange(bp);
+          }}
+          title="Sonraki Kırılma Noktası (Shift+→)"
+          aria-label="Sonraki Kırılma Noktası"
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
 
       {/* Orta Bölüm: Demografi Oranı + Zaman Çizgisi Slider */}
       <div className="flex-1 min-w-0 flex flex-col justify-center py-1">

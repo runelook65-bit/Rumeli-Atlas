@@ -8,6 +8,7 @@ import {
   type Layer
 } from './atlas-data';
 import type { AtlasMapHandle } from './atlas-map';
+import type { RumeliaEvent } from './historia-events';
 
 export const MIN_YEAR = 1354;
 export const MAX_YEAR = 2026;
@@ -84,6 +85,16 @@ export interface AtlasState {
   setToast: (toast: string | null) => void;
   notice: string | null;
   setNotice: (notice: string | null) => void;
+
+  // --- Historia Event-Centric Mapping & Breakpoints ---
+  activeEvent: RumeliaEvent | null;
+  setActiveEvent: (event: RumeliaEvent | null) => void;
+  periodBasemap: boolean;
+  setPeriodBasemap: (active: boolean) => void;
+  periodOpacity: number;
+  setPeriodOpacity: (opacity: number) => void;
+  historiaTextPlace: Place | null;
+  setHistoriaTextPlace: (place: Place | null) => void;
 
   // --- Map Controller Bridge ---
   mapHandle: AtlasMapHandle | null;
@@ -201,6 +212,24 @@ export const useStore = create<AtlasState>((set, get) => ({
   },
   notice: null,
   setNotice: (notice) => set({ notice }),
+
+  // --- Historia Event-Centric Mapping & Breakpoints ---
+  activeEvent: null,
+  setActiveEvent: (activeEvent) => {
+    set({ activeEvent });
+    if (activeEvent) {
+      get().setYear(activeEvent.anchorYear);
+      const map = get().mapHandle;
+      map?.fitBounds(activeEvent.bounds, { padding: 40, duration: 900 });
+      set({ selectedPlace: null });
+    }
+  },
+  periodBasemap: false,
+  setPeriodBasemap: (periodBasemap) => set({ periodBasemap }),
+  periodOpacity: 0.75,
+  setPeriodOpacity: (periodOpacity) => set({ periodOpacity }),
+  historiaTextPlace: null,
+  setHistoriaTextPlace: (historiaTextPlace) => set({ historiaTextPlace }),
 
   // --- Map Controller Bridge ---
   mapHandle: null,

@@ -12,7 +12,8 @@ import {
   Landmark,
   Building2,
   Calendar,
-  Layers
+  Layers,
+  FileCode
 } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { sources, isOttomanFoundation, type Place } from '@/lib/atlas-data';
@@ -118,13 +119,23 @@ export function PlaceStoryDrawer({
               </span>
             </div>
 
-            <button 
-              className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
-              onClick={onClose}
-              aria-label="Kapat"
-            >
-              <X size={18} />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                className="p-1.5 text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                onClick={() => useStore.getState().setHistoriaTextPlace(p)}
+                title="HistoriaText Kanıt Formatını İncele / Kopyala"
+                aria-label="HistoriaText Formatı"
+              >
+                <FileCode size={17} />
+              </button>
+              <button 
+                className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
+                onClick={onClose}
+                aria-label="Kapat"
+              >
+                <X size={18} />
+              </button>
+            </div>
           </div>
 
           {/* Yer Adı (Büyük Serif) */}

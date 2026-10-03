@@ -38,12 +38,15 @@ import { AtlasSourcesSheet } from '@/components/atlas/atlas-sources-sheet';
 import { RegionSelector } from '@/components/atlas/region-selector';
 import { LayerChoicePopup } from '@/components/atlas/layer-choice-popup';
 import { AtlasToast } from '@/components/atlas/atlas-toast';
+import { EventPanel } from '@/components/atlas/event-panel';
+import { PeriodMapControl } from '@/components/atlas/period-map-control';
+import { HistoriaTextModal } from '@/components/atlas/historia-text-modal';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'leaflet/dist/leaflet.css';
 
 export default function Atlas() {
-  // Global Navigation & Input Hooks (Strata architecture)
+  // Global Navigation & Input Hooks (Strata & Historia architecture)
   useUrlSync();
   useKeyboard();
   const deferredYear = useDeferredYear(70);
@@ -57,6 +60,8 @@ export default function Atlas() {
   const names = useStore((s) => s.names);
   const boundaries = useStore((s) => s.boundaries);
   const streets = useStore((s) => s.streets);
+  const periodBasemap = useStore((s) => s.periodBasemap);
+  const periodOpacity = useStore((s) => s.periodOpacity);
   const selectedPlace = useStore((s) => s.selectedPlace);
   const setSelectedPlace = useStore((s) => s.setSelectedPlace);
   const clusterPlaces = useStore((s) => s.clusterPlaces);
@@ -164,13 +169,15 @@ export default function Atlas() {
       names,
       boundaries,
       streets,
+      periodBasemap,
+      periodOpacity,
       onSelect: (p) => handleSelectPlace(p),
       onCluster: (items) => {
         setClusterPlaces(items);
         setRecordsOpen(true);
       }
     });
-  }, [ready, filtered, names, boundaries, streets]);
+  }, [ready, filtered, names, boundaries, streets, periodBasemap, periodOpacity]);
 
   // Timeline playback timer
   useEffect(() => {
@@ -243,9 +250,10 @@ export default function Atlas() {
 
   return (
     <main className="atlas-shell">
-      {/* Toast and Overlap Popups */}
+      {/* Toast, Overlap Popups and Historia Modals */}
       <AtlasToast />
       <LayerChoicePopup />
+      <HistoriaTextModal />
 
       {/* Top Header */}
       <AtlasHeader>
@@ -274,6 +282,9 @@ export default function Atlas() {
           <div className="map-top">
             <RegionSelector />
           </div>
+
+          {/* Historia Event Context Card */}
+          <EventPanel />
 
           {mode === 'lost' && (
             <div className="lost-note">
@@ -330,6 +341,9 @@ export default function Atlas() {
               </>
             )}
           </div>
+
+          {/* Historia Period Basemap Floating Control */}
+          <PeriodMapControl />
 
           <PlaceStoryDrawer />
         </section>

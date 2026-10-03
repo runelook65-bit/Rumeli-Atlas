@@ -1,6 +1,6 @@
 import {isOttomanFoundation, type Place} from './atlas-data';
 import type {Map as GLMap,Marker as GLMarker} from 'maplibre-gl';
-export type MapSettings={places:Place[];names:boolean;boundaries:boolean;streets:boolean;onSelect:(p:Place)=>void;onCluster?:(places:Place[])=>void};
+export type MapSettings={places:Place[];names:boolean;boundaries:boolean;streets:boolean;periodBasemap?:boolean;periodOpacity?:number;onSelect:(p:Place)=>void;onCluster?:(places:Place[])=>void};
 export type AtlasMapHandle={
  engine:'maplibre'|'leaflet';ready:Promise<void>;
  flyTo:(options:{center:[number,number];zoom:number;duration?:number})=>void;
@@ -67,6 +67,7 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
   interactive:false
  }).addTo(m);
  const streets=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{opacity:.85,maxZoom:19}).addTo(m);
+ const periodLayer=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{opacity:.75,maxZoom:17,className:'period-basemap-tiles'});
  const markers=L.layerGroup().addTo(m);let removed=false;let settings:MapSettings|undefined;
  const renderMarkers=()=>{
   markers.clearLayers();if(!settings)return;const current=settings;
@@ -108,6 +109,9 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
   settings=s;renderMarkers();
   if(s.boundaries&&!m.hasLayer(boundaries))boundaries.addTo(m);else if(!s.boundaries&&m.hasLayer(boundaries))m.removeLayer(boundaries);
   if(s.streets&&!m.hasLayer(streets))streets.addTo(m);else if(!s.streets&&m.hasLayer(streets))m.removeLayer(streets);
+  if(s.periodBasemap&&!m.hasLayer(periodLayer)){periodLayer.setOpacity(s.periodOpacity??.75);periodLayer.addTo(m);periodLayer.bringToBack()}
+  else if(!s.periodBasemap&&m.hasLayer(periodLayer)){m.removeLayer(periodLayer)}
+  else if(s.periodBasemap&&m.hasLayer(periodLayer)){periodLayer.setOpacity(s.periodOpacity??.75)}
  },invalidateSize:()=>{m.invalidateSize()},remove:()=>{removed=true;controller.abort();observer.disconnect();m.remove()}};
 }
 export async function createAtlasMap(container:HTMLDivElement):Promise<AtlasMapHandle>{
