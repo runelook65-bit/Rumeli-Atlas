@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { 
   X, ShieldCheck, LocateFixed, BookOpen, ChevronDown, ChevronRight, 
   MapPin, Compass, FileText, ArrowRightLeft, Calendar, Building, 
-  Landmark, History, Search, Sparkles 
+  Landmark, History, Search, Sparkles, Download, Layers 
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { places, sources, type Layer, regionalModules, type RegionalModule, regionPresets } from '@/lib/atlas-data';
 import { MIGRATION_WAVES, TOPONYM_TRANSFORMATIONS, type MigrationWave } from '@/lib/migration-data';
 import { RUMELIA_EVENTS, type RumeliaEvent } from '@/lib/historia-events';
+import { exportOhmSnapshotGeoJson, downloadGeoJsonFile } from '@/lib/ohm-temporal';
 import { layerInfo } from './atlas-sidebar';
 import { useStore } from '@/lib/store';
 
@@ -626,6 +627,13 @@ export function LayerDrawer({
                   onCheckedChange={checked => useStore.getState().setPeriodBasemap(checked)} 
                 />
               </label>
+              <label className="view-row">
+                OpenHistoricalMap (OHM Arazi & Landcover)
+                <Switch 
+                  checked={useStore(s => s.ohmBasemap)} 
+                  onCheckedChange={checked => useStore.getState().setOhmBasemap(checked)} 
+                />
+              </label>
               {useStore(s => s.periodBasemap) && (
                 <div className="px-3 py-2 mt-1 rounded bg-[#F5F2E9] border border-[#25352F]/10 flex flex-col gap-1.5">
                   <div className="flex justify-between text-xs text-[#6F786F]">
@@ -666,6 +674,30 @@ export function LayerDrawer({
               <button className="package-button" onClick={onOpenSources}>
                 <FileText size={16} />
                 Kaynaklar ve yöntem ({sourceCount})
+              </button>
+            </div>
+
+            {/* OpenHistoricalMap Temporal GIS Dışa Aktarımı */}
+            <div className="mt-5 p-3.5 bg-white border border-[#25352F]/15 rounded-lg shadow-2xs">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#00694C] flex items-center gap-1.5 mb-1.5">
+                <Layers size={13} />
+                OpenHistoricalMap (OHM) Açık Veri
+              </span>
+              <p className="text-[11px] text-[#6F786F] mb-3 leading-relaxed">
+                Tüm Rumeli veritabanını ({places.length} nesne) OHM etiket şeması, ondalık tarihler ve EDTF ömür parametreleriyle standart GeoJSON olarak dışa aktarın.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  const currentYear = useStore.getState().year;
+                  const snapshot = exportOhmSnapshotGeoJson(places, currentYear);
+                  downloadGeoJsonFile(snapshot, `rumelia-atlas-ohm-snapshot-${currentYear}.geojson`);
+                  useStore.getState().setToast(`Rumeli Atlas ${currentYear} OHM snapshot indirildi (${places.length} nesne)`);
+                }}
+                className="w-full py-2 px-3 bg-[#00694C] text-white hover:bg-[#00523b] rounded-md text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              >
+                <Download size={14} />
+                {year} Yılı OHM Snapshot'ını İndir
               </button>
             </div>
 

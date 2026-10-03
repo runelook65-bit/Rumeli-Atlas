@@ -1329,5 +1329,10 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   flex: 1;
 }
 
+/* ── OpenHistoricalMap (OHM) Katman Filtreleri ── */
+.ohm-basemap-tiles {
+  filter: sepia(0.12) saturate(0.88) contrast(1.04) brightness(0.98);
+}
+
 
 

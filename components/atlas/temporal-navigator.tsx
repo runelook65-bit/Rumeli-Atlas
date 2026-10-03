@@ -241,21 +241,42 @@ export function TemporalNavigator({
         </div>
       </div>
 
-      {/* Sağ Taraf: Mod Değiştirici ve Metodoloji Notu */}
+      {/* Sağ Taraf: OHM Adım Atlama, Mod Değiştirici ve Metodoloji Notu */}
       <div className="flex-shrink-0 ml-2 flex flex-col items-end gap-1.5">
-        <div className="flex items-center bg-white border border-gray-200 rounded-full p-0.5 text-xs shadow-2xs">
-          <button 
-            className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'snapshot' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
-            onClick={() => onTemporalModeChange?.('snapshot')}
-          >
-            Snapshot
-          </button>
-          <button 
-            className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'history' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
-            onClick={() => onTemporalModeChange?.('history')}
-          >
-            History
-          </button>
+        <div className="flex items-center gap-2">
+          {/* OHM Zaman Atlama Adımı (Time Jump) */}
+          <div className="hidden sm:flex items-center bg-white border border-stone-200 rounded-full p-0.5 text-[10px] font-mono shadow-2xs" title="OpenHistoricalMap Zaman Atlama Adımı (Time Jump)">
+            <span className="text-stone-400 pl-2 pr-1 text-[9px] font-sans font-medium">Adım:</span>
+            {[1, 5, 10, 25].map(step => (
+              <button
+                key={step}
+                type="button"
+                onClick={() => useStore.getState().setOhmStepAmount(step)}
+                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+                  useStore(s => s.ohmStepAmount) === step 
+                    ? 'bg-[#9D493A] text-white font-bold shadow-2xs' 
+                    : 'text-stone-600 hover:text-stone-900'
+                }`}
+              >
+                {step}Y
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center bg-white border border-gray-200 rounded-full p-0.5 text-xs shadow-2xs">
+            <button 
+              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'snapshot' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
+              onClick={() => onTemporalModeChange?.('snapshot')}
+            >
+              Snapshot
+            </button>
+            <button 
+              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'history' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
+              onClick={() => onTemporalModeChange?.('history')}
+            >
+              History
+            </button>
+          </div>
         </div>
         <p 
           className="text-[9px] text-gray-400 w-44 text-right leading-tight" 

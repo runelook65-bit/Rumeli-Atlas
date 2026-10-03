@@ -52,6 +52,10 @@ export function useKeyboard() {
 
       // Escape: Dismiss active drawers / selection
       if (e.key === 'Escape') {
+        if (store.ohmInspectorPlace) {
+          store.setOhmInspectorPlace(null);
+          return;
+        }
         if (store.historiaTextPlace) {
           store.setHistoriaTextPlace(null);
           return;
@@ -106,7 +110,7 @@ export function useKeyboard() {
           }
         }
 
-        const step = e.ctrlKey || e.metaKey ? 100 : e.altKey ? 10 : 1;
+        const step = e.ctrlKey || e.metaKey ? 100 : e.altKey ? 10 : (store.ohmStepAmount || 1);
         store.setYear(store.year + dir * step);
         return;
       }

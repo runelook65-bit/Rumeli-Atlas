@@ -96,6 +96,14 @@ export interface AtlasState {
   historiaTextPlace: Place | null;
   setHistoriaTextPlace: (place: Place | null) => void;
 
+  // --- OpenHistoricalMap (OHM) Temporal GIS ---
+  ohmBasemap: boolean;
+  setOhmBasemap: (active: boolean) => void;
+  ohmStepAmount: number;
+  setOhmStepAmount: (amount: number) => void;
+  ohmInspectorPlace: Place | null;
+  setOhmInspectorPlace: (place: Place | null) => void;
+
   // --- Map Controller Bridge ---
   mapHandle: AtlasMapHandle | null;
   setMapHandle: (handle: AtlasMapHandle | null) => void;
@@ -230,6 +238,14 @@ export const useStore = create<AtlasState>((set, get) => ({
   setPeriodOpacity: (periodOpacity) => set({ periodOpacity }),
   historiaTextPlace: null,
   setHistoriaTextPlace: (historiaTextPlace) => set({ historiaTextPlace }),
+
+  // --- OpenHistoricalMap (OHM) Temporal GIS ---
+  ohmBasemap: false,
+  setOhmBasemap: (ohmBasemap) => set({ ohmBasemap }),
+  ohmStepAmount: 1,
+  setOhmStepAmount: (ohmStepAmount) => set({ ohmStepAmount }),
+  ohmInspectorPlace: null,
+  setOhmInspectorPlace: (ohmInspectorPlace) => set({ ohmInspectorPlace }),
 
   // --- Map Controller Bridge ---
   mapHandle: null,

@@ -41,6 +41,7 @@ import { AtlasToast } from '@/components/atlas/atlas-toast';
 import { EventPanel } from '@/components/atlas/event-panel';
 import { PeriodMapControl } from '@/components/atlas/period-map-control';
 import { HistoriaTextModal } from '@/components/atlas/historia-text-modal';
+import { OhmInspectorModal } from '@/components/atlas/ohm-inspector-modal';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'leaflet/dist/leaflet.css';
@@ -62,6 +63,7 @@ export default function Atlas() {
   const streets = useStore((s) => s.streets);
   const periodBasemap = useStore((s) => s.periodBasemap);
   const periodOpacity = useStore((s) => s.periodOpacity);
+  const ohmBasemap = useStore((s) => s.ohmBasemap);
   const selectedPlace = useStore((s) => s.selectedPlace);
   const setSelectedPlace = useStore((s) => s.setSelectedPlace);
   const clusterPlaces = useStore((s) => s.clusterPlaces);
@@ -171,23 +173,25 @@ export default function Atlas() {
       streets,
       periodBasemap,
       periodOpacity,
+      ohmBasemap,
       onSelect: (p) => handleSelectPlace(p),
       onCluster: (items) => {
         setClusterPlaces(items);
         setRecordsOpen(true);
       }
     });
-  }, [ready, filtered, names, boundaries, streets, periodBasemap, periodOpacity]);
+  }, [ready, filtered, names, boundaries, streets, periodBasemap, periodOpacity, ohmBasemap]);
 
   // Timeline playback timer
   useEffect(() => {
     if (!playing) return;
     const timer = setInterval(() => {
       const cur = useStore.getState().year;
+      const step = useStore.getState().ohmStepAmount || 5;
       if (cur >= 2026) {
         useStore.getState().setPlaying(false);
       } else {
-        useStore.getState().setYear(Math.min(2026, cur + 5));
+        useStore.getState().setYear(Math.min(2026, cur + step));
       }
     }, 600);
     return () => clearInterval(timer);
@@ -250,10 +254,11 @@ export default function Atlas() {
 
   return (
     <main className="atlas-shell">
-      {/* Toast, Overlap Popups and Historia Modals */}
+      {/* Toast, Overlap Popups, Historia and OHM Modals */}
       <AtlasToast />
       <LayerChoicePopup />
       <HistoriaTextModal />
+      <OhmInspectorModal />
 
       {/* Top Header */}
       <AtlasHeader>

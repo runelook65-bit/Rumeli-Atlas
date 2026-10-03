@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { sources, isOttomanFoundation, type Place } from '@/lib/atlas-data';
+import { calculatePlaceLifespan } from '@/lib/ohm-temporal';
 import { Evidence } from './atlas-evidence';
 import { PopulationChart } from './population-chart';
 import { useStore } from '@/lib/store';
@@ -121,6 +122,14 @@ export function PlaceStoryDrawer({
 
             <div className="flex items-center gap-1">
               <button
+                className="p-1.5 text-stone-500 hover:text-[#00694C] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                onClick={() => useStore.getState().setOhmInspectorPlace(p)}
+                title="OpenHistoricalMap (OHM) Etiketleri & GeoJSON İncele"
+                aria-label="OpenHistoricalMap Etiketleri"
+              >
+                <Layers size={17} />
+              </button>
+              <button
                 className="p-1.5 text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
                 onClick={() => useStore.getState().setHistoriaTextPlace(p)}
                 title="HistoriaText Kanıt Formatını İncele / Kopyala"
@@ -218,6 +227,47 @@ export function PlaceStoryDrawer({
               </div>
               <span className="text-[11px] text-[#6F786F]">BOA & Salnâme Doğrulamalı</span>
             </div>
+
+            {/* OHM Temporal GIS Lifespan Kartı */}
+            {(() => {
+              const lifespan = calculatePlaceLifespan(p, year);
+              return (
+                <div className="p-3 bg-white rounded-lg border border-[#25352F]/10 shadow-2xs space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-[#6F786F] flex items-center gap-1.5">
+                      <Clock size={13} className="text-[#9D493A]" />
+                      Zamansal Ömür ({year} Durumu):
+                    </span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${lifespan.statusBadgeClass}`}>
+                      {lifespan.statusLabel}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden border border-stone-200">
+                    <div
+                      className={`h-full transition-all duration-300 ${
+                        lifespan.status === 'vanished'
+                          ? 'bg-rose-500'
+                          : lifespan.status === 'pre_existence'
+                          ? 'bg-stone-300'
+                          : 'bg-[#00694C]'
+                      }`}
+                      style={{ width: `${lifespan.progressPercent ?? 100}%` }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] text-[#6F786F]">
+                    <span className="font-mono">{p.start} {lifespan.ageAtYear !== null ? `(${lifespan.ageAtYear}. yaş)` : ''}</span>
+                    <button
+                      type="button"
+                      onClick={() => useStore.getState().setOhmInspectorPlace(p)}
+                      className="text-[#00694C] hover:underline font-medium text-[11px] flex items-center gap-1 cursor-pointer"
+                    >
+                      OHM Etiketleri & GeoJSON <ArrowUpRight size={11} />
+                    </button>
+                    <span className="font-mono">{p.end ?? '2026'}</span>
+                  </div>
+                </div>
+              );
+            })()}
 
             <p className="text-sm leading-relaxed text-[#25352F]">
               {p.summary}
