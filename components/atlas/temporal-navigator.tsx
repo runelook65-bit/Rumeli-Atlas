@@ -32,15 +32,15 @@ interface TemporalNavigatorProps {
 }
 
 const MILESTONES = [
-  { year: 1354, label: 'Osmanlı ayak izi (Çimpe)', short: '1354' },
-  { year: 1453, label: 'İstanbul’un fethi', short: '1453' },
-  { year: 1699, label: 'Karlofça Antlaşması', short: '1699' },
-  { year: 1878, label: 'Berlin Antlaşması', short: '1878' },
-  { year: 1912, label: 'I. Balkan Savaşı', short: '1912' },
-  { year: 1923, label: 'Lozan & Mübadele', short: '1923' },
-  { year: 1950, label: 'Yugoslavya Göçü', short: '1950' },
-  { year: 1989, label: 'Bulgaristan Göçü', short: '1989' },
-  { year: 2026, label: 'Günümüz', short: '2026' },
+  { year: 1354, label: 'Osmanlı ayak izi (Çimpe)', short: '1354', tier: 1 },
+  { year: 1453, label: 'İstanbul’un fethi', short: '1453', tier: 1 },
+  { year: 1699, label: 'Karlofça Antlaşması', short: '1699', tier: 1 },
+  { year: 1878, label: 'Berlin Antlaşması', short: '1878', tier: 1 },
+  { year: 1912, label: 'I. Balkan Savaşı', short: '1912', tier: 2 },
+  { year: 1923, label: 'Lozan & Mübadele', short: '1923', tier: 1 },
+  { year: 1950, label: 'Yugoslavya Göçü', short: '1950', tier: 2 },
+  { year: 1989, label: 'Bulgaristan Göçü', short: '1989', tier: 1 },
+  { year: 2026, label: 'Günümüz', short: '2026', tier: 1 },
 ];
 
 export function TemporalNavigator({
@@ -127,28 +127,16 @@ export function TemporalNavigator({
     return trackPercentToYear(pct);
   }
 
-  // Thin out milestone ticks if screen width is narrow (< 46px apart)
-  const visibleMilestones = MILESTONES.filter((m, idx) => {
-    if (trackW < 550) {
-      // In narrow view, show only 5 key anchors
-      return [1354, 1453, 1878, 1923, 2026].includes(m.year);
-    }
-    if (trackW < 750) {
-      return [1354, 1453, 1699, 1878, 1912, 1923, 2026].includes(m.year);
-    }
-    return true;
-  });
-
   const progressPercent = yearToTrackPercent(year) * 100;
 
   const desktopContent = (
-    <div className="h-[108px] bg-[#FAF8F2] border-t border-[#dddcd1] flex items-center px-5 sm:px-7 gap-4 w-full select-none shadow-sm">
-      {/* 1. Yıl ve Tarihsel Dönem Readout (ChronoAtlas YearReadout) */}
-      <div className="flex-shrink-0 w-28 sm:w-32 border-r border-[#dddcd1] pr-3 sm:pr-4">
+    <div className="temporal-console-dock flex items-center px-5 sm:px-6 py-2.5 gap-4 w-full select-none">
+      {/* 1. Yıl ve Tarihsel Dönem Readout (Sculpted Chronometer Year Display) */}
+      <div className="flex-shrink-0 w-28 sm:w-32 border-r border-[#C5A059]/30 pr-3 sm:pr-4">
         {editing ? (
           <input
             autoFocus
-            className="w-full text-4xl font-serif text-primary bg-transparent outline-none border-b-2 border-primary"
+            className="w-full text-3xl sm:text-4xl font-serif text-[#8B2C21] font-bold bg-transparent outline-none border-b-2 border-[#C5A059]"
             value={editValue}
             onChange={e => setEditValue(e.target.value)}
             onBlur={handleEditSubmit}
@@ -161,12 +149,11 @@ export function TemporalNavigator({
             className="text-left w-full cursor-pointer group"
             title="Yılı doğrudan klavyeden girmek için tıklayın"
           >
-            <strong className="block text-3xl sm:text-4xl font-serif text-primary lining-nums group-hover:text-[#00694C] transition-colors leading-none mb-1">
+            <strong className="block text-3xl sm:text-4xl font-serif text-[#8B2C21] font-bold lining-nums group-hover:text-[#005A3E] transition-colors leading-none mb-1">
               {year}
             </strong>
             <span 
-              className="block text-[10px] tracking-wide font-semibold truncate uppercase"
-              style={{ color: currentEra.color }}
+              className="inline-block px-1.5 py-0.5 rounded-full text-[9px] font-bold tracking-widest uppercase border border-[#C5A059]/40 bg-[#FAF6EC] text-[#8B6E32] shadow-2xs truncate max-w-full"
               title={currentEra.name}
             >
               {currentEra.shortName}
@@ -179,7 +166,7 @@ export function TemporalNavigator({
       <div className="flex items-center gap-1.5 flex-shrink-0">
         <button
           type="button"
-          className="w-8 h-8 rounded-full border border-[#dddcd1] bg-white text-[#6F786F] hover:text-[#9D493A] hover:border-[#9D493A]/40 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+          className="w-8 h-8 rounded-full border border-[#C5A059]/30 bg-[#FFFDF9] text-[#5C6963] hover:text-[#8B2C21] hover:border-[#C5A059] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
           onClick={() => {
             const bp = getAdjacentBreakpoint(year, -1);
             if (bp !== null) onYearChange(bp);
@@ -191,7 +178,7 @@ export function TemporalNavigator({
         </button>
 
         <button 
-          className="w-10 h-10 rounded-full bg-primary hover:bg-[#7b3225] text-white flex items-center justify-center shadow-sm transition-all duration-150 cursor-pointer"
+          className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9E2B20] to-[#751D14] hover:from-[#B53528] hover:to-[#8B2419] text-white flex items-center justify-center shadow-md border border-[#FFF8EB]/60 ring-2 ring-[#C5A059]/35 transition-all duration-150 cursor-pointer"
           onClick={onPlayingToggle}
           aria-label={playing ? "Zaman akışını duraklat (Boşluk)" : "Zaman akışını oynat (Boşluk)"}
         >
@@ -200,7 +187,7 @@ export function TemporalNavigator({
 
         <button
           type="button"
-          className="w-8 h-8 rounded-full border border-[#dddcd1] bg-white text-[#6F786F] hover:text-[#9D493A] hover:border-[#9D493A]/40 flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+          className="w-8 h-8 rounded-full border border-[#C5A059]/30 bg-[#FFFDF9] text-[#5C6963] hover:text-[#8B2C21] hover:border-[#C5A059] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
           onClick={() => {
             const bp = getAdjacentBreakpoint(year, 1);
             if (bp !== null) onYearChange(bp);
@@ -212,43 +199,37 @@ export function TemporalNavigator({
         </button>
       </div>
 
-      {/* 3. Orta Bölüm: Demografi Oranı + Chrono Ticker + Era Bands + Scrub Track */}
+      {/* 3. Orta Bölüm: Demografi Mührü + Chrono Ticker + Era Ribbon + Collision-Free Scrub Track */}
       <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
         
-        {/* Üst Satır: Demografi Rozeti + Chrono Ticker (ChronoAtlas Event Chip) */}
+        {/* Üst Satır: Tarihsel Demografi Mührü + Chrono Ticker */}
         <div className="flex items-center justify-between text-xs mb-1.5 flex-wrap gap-x-2 gap-y-1">
-          {/* Balkan Demografi Rozeti */}
+          {/* Balkan Demografi Rozeti (Museum-Grade Archival Insignia) */}
           <div 
-            className="flex items-center gap-1.5 bg-[#f0fdf7] border border-[#00694C]/25 px-2.5 py-0.5 rounded-full shadow-2xs shrink-0"
+            className="flex items-center gap-1.5 bg-[#FFFDF9] border border-[#C5A059]/35 px-2.5 py-0.5 rounded-full shadow-2xs shrink-0"
             title={`${demo.note}\nKaynak: ${demo.source}\n${DEMOGRAPHIC_SCOPE_NOTE}`}
           >
-            <span className="w-2 h-2 rounded-full bg-[#00694C]" />
-            <span className="text-[11px] font-bold text-[#00694C]">
+            <span className="w-2 h-2 rounded-full bg-[#005A3E] ring-2 ring-[#005A3E]/20" />
+            <span className="text-[11px] font-semibold text-[#1C2623] tracking-tight">
               Balkanlar Türk & Müslüman:
             </span>
-            <span className="font-serif font-bold text-xs text-[#0f172a] font-mono">
+            <span className="font-serif font-bold text-xs text-[#8B2C21] font-mono tracking-wide">
               {demo.muslim.toLocaleString('tr')}
             </span>
             <span 
               className="text-[10px] font-bold px-1.5 py-0.2 rounded-full text-white shadow-2xs"
-              style={{ backgroundColor: '#00694C' }}
+              style={{ backgroundColor: '#005A3E' }}
             >
               %{demo.pct.toFixed(1)}
             </span>
             <span 
-              className={`text-[9px] font-medium px-1.5 py-0.2 rounded ${
-                demo.kind === 'sayim-temelli' 
-                  ? 'bg-emerald-100 text-emerald-800' 
-                  : demo.kind === 'kaynak-sentezi' 
-                  ? 'bg-blue-100 text-blue-800' 
-                  : 'bg-amber-100 text-amber-800'
-              }`}
+              className="text-[9px] font-medium px-1.5 py-0.2 rounded border border-[#C5A059]/30 text-[#8B6E32] bg-[#FAF6EC]"
             >
               {demo.interpolated ? 'Ara Değer' : DEMOGRAPHIC_EVIDENCE_LABELS[demo.kind]}
             </span>
           </div>
 
-          {/* Chrono Ticker (ChronoAtlas Dönem & Olay Hapı) */}
+          {/* Chrono Ticker (ChronoAtlas Olay Hapı) */}
           {activeEvent ? (
             <button
               type="button"
@@ -257,29 +238,29 @@ export function TemporalNavigator({
                 const map = useStore.getState().mapHandle;
                 map?.flyTo({ center: activeEvent.coordinates, zoom: 8, duration: 800 });
               }}
-              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] bg-white border border-[#25352F]/15 shadow-2xs hover:border-[#9D493A] transition-all cursor-pointer truncate max-w-[320px]"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] bg-[#FFFDF9] border border-[#C5A059]/30 hover:border-[#8B2C21] shadow-2xs transition-all cursor-pointer truncate max-w-[320px]"
               title={`${activeEvent.title} (${activeEvent.year})\n${activeEvent.blurb}`}
             >
               <span style={{ color: activeEvent.color }} className="font-bold text-[10px]">
                 {activeEvent.icon}
               </span>
-              <span className="font-serif font-bold text-[#9D493A]">
+              <span className="font-serif font-bold text-[#8B2C21]">
                 {activeEvent.year}
               </span>
-              <span className="text-[#25352F] font-medium truncate">
+              <span className="text-[#1C2623] font-medium truncate">
                 {activeEvent.title}
               </span>
             </button>
           ) : (
-            <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-[#6F786F] truncate max-w-[300px]">
-              <Compass size={12} className="text-[#B38A4A] shrink-0" />
+            <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-[#5C6963] truncate max-w-[300px]">
+              <Compass size={12} className="text-[#C5A059] shrink-0" />
               <span className="truncate italic">{currentEra.name}</span>
             </div>
           )}
         </div>
 
-        {/* ChronoAtlas: Tarihsel Dönem Kuşakları (Era Bands Strip) */}
-        <div className="relative w-full h-[14px] flex rounded overflow-hidden border border-stone-200/80 mb-1 bg-stone-100/60">
+        {/* ChronoAtlas: Tarihsel Dönem Kuşakları (Era Bands Ribbon) */}
+        <div className="relative w-full h-[15px] flex rounded-md overflow-hidden border border-[#C5A059]/30 mb-1 bg-[#FAF6ED] shadow-inner">
           {RUMELIA_ERAS.map((era) => {
             const startPct = yearToTrackPercent(era.from) * 100;
             const endPct = yearToTrackPercent(era.to) * 100;
@@ -291,14 +272,14 @@ export function TemporalNavigator({
                 key={era.id}
                 type="button"
                 onClick={() => onYearChange(era.from)}
-                className={`h-full relative transition-all group overflow-hidden cursor-pointer border-r border-white/60 last:border-r-0 ${
-                  isEraActive ? 'brightness-95 ring-1 ring-inset ring-[#9D493A]/50' : 'hover:brightness-90'
+                className={`h-full relative transition-all group overflow-hidden cursor-pointer border-r border-[#C5A059]/30 last:border-r-0 ${
+                  isEraActive ? 'brightness-95 ring-1 ring-inset ring-[#8B2C21]' : 'hover:brightness-90'
                 }`}
                 style={{ width: `${widthPct}%`, backgroundColor: era.tint }}
                 title={`${era.name} (${era.from}–${era.to})\n${era.description}`}
               >
-                {widthPct > 8 && (
-                  <span className="absolute inset-0 flex items-center justify-center text-[8px] font-bold uppercase tracking-wider text-stone-700/80 truncate px-1">
+                {widthPct > 7 && (
+                  <span className="absolute inset-0 flex items-center justify-center text-[8px] font-serif font-bold uppercase tracking-wider text-[#1C2623] truncate px-1">
                     {era.shortName}
                   </span>
                 )}
@@ -307,7 +288,7 @@ export function TemporalNavigator({
           })}
         </div>
 
-        {/* ChronoAtlas: Hassas Sürekli Zaman Tarama Rayı (Continuous Pointer Scrub Track) */}
+        {/* ChronoAtlas: Sürekli Zaman Tarama Rayı (Continuous Pointer Scrub Track) */}
         <div
           ref={trackRef}
           className="relative h-[24px] flex items-center cursor-crosshair touch-none select-none group"
@@ -341,24 +322,27 @@ export function TemporalNavigator({
           aria-valuenow={year}
         >
           {/* Ray Tabanı (Track Base Rail) */}
-          <div className="w-full h-1.5 bg-[#e4e1d5] rounded-full overflow-hidden relative">
+          <div className="w-full h-1.5 bg-[#E2DDCF] rounded-full overflow-hidden relative shadow-inner">
             <div 
-              className="h-full bg-[#9D493A] transition-all duration-75"
+              className="h-full bg-gradient-to-r from-[#8B2C21] to-[#A8382B] transition-all duration-75"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
 
-          {/* Kilometre Taşı Noktaları (Milestone Dots) */}
+          {/* Kilometre Taşı Noktaları (Milestone Dots on Rail) */}
           {MILESTONES.map((m) => {
             const mPct = yearToTrackPercent(m.year) * 100;
             const isPassed = m.year <= year;
+            const isCurrent = m.year === year;
             return (
               <div
                 key={m.year}
                 className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 h-2 rounded-full border transition-all ${
-                  isPassed 
-                    ? 'bg-[#9D493A] border-white ring-1 ring-[#9D493A]/40' 
-                    : 'bg-white border-stone-300'
+                  isCurrent
+                    ? 'bg-[#C5A059] border-white ring-2 ring-[#8B2C21] scale-125 z-10'
+                    : isPassed 
+                    ? 'bg-[#8B2C21] border-white ring-1 ring-[#8B2C21]/50' 
+                    : 'bg-white border-[#C5A059]/60'
                 }`}
                 style={{ left: `${mPct}%` }}
                 title={`${m.label} (${m.year})`}
@@ -369,41 +353,55 @@ export function TemporalNavigator({
           {/* Hover Ghost: Mouse ile Gezinirken Takip Eden Çizgi ve Yıl Balonu (ChronoAtlas Ghost) */}
           {hoverPercent !== null && !dragging.current && (
             <div
-              className="pointer-events-none absolute inset-y-0 w-px bg-[#9D493A]/50 z-20"
+              className="pointer-events-none absolute inset-y-0 w-px bg-[#8B2C21]/60 z-20"
               style={{ left: `${hoverPercent * 100}%` }}
             >
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-stone-900 text-white text-[10px] font-mono px-1.5 py-0.5 shadow-md">
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#1C2623] text-white text-[10px] font-mono px-1.5 py-0.5 shadow-md border border-[#C5A059]/40">
                 {trackPercentToYear(hoverPercent)}
               </div>
             </div>
           )}
 
-          {/* Scrubber İğnesi & Elmas Uç (ChronoAtlas Diamond Needle) */}
+          {/* Scrubber İğnesi & Elmas Uç (ChronoAtlas Gold Diamond Needle) */}
           <div
             className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-30 pointer-events-none transition-transform duration-75"
             style={{ left: `${progressPercent}%` }}
           >
-            <div className="w-3.5 h-3.5 rotate-45 bg-[#B38A4A] border-2 border-white shadow-md rounded-[2px]" />
+            <div className="w-4 h-4 rotate-45 bg-[#C5A059] border-2 border-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] rounded-[2px]" />
           </div>
         </div>
 
-        {/* Alt Satır: Kilometre Taşı Etiketleri */}
-        <div className="relative w-full h-3 text-[9px] text-[#6F786F] font-mono">
-          {visibleMilestones.map((m) => {
+        {/* Alt Satır: Kademeli & Çarpışmasız Kilometre Taşı Etiketleri (Collision-Free Two-Tier Labels) */}
+        <div className="relative w-full h-[22px] text-[9.5px] font-mono select-none">
+          {MILESTONES.map((m) => {
             const mPct = yearToTrackPercent(m.year) * 100;
             const isSelected = m.year === year;
+            const isTier2 = m.tier === 2;
+            const hideLabel = trackW < 750 && isTier2 && !isSelected;
+            if (hideLabel) return null;
+
             return (
               <button
                 key={m.year}
                 type="button"
                 onClick={() => onYearChange(m.year)}
-                className={`absolute -translate-x-1/2 hover:text-[#9D493A] transition-colors cursor-pointer ${
-                  isSelected ? 'text-[#9D493A] font-bold' : ''
+                className={`absolute -translate-x-1/2 transition-colors cursor-pointer flex flex-col items-center leading-none ${
+                  isSelected 
+                    ? 'text-[#8B2C21] font-bold z-10' 
+                    : isTier2 
+                    ? 'text-[#7A8780] hover:text-[#8B2C21]' 
+                    : 'text-[#4A5750] hover:text-[#8B2C21] font-medium'
                 }`}
-                style={{ left: `${mPct}%` }}
-                title={m.label}
+                style={{ 
+                  left: `${mPct}%`, 
+                  top: isTier2 ? '11px' : '0px' 
+                }}
+                title={`${m.label} (${m.year})`}
               >
-                {m.short}
+                {isTier2 && (
+                  <span className="w-1 h-1 rounded-full bg-[#C5A059]/80 mb-0.5" />
+                )}
+                <span>{m.short}</span>
               </button>
             );
           })}
@@ -415,10 +413,10 @@ export function TemporalNavigator({
         <div className="flex items-center gap-1.5">
           {/* OHM Zaman Atlama Adımı (Time Jump) */}
           <div 
-            className="hidden sm:flex items-center bg-white border border-stone-200 rounded-full p-0.5 text-[10px] font-mono shadow-2xs" 
+            className="hidden sm:flex items-center bg-[#FFFDF9] border border-[#C5A059]/30 rounded-full p-0.5 text-[10px] font-mono shadow-2xs" 
             title="OpenHistoricalMap & ChronoAtlas Zaman Atlama Adımı"
           >
-            <span className="text-stone-400 pl-2 pr-1 text-[9px] font-sans font-medium">Adım:</span>
+            <span className="text-[#829088] pl-2 pr-1 text-[9px] font-sans font-medium">Adım:</span>
             {[1, 5, 10, 25].map(step => (
               <button
                 key={step}
@@ -426,8 +424,8 @@ export function TemporalNavigator({
                 onClick={() => setOhmStepAmount(step)}
                 className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
                   ohmStepAmount === step 
-                    ? 'bg-[#9D493A] text-white font-bold shadow-2xs' 
-                    : 'text-stone-600 hover:text-stone-900'
+                    ? 'bg-[#8B2C21] text-white font-bold shadow-2xs' 
+                    : 'text-[#5C6963] hover:text-[#1C2623]'
                 }`}
               >
                 {step}Y
@@ -436,15 +434,15 @@ export function TemporalNavigator({
           </div>
 
           {/* Snapshot / History Toggle */}
-          <div className="flex items-center bg-white border border-gray-200 rounded-full p-0.5 text-xs shadow-2xs">
+          <div className="flex items-center bg-[#FFFDF9] border border-[#C5A059]/30 rounded-full p-0.5 text-xs shadow-2xs">
             <button 
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'snapshot' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
+              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'snapshot' ? 'bg-[#F4EFE2] text-[#8B2C21] font-bold border border-[#C5A059]/40 shadow-2xs' : 'text-[#5C6963]'}`}
               onClick={() => onTemporalModeChange?.('snapshot')}
             >
               Snapshot
             </button>
             <button 
-              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'history' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold shadow-2xs' : 'text-gray-600'}`}
+              className={`px-3 py-1 rounded-full transition-all cursor-pointer ${temporalMode === 'history' ? 'bg-[#F4EFE2] text-[#8B2C21] font-bold border border-[#C5A059]/40 shadow-2xs' : 'text-[#5C6963]'}`}
               onClick={() => onTemporalModeChange?.('history')}
             >
               History
@@ -452,7 +450,7 @@ export function TemporalNavigator({
           </div>
         </div>
 
-        <p className="text-[9px] text-gray-400 w-44 text-right leading-tight truncate">
+        <p className="text-[9.5px] font-serif text-[#829088] w-48 text-right leading-tight truncate">
           1354–2026 Rumeli Kronolojisi
         </p>
       </div>

@@ -14,40 +14,54 @@
 }
 
 :root, .dark {
-  --atlas-ivory: #F5F2E9;
-  --atlas-paper: #FAF8F2;
-  --atlas-text: #25352F;
-  --atlas-text-secondary: #6F786F;
-  --atlas-burgundy: #9D493A;
-  --atlas-burgundy-muted: #B5725F;
-  --atlas-ochre: #B38A4A;
-  --atlas-blue: #647E91;
-  --atlas-green: #637C6D;
-  --atlas-plum: #806B82;
-  --atlas-border: rgba(100, 110, 95, 0.15);
-  --atlas-shadow: 0 4px 20px rgba(35, 55, 40, 0.08);
+  --atlas-ivory: #F8F5EC;
+  --atlas-paper: #FCFAF5;
+  --atlas-parchment: #F4EFE2;
+  --atlas-gold: #C5A059;
+  --atlas-gold-light: #E0C78E;
+  --atlas-gold-dark: #9A7836;
+  --atlas-text: #1C2623;
+  --atlas-text-secondary: #5C6963;
+  --atlas-text-muted: #829088;
+  --atlas-burgundy: #8B2C21;
+  --atlas-burgundy-dark: #6C1E15;
+  --atlas-burgundy-muted: #A85348;
+  --atlas-green: #005A3E;
+  --atlas-green-dark: #00432E;
+  --atlas-ochre: #B8893E;
+  --atlas-blue: #4F6D85;
+  --atlas-plum: #735975;
+  --atlas-border: rgba(197, 160, 89, 0.24);
+  --atlas-border-subtle: rgba(28, 38, 35, 0.08);
+  --atlas-glass: rgba(252, 250, 245, 0.90);
+  --atlas-glass-elevated: rgba(254, 253, 250, 0.96);
+  --atlas-shadow-sm: 0 2px 8px rgba(28, 38, 35, 0.05);
+  --atlas-shadow-md: 0 8px 24px -4px rgba(28, 38, 35, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --atlas-shadow-lg: 0 16px 40px -8px rgba(28, 38, 35, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --atlas-shadow-gold: 0 0 16px rgba(197, 160, 89, 0.28);
   --drawer-width: 400px;
-  --toolbar-width: 60px;
+  --toolbar-width: 64px;
   --topbar-height: 64px;
-  --timeline-height: 88px;
-  --transition-drawer: 200ms ease;
-  --transition-hover: 140ms ease;
+  --timeline-height: 108px;
+  --transition-drawer: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-hover: 160ms ease;
 
   --background: var(--atlas-ivory);
   --foreground: var(--atlas-text);
   --primary: var(--atlas-burgundy);
   --muted: #ebece4;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--foreground);
-  font-size: 16px;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
+  background: var(--atlas-paper);
 }
 
 button, a, input { -webkit-tap-highlight-color: transparent; }
@@ -55,11 +69,11 @@ button { cursor: pointer; font: inherit; border: 0; background: none; }
 button:disabled { cursor: not-allowed; }
 a { color: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible {
-  outline: 2px solid var(--atlas-burgundy);
+  outline: 2px solid var(--atlas-gold);
   outline-offset: 2px;
 }
 h1, h2, h3, p { margin: 0; }
-h2, h3 { font-family: Georgia, serif; font-weight: 400; }
+h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-weight: 500; }
 
 /* ── Shell & Topbar ── */
 .atlas-shell {
@@ -68,6 +82,7 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   flex-direction: column;
   overflow: hidden;
   background: var(--atlas-paper);
+  position: relative;
 }
 
 .topbar {
@@ -76,59 +91,80 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 24px;
   border-bottom: 1px solid var(--atlas-border);
-  background: var(--atlas-paper);
-  z-index: 20;
+  background: var(--atlas-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 25;
+  box-shadow: 0 2px 12px rgba(28, 36, 33, 0.04);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
 }
-.brand-icon { color: var(--atlas-burgundy); stroke-width: 1.5; }
+.brand-icon { 
+  color: var(--atlas-gold); 
+  filter: drop-shadow(0 1px 3px rgba(197, 160, 89, 0.4));
+  stroke-width: 1.6; 
+  transition: transform 300ms ease;
+}
+.brand:hover .brand-icon {
+  transform: rotate(30deg);
+}
 .brand h1 {
-  font: 20px Georgia, serif;
-  letter-spacing: 0.06em;
+  font: 600 20px Georgia, "Iowan Old Style", serif;
+  letter-spacing: 0.12em;
   color: var(--atlas-text);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 .brand h1 em {
   font-weight: 400;
-  font-style: normal;
+  font-style: italic;
   color: var(--atlas-burgundy);
+  letter-spacing: 0.04em;
 }
 
 .mode-toggle {
   display: flex;
   gap: 4px;
   align-items: center;
-  background: var(--atlas-ivory);
+  background: rgba(245, 242, 233, 0.85);
   border: 1px solid var(--atlas-border);
-  border-radius: 24px;
-  padding: 4px;
+  border-radius: 9999px;
+  padding: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 .mode-toggle button {
-  padding: 6px 14px;
+  padding: 6px 16px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
+  font-weight: 500;
   color: var(--atlas-text-secondary);
-  border-radius: 18px;
+  border-radius: 9999px;
   transition: all var(--transition-hover);
 }
+.mode-toggle button:hover {
+  color: var(--atlas-text);
+}
 .mode-toggle button.active {
-  background: var(--atlas-paper);
+  background: #ffffff;
   color: var(--atlas-burgundy);
-  box-shadow: 0 1px 4px rgba(39, 59, 52, 0.08);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(139, 44, 33, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .source-button {
@@ -136,16 +172,20 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   align-items: center;
   gap: 8px;
   font-size: 13px;
+  font-weight: 500;
   color: var(--atlas-text-secondary);
   border: 1px solid var(--atlas-border);
-  background: var(--atlas-paper);
-  padding: 6px 12px;
-  border-radius: 18px;
+  background: #ffffff;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  box-shadow: var(--atlas-shadow-sm);
   transition: all var(--transition-hover);
 }
 .source-button:hover {
   background: var(--atlas-ivory);
+  border-color: var(--atlas-gold);
   color: var(--atlas-text);
+  box-shadow: var(--atlas-shadow-md);
 }
 
 /* ── Search Bar ── */
@@ -153,18 +193,19 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--atlas-paper);
+  background: #ffffff;
   border: 1px solid var(--atlas-border);
-  border-radius: 20px;
+  border-radius: 9999px;
   padding: 6px 14px;
-  width: 260px;
+  width: 270px;
   position: relative;
-  transition: width 200ms ease, border-color var(--transition-hover);
+  box-shadow: var(--atlas-shadow-sm);
+  transition: width 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-hover), box-shadow var(--transition-hover);
 }
 .search-wrap.focused {
-  width: 320px;
-  border-color: var(--atlas-burgundy);
-  box-shadow: 0 0 0 1px var(--atlas-burgundy);
+  width: 340px;
+  border-color: var(--atlas-gold);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18), var(--atlas-shadow-md);
 }
 .search-wrap input {
   border: 0;
@@ -175,11 +216,11 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   color: var(--atlas-text);
 }
 .search-wrap input::placeholder {
-  color: var(--atlas-text-secondary);
-  opacity: 0.8;
+  color: var(--atlas-text-muted);
+  opacity: 0.9;
 }
 .search-icon-desktop {
-  color: var(--atlas-text-secondary);
+  color: var(--atlas-gold);
   flex-shrink: 0;
 }
 .search-clear {
@@ -196,37 +237,40 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  background: var(--atlas-paper);
+  background: var(--atlas-glass-elevated);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--atlas-border);
-  border-radius: 12px;
-  box-shadow: var(--atlas-shadow);
-  max-height: 320px;
+  border-radius: 14px;
+  box-shadow: var(--atlas-shadow-lg);
+  max-height: 340px;
   overflow-y: auto;
   z-index: 50;
-  padding: 4px;
+  padding: 6px;
 }
 .search-results button {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   width: 100%;
   text-align: left;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: background var(--transition-hover);
 }
 .search-results button:hover {
-  background: rgba(157, 73, 58, 0.06);
+  background: rgba(197, 160, 89, 0.12);
 }
 
 .search-mobile-btn {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   align-items: center;
   justify-content: center;
   color: var(--atlas-text-secondary);
   border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--atlas-border);
 }
 
 /* ── Workspace ── */
@@ -238,61 +282,83 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   overflow: hidden;
 }
 
-/* ── Map Toolbar ── */
+/* ── Floating Left Map Toolbar ── */
 .map-toolbar {
+  position: absolute;
+  left: 14px;
+  top: 14px;
   width: var(--toolbar-width);
-  flex-shrink: 0;
-  background: var(--atlas-paper);
-  border-right: 1px solid var(--atlas-border);
+  background: var(--atlas-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--atlas-border);
+  border-radius: 20px;
+  box-shadow: var(--atlas-shadow-md);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 12px;
-  gap: 8px;
-  z-index: 10;
+  padding: 10px 0;
+  gap: 6px;
+  z-index: 20;
 }
 .toolbar-btn {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--atlas-text-secondary);
-  border-radius: 8px;
+  border-radius: 14px;
   transition: all var(--transition-hover);
   position: relative;
 }
 .toolbar-btn span {
-  font-size: 9px;
-  margin-top: 3px;
+  font-size: 9.5px;
+  margin-top: 2px;
   letter-spacing: 0.02em;
+  font-weight: 500;
 }
 .toolbar-btn:hover {
-  background: rgba(157, 73, 58, 0.06);
+  background: rgba(197, 160, 89, 0.12);
   color: var(--atlas-burgundy);
+  transform: translateY(-1px);
 }
 .toolbar-btn.active {
-  background: rgba(157, 73, 58, 0.12);
+  background: #ffffff;
   color: var(--atlas-burgundy);
+  box-shadow: 0 2px 10px rgba(139, 44, 33, 0.14), inset 0 0 0 1px var(--atlas-border);
+}
+.toolbar-btn.active::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--atlas-gold);
 }
 
 /* ── Layer Drawer ── */
 .layer-drawer {
   width: var(--drawer-width);
-  max-width: calc(100vw - var(--toolbar-width));
-  background: var(--atlas-paper);
-  border-right: 1px solid var(--atlas-border);
+  max-width: calc(100vw - 90px);
+  background: var(--atlas-glass-elevated);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--atlas-border);
+  border-radius: 20px;
   position: absolute;
-  left: var(--toolbar-width);
-  top: 0;
-  bottom: 0;
-  transform: translateX(-100%);
+  left: 88px;
+  top: 14px;
+  bottom: 14px;
+  transform: translateX(-120%);
   transition: transform var(--transition-drawer), opacity var(--transition-drawer);
-  z-index: 15;
+  z-index: 20;
   display: flex;
   flex-direction: column;
-  box-shadow: 6px 0 24px rgba(35, 55, 40, 0.08);
+  box-shadow: var(--atlas-shadow-lg);
   pointer-events: none;
   opacity: 0;
 }
@@ -370,122 +436,151 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
 /* ── Map Top Controls ── */
 .map-top {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 10;
+  top: 14px;
+  left: 90px;
+  z-index: 15;
   display: flex;
   gap: 12px;
   pointer-events: none;
 }
 .map-top > * { pointer-events: auto; }
 
+@media (max-width: 760px) {
+  .map-top {
+    left: 14px;
+  }
+}
+
 .region-button {
-  background: #fffefaed;
-  border: 1px solid #ffffffb8;
-  border-radius: 20px;
-  padding: 8px 16px;
+  background: var(--atlas-glass-elevated);
+  border: 1px solid var(--atlas-border);
+  border-radius: 9999px;
+  padding: 8px 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   font-size: 13px;
-  color: #4c6255;
-  box-shadow: 0 3px 14px rgba(35, 62, 52, 0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  font-weight: 500;
+  color: var(--atlas-text);
+  box-shadow: var(--atlas-shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   cursor: pointer;
   transition: all var(--transition-hover);
 }
 .region-button:hover {
-  background: #fffefa;
-  color: #27352e;
+  background: #ffffff;
+  border-color: var(--atlas-gold);
+  box-shadow: var(--atlas-shadow-lg), var(--atlas-shadow-gold);
+  transform: translateY(-1px);
 }
 .region-mobile { display: none; }
 
 /* ── Map Zoom Controls ── */
 .map-controls {
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 18px;
+  top: 18px;
   display: flex;
   flex-direction: column;
-  background: #fffefaed;
-  border: 1px solid #ffffffb8;
-  border-radius: 20px;
+  background: var(--atlas-glass-elevated);
+  border: 1px solid var(--atlas-border);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 3px 14px rgba(35, 62, 52, 0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  z-index: 10;
+  box-shadow: var(--atlas-shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 15;
 }
 .map-controls button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
+  width: 40px;
   height: 40px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  color: #506657;
+  border-bottom: 1px solid var(--atlas-border-subtle);
+  color: var(--atlas-text-secondary);
   cursor: pointer;
-  transition: background var(--transition-hover);
+  transition: all var(--transition-hover);
 }
 .map-controls button:last-child { border-bottom: 0; }
-.map-controls button:hover { background: #eef2e8; }
+.map-controls button:hover {
+  background: rgba(197, 160, 89, 0.12);
+  color: var(--atlas-burgundy);
+}
 
 .compass {
   position: absolute;
   right: 20px;
-  top: 155px;
+  top: 156px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   font-size: 10px;
-  color: #667666;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--atlas-gold-dark);
   pointer-events: none;
   z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
 }
 
 /* ── Bottom Pills & Legends on Map ── */
 .count-pill {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: #fffefaed;
-  border: 1px solid #ffffffb8;
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 12px;
-  color: var(--atlas-text-secondary);
-  z-index: 10;
-  box-shadow: 0 3px 14px rgba(35, 62, 52, 0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  bottom: 124px;
+  left: 20px;
+  background: var(--atlas-glass-elevated);
+  border: 1px solid var(--atlas-border);
+  border-radius: 9999px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: Georgia, "Iowan Old Style", serif;
+  color: var(--atlas-text);
+  z-index: 15;
+  box-shadow: var(--atlas-shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   transition: all var(--transition-hover);
 }
+.count-pill::before {
+  content: '✦';
+  color: var(--atlas-gold);
+  font-size: 11px;
+}
 .count-pill:hover {
-  background: #fffefa;
-  color: var(--atlas-text);
+  background: #ffffff;
+  border-color: var(--atlas-gold);
+  box-shadow: var(--atlas-shadow-lg), var(--atlas-shadow-gold);
+  transform: translateY(-1px);
 }
 
 .map-legend {
   position: absolute;
-  bottom: 56px;
-  left: 16px;
-  background: var(--atlas-paper);
+  bottom: 170px;
+  left: 20px;
+  background: var(--atlas-glass-elevated);
   border: 1px solid var(--atlas-border);
-  border-radius: 8px;
-  padding: 10px 14px;
+  border-radius: 12px;
+  padding: 12px 16px;
   font-size: 11px;
-  z-index: 10;
-  min-width: 140px;
-  box-shadow: var(--atlas-shadow);
+  z-index: 15;
+  min-width: 150px;
+  box-shadow: var(--atlas-shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .map-legend-title {
-  font-size: 9px;
+  font-size: 9.5px;
   letter-spacing: 0.12em;
-  font-weight: 600;
-  color: var(--atlas-text-secondary);
+  font-weight: 700;
+  color: var(--atlas-burgundy);
   margin-bottom: 8px;
   text-transform: uppercase;
 }
@@ -495,19 +590,21 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   gap: 8px;
   margin-bottom: 6px;
   color: var(--atlas-text-secondary);
-  font-size: 11px;
+  font-size: 11.5px;
 }
 .map-legend-row:last-child { margin-bottom: 0; }
 
 .map-credits {
   position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-size: 10px;
-  background: rgba(250, 249, 245, 0.85);
+  bottom: 6px;
+  right: 20px;
+  font-size: 9.5px;
+  background: rgba(254, 252, 248, 0.75);
+  backdrop-filter: blur(6px);
   padding: 3px 8px;
-  border-radius: 4px;
-  color: #7c8377;
+  border-radius: 6px;
+  color: var(--atlas-text-muted);
+  border: 1px solid rgba(197, 160, 89, 0.18);
   z-index: 10;
 }
 .map-credits a {
@@ -555,174 +652,238 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   color: #773a2d;
   white-space: nowrap;
   transform: none;
   background: none;
   border: 0;
   cursor: pointer;
+  transition: transform 140ms ease;
+}
+.place-marker:hover {
+  transform: scale(1.06);
+  z-index: 50 !important;
 }
 .pin {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1;
-  background: #fffdf6;
-  border: 1px solid #b17d6c;
+  background: #fffdf8;
+  border: 1.5px solid var(--atlas-gold);
   border-radius: 50%;
-  box-shadow: 0 1px 6px rgba(52, 69, 54, 0.15);
+  box-shadow: 0 1px 6px rgba(40, 50, 45, 0.2);
+  transition: all 140ms ease;
 }
 .place-label {
-  font-family: Georgia, serif;
-  font-size: 15px;
-  text-shadow: 1px 1px 1px #fff, -1px -1px 1px #fff, 0 0 6px #fff;
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-size: 14px;
   font-weight: 600;
-  color: #724936;
+  color: var(--atlas-text);
+  padding: 1px 6px;
+  background: rgba(254, 253, 250, 0.90);
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 .place-marker.heritage { color: #84623b; }
-.place-marker.heritage .pin { font-size: 14px; width: 15px; height: 15px; border-color: #ad9368; }
-.place-marker.heritage .place-label { font: 12px Arial, sans-serif; }
+.place-marker.heritage .pin { 
+  font-size: 12px; 
+  width: 16px; 
+  height: 16px; 
+  border-color: var(--atlas-gold); 
+  background: #FAF6ED;
+}
+.place-marker.heritage .place-label { 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px; 
+  font-weight: 500;
+}
 .place-marker.lost { color: #7b5c70; }
-.place-marker.lost .pin { font-size: 16px; border-style: dashed; border-color: #846e79; background: transparent; }
+.place-marker.lost .pin { 
+  font-size: 15px; 
+  border-style: dashed; 
+  border-color: #846e79; 
+  background: transparent; 
+}
 
-/* ── Kırmızı Yerleşim Yerleri (Tarihsel / Fethedilen Yerleşimler) ── */
+/* ── Kırmızı Yerleşim Yerleri (Tarihsel Rumeli / Fetih Yerleşimleri) ── */
 .place-marker.settlement-red {
-  color: #A91101;
+  color: var(--atlas-burgundy);
 }
 .place-marker.settlement-red .pin,
 .place-marker .pin.pin-red {
-  background: #fff5f5;
-  border: 1.5px solid #A91101;
-  color: #A91101;
-  font-size: 20px;
-  box-shadow: 0 1px 8px rgba(169, 17, 1, 0.35);
+  background: #fffdf9;
+  border: 2px solid var(--atlas-burgundy);
+  color: var(--atlas-burgundy);
+  box-shadow: 0 0 0 1px var(--atlas-gold), 0 2px 6px rgba(139, 44, 33, 0.35);
 }
 .place-marker.settlement-red:hover .pin,
 .place-marker:hover .pin.pin-red {
-  background: #A91101;
-  border-color: #870e01;
-  color: #ffffff;
+  background: var(--atlas-burgundy);
+  border-color: var(--atlas-burgundy-dark);
+  color: #fffdf8;
+  box-shadow: 0 0 0 2px var(--atlas-gold), 0 4px 12px rgba(139, 44, 33, 0.5);
 }
 .place-marker.settlement-red .place-label,
-.place-marker .place-label.label-red,
-.cluster-label.label-red {
-  color: #A91101 !important;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #ffffff, 0 0 6px #fee2e2, 0 0 10px #ffffff;
+.place-marker .place-label.label-red {
+  color: var(--atlas-burgundy) !important;
 }
 
-.atlas-cluster.cluster-red {
-  background: #A91101;
-  border-color: #fff5f5;
-  box-shadow: 0 0 0 4px rgba(169, 17, 1, 0.2), 0 3px 9px rgba(169, 17, 1, 0.25);
-}
-.atlas-cluster.cluster-red:hover {
-  background: #870e01;
-}
-
-/* ── Yeşil Yerleşim Yerleri (Osmanlı'nın Kurduğu Yerleşimler) ── */
+/* ── Yeşil Yerleşim Yerleri (Osmanlı Vakıf & Yeni Kuruluşlar) ── */
 .place-marker.settlement-green {
-  color: #00694C;
+  color: var(--atlas-green);
 }
 .place-marker.settlement-green .pin,
 .place-marker .pin.pin-green {
-  background: #f0fdf7;
-  border: 2px solid #00694C;
-  color: #00694C;
-  font-size: 20px;
-  box-shadow: 0 1px 8px rgba(0, 105, 76, 0.35);
+  background: #fffdf9;
+  border: 2px solid var(--atlas-green);
+  color: var(--atlas-green);
+  box-shadow: 0 0 0 1px var(--atlas-gold), 0 2px 6px rgba(0, 90, 62, 0.35);
 }
 .place-marker.settlement-green:hover .pin,
 .place-marker:hover .pin.pin-green {
-  background: #00694C;
-  border-color: #004d38;
-  color: #ffffff;
+  background: var(--atlas-green);
+  border-color: var(--atlas-green-dark);
+  color: #fffdf8;
+  box-shadow: 0 0 0 2px var(--atlas-gold), 0 4px 12px rgba(0, 90, 62, 0.5);
 }
 .place-marker.settlement-green .place-label,
-.place-marker .place-label.label-green,
-.cluster-label.label-green {
-  color: #00694C !important;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #ffffff, 0 0 6px #dcfce7, 0 0 10px #ffffff;
+.place-marker .place-label.label-green {
+  color: var(--atlas-green) !important;
 }
 
-.atlas-cluster.cluster-green {
-  background: #00694C;
-  border-color: #f0fdf7;
-  box-shadow: 0 0 0 4px rgba(0, 105, 76, 0.25), 0 3px 9px rgba(0, 105, 76, 0.25);
-}
-.atlas-cluster.cluster-green:hover {
-  background: #004d38;
-}
-
-/* ── Mavi Yerleşim Yerleri (Geriye Dönük Uyumluluk) ── */
+/* ── Mavi Yerleşim Yerleri ── */
 .place-marker.settlement-blue {
-  color: #1d4ed8;
+  color: var(--atlas-blue);
 }
 .place-marker.settlement-blue .pin,
 .place-marker .pin.pin-blue {
-  background: #f0f7ff;
-  border: 1.5px solid #2563eb;
-  color: #1d4ed8;
-  font-size: 20px;
-  box-shadow: 0 1px 8px rgba(37, 99, 235, 0.35);
+  background: #fffdf9;
+  border: 2px solid var(--atlas-blue);
+  color: var(--atlas-blue);
+  box-shadow: 0 0 0 1px var(--atlas-gold), 0 2px 6px rgba(79, 109, 133, 0.35);
 }
 .place-marker.settlement-blue:hover .pin,
 .place-marker:hover .pin.pin-blue {
-  background: #2563eb;
-  border-color: #1e40af;
-  color: #ffffff;
+  background: var(--atlas-blue);
+  color: #fffdf8;
+  box-shadow: 0 0 0 2px var(--atlas-gold), 0 4px 12px rgba(79, 109, 133, 0.5);
 }
 .place-marker.settlement-blue .place-label,
-.place-marker .place-label.label-blue,
-.cluster-label.label-blue {
-  color: #1e40af !important;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #ffffff, 0 0 6px #dbeafe, 0 0 10px #ffffff;
-}
-.atlas-cluster.cluster-blue {
-  background: #2563eb;
-  border-color: #eff6ff;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2), 0 3px 9px rgba(30, 64, 175, 0.25);
-}
-.atlas-cluster.cluster-blue:hover {
-  background: #1d4ed8;
+.place-marker .place-label.label-blue {
+  color: var(--atlas-blue) !important;
 }
 
+/* ── Imperial Medallion Cluster Seals ── */
 .atlas-cluster {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  color: #fffaf0;
-  background: #8c5142;
-  border: 3px solid #fffaf1;
-  box-shadow: 0 0 0 4px rgba(140, 81, 66, 0.12), 0 3px 9px rgba(35, 62, 52, 0.15);
-  font-size: 13px;
-  font-weight: 600;
+  color: #fffdf8;
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   pointer-events: auto;
   cursor: pointer;
   font-variant-numeric: tabular-nums;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  user-select: none;
 }
-.atlas-cluster:hover { background: #734333; }
+.atlas-cluster:hover {
+  transform: scale(1.14);
+  z-index: 100 !important;
+}
+
+.atlas-cluster.cluster-red {
+  background: radial-gradient(circle at 35% 30%, #A62F22 0%, #7E1C12 75%, #59140C 100%);
+  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  box-shadow: 
+    0 0 0 1.5px var(--atlas-gold),
+    0 0 0 3.5px rgba(166, 47, 34, 0.22),
+    0 6px 18px -2px rgba(89, 20, 12, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.atlas-cluster.cluster-red:hover {
+  box-shadow: 
+    0 0 0 2px var(--atlas-gold-light),
+    0 0 0 5px rgba(166, 47, 34, 0.35),
+    0 8px 24px -2px rgba(89, 20, 12, 0.6),
+    0 0 20px rgba(197, 160, 89, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.atlas-cluster.cluster-green {
+  background: radial-gradient(circle at 35% 30%, #027A54 0%, #004D35 75%, #003625 100%);
+  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  box-shadow: 
+    0 0 0 1.5px var(--atlas-gold),
+    0 0 0 3.5px rgba(0, 122, 84, 0.22),
+    0 6px 18px -2px rgba(0, 54, 37, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.atlas-cluster.cluster-green:hover {
+  box-shadow: 
+    0 0 0 2px var(--atlas-gold-light),
+    0 0 0 5px rgba(0, 122, 84, 0.35),
+    0 8px 24px -2px rgba(0, 54, 37, 0.6),
+    0 0 20px rgba(197, 160, 89, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.atlas-cluster.cluster-blue {
+  background: radial-gradient(circle at 35% 30%, #3B6B92 0%, #224765 75%, #163045 100%);
+  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  box-shadow: 
+    0 0 0 1.5px var(--atlas-gold),
+    0 0 0 3.5px rgba(34, 71, 101, 0.22),
+    0 6px 18px -2px rgba(22, 48, 69, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
 .cluster-label {
   position: absolute;
   left: 50%;
-  bottom: 40px;
+  bottom: 44px;
   transform: translateX(-50%);
-  font: 15px Georgia, serif;
-  color: #704a38;
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-size: 13.5px;
+  font-weight: 700;
   white-space: nowrap;
-  text-shadow: 0 1px 2px #fff, 0 0 5px #fff;
+  letter-spacing: 0.02em;
+  padding: 2px 10px;
+  background: rgba(254, 253, 250, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 9999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
 }
-.atlas-cluster:focus-visible { outline: 2px solid #293b34; outline-offset: 4px; }
+.cluster-label.label-red {
+  color: var(--atlas-burgundy) !important;
+}
+.cluster-label.label-green {
+  color: var(--atlas-green) !important;
+}
+.cluster-label.label-blue {
+  color: var(--atlas-blue) !important;
+}
+.atlas-cluster:focus-visible { outline: 2px solid var(--atlas-gold); outline-offset: 4px; }
 
 /* ── Leaflet Specific Styles ── */
 .map-canvas.leaflet-container {
@@ -1249,45 +1410,105 @@ h2, h3 { font-family: Georgia, serif; font-weight: 400; }
   line-height: 1.35;
 }
 
-/* Period Map Floating Control */
+/* ── Period Map Floating Control ── */
 .period-map-control {
   position: absolute;
-  bottom: 38px;
-  right: 14px;
-  background: rgba(250, 248, 242, 0.96);
-  border: 1px solid rgba(37, 53, 47, 0.16);
-  border-radius: 6px;
-  padding: 6px 10px;
+  bottom: 124px;
+  right: 20px;
+  background: var(--atlas-glass-elevated);
+  border: 1px solid var(--atlas-border);
+  border-radius: 14px;
+  padding: 8px 14px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 11.5px;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--atlas-text);
-  box-shadow: 0 4px 14px rgba(37, 53, 47, 0.1);
-  backdrop-filter: blur(6px);
+  box-shadow: var(--atlas-shadow-md);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 20;
+  transition: all var(--transition-hover);
+}
+.period-map-control:hover {
+  border-color: var(--atlas-gold);
+  box-shadow: var(--atlas-shadow-lg), var(--atlas-shadow-gold);
 }
 .period-control-toggle {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-family: Georgia, "Iowan Old Style", serif;
+  font-weight: 600;
+  color: var(--atlas-text);
+  user-select: none;
+}
+.period-control-toggle input[type="checkbox"] {
+  accent-color: var(--atlas-burgundy);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
 }
 .period-opacity-wrap {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding-top: 4px;
-  border-top: 1px solid var(--atlas-border);
+  gap: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--atlas-border-subtle);
 }
 .opacity-label {
-  font-size: 9.5px;
+  font-size: 10px;
+  font-family: monospace;
   color: var(--atlas-text-secondary);
 }
 .period-opacity-wrap input[type="range"] {
-  accent-color: var(--atlas-burgundy);
+  accent-color: var(--atlas-gold);
   width: 100%;
+  cursor: pointer;
+}
+
+/* ── Floating Chronometer Master Console Dock ── */
+.temporal-console-dock {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  max-width: 1420px;
+  margin: 0 auto;
+  background: var(--atlas-glass-elevated);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--atlas-border);
+  border-radius: 20px;
+  box-shadow: var(--atlas-shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  z-index: 25;
+  pointer-events: auto;
+}
+
+@media (max-width: 760px) {
+  .temporal-console-dock {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .count-pill {
+    bottom: 16px;
+    left: 12px;
+  }
+  .period-map-control {
+    bottom: 16px;
+    right: 12px;
+  }
+  .map-legend {
+    bottom: 60px;
+    left: 12px;
+  }
 }
 
 /* HistoriaText Modal */

@@ -17,8 +17,8 @@ export function PeriodMapControl() {
           checked={periodBasemap}
           onChange={(e) => setPeriodBasemap(e.target.checked)}
         />
-        <Map size={13} className="text-[#9D493A]" />
-        <span>Dönem Haritası (Rölyef)</span>
+        <Map size={15} className="text-[#8B2C21] shrink-0" />
+        <span className="font-serif font-semibold text-xs tracking-wide">Dönem Haritası (Rölyef)</span>
       </label>
 
       {periodBasemap && (
