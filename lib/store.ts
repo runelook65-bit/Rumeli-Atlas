@@ -53,6 +53,12 @@ export interface AtlasState {
   setBoundaries: (boundaries: boolean) => void;
   streets: boolean;
   setStreets: (streets: boolean) => void;
+  vilayets: boolean;
+  setVilayets: (active: boolean) => void;
+  contributionModalOpen: boolean;
+  setContributionModalOpen: (open: boolean) => void;
+  contributionTargetPlace: Place | null;
+  setContributionTargetPlace: (place: Place | null) => void;
 
   // --- Feature Selection & Interaction ---
   selectedPlace: Place | null;
@@ -167,6 +173,12 @@ export const useStore = create<AtlasState>((set, get) => ({
   setBoundaries: (boundaries) => set({ boundaries }),
   streets: true,
   setStreets: (streets) => set({ streets }),
+  vilayets: false,
+  setVilayets: (vilayets) => set({ vilayets }),
+  contributionModalOpen: false,
+  setContributionModalOpen: (contributionModalOpen) => set({ contributionModalOpen }),
+  contributionTargetPlace: null,
+  setContributionTargetPlace: (contributionTargetPlace) => set({ contributionTargetPlace }),
 
   // --- Feature Selection & Interaction ---
   selectedPlace: null,

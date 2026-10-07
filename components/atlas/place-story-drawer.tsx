@@ -13,7 +13,11 @@ import {
   Building2,
   Calendar,
   Layers,
-  FileCode
+  FileCode,
+  Image as ImageIcon,
+  Maximize2,
+  PlusCircle,
+  FileText
 } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { sources, isOttomanFoundation, type Place } from '@/lib/atlas-data';
@@ -42,6 +46,7 @@ export function PlaceStoryDrawer({
   const onClose = propOnClose || (() => storeSetPlace(null));
 
   const [isDesktop, setIsDesktop] = useState(true);
+  const [activeLightboxImg, setActiveLightboxImg] = useState<{ url: string; caption: string; year?: number; credit?: string } | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -186,6 +191,13 @@ export function PlaceStoryDrawer({
           </button>
           <button 
             type="button"
+            onClick={() => scrollToSection('sec-gallery')}
+            className="px-2.5 py-1 rounded-lg text-[#9D493A] bg-[#fbf5f4] border border-[#9D493A]/20 hover:bg-[#f6eae8] hover:shadow-xs transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
+          >
+            <ImageIcon size={12} className="text-[#9D493A]" /> Görsel ({p.images?.length ?? 0})
+          </button>
+          <button 
+            type="button"
             onClick={() => scrollToSection('sec-timeline')}
             className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
@@ -272,6 +284,92 @@ export function PlaceStoryDrawer({
             <p className="text-sm leading-relaxed text-[#25352F]">
               {p.summary}
             </p>
+          </section>
+
+          {/* GÖRSEL ARŞİV & TARİHÎ KARTPOSTALLAR */}
+          <section id="sec-gallery" className="space-y-3 pt-2 border-t border-[#25352F]/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <ImageIcon size={15} className="text-[#9D493A]" />
+                <h3 className="eyebrow text-xs font-bold text-[#9D493A] uppercase tracking-wider">
+                  GÖRSEL ARŞİV & TARİHÎ GRAVÜRLER ({p.images?.length ?? 0})
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  useStore.getState().setContributionTargetPlace(p);
+                  useStore.getState().setContributionModalOpen(true);
+                }}
+                className="text-[11px] text-[#9D493A] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+              >
+                <PlusCircle size={12} /> Görsel Öner
+              </button>
+            </div>
+
+            {p.images && p.images.length > 0 ? (
+              <div className="space-y-3">
+                {p.images.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative bg-white p-2 rounded-xl border border-[#25352F]/15 shadow-xs overflow-hidden"
+                  >
+                    <div 
+                      className="relative h-48 w-full bg-stone-100 rounded-lg overflow-hidden cursor-zoom-in"
+                      onClick={() => setActiveLightboxImg(img)}
+                    >
+                      <img
+                        src={img.url}
+                        alt={img.caption}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          target.style.display = 'none';
+                          const parent = target.parentElement;
+                          if (parent) {
+                            parent.classList.add('flex', 'items-center', 'justify-center', 'bg-[#F2EDE2]', 'p-4', 'text-center');
+                            parent.innerHTML = `<div class="text-stone-500 text-xs font-serif italic"><div class="text-base mb-1">📜</div>${img.caption}</div>`;
+                          }
+                        }}
+                      />
+                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-xs text-white text-[10px] font-mono flex items-center gap-1">
+                        <Maximize2 size={10} /> {img.year ? `${img.year} Arşiv` : 'Tarihî Belge'}
+                      </div>
+                    </div>
+                    <div className="p-2 pt-2.5 space-y-1">
+                      <p className="text-xs font-medium text-[#25352F] leading-snug">
+                        {img.caption}
+                      </p>
+                      {img.credit && (
+                        <p className="text-[10px] text-[#6F786F] font-mono flex items-center gap-1">
+                          <span>Kaynak:</span> <span>{img.credit}</span>
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="p-4 bg-white/70 rounded-xl border border-stone-200/80 text-center space-y-2">
+                <div className="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center mx-auto text-stone-400">
+                  <ImageIcon size={18} />
+                </div>
+                <p className="text-xs text-stone-600 leading-relaxed">
+                  Bu yerleşim/eser için henüz taranmış arşiv fotoğrafı eklenmedi.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    useStore.getState().setContributionTargetPlace(p);
+                    useStore.getState().setContributionModalOpen(true);
+                  }}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FAF8F2] border border-[#9D493A]/30 text-[#9D493A] text-xs font-semibold hover:bg-white transition-all cursor-pointer shadow-2xs"
+                >
+                  <PlusCircle size={12} />
+                  Arşiv Kartpostalı / Belge Katkısı Ver
+                </button>
+              </div>
+            )}
           </section>
 
           {/* 2. YIKILAN MİRAS / GÜNCEL DURUM KARTI (Lost Rumelia / Current) */}
@@ -430,8 +528,58 @@ export function PlaceStoryDrawer({
                 {p.alternatives.map((t, i) => <p key={i} className="leading-snug">· {t}</p>)}
               </div>
             )}
+
+            {/* Düzeltme & Katkı Butonu */}
+            <div className="mt-5 pt-3 border-t border-[#25352F]/10">
+              <button
+                type="button"
+                onClick={() => {
+                  useStore.getState().setContributionTargetPlace(p);
+                  useStore.getState().setContributionModalOpen(true);
+                }}
+                className="w-full py-2.5 px-3 bg-white border border-[#9D493A]/30 text-[#9D493A] rounded-xl text-xs font-bold hover:bg-[#fbf5f4] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+              >
+                <FileText size={14} />
+                Bu Kayda Düzeltme / Yeni Kaynak Öner (001_atlas.sql)
+              </button>
+            </div>
           </section>
         </div>
+
+        {/* Lightbox Modal */}
+        {activeLightboxImg && (
+          <div 
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200"
+            onClick={() => setActiveLightboxImg(null)}
+          >
+            <button 
+              type="button"
+              onClick={() => setActiveLightboxImg(null)}
+              className="absolute top-4 right-4 p-2 text-white/80 hover:text-white rounded-full bg-white/10 cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+            <div 
+              className="max-w-xl w-full bg-[#FAF8F2] rounded-2xl overflow-hidden shadow-2xl p-2"
+              onClick={e => e.stopPropagation()}
+            >
+              <img 
+                src={activeLightboxImg.url} 
+                alt={activeLightboxImg.caption}
+                className="w-full max-h-[60vh] object-contain rounded-xl bg-black/5"
+              />
+              <div className="p-4 space-y-1">
+                <div className="flex items-center justify-between text-[11px] text-[#6F786F]">
+                  <span className="font-mono">{activeLightboxImg.year ? `${activeLightboxImg.year} Yılı Arşiv Belgesi` : 'Tarihî Kartpostal'}</span>
+                  {activeLightboxImg.credit && <span>{activeLightboxImg.credit}</span>}
+                </div>
+                <p className="text-sm font-medium text-[#25352F] leading-snug">
+                  {activeLightboxImg.caption}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   };

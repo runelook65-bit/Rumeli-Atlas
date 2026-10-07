@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { 
-  X, ShieldCheck, LocateFixed, BookOpen, ChevronDown, ChevronRight, 
+  PlusCircle, X, ShieldCheck, LocateFixed, BookOpen, ChevronDown, ChevronRight, 
   MapPin, Compass, FileText, ArrowRightLeft, Calendar, Building, 
   Landmark, History, Search, Sparkles, Download, Layers 
 } from 'lucide-react';
@@ -81,6 +81,8 @@ export function LayerDrawer({
   const storeSetPeriodOpacity = useStore(s => s.setPeriodOpacity);
   const storeOhmBasemap = useStore(s => s.ohmBasemap);
   const storeSetOhmBasemap = useStore(s => s.setOhmBasemap);
+  const storeVilayets = useStore(s => s.vilayets);
+  const storeSetVilayets = useStore(s => s.setVilayets);
 
   const activeCategory = propActiveCategory !== undefined ? propActiveCategory : storeCategory;
   const onClose = propOnClose || (() => storeSetCategory(null));
@@ -642,6 +644,13 @@ export function LayerDrawer({
                   onCheckedChange={checked => storeSetOhmBasemap(checked)} 
                 />
               </label>
+              <label className="view-row">
+                🏛️ Osmanlı Vilayet Taksimatı (1878–1912)
+                <Switch 
+                  checked={storeVilayets} 
+                  onCheckedChange={checked => storeSetVilayets(checked)} 
+                />
+              </label>
               {storePeriodBasemap && (
                 <div className="px-3 py-2 mt-1 rounded bg-[#F5F2E9] border border-[#25352F]/10 flex flex-col gap-1.5">
                   <div className="flex justify-between text-xs text-[#6F786F]">
@@ -682,6 +691,14 @@ export function LayerDrawer({
               <button className="package-button" onClick={onOpenSources}>
                 <FileText size={16} />
                 Kaynaklar ve yöntem ({sourceCount})
+              </button>
+              <button 
+                className="package-button" 
+                style={{ borderColor: 'rgba(157, 73, 58, 0.4)', color: '#9D493A', backgroundColor: '#fcf8f7' }}
+                onClick={() => { onClose(); useStore.getState().setContributionModalOpen(true); }}
+              >
+                <PlusCircle size={16} />
+                Editoryal Katkı & Düzeltme Öner
               </button>
             </div>
 

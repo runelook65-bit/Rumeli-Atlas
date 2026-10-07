@@ -1,6 +1,6 @@
 import {isOttomanFoundation, type Place} from './atlas-data';
 import type {Map as GLMap,Marker as GLMarker} from 'maplibre-gl';
-export type MapSettings={places:Place[];names:boolean;boundaries:boolean;streets:boolean;periodBasemap?:boolean;periodOpacity?:number;ohmBasemap?:boolean;onSelect:(p:Place)=>void;onCluster?:(places:Place[])=>void};
+export type MapSettings={places:Place[];names:boolean;boundaries:boolean;streets:boolean;periodBasemap?:boolean;periodOpacity?:number;ohmBasemap?:boolean;vilayets?:boolean;onSelect:(p:Place)=>void;onCluster?:(places:Place[])=>void};
 export type AtlasMapHandle={
  engine:'maplibre'|'leaflet';ready:Promise<void>;
  flyTo:(options:{center:[number,number];zoom:number;duration?:number})=>void;
@@ -43,13 +43,13 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
  const m=L.map(container,{
   zoomControl:false,
   attributionControl:false,
-  minZoom:5.5,
-  maxZoom:17,
-  maxBounds:[[35.0,12.8],[47.5,30.8]],
-  maxBoundsViscosity:1.0,
-  preferCanvas:false,
-  zoomSnap:0.25
- }).fitBounds([[36.2,13.8],[46.8,29.8]],{padding:[25,25]});
+  minZoom:4.0,
+   maxZoom:17,
+   maxBounds:[[28.0, 4.0],[54.0, 52.0]],
+   maxBoundsViscosity:0.6,
+   preferCanvas:false,
+   zoomSnap:0.25
+  }).fitBounds([[33.8, 8.2],[49.8, 45.8]],{padding:[15,15]});
  container.dataset.mapEngine='leaflet';
  if(window.matchMedia('(max-width:760px)').matches)m.fitBounds([[39.5,18.5],[44.5,25.5]],{paddingTopLeft:[20,70],paddingBottomRight:[20,60]});
  L.control.scale({imperial:false,position:'bottomleft'}).addTo(m);
@@ -69,6 +69,37 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
  const streets=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{opacity:.85,maxZoom:19}).addTo(m);
  const periodLayer=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{opacity:.75,maxZoom:17,className:'period-basemap-tiles'});
  const ohmLayer=L.tileLayer('https://static-tiles.openhistoricalmap.org/{z}/{x}/{y}.png',{opacity:.85,maxZoom:18,className:'ohm-basemap-tiles'});
+  const vilayetsLayer=L.geoJSON(undefined,{
+   style:f=>({
+    fillColor:f?.properties?.color??'#8B2616',
+    fillOpacity:0.12,
+    color:f?.properties?.color??'#8B2616',
+    weight:2.2,
+    dashArray:'5 3',
+    opacity:0.92
+   }),
+   onEachFeature:(feature,layer)=>{
+    const p=feature?.properties;
+    if(p){
+      const sancakList=p.sancaklar ? ('<div style="margin-top:4px;font-size:10px;color:#5C6963"><b>Sancaklar:</b> ' + p.sancaklar.join(', ') + '</div>') : '';
+      layer.bindTooltip(
+        '<div style="font-family:Georgia,serif;padding:3px;max-width:240px">' +
+          '<div style="font-size:13px;font-weight:bold;color:#8B2C21">' + p.name + '</div>' +
+          '<div style="font-size:10px;font-weight:600;color:#7A5B22;margin-bottom:2px">' + p.donem + ' · Merkez: ' + p.merkez + '</div>' +
+          sancakList +
+          '<div style="margin-top:4px;font-size:9.5px;line-height:1.35;color:#4A5750;font-style:italic;border-top:1px solid #E2DDCF;padding-top:3px">' + p.aciklama + '</div>' +
+        '</div>',
+        {sticky:true,direction:'top'}
+      );
+      (layer as L.Path).on('mouseover',()=>{
+        (layer as L.Path).setStyle({weight:3.2,fillOpacity:0.22,dashArray:''});
+      });
+      (layer as L.Path).on('mouseout',()=>{
+        vilayetsLayer.resetStyle(layer as L.Path);
+      });
+    }
+   }
+  });
  const markers=L.layerGroup().addTo(m);let removed=false;let settings:MapSettings|undefined;
  const renderMarkers=()=>{
   markers.clearLayers();if(!settings)return;const current=settings;
@@ -85,8 +116,10 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
    else{
     const hasOttoman=group.places.some(p=>p.layer==='settlement'&&isOttomanFoundation(p));
     const hasSettlement=group.places.some(p=>p.layer==='settlement');
-    const clusterClass=hasOttoman?'cluster-green':hasSettlement?'cluster-red':'';
-    el=document.createElement('button');el.className=`atlas-cluster ${clusterClass}`;el.textContent=String(group.places.length);el.setAttribute('aria-label',`${group.places.length} yakın kaydı keşfet`);
+    const clusterClass=hasOttoman?'cluster-green':hasSettlement?'cluster-red':'cluster-blue';
+    const count=group.places.length;
+    const sizeClass=count>=50?'cluster-lg':count>=10?'cluster-md':'cluster-sm';
+    el=document.createElement('button');el.className=`atlas-cluster ${clusterClass} ${sizeClass}`;el.textContent=String(count);el.setAttribute('aria-label',`${count} yakın kaydı keşfet`);
     const town=group.places.find(p=>p.layer==='settlement');
     if(town&&m.getZoom()>=7){const label=document.createElement('span');const isTownOttoman=isOttomanFoundation(town);label.className=`cluster-label ${isTownOttoman?'label-green':'label-red'}`;label.textContent=current.names?town.name:town.modern;el.appendChild(label)}
     el.onclick=event=>{event.stopPropagation();const bounds=L.latLngBounds(group.places.map(p=>[p.coordinates[1],p.coordinates[0]] as [number,number]));
@@ -95,14 +128,21 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
     };
    }
    const clustered=group.places.length>1;
-   const icon=L.divIcon({html:el,className:'atlas-leaflet-marker',iconSize:clustered?[36,36]:[24,24],iconAnchor:clustered?[18,18]:[10,12]});
+   const count=group.places.length;
+   const size=clustered?(count>=50?28:count>=10?26:24):20;
+   const half=Math.round(size/2);
+   const icon=L.divIcon({html:el,className:'atlas-leaflet-marker',iconSize:[size,size],iconAnchor:clustered?[half,half]:[10,10]});
    L.marker(center,{icon,keyboard:false}).addTo(markers);
   }
  };
  m.on('zoomend',renderMarkers);
  const markZoom=()=>{container.classList.toggle('close-view',m.getZoom()>=11);container.classList.toggle('wide-view',m.getZoom()<7)};m.on('zoomend',markZoom);markZoom();
  const controller=new AbortController();
- const ready=fetch('/data/countries.geojson',{signal:controller.signal})
+ fetch('/data/ottoman-vilayets.geojson',{signal:controller.signal})
+   .then(r=>r.ok?r.json():null)
+   .then(data=>{if(data&&!removed)vilayetsLayer.addData(data as Parameters<typeof vilayetsLayer.addData>[0]);})
+   .catch(()=>{});
+  const ready=fetch('/data/countries.geojson',{signal:controller.signal})
   .then(res=>{if(!res.ok)throw new Error(`countries: ${res.status}`);return res.json()})
   .then(data=>{if(!removed)boundaries.addData(data as Parameters<typeof boundaries.addData>[0]);m.invalidateSize()});
  const observer=new ResizeObserver(()=>m.invalidateSize());observer.observe(container);
@@ -115,6 +155,8 @@ async function createLeaflet(container:HTMLDivElement):Promise<AtlasMapHandle>{
   else if(s.periodBasemap&&m.hasLayer(periodLayer)){periodLayer.setOpacity(s.periodOpacity??.75)}
   if(s.ohmBasemap&&!m.hasLayer(ohmLayer)){ohmLayer.addTo(m);ohmLayer.bringToBack()}
   else if(!s.ohmBasemap&&m.hasLayer(ohmLayer)){m.removeLayer(ohmLayer)}
+   if(s.vilayets&&!m.hasLayer(vilayetsLayer)){vilayetsLayer.addTo(m);vilayetsLayer.bringToBack();}
+   else if(!s.vilayets&&m.hasLayer(vilayetsLayer)){m.removeLayer(vilayetsLayer);}
  },invalidateSize:()=>{m.invalidateSize()},remove:()=>{removed=true;controller.abort();observer.disconnect();m.remove()}};
 }
 export async function createAtlasMap(container:HTMLDivElement):Promise<AtlasMapHandle>{

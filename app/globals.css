@@ -91,6 +91,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 0 24px;
   border-bottom: 1px solid var(--atlas-border);
   background: var(--atlas-glass);
@@ -98,6 +99,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   -webkit-backdrop-filter: blur(16px);
   z-index: 25;
   box-shadow: 0 2px 12px rgba(28, 36, 33, 0.04);
+  position: relative;
 }
 
 .brand {
@@ -105,7 +107,40 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 2;
 }
+.brand:hover {
+  opacity: 0.94;
+  transform: translateY(-0.5px);
+}
+.brand-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0, 90, 62, 0.08));
+  transition: filter 200ms ease, transform 200ms ease;
+}
+.brand:hover .brand-logo {
+  filter: drop-shadow(0 2px 6px rgba(0, 90, 62, 0.18));
+}
+.brand-logo-compact {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .brand-logo-full {
+    display: none;
+  }
+  .brand-logo-compact {
+    display: block;
+    height: 34px;
+    width: auto;
+  }
+}
+
 .brand-icon { 
   color: var(--atlas-gold); 
   filter: drop-shadow(0 1px 3px rgba(197, 160, 89, 0.4));
@@ -118,7 +153,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 .brand h1 {
   font: 600 20px Georgia, "Iowan Old Style", serif;
   letter-spacing: 0.12em;
-  color: var(--atlas-text);
+  color: var(--atlas-green);
   display: flex;
   align-items: baseline;
   gap: 6px;
@@ -126,25 +161,62 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 .brand h1 em {
   font-weight: 400;
   font-style: italic;
-  color: var(--atlas-burgundy);
+  color: var(--atlas-green);
   letter-spacing: 0.04em;
+}
+
+/* ── Topbar Center: Search Bar ── */
+.header-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 12px;
+  z-index: 1;
+}
+
+@media (min-width: 1240px) {
+  .header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 440px;
+    padding: 0;
+  }
+}
+
+/* ── Topbar Right: Mode Toggle + Action Buttons ── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .mode-toggle {
   display: flex;
-  gap: 4px;
+  gap: 3px;
   align-items: center;
-  background: rgba(245, 242, 233, 0.85);
+  background: rgba(245, 242, 233, 0.9);
   border: 1px solid var(--atlas-border);
   border-radius: 9999px;
   padding: 3px;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 .mode-toggle button {
-  padding: 6px 16px;
+  padding: 5px 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 13px;
   font-weight: 500;
   color: var(--atlas-text-secondary);
@@ -161,22 +233,16 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   box-shadow: 0 2px 8px rgba(139, 44, 33, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
 .source-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--atlas-text-secondary);
   border: 1px solid var(--atlas-border);
   background: #ffffff;
-  padding: 7px 14px;
+  padding: 6px 13px;
   border-radius: 9999px;
   box-shadow: var(--atlas-shadow-sm);
   transition: all var(--transition-hover);
@@ -188,6 +254,15 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   box-shadow: var(--atlas-shadow-md);
 }
 
+@media (max-width: 920px) {
+  .source-button span {
+    display: none;
+  }
+  .source-button {
+    padding: 6px 9px;
+  }
+}
+
 /* ── Search Bar ── */
 .search-wrap {
   display: flex;
@@ -197,13 +272,14 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   border: 1px solid var(--atlas-border);
   border-radius: 9999px;
   padding: 6px 14px;
-  width: 270px;
+  width: 310px;
+  max-width: 100%;
   position: relative;
   box-shadow: var(--atlas-shadow-sm);
-  transition: width 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-hover), box-shadow var(--transition-hover);
+  transition: width 220ms cubic-bezier(0.16, 1, 0.3, 1), max-width 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color var(--transition-hover), box-shadow var(--transition-hover);
 }
 .search-wrap.focused {
-  width: 340px;
+  width: 380px;
   border-color: var(--atlas-gold);
   box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18), var(--atlas-shadow-md);
 }
@@ -529,7 +605,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 /* ── Bottom Pills & Legends on Map ── */
 .count-pill {
   position: absolute;
-  bottom: 96px;
+  bottom: 168px;
   left: 20px;
   background: var(--atlas-glass-elevated);
   border: 1px solid var(--atlas-border);
@@ -563,7 +639,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 
 .map-legend {
   position: absolute;
-  bottom: 170px;
+  bottom: 198px;
   left: 20px;
   background: var(--atlas-glass-elevated);
   border: 1px solid var(--atlas-border);
@@ -666,30 +742,30 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   z-index: 50 !important;
 }
 .pin {
-  width: 19px;
-  height: 19px;
+  width: 16px;
+  height: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
+  font-size: 11px;
   line-height: 1;
-  background: #fffdf8;
-  border: 1.5px solid var(--atlas-gold);
+  background: #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 1px 6px rgba(40, 50, 45, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   transition: all 140ms ease;
 }
 .place-label {
-  font-family: Georgia, "Iowan Old Style", serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--atlas-text);
-  padding: 1px 6px;
-  background: rgba(254, 253, 250, 0.90);
+  font-family: -apple-system, BlinkMacSystemFont, "Google Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #202124;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
   border-radius: 4px;
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(60, 64, 67, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 .place-marker.heritage { color: #84623b; }
 .place-marker.heritage .pin { 
@@ -718,17 +794,16 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 }
 .place-marker.settlement-red .pin,
 .place-marker .pin.pin-red {
-  background: #fffdf9;
-  border: 2px solid var(--atlas-burgundy);
-  color: var(--atlas-burgundy);
-  box-shadow: 0 0 0 1px var(--atlas-gold), 0 2px 6px rgba(139, 44, 33, 0.35);
+  background: #EA4335;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(234, 67, 53, 0.25), 0 2px 4px rgba(0, 0, 0, 0.22);
 }
 .place-marker.settlement-red:hover .pin,
 .place-marker:hover .pin.pin-red {
-  background: var(--atlas-burgundy);
-  border-color: var(--atlas-burgundy-dark);
-  color: #fffdf8;
-  box-shadow: 0 0 0 2px var(--atlas-gold), 0 4px 12px rgba(139, 44, 33, 0.5);
+  background: #D93025;
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.4), 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 .place-marker.settlement-red .place-label,
 .place-marker .place-label.label-red {
@@ -741,17 +816,16 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 }
 .place-marker.settlement-green .pin,
 .place-marker .pin.pin-green {
-  background: #fffdf9;
-  border: 2px solid var(--atlas-green);
-  color: var(--atlas-green);
-  box-shadow: 0 0 0 1px var(--atlas-gold), 0 2px 6px rgba(0, 90, 62, 0.35);
+  background: #1E8E3E;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(30, 142, 62, 0.25), 0 2px 4px rgba(0, 0, 0, 0.22);
 }
 .place-marker.settlement-green:hover .pin,
 .place-marker:hover .pin.pin-green {
-  background: var(--atlas-green);
-  border-color: var(--atlas-green-dark);
-  color: #fffdf8;
-  box-shadow: 0 0 0 2px var(--atlas-gold), 0 4px 12px rgba(0, 90, 62, 0.5);
+  background: #188038;
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(30, 142, 62, 0.4), 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 .place-marker.settlement-green .place-label,
 .place-marker .place-label.label-green {
@@ -780,110 +854,124 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   color: var(--atlas-blue) !important;
 }
 
-/* ── Imperial Medallion Cluster Seals ── */
+/* ── Google Maps Style Cluster Badges ── */
 .atlas-cluster {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  color: #fffdf8;
-  font-family: Georgia, "Iowan Old Style", serif;
-  font-size: 13.5px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Google Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   pointer-events: auto;
   cursor: pointer;
   font-variant-numeric: tabular-nums;
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms ease;
   user-select: none;
+  padding: 0;
+  line-height: 1;
 }
+
+.atlas-cluster.cluster-sm {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
+}
+
+.atlas-cluster.cluster-md {
+  width: 26px;
+  height: 26px;
+  font-size: 11.5px;
+}
+
+.atlas-cluster.cluster-lg {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+
 .atlas-cluster:hover {
-  transform: scale(1.14);
+  transform: scale(1.15);
   z-index: 100 !important;
 }
 
+/* Red Cluster (Historical Settlements) - Google Maps Crimson */
 .atlas-cluster.cluster-red {
-  background: radial-gradient(circle at 35% 30%, #A62F22 0%, #7E1C12 75%, #59140C 100%);
-  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  background: #EA4335;
   box-shadow: 
-    0 0 0 1.5px var(--atlas-gold),
-    0 0 0 3.5px rgba(166, 47, 34, 0.22),
-    0 6px 18px -2px rgba(89, 20, 12, 0.45),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.35);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    0 0 0 3px rgba(234, 67, 53, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.28);
 }
 .atlas-cluster.cluster-red:hover {
+  background: #D93025;
   box-shadow: 
-    0 0 0 2px var(--atlas-gold-light),
-    0 0 0 5px rgba(166, 47, 34, 0.35),
-    0 8px 24px -2px rgba(89, 20, 12, 0.6),
-    0 0 20px rgba(197, 160, 89, 0.5),
-    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+    0 0 0 4.5px rgba(234, 67, 53, 0.35),
+    0 3px 8px rgba(0, 0, 0, 0.35);
 }
 
+/* Green Cluster (Ottoman Foundations) - Google Maps Green */
 .atlas-cluster.cluster-green {
-  background: radial-gradient(circle at 35% 30%, #027A54 0%, #004D35 75%, #003625 100%);
-  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  background: #1E8E3E;
   box-shadow: 
-    0 0 0 1.5px var(--atlas-gold),
-    0 0 0 3.5px rgba(0, 122, 84, 0.22),
-    0 6px 18px -2px rgba(0, 54, 37, 0.45),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.35);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    0 0 0 3px rgba(30, 142, 62, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.28);
 }
 .atlas-cluster.cluster-green:hover {
+  background: #188038;
   box-shadow: 
-    0 0 0 2px var(--atlas-gold-light),
-    0 0 0 5px rgba(0, 122, 84, 0.35),
-    0 8px 24px -2px rgba(0, 54, 37, 0.6),
-    0 0 20px rgba(197, 160, 89, 0.5),
-    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+    0 0 0 4.5px rgba(30, 142, 62, 0.35),
+    0 3px 8px rgba(0, 0, 0, 0.35);
 }
 
+/* Blue Cluster (Other / Mixed) - Google Maps Blue */
 .atlas-cluster.cluster-blue {
-  background: radial-gradient(circle at 35% 30%, #3B6B92 0%, #224765 75%, #163045 100%);
-  border: 1.5px solid rgba(255, 248, 235, 0.95);
+  background: #1A73E8;
   box-shadow: 
-    0 0 0 1.5px var(--atlas-gold),
-    0 0 0 3.5px rgba(34, 71, 101, 0.22),
-    0 6px 18px -2px rgba(22, 48, 69, 0.45),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    0 0 0 3px rgba(26, 115, 232, 0.22),
+    0 2px 5px rgba(0, 0, 0, 0.28);
+}
+.atlas-cluster.cluster-blue:hover {
+  background: #185ABC;
+  box-shadow: 
+    0 0 0 4.5px rgba(26, 115, 232, 0.35),
+    0 3px 8px rgba(0, 0, 0, 0.35);
 }
 
 .cluster-label {
   position: absolute;
   left: 50%;
-  bottom: 44px;
+  bottom: calc(100% + 5px);
   transform: translateX(-50%);
-  font-family: Georgia, "Iowan Old Style", serif;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Google Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
   white-space: nowrap;
-  letter-spacing: 0.02em;
-  padding: 2px 10px;
-  background: rgba(254, 253, 250, 0.94);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 160, 89, 0.4);
+  letter-spacing: 0.01em;
+  padding: 2px 7px;
+  background: #ffffff;
+  border: 1px solid rgba(60, 64, 67, 0.18);
   border-radius: 9999px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px rgba(60, 64, 67, 0.22);
   pointer-events: none;
+  line-height: 1.2;
 }
 .cluster-label.label-red {
-  color: var(--atlas-burgundy) !important;
+  color: #D93025 !important;
 }
 .cluster-label.label-green {
-  color: var(--atlas-green) !important;
+  color: #188038 !important;
 }
 .cluster-label.label-blue {
-  color: var(--atlas-blue) !important;
+  color: #1A73E8 !important;
 }
-.atlas-cluster:focus-visible { outline: 2px solid var(--atlas-gold); outline-offset: 4px; }
+.atlas-cluster:focus-visible { outline: 2px solid #1A73E8; outline-offset: 3px; }
 
 /* ── Leaflet Specific Styles ── */
 .map-canvas.leaflet-container {
@@ -1094,12 +1182,20 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 /* ── Mobile Layout (<761px) ── */
 @media (max-width: 760px) {
   .topbar {
-    height: 72px;
-    padding: 0 14px;
+    height: 64px;
+    padding: 0 12px;
+    gap: 8px;
   }
   .brand h1 { font-size: 18px; }
+  .header-center {
+    flex: 0 0 auto;
+    padding: 0;
+  }
+  .header-actions {
+    display: none;
+  }
   .mode-toggle { padding: 2px; }
-  .mode-toggle button { padding: 4px 10px; font-size: 12px; }
+  .mode-toggle button { padding: 4px 8px; font-size: 12px; gap: 4px; }
   .search-wrap:not(.mobile-open) { display: none; }
   .search-mobile-btn { display: flex; }
   .search-wrap.mobile-open {
@@ -1413,7 +1509,7 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 /* ── Period Map Floating Control ── */
 .period-map-control {
   position: absolute;
-  bottom: 96px;
+  bottom: 168px;
   right: 20px;
   background: var(--atlas-glass-elevated);
   border: 1px solid var(--atlas-border);
@@ -1469,23 +1565,33 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   cursor: pointer;
 }
 
-/* ── Floating Chronometer Master Console Dock (25% Compact & Centered) ── */
+/* ── Floating Chronometer Master Console Dock (V2 GIS Historical Instrument) ── */
 .temporal-console-dock {
   position: absolute;
-  bottom: 14px;
+  bottom: 16px;
   left: 50%;
   right: auto;
   transform: translateX(-50%);
-  width: min(1060px, calc(100vw - 48px));
-  max-width: 1060px;
-  background: var(--atlas-glass-elevated);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--atlas-border);
-  border-radius: 16px;
-  box-shadow: var(--atlas-shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  width: min(1140px, calc(100vw - 32px));
+  max-width: 1140px;
+  background: rgba(254, 252, 246, 0.95);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px -6px rgba(28, 38, 35, 0.16), 0 2px 8px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.85) inset;
   z-index: 25;
   pointer-events: auto;
+  padding: 12px 18px 10px 18px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+@media (max-width: 1024px) {
+  .temporal-console-dock {
+    width: calc(100vw - 24px);
+    padding: 10px 14px 8px 14px;
+    bottom: 12px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1558,3 +1664,10 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 
 
 
+
+/* Hide top region selector on desktop as it is integrated inside Timeline V2 Dock */
+@media (min-width: 768px) {
+  .map-top {
+    display: none;
+  }
+}

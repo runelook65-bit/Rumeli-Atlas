@@ -15,7 +15,13 @@ const seedSources:Source[]=[
 {id:'burmali',title:'Burmalı Câmii',author:'CEIPA · Aziz Kiril ve Metodiy Üniversitesi, Üsküp',date:'Tarihsiz web kaydı',url:'https://ceipa.pmf.ukim.mk/tr/node/48',locator:'1495 inşa ve 1925 yıkım açıklamaları',kind:'Üniversite envanteri'}
 ];
 export type Observation={year:number;end?:number;dimension:'community'|'religion'|'language'|'ethnicity'|'administration'|'settlement_origin'|'migration'|'heritage';text:string;source:string;values?:{label:string;value:number}[];unit?:string;scope?:string;note?:string;recordId?:string;disputed?:boolean};
-export type Place={id:string;name:string;modern:string;aliases:string[];coordinates:[number,number];layer:'settlement'|'heritage';start:number;end?:number;datePrecision:string;confidence:'high'|'medium';locationAccuracy:string;source:string;summary:string;lost?:boolean;partialLoss?:boolean;current:string;currentAsOf:string;events:{year:number;text:string;source:string}[];observations:Observation[];alternatives?:string[];additionalSources?:string[];importedRecords?:Record<string,string|null>[]};
+export type PlaceImage = {
+  url: string;
+  caption: string;
+  year?: number;
+  credit?: string;
+};
+export type Place={id:string;name:string;modern:string;aliases:string[];coordinates:[number,number];layer:'settlement'|'heritage';start:number;end?:number;datePrecision:string;confidence:'high'|'medium';locationAccuracy:string;source:string;summary:string;lost?:boolean;partialLoss?:boolean;current:string;currentAsOf:string;events:{year:number;text:string;source:string}[];observations:Observation[];alternatives?:string[];additionalSources?:string[];importedRecords?:Record<string,string|null>[];images?:PlaceImage[]};
 const seedPlaces:Place[]=[
 {id:'skopje',name:'Üsküp',modern:'Skopje',aliases:['Üsküb','Uskub','Shkup','Скопје'],coordinates:[21.431,41.997],layer:'settlement',start:1354,datePrecision:'1354 atlas alt sınırı; şehrin kuruluş tarihi değildir',confidence:'high',locationAccuracy:'Şehir merkezini temsil eden yaklaşık nokta; mahalle sınırı değildir',source:'uskup',summary:'Vardar vadisinde tarihî bir kent. Osmanlı iskânı ile idarî geçmişi ayrı kayıtlar olarak tutulur.',current:'Kuzey Makedonya başkenti. Pilot, güncel nüfus sayımı içermez.',currentAsOf:'2026 coğrafi bağlam; saha denetimi yapılmadı',events:[{year:1392,text:'Osmanlı yönetiminin başlangıcı için yaygın tarih.',source:'uskup'}],observations:[{year:1392,end:1400,dimension:'settlement_origin',text:'Saruhan bölgesinden Türkmen iskânı kaynakta anlatılır; bitiş yılı bilinmez, 1392–1400 gösterim aralığı editoryal bir yaklaşık dönemdir.',source:'uskup',note:'Şehir çevresine ilişkin anlatı; bütün şehir halkının etnik kimliğine uygulanamaz.'}]},
 {id:'tetovo',name:'Kalkandelen',modern:'Tetovo',aliases:['Tetovë','Htetovo','Тетово'],coordinates:[20.971,42.009],layer:'settlement',start:1354,datePrecision:'1354 atlas alt sınırı; yerleşim daha eskidir',confidence:'medium',locationAccuracy:'Yaklaşık şehir merkezi',source:'tetovo',summary:'Polog vadisindeki kent. Kaynaklar fetih tarihini farklı biçimlerde aktarır.',current:'Kuzey Makedonya’da Tetovo. Tarihsel kaza ile bugünkü belediye eşdeğer değildir.',currentAsOf:'2026 coğrafi bağlam; saha denetimi yapılmadı',events:[{year:1390,text:'Kosova salnâmesinde aktarılan fetih tarihi; kesinlik taşımaz.',source:'tetovo'}],alternatives:['Kosova salnâmesi 1390 tarihini verir; Slav kaynaklarına dayanan yorum 1382–1392 aralığını kullanır.'],observations:[{year:1455,dimension:'religion',text:'Tahrirde dinî aidiyete göre hâne kayıtları.',source:'tetovo',values:[{label:'Müslüman',value:60},{label:'Hıristiyan',value:153}],unit:'hâne',scope:'Kalkandelen kasabası',note:'Hâne kişi sayısı değildir. Dinî kayıt etnisiteye dönüştürülmez.'},{year:1894,dimension:'religion',text:'Kosova salnâmesinin kaza toplamı; tarihsel sınıflandırmalar aynen etiketlenir.',source:'tetovo',values:[{label:'Müslüman',value:30348},{label:'Rum (kaynak kategorisi)',value:5528},{label:'Bulgar (kaynak kategorisi)',value:10175}],unit:'kişi',scope:'Kalkandelen kazası; şehir değil',note:'Din ve tarihsel cemaat adları aynı tabloda kullanılmıştır; modern etnik dağılım sayılmaz.'},{year:1562,dimension:'administration',text:'1562’den itibaren Üsküp sancağına bağlılık kaydedilir. Sonraki değişimler bu pilotta işlenmediği için 1562 yılı dışında süreklilik varsayılmaz.',source:'tetovo',note:'Yalnız 1562 tarihindeki bağlılık kanıtı. Sınır geometrisi yok.'}]},
@@ -1944,6 +1950,105 @@ const UNVERIFIED_IDENTICAL: { id: string; year: number }[] = [
   { id: 'bos-jajce', year: 1530 }, { id: 'bos-srebrenica', year: 1530 },
   { id: 'bos-doboj', year: 1530 }, { id: 'bos-gacko', year: 1530 }
 ];
+export const placeVisualArchive: Record<string, PlaceImage[]> = {
+  'burmali': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Burmali_Mosque_Skopje_1920s.jpg',
+      caption: '1925 yılında yıktırılan Burmalı Camii ve Taş Köprü başındaki konumu.',
+      year: 1913,
+      credit: 'Üsküp Tarih Arşivi & CEIPA Envanteri'
+    }
+  ],
+  'skopje': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Stone_Bridge_Skopje_postcard_1900s.jpg',
+      caption: 'Taş Köprü ve Vardar boyu Osmanlı Üsküp panoraması.',
+      year: 1903,
+      credit: 'Osmanlı Dönemi Postakartı / BOA Fototeka'
+    }
+  ],
+  'alaca-tetovo': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/%C5%A0arena_D%C5%BEamija_Tetovo_exterior.jpg',
+      caption: 'Kalkandelen Alaca Cami (Šarena Džamija). Barok-rokoko üsluplu dış cephe freskleri.',
+      year: 1833,
+      credit: 'Makedonya Kültürel Miras Envanteri'
+    }
+  ],
+  'harabati': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Arabati_Baba_Tekke_Tetovo.jpg',
+      caption: 'Harâbâtî Baba Tekkesi (Sersem Ali Baba Külliyesi) tarihi derviş avlusu.',
+      year: 1912,
+      credit: 'Kalkandelen Bektaşî Vakfı Arşivi'
+    }
+  ],
+  'sinan': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Sinan_Pasha_Mosque_Prizren_historic.jpg',
+      caption: 'Sinan Paşa Camii ve Şadırvan Meydanı tarihi görünümü.',
+      year: 1910,
+      credit: 'Prizren Arşivi / TDV İslâm Ansiklopedisi'
+    }
+  ],
+  'prizren': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Prizren_fortress_and_mosque_view_1900s.jpg',
+      caption: 'Prizren Kalesi eteklerinde Bistriça (Lumbardhi) nehri ve tarihi camiler.',
+      year: 1905,
+      credit: 'Kosova Tarih Enstitüsü Koleksiyonu'
+    }
+  ],
+  'ishak': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Ishak_Bey_Mosque_Skopje.jpg',
+      caption: 'Alaca İshak Bey Camii ve çevresindeki külliye haziresi, Üsküp.',
+      year: 1930,
+      credit: 'TDV İslâm Ansiklopedisi (Cilt 2)'
+    }
+  ],
+  'bos-sarajevo': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Gazi_Husrev-beg_Mosque_Sarajevo_1900.jpg',
+      caption: 'Gazi Hüsrev Bey Camii ve Başçarşı Saat Kulesi, Saraybosna.',
+      year: 1900,
+      credit: 'Bosna-Hersek Ulusal Müzesi Fototeka'
+    }
+  ],
+  'bos-mostar': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Stari_Most_Mostar_photochrome_1890s.jpg',
+      caption: 'Mimar Hayreddin eseri Tarihî Mostar Köprüsü (Stari Most) ve Neretva Nehri.',
+      year: 1895,
+      credit: 'Library of Congress / Detroit Publishing Co.'
+    }
+  ],
+  'reg-thessaloniki': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Bey_Hamam_Thessaloniki.jpg',
+      caption: 'Bey Hamamı (Cennet Hamamı) ve Selanik Osmanlı çarşı dokusu.',
+      year: 1912,
+      credit: 'Selanik Tarih Arşivi'
+    }
+  ],
+  'reg-bitola': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Bitola_Saat_Kula_1900s.jpg',
+      caption: 'Manastır (Bitola) Saat Kulesi ve İshakiye Camii çevresi, Şirok Sokak girişi.',
+      year: 1903,
+      credit: 'Manaki Kardeşler Koleksiyonu'
+    }
+  ],
+  'bg-plovdiv': [
+    {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Dzhumaya_Mosque_Plovdiv_historic.jpg',
+      caption: 'Muradiye (Cuma) Camii, Filibe (Plovdiv). I. Murad devri ulu cami üslubu.',
+      year: 1908,
+      credit: 'Bulgaristan Arşiv Enstitüsü'
+    }
+  ]
+};
+
 function assemblePlaces(all: Place[]): Place[] {
   const byId = new Map(all.map(p => [p.id, p]));
   const result: Place[] = [];
@@ -1973,6 +2078,9 @@ function assemblePlaces(all: Place[]): Place[] {
           note: [o.note, 'Doğrulanmadı: Bu hâne değerleri başka bir Bosna kasabasının aynı yıl kaydıyla birebir aynı; defter sayfasıyla karşılaştırılmalı.'].filter(Boolean).join(' ')
         } : o)
       };
+    }
+    if (!merged.images && placeVisualArchive[merged.id]) {
+      merged.images = placeVisualArchive[merged.id];
     }
     result.push(merged);
   }
@@ -2184,8 +2292,8 @@ export const regionPresets: RegionPreset[] = [
     id: 'all',
     name: 'Balkanların tamamı',
     category: 'all',
-    bounds: [[13.8, 36.2], [29.8, 46.8]],
-    description: 'Tüm Balkan coğrafyası genel görünümü'
+    bounds: [[8.2, 33.8], [45.8, 49.8]],
+    description: 'Tüm Balkan ve Doğu Akdeniz coğrafyası genel görünümü'
   },
   // Modern Ülkeler
   { id: 'mkd', name: 'Kuzey Makedonya', category: 'modern', bounds: [[20.4, 40.8], [23.1, 42.4]] },

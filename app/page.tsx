@@ -39,9 +39,9 @@ import { RegionSelector } from '@/components/atlas/region-selector';
 import { LayerChoicePopup } from '@/components/atlas/layer-choice-popup';
 import { AtlasToast } from '@/components/atlas/atlas-toast';
 import { EventPanel } from '@/components/atlas/event-panel';
-import { PeriodMapControl } from '@/components/atlas/period-map-control';
 import { HistoriaTextModal } from '@/components/atlas/historia-text-modal';
 import { OhmInspectorModal } from '@/components/atlas/ohm-inspector-modal';
+import { EditorialContributionModal } from '@/components/atlas/editorial-contribution-modal';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'leaflet/dist/leaflet.css';
@@ -64,6 +64,7 @@ export default function Atlas() {
   const periodBasemap = useStore((s) => s.periodBasemap);
   const periodOpacity = useStore((s) => s.periodOpacity);
   const ohmBasemap = useStore((s) => s.ohmBasemap);
+  const vilayets = useStore((s) => s.vilayets);
   const selectedPlace = useStore((s) => s.selectedPlace);
   const setSelectedPlace = useStore((s) => s.setSelectedPlace);
   const clusterPlaces = useStore((s) => s.clusterPlaces);
@@ -174,13 +175,14 @@ export default function Atlas() {
       periodBasemap,
       periodOpacity,
       ohmBasemap,
+      vilayets,
       onSelect: (p) => handleSelectPlace(p),
       onCluster: (items) => {
         setClusterPlaces(items);
         setRecordsOpen(true);
       }
     });
-  }, [ready, filtered, names, boundaries, streets, periodBasemap, periodOpacity, ohmBasemap]);
+  }, [ready, filtered, names, boundaries, streets, periodBasemap, periodOpacity, ohmBasemap, vilayets]);
 
   // Timeline playback timer
   useEffect(() => {
@@ -347,9 +349,6 @@ export default function Atlas() {
             )}
           </div>
 
-          {/* Historia Period Basemap Floating Control */}
-          <PeriodMapControl />
-
           <PlaceStoryDrawer />
         </section>
       </div>
@@ -416,6 +415,9 @@ export default function Atlas() {
         onOpenChange={setSourcesOpen}
         onOpenArchive={() => setArchiveOpen(true)}
       />
+
+      {/* Editorial Contribution & Research Submission Dialog */}
+      <EditorialContributionModal />
     </main>
   );
 }

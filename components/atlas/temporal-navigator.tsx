@@ -1,26 +1,20 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { 
-  Play, Pause, ChevronLeft, ChevronRight, Info, Users, 
-  BookOpen, Sparkles, Clock, Compass 
-} from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { 
-  getBalkanDemographicsForYear, 
-  DEMOGRAPHIC_EVIDENCE_LABELS, 
-  DEMOGRAPHIC_SCOPE_NOTE 
-} from '@/lib/atlas-data';
+import { Play, Pause, ChevronLeft, ChevronRight, Calendar, Users, Landmark, Layers } from 'lucide-react';
 import { useStore, type TemporalMode } from '@/lib/store';
+import { getBalkanDemographicsForYear, DEMOGRAPHIC_EVIDENCE_LABELS } from '@/lib/atlas-data';
+import { getEraForYear, yearToTrackPercent } from '@/lib/chrono-timeline';
 import { getAdjacentBreakpoint } from '@/lib/historia-events';
-import { 
-  RUMELIA_ERAS, 
-  getEraForYear, 
-  getEventsNearYear, 
-  yearToTrackPercent, 
-  trackPercentToYear,
-  type ChronoEvent 
-} from '@/lib/chrono-timeline';
+
+// Sub-components
+import { TimelineYearZone } from './timeline/timeline-year-zone';
+import { TimelineTransportZone } from './timeline/timeline-transport-zone';
+import { TimelineMetricsZone } from './timeline/timeline-metrics-zone';
+import { TimelineTrackZone } from './timeline/timeline-track-zone';
+import { TimelineControlsZone } from './timeline/timeline-controls-zone';
+import { MACRO_ERAS, TIMELINE_MILESTONES, CURATED_TIMELINE_EVENTS, EVENT_CATEGORIES } from './timeline/timeline-types';
 
 interface TemporalNavigatorProps {
   year?: number;
@@ -31,18 +25,6 @@ interface TemporalNavigatorProps {
   onTemporalModeChange?: (m: TemporalMode) => void;
 }
 
-const MILESTONES = [
-  { year: 1354, label: 'Osmanlı ayak izi (Çimpe)', short: '1354', tier: 1 },
-  { year: 1453, label: 'İstanbul’un fethi', short: '1453', tier: 1 },
-  { year: 1699, label: 'Karlofça Antlaşması', short: '1699', tier: 1 },
-  { year: 1878, label: 'Berlin Antlaşması', short: '1878', tier: 1 },
-  { year: 1912, label: 'I. Balkan Savaşı', short: '1912', tier: 2 },
-  { year: 1923, label: 'Lozan & Mübadele', short: '1923', tier: 1 },
-  { year: 1950, label: 'Yugoslavya Göçü', short: '1950', tier: 2 },
-  { year: 1989, label: 'Bulgaristan Göçü', short: '1989', tier: 1 },
-  { year: 2026, label: 'Günümüz', short: '2026', tier: 1 },
-];
-
 export function TemporalNavigator({
   year: propYear,
   onYearChange: propOnYearChange,
@@ -51,14 +33,14 @@ export function TemporalNavigator({
   temporalMode: propTemporalMode,
   onTemporalModeChange: propOnTemporalModeChange
 }: TemporalNavigatorProps = {}) {
-  const storeYear = useStore(s => s.year);
-  const storeSetYear = useStore(s => s.setYear);
-  const storePlaying = useStore(s => s.playing);
-  const storeSetPlaying = useStore(s => s.setPlaying);
-  const storeTemporalMode = useStore(s => s.temporalMode);
-  const storeSetTemporalMode = useStore(s => s.setTemporalMode);
-  const ohmStepAmount = useStore(s => s.ohmStepAmount);
-  const setOhmStepAmount = useStore(s => s.setOhmStepAmount);
+  const storeYear = useStore((s) => s.year);
+  const storeSetYear = useStore((s) => s.setYear);
+  const storePlaying = useStore((s) => s.playing);
+  const storeSetPlaying = useStore((s) => s.setPlaying);
+  const storeTemporalMode = useStore((s) => s.temporalMode);
+  const storeSetTemporalMode = useStore((s) => s.setTemporalMode);
+  const ohmStepAmount = useStore((s) => s.ohmStepAmount);
+  const mapHandle = useStore((s) => s.mapHandle);
 
   const year = propYear !== undefined ? propYear : storeYear;
   const onYearChange = propOnYearChange || ((y: number) => {
@@ -75,444 +57,136 @@ export function TemporalNavigator({
 
   const [isDesktop, setIsDesktop] = useState(true);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [editValue, setEditValue] = useState('');
-
-  // ChronoAtlas pointer scrub & track state
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [trackW, setTrackW] = useState(800);
-  const [hoverPercent, setHoverPercent] = useState<number | null>(null);
-  const dragging = useRef(false);
 
   useEffect(() => {
-    const mql = window.matchMedia('(min-width: 761px)');
+    const mql = window.matchMedia('(min-width: 768px)');
     setIsDesktop(mql.matches);
     const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     mql.addEventListener('change', handler);
     return () => mql.removeEventListener('change', handler);
   }, []);
 
-  // Measure track width for adaptive tick thinning
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver((entries) => {
-      const w = entries[0]?.contentRect.width;
-      if (w) setTrackW(w);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [isDesktop]);
-
-  const handleEditSubmit = (e: React.KeyboardEvent | React.FocusEvent) => {
-    if ('key' in e && e.key !== 'Enter') return;
-    const v = parseInt(editValue);
-    if (!isNaN(v) && v >= 1354 && v <= 2026) {
-      onYearChange(v);
-    }
-    setEditing(false);
-  };
-
   const currentEra = getEraForYear(year);
-  const nearEvents = getEventsNearYear(year, 6);
-  const activeEvent = nearEvents[0];
   const demo = getBalkanDemographicsForYear(year);
-  const currentMilestone = MILESTONES.find(m => m.year === year);
-
-  // ChronoAtlas: Calculate client coordinate to year
-  function yearFromClientX(clientX: number): number {
-    if (!trackRef.current) return year;
-    const rect = trackRef.current.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    return trackPercentToYear(pct);
-  }
-
   const progressPercent = yearToTrackPercent(year) * 100;
 
+  // Desktop & Tablet Floating Dock
   const desktopContent = (
-    <div className="temporal-console-dock flex items-center px-4 sm:px-4.5 py-1.5 gap-3 w-full select-none">
-      {/* 1. Yıl ve Tarihsel Dönem Readout (Sculpted Chronometer Year Display) */}
-      <div className="flex-shrink-0 w-24 sm:w-28 border-r border-[#C5A059]/30 pr-2 sm:pr-3">
-        {editing ? (
-          <input
-            autoFocus
-            className="w-full text-2xl sm:text-3xl font-serif text-[#8B2C21] font-bold bg-transparent outline-none border-b-2 border-[#C5A059]"
-            value={editValue}
-            onChange={e => setEditValue(e.target.value)}
-            onBlur={handleEditSubmit}
-            onKeyDown={handleEditSubmit}
-            placeholder="Yıl girin"
-          />
-        ) : (
-          <button 
-            onClick={() => { setEditValue(year.toString()); setEditing(true); }} 
-            className="text-left w-full cursor-pointer group"
-            title="Yılı doğrudan klavyeden girmek için tıklayın"
-          >
-            <strong className="block text-2xl sm:text-3xl font-serif text-[#8B2C21] font-bold lining-nums group-hover:text-[#005A3E] transition-colors leading-none mb-0.5">
-              {year}
-            </strong>
-            <span 
-              className="inline-block px-1.5 py-0.2 rounded-full text-[8px] font-bold tracking-widest uppercase border border-[#C5A059]/40 bg-[#FAF6EC] text-[#8B6E32] shadow-2xs truncate max-w-full"
-              title={currentEra.name}
-            >
-              {currentEra.shortName}
-            </span>
-          </button>
-        )}
-      </div>
+    <nav 
+      aria-label="Tarihsel Zaman Çizelgesi Konsolu" 
+      className="temporal-console-dock flex flex-col gap-2 select-none"
+    >
+      {/* ÜST SATIR: Zone A (Yıl), Zone B (Oynatıcı), Zone C (Nüfus & Bölge Metrikleri) */}
+      <div className="flex items-center gap-3 sm:gap-4 w-full">
+        {/* Zone A: Büyük Tarihsel Yıl ve Dönem Rozeti */}
+        <TimelineYearZone year={year} onYearChange={onYearChange} />
 
-      {/* 2. Oynat / Durdur & Kırılma Noktası Atlama (Historia & Chrono Transport) */}
-      <div className="flex items-center gap-1 flex-shrink-0">
-        <button
-          type="button"
-          className="w-7 h-7 rounded-full border border-[#C5A059]/30 bg-[#FFFDF9] text-[#5C6963] hover:text-[#8B2C21] hover:border-[#C5A059] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
-          onClick={() => {
-            const bp = getAdjacentBreakpoint(year, -1);
-            if (bp !== null) onYearChange(bp);
-          }}
-          title="Önceki Kırılma Noktası (Shift+←)"
-          aria-label="Önceki Kırılma Noktası"
-        >
-          <ChevronLeft size={14} />
-        </button>
+        {/* Zone B: Oynat / Durdur / Atlama Kontrolleri */}
+        <TimelineTransportZone
+          year={year}
+          onYearChange={onYearChange}
+          playing={playing}
+          onPlayingToggle={onPlayingToggle}
+          stepAmount={ohmStepAmount || 5}
+        />
 
-        <button 
-          className="w-8 h-8 rounded-full bg-gradient-to-br from-[#9E2B20] to-[#751D14] hover:from-[#B53528] hover:to-[#8B2419] text-white flex items-center justify-center shadow-md border border-[#FFF8EB]/60 ring-2 ring-[#C5A059]/35 transition-all duration-150 cursor-pointer"
-          onClick={onPlayingToggle}
-          aria-label={playing ? "Zaman akışını duraklat (Boşluk)" : "Zaman akışını oynat (Boşluk)"}
-        >
-          {playing ? <Pause size={13} fill="currentColor" /> : <Play size={13} fill="currentColor" className="ml-0.5" />}
-        </button>
-
-        <button
-          type="button"
-          className="w-7 h-7 rounded-full border border-[#C5A059]/30 bg-[#FFFDF9] text-[#5C6963] hover:text-[#8B2C21] hover:border-[#C5A059] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
-          onClick={() => {
-            const bp = getAdjacentBreakpoint(year, 1);
-            if (bp !== null) onYearChange(bp);
-          }}
-          title="Sonraki Kırılma Noktası (Shift+→)"
-          aria-label="Sonraki Kırılma Noktası"
-        >
-          <ChevronRight size={14} />
-        </button>
-      </div>
-
-      {/* 3. Orta Bölüm: Demografi Mührü + Chrono Ticker + Era Ribbon + Collision-Free Scrub Track */}
-      <div className="flex-1 min-w-0 flex flex-col justify-center py-0">
-        
-        {/* Üst Satır: Tarihsel Demografi Mührü + Chrono Ticker */}
-        <div className="flex items-center justify-between text-xs mb-1 flex-wrap gap-x-2 gap-y-0.5">
-          {/* Balkan Demografi Rozeti (Museum-Grade Archival Insignia) */}
-          <div 
-            className="flex items-center gap-1 bg-[#FFFDF9] border border-[#C5A059]/35 px-2 py-0.2 rounded-full shadow-2xs shrink-0 cursor-help"
-            title={`${demo.note}\nKaynak: ${demo.source}\n${DEMOGRAPHIC_SCOPE_NOTE}`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#005A3E] ring-2 ring-[#005A3E]/20" />
-            <span className="text-[10px] font-semibold text-[#1C2623] tracking-tight">
-              Balkanlar Türk & Müslüman:
-            </span>
-            <span className="font-serif font-bold text-[11px] text-[#8B2C21] font-mono tracking-wide">
-              {demo.muslim.toLocaleString('tr')}
-            </span>
-            <span 
-              className="text-[9px] font-bold px-1.5 py-0 rounded-full text-white shadow-2xs"
-              style={{ backgroundColor: '#005A3E' }}
-            >
-              %{demo.pct.toFixed(1)}
-            </span>
-            <span 
-              className="text-[8.5px] font-medium px-1 rounded border border-[#C5A059]/30 text-[#8B6E32] bg-[#FAF6EC]"
-            >
-              {demo.interpolated ? 'Ara Değer' : DEMOGRAPHIC_EVIDENCE_LABELS[demo.kind]}
-            </span>
-          </div>
-
-          {/* Chrono Ticker (ChronoAtlas Olay Hapı) */}
-          {activeEvent ? (
-            <button
-              type="button"
-              onClick={() => {
-                onYearChange(activeEvent.year);
-                const map = useStore.getState().mapHandle;
-                map?.flyTo({ center: activeEvent.coordinates, zoom: 8, duration: 800 });
-              }}
-              className="hidden md:inline-flex items-center gap-1 px-2 py-0.2 rounded-full text-[10px] bg-[#FFFDF9] border border-[#C5A059]/30 hover:border-[#8B2C21] shadow-2xs transition-all cursor-pointer truncate max-w-[280px]"
-              title={`${activeEvent.title} (${activeEvent.year})\n${activeEvent.blurb}`}
-            >
-              <span style={{ color: activeEvent.color }} className="font-bold text-[9px]">
-                {activeEvent.icon}
-              </span>
-              <span className="font-serif font-bold text-[#8B2C21]">
-                {activeEvent.year}
-              </span>
-              <span className="text-[#1C2623] font-medium truncate">
-                {activeEvent.title}
-              </span>
-            </button>
-          ) : (
-            <div className="hidden lg:flex items-center gap-1 text-[10px] text-[#5C6963] truncate max-w-[260px]">
-              <Compass size={11} className="text-[#C5A059] shrink-0" />
-              <span className="truncate italic">{currentEra.name}</span>
-            </div>
-          )}
-        </div>
-
-        {/* ChronoAtlas: Tarihsel Dönem Kuşakları (Era Bands Ribbon) */}
-        <div className="relative w-full h-[12px] flex rounded-md overflow-hidden border border-[#C5A059]/30 mb-0.5 bg-[#FAF6ED] shadow-inner">
-          {RUMELIA_ERAS.map((era) => {
-            const startPct = yearToTrackPercent(era.from) * 100;
-            const endPct = yearToTrackPercent(era.to) * 100;
-            const widthPct = endPct - startPct;
-            const isEraActive = year >= era.from && year < era.to;
-
-            return (
-              <button
-                key={era.id}
-                type="button"
-                onClick={() => onYearChange(era.from)}
-                className={`h-full relative transition-all group overflow-hidden cursor-pointer border-r border-[#C5A059]/30 last:border-r-0 ${
-                  isEraActive ? 'brightness-95 ring-1 ring-inset ring-[#8B2C21]' : 'hover:brightness-90'
-                }`}
-                style={{ width: `${widthPct}%`, backgroundColor: era.tint }}
-                title={`${era.name} (${era.from}–${era.to})\n${era.description}`}
-              >
-                {widthPct > 7 && (
-                  <span className="absolute inset-0 flex items-center justify-center text-[7.5px] font-serif font-bold uppercase tracking-wider text-[#1C2623] truncate px-1">
-                    {era.shortName}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ChronoAtlas: Sürekli Zaman Tarama Rayı (Continuous Pointer Scrub Track) */}
-        <div
-          ref={trackRef}
-          className="relative h-[18px] flex items-center cursor-crosshair touch-none select-none group"
-          onPointerDown={(e) => {
-            dragging.current = true;
-            (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
-            useStore.getState().setPlaying(false);
-            onYearChange(yearFromClientX(e.clientX));
-          }}
-          onPointerMove={(e) => {
-            if (!trackRef.current) return;
-            const rect = trackRef.current.getBoundingClientRect();
-            const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-            setHoverPercent(pct);
-            if (dragging.current) {
-              onYearChange(trackPercentToYear(pct));
-            }
-          }}
-          onPointerUp={(e) => {
-            dragging.current = false;
-            (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
-          }}
-          onPointerLeave={() => {
-            setHoverPercent(null);
-            dragging.current = false;
-          }}
-          role="slider"
-          aria-label="Tarihsel Zaman Çizelgesi"
-          aria-valuemin={1354}
-          aria-valuemax={2026}
-          aria-valuenow={year}
-        >
-          {/* Ray Tabanı (Track Base Rail) */}
-          <div className="w-full h-1 bg-[#E2DDCF] rounded-full overflow-hidden relative shadow-inner">
-            <div 
-              className="h-full bg-gradient-to-r from-[#8B2C21] to-[#A8382B] transition-all duration-75"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-
-          {/* Kilometre Taşı Noktaları (Milestone Dots on Rail) */}
-          {MILESTONES.map((m) => {
-            const mPct = yearToTrackPercent(m.year) * 100;
-            const isPassed = m.year <= year;
-            const isCurrent = m.year === year;
-            return (
-              <div
-                key={m.year}
-                className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full border transition-all ${
-                  isCurrent
-                    ? 'bg-[#C5A059] border-white ring-2 ring-[#8B2C21] scale-125 z-10'
-                    : isPassed 
-                    ? 'bg-[#8B2C21] border-white ring-1 ring-[#8B2C21]/50' 
-                    : 'bg-white border-[#C5A059]/60'
-                }`}
-                style={{ left: `${mPct}%` }}
-                title={`${m.label} (${m.year})`}
-              />
-            );
-          })}
-
-          {/* Hover Ghost: Mouse ile Gezinirken Takip Eden Çizgi ve Yıl Balonu (ChronoAtlas Ghost) */}
-          {hoverPercent !== null && !dragging.current && (
-            <div
-              className="pointer-events-none absolute inset-y-0 w-px bg-[#8B2C21]/60 z-20"
-              style={{ left: `${hoverPercent * 100}%` }}
-            >
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[#1C2623] text-white text-[9px] font-mono px-1 py-0.2 shadow-md border border-[#C5A059]/40">
-                {trackPercentToYear(hoverPercent)}
-              </div>
-            </div>
-          )}
-
-          {/* Scrubber İğnesi & Elmas Uç (ChronoAtlas Gold Diamond Needle) */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-30 pointer-events-none transition-transform duration-75"
-            style={{ left: `${progressPercent}%` }}
-          >
-            <div className="w-3 h-3 rotate-45 bg-[#C5A059] border-1.5 border-white shadow-[0_2px_6px_rgba(0,0,0,0.3)] rounded-[1.5px]" />
-          </div>
-        </div>
-
-        {/* Alt Satır: Kademeli & Çarpışmasız Kilometre Taşı Etiketleri (Collision-Free Two-Tier Labels) */}
-        <div className="relative w-full h-[18px] text-[8.5px] font-mono select-none">
-          {MILESTONES.map((m) => {
-            const mPct = yearToTrackPercent(m.year) * 100;
-            const isSelected = m.year === year;
-            const isTier2 = m.tier === 2;
-            const hideLabel = trackW < 700 && isTier2 && !isSelected;
-            if (hideLabel) return null;
-
-            return (
-              <button
-                key={m.year}
-                type="button"
-                onClick={() => onYearChange(m.year)}
-                className={`absolute -translate-x-1/2 transition-colors cursor-pointer flex flex-col items-center leading-none ${
-                  isSelected 
-                    ? 'text-[#8B2C21] font-bold z-10' 
-                    : isTier2 
-                    ? 'text-[#7A8780] hover:text-[#8B2C21]' 
-                    : 'text-[#4A5750] hover:text-[#8B2C21] font-medium'
-                }`}
-                style={{ 
-                  left: `${mPct}%`, 
-                  top: isTier2 ? '9px' : '0px' 
-                }}
-                title={`${m.label} (${m.year})`}
-              >
-                {isTier2 && (
-                  <span className="w-0.5 h-0.5 rounded-full bg-[#C5A059]/80 mb-0.5" />
-                )}
-                <span>{m.short}</span>
-              </button>
-            );
-          })}
+        {/* Zone C: Balkan Demografi Göstergesi, Toplam Nüfus, Kaynak ve Bölge */}
+        <div className="flex-1 min-w-0">
+          <TimelineMetricsZone year={year} />
         </div>
       </div>
 
-      {/* 4. Sağ Taraf: OHM Adım Atlama, Mod Değiştirici ve Metodoloji */}
-      <div className="flex-shrink-0 ml-0.5 flex flex-col items-end gap-1">
-        <div className="flex items-center gap-1">
-          {/* OHM Zaman Atlama Adımı (Time Jump) */}
-          <div 
-            className="hidden sm:flex items-center bg-[#FFFDF9] border border-[#C5A059]/30 rounded-full p-0.5 text-[9px] font-mono shadow-2xs" 
-            title="OpenHistoricalMap & ChronoAtlas Zaman Atlama Adımı"
-          >
-            <span className="text-[#829088] pl-1.5 pr-0.5 text-[8.5px] font-sans font-medium">Adım:</span>
-            {[1, 5, 10, 25].map(step => (
-              <button
-                key={step}
-                type="button"
-                onClick={() => setOhmStepAmount(step)}
-                className={`px-1.5 py-0.2 rounded-full transition-all cursor-pointer ${
-                  ohmStepAmount === step 
-                    ? 'bg-[#8B2C21] text-white font-bold shadow-2xs' 
-                    : 'text-[#5C6963] hover:text-[#1C2623]'
-                }`}
-              >
-                {step}Y
-              </button>
-            ))}
-          </div>
-
-          {/* Snapshot / History Toggle */}
-          <div className="flex items-center bg-[#FFFDF9] border border-[#C5A059]/30 rounded-full p-0.5 text-[11px] shadow-2xs">
-            <button 
-              className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${temporalMode === 'snapshot' ? 'bg-[#F4EFE2] text-[#8B2C21] font-bold border border-[#C5A059]/40 shadow-2xs' : 'text-[#5C6963]'}`}
-              onClick={() => onTemporalModeChange?.('snapshot')}
-            >
-              Snapshot
-            </button>
-            <button 
-              className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${temporalMode === 'history' ? 'bg-[#F4EFE2] text-[#8B2C21] font-bold border border-[#C5A059]/40 shadow-2xs' : 'text-[#5C6963]'}`}
-              onClick={() => onTemporalModeChange?.('history')}
-            >
-              History
-            </button>
-          </div>
-        </div>
-
-        <p className="text-[8.5px] font-serif text-[#829088] w-40 text-right leading-tight truncate">
-          1354–2026 Rumeli Kronolojisi
-        </p>
+      {/* ORTA SATIR: Zone D (Dönem Kuşakları, Zaman Tarama Rayı, Olaylar ve Kilometre Taşları) */}
+      <div className="w-full">
+        <TimelineTrackZone year={year} onYearChange={onYearChange} />
       </div>
-    </div>
+
+      {/* ALT SATIR: Zone E (Önemli Olaylar Menüsü, Kategori Lejantı, 5Y/10Y/25Y, Snapshot/History, Ayarlar) */}
+      <div className="w-full">
+        <TimelineControlsZone
+          temporalMode={temporalMode}
+          onTemporalModeChange={onTemporalModeChange}
+          onYearChange={onYearChange}
+          year={year}
+        />
+      </div>
+    </nav>
   );
 
-  // Mobil Görünüm
+  // Mobil Görünüm (Kompakt Alt Bar + Detaylı Sheet)
   const mobileContent = (
-    <div className="h-[60px] bg-[#FAF8F2] border-t border-[#dddcd1] flex items-center px-3 justify-between w-full select-none shadow-sm">
+    <div className="h-[64px] bg-[#FAF8F3] border-t border-[#C5A059]/40 flex items-center px-3 justify-between w-full select-none shadow-lg z-25 relative">
+      {/* Sol: Adım Geri & Yıl Açıcı */}
       <div className="flex items-center gap-1">
-        <button 
-          className="p-1.5 text-gray-600" 
-          onClick={() => onYearChange(Math.max(1354, year - (ohmStepAmount || 1)))}
+        <button
+          type="button"
+          className="p-1.5 text-[#5C6963] hover:text-[#8B2C21]"
+          onClick={() => {
+            const bp = getAdjacentBreakpoint(year, -1);
+            onYearChange(bp !== null ? bp : Math.max(1354, year - (ohmStepAmount || 5)));
+          }}
+          aria-label="Geriye git"
         >
           <ChevronLeft size={18} />
         </button>
-        <button 
-          onClick={() => setSheetOpen(true)} 
-          className="text-center px-1"
+
+        <button
+          type="button"
+          onClick={() => setSheetOpen(true)}
+          className="text-center px-1.5 py-0.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
+          title="Tarihsel detayları ve olayları aç"
         >
-          <strong className="text-xl font-serif text-primary block leading-none">
+          <strong className="text-xl font-serif text-[#8B2C21] block leading-none lining-nums">
             {year}
           </strong>
-          <span className="text-[9px] text-[#00694C] font-bold block">
+          <span className="text-[9px] text-[#005A3E] font-bold block leading-tight">
             %{demo.pct.toFixed(0)} Türk/Müs.
           </span>
         </button>
-        <button 
-          className="p-1.5 text-gray-600" 
-          onClick={() => onYearChange(Math.min(2026, year + (ohmStepAmount || 1)))}
+
+        <button
+          type="button"
+          className="p-1.5 text-[#5C6963] hover:text-[#8B2C21]"
+          onClick={() => {
+            const bp = getAdjacentBreakpoint(year, 1);
+            onYearChange(bp !== null ? bp : Math.min(2026, year + (ohmStepAmount || 5)));
+          }}
+          aria-label="İleriye git"
         >
           <ChevronRight size={18} />
         </button>
       </div>
-      
-      <div className="flex-1 mx-3 flex flex-col justify-center">
-        {/* Mobil Era Bandı Mini Çizgisi */}
-        <div className="w-full h-1 flex rounded overflow-hidden mb-1">
-          {RUMELIA_ERAS.map((era) => (
+
+      {/* Orta: Mobil Mini Ray */}
+      <div className="flex-1 mx-2 flex flex-col justify-center">
+        <div className="w-full h-1.5 flex rounded overflow-hidden mb-1 border border-[#C5A059]/30">
+          {MACRO_ERAS.map((era) => (
             <div
               key={era.id}
               style={{
-                width: `${(era.to - era.from) / (2026 - 1354) * 100}%`,
+                width: `${((era.to - era.from) / (2026 - 1354)) * 100}%`,
                 backgroundColor: era.color,
-                opacity: year >= era.from && year < era.to ? 1 : 0.3
+                opacity: year >= era.from && year < era.to ? 1 : 0.4
               }}
             />
           ))}
         </div>
-        <div className="w-full h-2 bg-stone-200 rounded-full overflow-hidden relative">
-          <div 
-            className="h-full bg-[#9D493A]"
+        <div className="w-full h-2 bg-[#E2DDCF] rounded-full overflow-hidden relative shadow-inner">
+          <div
+            className="h-full bg-gradient-to-r from-[#8B2C21] to-[#A8382B]"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
-      <button 
-        className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-xs"
+      {/* Sağ: Oynatıcı Buton */}
+      <button
+        type="button"
+        className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9E2B20] to-[#751D14] text-white flex items-center justify-center flex-shrink-0 shadow-md ring-2 ring-[#C5A059]/40 cursor-pointer active:scale-95"
         onClick={onPlayingToggle}
+        aria-label={playing ? "Durdur" : "Oynat"}
       >
-        {playing ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" className="ml-0.5" />}
+        {playing ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" className="ml-0.5" />}
       </button>
     </div>
   );
@@ -520,88 +194,124 @@ export function TemporalNavigator({
   return (
     <>
       {isDesktop ? desktopContent : mobileContent}
+
+      {/* Mobil Detay Çekmecesi (Sheet) */}
       {!isDesktop && (
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetContent side="bottom" className="p-6 bg-[#FAF8F2] rounded-t-[24px]">
-             <div className="flex flex-col gap-5 py-2">
-                <div className="text-center">
-                  <strong className="text-4xl font-serif text-primary lining-nums">{year}</strong>
-                  <p className="text-xs font-semibold text-[#00694C] mt-1">{currentEra.name}</p>
-                </div>
+          <SheetContent side="bottom" className="p-5 bg-[#FAF8F3] rounded-t-[24px] max-h-[85vh] overflow-y-auto border-t border-[#C5A059]/40">
+            <div className="flex flex-col gap-4 py-1">
+              <div className="text-center border-b border-[#C5A059]/25 pb-3">
+                <strong className="text-4xl font-serif text-[#8B2C21] lining-nums">{year}</strong>
+                <p className="text-xs font-semibold text-[#8B6E32] mt-1 tracking-wider uppercase font-serif">
+                  {currentEra.name}
+                </p>
+              </div>
 
-                {/* Mobil Demografi Özeti */}
-                <div className="bg-white border border-[#25352F]/15 p-3.5 rounded-xl shadow-xs space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-[#00694C] flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-[#00694C]" />
-                      Balkanlar Türk & Müslüman Nüfusu:
-                    </span>
-                    <span className="font-bold text-sm text-[#00694C] font-mono">
-                      %{demo.pct.toFixed(1)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs text-stone-600 font-mono">
-                    <span>Müslüman Nüfus: <b>{demo.muslim.toLocaleString('tr')}</b></span>
-                    <span>Toplam: <b>{demo.total.toLocaleString('tr')}</b></span>
-                  </div>
-                  <div className="w-full h-2.5 bg-stone-100 rounded-full overflow-hidden flex shadow-inner">
-                    <div className="h-full bg-[#00694C]" style={{ width: `${demo.pct}%` }} />
-                    <div className="h-full bg-[#A91101]" style={{ width: `${100 - demo.pct}%` }} />
-                  </div>
-                  <p className="text-[10px] text-gray-500 italic pt-1 border-t border-stone-100">
-                    {demo.note} ({demo.source})
-                  </p>
+              {/* Mobil Nüfus Kartı */}
+              <div className="bg-white border border-[#C5A059]/35 p-3.5 rounded-xl shadow-xs space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[#005A3E] flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#005A3E]" />
+                    Balkanlar Türk & Müslüman:
+                  </span>
+                  <span className="font-bold text-sm text-[#005A3E] font-mono">
+                    %{demo.pct.toFixed(1)}
+                  </span>
                 </div>
-
-                {/* Mobil Era Bandı */}
-                <div className="space-y-1">
-                  <span className="text-[10px] font-semibold text-stone-500 uppercase">Tarihsel Dönemler:</span>
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {RUMELIA_ERAS.map(era => (
-                      <button
-                        key={era.id}
-                        onClick={() => onYearChange(era.from)}
-                        className={`p-2 rounded text-left text-xs border transition-all ${
-                          year >= era.from && year < era.to 
-                            ? 'border-[#9D493A] bg-amber-50 font-bold' 
-                            : 'border-stone-200 bg-white'
-                        }`}
-                      >
-                        <span className="block font-medium truncate">{era.shortName}</span>
-                        <span className="text-[10px] text-stone-500 font-mono">{era.from}–{era.to}</span>
-                      </button>
-                    ))}
-                  </div>
+                <div className="flex items-center justify-between text-xs text-[#5C6963] font-mono">
+                  <span>Müslüman: <b className="text-[#8B2C21]">{demo.muslim.toLocaleString('tr')}</b></span>
+                  <span>Toplam: <b>{demo.total.toLocaleString('tr')}</b></span>
                 </div>
+                <div className="w-full h-2.5 bg-[#FAF6ED] rounded-full overflow-hidden flex border border-[#C5A059]/30">
+                  <div className="h-full bg-[#005A3E]" style={{ width: `${demo.pct}%` }} />
+                  <div className="h-full bg-[#8B2C21]" style={{ width: `${100 - demo.pct}%` }} />
+                </div>
+                <p className="text-[10px] text-[#74766F] italic pt-1 border-t border-stone-100">
+                  {demo.source} · {demo.note}
+                </p>
+              </div>
 
-                {/* Mobil Kilometre Taşları */}
-                <div className="grid grid-cols-3 gap-2">
-                  {MILESTONES.map(m => (
+              {/* Tarihsel Dönem Kuşakları */}
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-semibold text-[#74766F] uppercase tracking-wider">
+                  Tarihsel Dönemler:
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  {MACRO_ERAS.map((era) => (
+                    <button
+                      key={era.id}
+                      type="button"
+                      onClick={() => {
+                        onYearChange(era.from);
+                        setSheetOpen(false);
+                      }}
+                      className={`p-2 rounded-xl text-left text-xs border transition-all ${
+                        year >= era.from && year < era.to
+                          ? 'border-[#8B2C21] bg-[#FAF6EC] font-bold ring-1 ring-[#8B2C21]/30'
+                          : 'border-[#C5A059]/30 bg-white hover:bg-[#FAF6EC]'
+                      }`}
+                    >
+                      <span className="block font-serif font-semibold truncate" style={{ color: era.textColor }}>
+                        {era.shortName}
+                      </span>
+                      <span className="text-[10px] text-[#74766F] font-mono">{era.from}–{era.to}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kilometre Taşları */}
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-semibold text-[#74766F] uppercase tracking-wider">
+                  Kırılma Noktaları:
+                </span>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {TIMELINE_MILESTONES.map((m) => (
                     <button
                       key={m.year}
-                      className={`py-2 text-xs rounded border ${m.year === year ? 'border-primary bg-primary/5 text-primary font-bold' : 'border-gray-200 bg-white text-gray-600'}`}
-                      onClick={() => onYearChange(m.year)}
+                      type="button"
+                      className={`py-1.5 text-xs rounded-lg border font-mono transition-colors ${
+                        m.year === year
+                          ? 'border-[#8B2C21] bg-[#8B2C21] text-white font-bold'
+                          : 'border-[#C5A059]/30 bg-white text-[#1C2623] hover:bg-[#FAF6EC]'
+                      }`}
+                      onClick={() => {
+                        onYearChange(m.year);
+                        setSheetOpen(false);
+                      }}
                     >
                       {m.short}
                     </button>
                   ))}
                 </div>
+              </div>
 
-                <div className="flex items-center justify-center bg-white border border-gray-200 rounded-full p-1 text-sm shadow-xs mx-auto">
-                  <button 
-                    className={`px-4 py-1.5 rounded-full transition-colors ${temporalMode === 'snapshot' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold' : 'text-gray-600'}`}
-                    onClick={() => onTemporalModeChange?.('snapshot')}
-                  >
-                    Snapshot
-                  </button>
-                  <button 
-                    className={`px-4 py-1.5 rounded-full transition-colors ${temporalMode === 'history' ? 'bg-[#FAF8F2] text-[#9D493A] font-bold' : 'text-gray-600'}`}
-                    onClick={() => onTemporalModeChange?.('history')}
-                  >
-                    History
-                  </button>
-                </div>
-             </div>
+              {/* Görünüm Modu */}
+              <div className="flex items-center justify-center bg-white border border-[#C5A059]/35 rounded-full p-1 text-sm shadow-xs mx-auto w-full max-w-xs mt-2">
+                <button
+                  type="button"
+                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs ${
+                    temporalMode === 'snapshot'
+                      ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
+                      : 'text-[#74766F]'
+                  }`}
+                  onClick={() => onTemporalModeChange('snapshot')}
+                >
+                  Snapshot
+                </button>
+                <button
+                  type="button"
+                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs ${
+                    temporalMode === 'history'
+                      ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
+                      : 'text-[#74766F]'
+                  }`}
+                  onClick={() => onTemporalModeChange('history')}
+                >
+                  History
+                </button>
+              </div>
+            </div>
           </SheetContent>
         </Sheet>
       )}
