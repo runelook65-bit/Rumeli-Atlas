@@ -7,6 +7,12 @@ if (!["dev", "build"].includes(command)) throw new Error("Expected dev or build.
 await import("./copy-maplibre-worker.mjs");
 const managedLinux = readExecutionProfile() === "managed-linux";
 
+if (process.env.VERCEL && command === "build") {
+  const result = spawnSync("npx", ["next", "build", ...args], { stdio: "inherit", shell: true });
+  if (result.error) throw result.error;
+  process.exit(result.status ?? 0);
+}
+
 if (managedLinux && command === "build") {
   const result = spawnSync("bash", [
     fileURLToPath(new URL("./build-verified.sh", import.meta.url)), ...args,
