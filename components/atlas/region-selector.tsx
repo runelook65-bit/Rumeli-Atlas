@@ -120,7 +120,7 @@ export function RegionSelector({
 
       {isOpen && (
         <div 
-          className="absolute left-0 mt-2 w-[340px] sm:w-[380px] max-h-[480px] flex flex-col bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in zoom-in-95 duration-150 backdrop-blur-xl"
+          className="absolute left-0 mt-2 w-[340px] sm:w-[380px] max-w-[calc(100vw-24px)] max-h-[480px] flex flex-col bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in zoom-in-95 duration-150 backdrop-blur-xl"
           role="menu"
         >
           {/* Header */}

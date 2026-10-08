@@ -89,6 +89,7 @@ export default function Atlas() {
   // Local Component State for Map Lifecycle
   const [ready, setReady] = useState(false);
   const [error, setError] = useState('');
+  const [lostNoteDismissed, setLostNoteDismissed] = useState(false);
   const mapEl = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<AtlasMapHandle | null>(null);
 
@@ -293,9 +294,16 @@ export default function Atlas() {
           {/* Historia Event Context Card */}
           <EventPanel />
 
-          {mode === 'lost' && (
-            <div className="lost-note">
-              Bu mod bütün dönemleri birlikte gösterir. Zaman çizgisi, seçili yapının kronolojisini okumak için kullanılabilir.
+          {mode === 'lost' && !lostNoteDismissed && (
+            <div className="lost-note flex items-start justify-between gap-2.5">
+              <span>Bu mod bütün dönemleri birlikte gösterir. Zaman çizgisi, seçili yapının kronolojisini okumak için kullanılabilir.</span>
+              <button
+                onClick={() => setLostNoteDismissed(true)}
+                aria-label="Bilgi kutusunu kapat"
+                className="text-stone-400 hover:text-stone-700 p-0.5 shrink-0 cursor-pointer rounded hover:bg-black/5"
+              >
+                <X size={14} />
+              </button>
             </div>
           )}
 

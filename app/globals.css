@@ -1197,7 +1197,16 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   .mode-toggle { padding: 2px; }
   .mode-toggle button { padding: 4px 8px; font-size: 12px; gap: 4px; }
   .search-wrap:not(.mobile-open) { display: none; }
-  .search-mobile-btn { display: flex; }
+  .search-mobile-btn { 
+    display: flex;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid var(--atlas-border);
+    color: var(--atlas-burgundy);
+    box-shadow: var(--atlas-shadow-sm);
+  }
   .search-wrap.mobile-open {
     position: fixed;
     top: 0;
@@ -1205,10 +1214,65 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
     right: 0;
     height: 60px;
     width: 100% !important;
+    max-width: 100vw !important;
     border-radius: 0;
-    z-index: 100;
-    background: var(--atlas-paper);
-    padding: 0 16px;
+    z-index: 1000;
+    background: #FFFDF9;
+    border: none;
+    border-bottom: 1px solid var(--atlas-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .search-wrap.mobile-open .search-icon-desktop {
+    display: none;
+  }
+  .search-wrap.mobile-open .search-back {
+    color: var(--atlas-burgundy);
+    padding: 6px;
+    border-radius: 50%;
+    background: #FAF6EC;
+    border: 1px solid var(--atlas-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .search-wrap.mobile-open input {
+    font-size: 15px;
+    color: var(--atlas-text);
+  }
+  .search-wrap.mobile-open .search-results {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: calc(100dvh - 60px);
+    background: #FFFDF9;
+    backdrop-filter: none;
+    border-radius: 0 0 16px 16px;
+    border: none;
+    border-bottom: 1px solid var(--atlas-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    padding: 10px 12px;
+  }
+  .search-wrap.mobile-open .search-results button {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .lost-note {
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    max-width: calc(100% - 24px);
+    font-size: 11.5px;
+    padding: 8px 12px;
   }
 
   .map-toolbar { display: none; }
@@ -1218,8 +1282,8 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   .region-mobile { display: inline; }
   .map-controls { right: 12px; top: 12px; }
   .compass { display: none; }
-  .count-pill { bottom: 12px; left: 12px; }
-  .map-legend { bottom: 50px; left: 12px; }
+  .count-pill { bottom: 16px; left: 12px; }
+  .map-legend { bottom: 64px; left: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

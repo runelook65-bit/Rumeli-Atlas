@@ -115,78 +115,89 @@ export function TemporalNavigator({
 
   // Mobil Görünüm (Kompakt Alt Bar + Detaylı Sheet)
   const mobileContent = (
-    <div className="h-[64px] bg-[#FAF8F3] border-t border-[#C5A059]/40 flex items-center px-3 justify-between w-full select-none shadow-lg z-25 relative">
+    <div className="h-[64px] pb-[env(safe-area-inset-bottom,0px)] bg-[#FAF8F3] border-t border-[#C5A059]/40 flex items-center px-3 justify-between w-full select-none shadow-lg z-25 relative">
       {/* Sol: Adım Geri & Yıl Açıcı */}
       <div className="flex items-center gap-1">
         <button
           type="button"
-          className="p-1.5 text-[#5C6963] hover:text-[#8B2C21]"
+          className="p-2 text-[#5C6963] hover:text-[#8B2C21] active:scale-95 cursor-pointer touch-manipulation"
           onClick={() => {
             const bp = getAdjacentBreakpoint(year, -1);
             onYearChange(bp !== null ? bp : Math.max(1354, year - (ohmStepAmount || 5)));
           }}
           aria-label="Geriye git"
         >
-          <ChevronLeft size={18} />
+          <ChevronLeft size={20} />
         </button>
 
         <button
           type="button"
           onClick={() => setSheetOpen(true)}
-          className="text-center px-1.5 py-0.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
+          className="flex flex-col items-center justify-center px-2 py-1 rounded-xl bg-[#FFFDF9] border border-[#C5A059]/40 shadow-xs active:bg-[#F2ECE1] transition-colors cursor-pointer touch-manipulation"
           title="Tarihsel detayları ve olayları aç"
         >
-          <strong className="text-xl font-serif text-[#8B2C21] block leading-none lining-nums">
+          <strong className="text-lg font-serif text-[#8B2C21] block leading-none lining-nums">
             {year}
           </strong>
-          <span className="text-[9px] text-[#005A3E] font-bold block leading-tight">
+          <span className="text-[9px] text-[#005A3E] font-bold block leading-tight mt-0.5 whitespace-nowrap">
             %{demo.pct.toFixed(0)} Türk/Müs.
           </span>
         </button>
 
         <button
           type="button"
-          className="p-1.5 text-[#5C6963] hover:text-[#8B2C21]"
+          className="p-2 text-[#5C6963] hover:text-[#8B2C21] active:scale-95 cursor-pointer touch-manipulation"
           onClick={() => {
             const bp = getAdjacentBreakpoint(year, 1);
             onYearChange(bp !== null ? bp : Math.min(2026, year + (ohmStepAmount || 5)));
           }}
           aria-label="İleriye git"
         >
-          <ChevronRight size={18} />
+          <ChevronRight size={20} />
         </button>
       </div>
 
-      {/* Orta: Mobil Mini Ray */}
-      <div className="flex-1 mx-2 flex flex-col justify-center">
-        <div className="w-full h-1.5 flex rounded overflow-hidden mb-1 border border-[#C5A059]/30">
+      {/* Orta: Mobil İnteraktif Dokunmatik Ray */}
+      <div className="flex-1 mx-2 relative flex flex-col justify-center h-11 touch-manipulation">
+        <div className="w-full h-1.5 flex rounded overflow-hidden mb-1 border border-[#C5A059]/35 pointer-events-none">
           {MACRO_ERAS.map((era) => (
             <div
               key={era.id}
               style={{
                 width: `${((era.to - era.from) / (2026 - 1354)) * 100}%`,
                 backgroundColor: era.color,
-                opacity: year >= era.from && year < era.to ? 1 : 0.4
+                opacity: year >= era.from && year < era.to ? 1 : 0.45
               }}
             />
           ))}
         </div>
-        <div className="w-full h-2 bg-[#E2DDCF] rounded-full overflow-hidden relative shadow-inner">
+        <div className="w-full h-2.5 bg-[#E2DDCF] rounded-full overflow-hidden relative shadow-inner pointer-events-none">
           <div
-            className="h-full bg-gradient-to-r from-[#8B2C21] to-[#A8382B]"
-            style={{ width: `${progressPercent}%` }}
+            className="h-full transition-[width] duration-75"
+            style={{ width: `${progressPercent}%`, backgroundColor: '#8B2C21' }}
           />
         </div>
+        {/* Görünmez dokunmatik slider (native touch scrubbing) */}
+        <input
+          type="range"
+          min={1354}
+          max={2026}
+          value={year}
+          onChange={(e) => onYearChange(Number(e.target.value))}
+          aria-label="Zaman tarama rayı"
+          className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10 touch-pan-x"
+        />
       </div>
 
-      {/* Sağ: Oynatıcı Buton */}
+      {/* Sağ: Terracotta Oynatıcı Buton */}
       <button
         type="button"
-        className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9E2B20] to-[#751D14] text-white flex items-center justify-center flex-shrink-0 shadow-md ring-2 ring-[#C5A059]/40 cursor-pointer active:scale-95"
+        style={{ backgroundColor: '#9E2B20', color: '#ffffff' }}
+        className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 shadow-md ring-2 ring-[#C5A059]/50 cursor-pointer active:scale-95 transition-transform touch-manipulation"
         onClick={onPlayingToggle}
         aria-label={playing ? "Durdur" : "Oynat"}
       >
-        {playing ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" className="ml-0.5" />}
+        {playing ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" className="ml-0.5" />}
       </button>
     </div>
   );
@@ -198,13 +209,39 @@ export function TemporalNavigator({
       {/* Mobil Detay Çekmecesi (Sheet) */}
       {!isDesktop && (
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetContent side="bottom" className="p-5 bg-[#FAF8F3] rounded-t-[24px] max-h-[85vh] overflow-y-auto border-t border-[#C5A059]/40">
+          <SheetContent side="bottom" className="p-5 pb-8 bg-[#FAF8F3] rounded-t-[28px] max-h-[85vh] overflow-y-auto border-t border-[#C5A059]/40 shadow-2xl">
             <div className="flex flex-col gap-4 py-1">
               <div className="text-center border-b border-[#C5A059]/25 pb-3">
                 <strong className="text-4xl font-serif text-[#8B2C21] lining-nums">{year}</strong>
                 <p className="text-xs font-semibold text-[#8B6E32] mt-1 tracking-wider uppercase font-serif">
                   {currentEra.name}
                 </p>
+              </div>
+
+              {/* Mobil Hızlı Yıl Kaydırıcı */}
+              <div className="bg-white border border-[#C5A059]/35 p-3 rounded-xl shadow-xs space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-[#5C6963] font-mono">
+                  <span>1354</span>
+                  <span className="font-bold text-xs text-[#8B2C21] font-serif">{year}</span>
+                  <span>2026</span>
+                </div>
+                <input
+                  type="range"
+                  min={1354}
+                  max={2026}
+                  value={year}
+                  onChange={(e) => onYearChange(Number(e.target.value))}
+                  aria-label="Yıl değiştir"
+                  className="w-full accent-[#8B2C21] h-2.5 bg-[#E2DDCF] rounded-lg cursor-pointer"
+                />
+                <div className="grid grid-cols-6 gap-1 pt-1 font-mono text-[11px]">
+                  <button onClick={() => onYearChange(Math.max(1354, year - 25))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-25</button>
+                  <button onClick={() => onYearChange(Math.max(1354, year - 10))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-10</button>
+                  <button onClick={() => onYearChange(Math.max(1354, year - 1))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-1</button>
+                  <button onClick={() => onYearChange(Math.min(2026, year + 1))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+1</button>
+                  <button onClick={() => onYearChange(Math.min(2026, year + 10))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+10</button>
+                  <button onClick={() => onYearChange(Math.min(2026, year + 25))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+25</button>
+                </div>
               </div>
 
               {/* Mobil Nüfus Kartı */}
@@ -245,7 +282,7 @@ export function TemporalNavigator({
                         onYearChange(era.from);
                         setSheetOpen(false);
                       }}
-                      className={`p-2 rounded-xl text-left text-xs border transition-all ${
+                      className={`p-2.5 rounded-xl text-left text-xs border transition-all cursor-pointer ${
                         year >= era.from && year < era.to
                           ? 'border-[#8B2C21] bg-[#FAF6EC] font-bold ring-1 ring-[#8B2C21]/30'
                           : 'border-[#C5A059]/30 bg-white hover:bg-[#FAF6EC]'
@@ -270,7 +307,7 @@ export function TemporalNavigator({
                     <button
                       key={m.year}
                       type="button"
-                      className={`py-1.5 text-xs rounded-lg border font-mono transition-colors ${
+                      className={`py-2 text-xs rounded-xl border font-mono transition-colors cursor-pointer ${
                         m.year === year
                           ? 'border-[#8B2C21] bg-[#8B2C21] text-white font-bold'
                           : 'border-[#C5A059]/30 bg-white text-[#1C2623] hover:bg-[#FAF6EC]'
@@ -290,7 +327,7 @@ export function TemporalNavigator({
               <div className="flex items-center justify-center bg-white border border-[#C5A059]/35 rounded-full p-1 text-sm shadow-xs mx-auto w-full max-w-xs mt-2">
                 <button
                   type="button"
-                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs ${
+                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
                     temporalMode === 'snapshot'
                       ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
                       : 'text-[#74766F]'
@@ -301,7 +338,7 @@ export function TemporalNavigator({
                 </button>
                 <button
                   type="button"
-                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs ${
+                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
                     temporalMode === 'history'
                       ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
                       : 'text-[#74766F]'
