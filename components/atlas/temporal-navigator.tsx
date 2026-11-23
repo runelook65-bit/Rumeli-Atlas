@@ -327,6 +327,55 @@ export function TemporalNavigator({
                 </div>
               </div>
 
+              {/* Mobilde tarihsel olay kataloğu: masaüstü olay menüsüne erişim eşdeğeri */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-semibold text-[#74766F] uppercase tracking-wider">
+                    Önemli tarihsel olaylar
+                  </span>
+                  <span className="text-[10px] text-[#8B6E32] font-mono">
+                    {CURATED_TIMELINE_EVENTS.length} kayıt
+                  </span>
+                </div>
+                <div className="max-h-[min(40dvh,20rem)] overflow-y-auto overscroll-contain rounded-xl border border-[#C5A059]/30 bg-white p-1.5 space-y-1">
+                  {CURATED_TIMELINE_EVENTS.map((event) => {
+                    const category = EVENT_CATEGORIES[event.category];
+                    const isCurrentEvent = event.year === year;
+
+                    return (
+                      <button
+                        key={event.id}
+                        type="button"
+                        onClick={() => {
+                          setPlaying(false);
+                          onYearChange(event.year);
+                          mapHandle?.flyTo({ center: event.coordinates, zoom: 8, duration: 800 });
+                          setSheetOpen(false);
+                        }}
+                        aria-current={isCurrentEvent ? 'date' : undefined}
+                        aria-label={`${event.year}: ${event.title} — ${category.label}`}
+                        className={`min-h-11 w-full flex items-start gap-2 rounded-lg px-2.5 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] ${
+                          isCurrentEvent ? 'bg-[#FAF6EC] ring-1 ring-[#C5A059]/60' : 'hover:bg-[#FAF6EC]/70'
+                        }`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
+                          style={{ backgroundColor: category.color }}
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="flex items-center justify-between gap-2">
+                            <span className="truncate text-xs font-semibold text-[#1C2623]">{event.title}</span>
+                            <span className="shrink-0 font-mono text-[11px] font-bold text-[#8B2C21]">{event.year}</span>
+                          </span>
+                          <span className="block text-[10px] text-[#74766F]">{category.label}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Görünüm Modu */}
               <div className="flex items-center justify-center bg-white border border-[#C5A059]/35 rounded-full p-1 text-sm shadow-xs mx-auto w-full max-w-xs mt-2">
                 <button
