@@ -403,6 +403,11 @@ export function TemporalNavigator({
                   History
                 </button>
               </div>
+              <p className="mx-auto max-w-xs text-center text-[10px] leading-relaxed text-[#74766F]">
+                {temporalMode === 'snapshot'
+                  ? 'Snapshot: seçili yılın dönem filtresini gösterir.'
+                  : 'History: seçili yıla kadar biriken tarihsel kayıtları gösterir.'}
+              </p>
             </div>
           </SheetContent>
         </Sheet>
