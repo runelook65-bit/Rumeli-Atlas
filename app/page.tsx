@@ -333,13 +333,16 @@ export default function Atlas() {
           </div>
 
           <button
+            type="button"
             className="count-pill"
+            aria-label={`Haritada ${filtered.length} kayıt görünüyor. Kayıt listesini aç.`}
             onClick={() => {
               setClusterPlaces(null);
               setRecordsOpen(true);
             }}
           >
-            {filtered.length} kayıt görünümde
+            <span className="count-pill-value">{filtered.length}</span>
+            <span>kayıt görünümde</span>
           </button>
 
           <div className="map-credits">
