@@ -21,7 +21,10 @@ export function AtlasRecordsSheet({
   mode,
   onSelectPlace
 }: AtlasRecordsSheetProps) {
-  const currentList = clusterPlaces ?? filteredPlaces;
+  const visiblePlaceIds = new Set(filteredPlaces.map(place => place.id));
+  const currentList = clusterPlaces
+    ? clusterPlaces.filter(place => visiblePlaceIds.has(place.id))
+    : filteredPlaces;
 
   const title = clusterPlaces
     ? 'Bu konumdaki kayıtlar'
