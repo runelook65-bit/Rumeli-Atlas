@@ -177,7 +177,7 @@ export function LayerDrawer({
       <div className="drawer-content">
         {activeCategoryLayerIds && (
           <div className="layer-status" role="status" aria-live="polite">
-            <span>Etkin katman</span>
+            <span>Etkin katmanlar</span>
             <strong>{activeCategoryLayerCount} / {activeCategoryLayerIds.length}</strong>
           </div>
         )}
