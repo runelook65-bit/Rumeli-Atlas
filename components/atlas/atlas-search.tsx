@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type KeyboardEvent } from 'react';
 import { Search, X, MapPin } from 'lucide-react';
 import { places, searchPlaces, type Place } from '@/lib/atlas-data';
 import { useStore } from '@/lib/store';
@@ -38,6 +38,7 @@ export function AtlasSearch({
 
   const [focused, setFocused] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -46,6 +47,11 @@ export function AtlasSearch({
 
   const results = query ? searchPlaces(query).slice(0, 7) : [];
   const showResults = Boolean(query.trim() && focused);
+  const activeResult = results[activeIndex];
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [query]);
 
   const handleSelect = (p: any) => {
     const found = places.find(x => x.id === p.id);
@@ -60,11 +66,23 @@ export function AtlasSearch({
     setMobileOpen(false);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
       setFocused(false);
       setMobileOpen(false);
       inputRef.current?.blur();
+      return;
+    }
+    if (!showResults || results.length === 0) return;
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveIndex(index => Math.min(index + 1, results.length - 1));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveIndex(index => Math.max(index - 1, 0));
+    } else if (event.key === 'Enter' && activeResult) {
+      event.preventDefault();
+      handleSelect(activeResult);
     }
   };
 
@@ -101,6 +119,7 @@ export function AtlasSearch({
           aria-autocomplete="list"
           aria-expanded={showResults}
           aria-controls={RESULTS_ID}
+          aria-activedescendant={showResults && activeResult ? `${RESULTS_ID}-${activeResult.id}` : undefined}
           aria-haspopup="listbox"
           placeholder="Yer veya tarihsel ad ara…"
           value={query}
@@ -130,10 +149,12 @@ export function AtlasSearch({
                 return (
                   <button
                     type="button"
+                    id={`${RESULTS_ID}-${p.id}`}
                     role="option"
-                    aria-selected={false}
+                    aria-selected={p.id === activeResult?.id}
                     key={p.id}
                     onClick={() => handleSelect(p)}
+                    onMouseEnter={() => setActiveIndex(results.findIndex(result => result.id === p.id))}
                     onMouseDown={e => e.preventDefault()}
                   >
                     <MapPin size={16} className="shrink-0" aria-hidden="true" />
