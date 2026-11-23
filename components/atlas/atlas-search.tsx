@@ -13,6 +13,8 @@ interface AtlasSearchProps {
   onNotice?: (msg: string) => void;
 }
 
+const RESULTS_ID = 'atlas-search-results';
+
 export function AtlasSearch({
   query: propQuery,
   onQueryChange: propOnQueryChange,
@@ -39,12 +41,11 @@ export function AtlasSearch({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (mobileOpen) {
-      inputRef.current?.focus();
-    }
+    if (mobileOpen) inputRef.current?.focus();
   }, [mobileOpen]);
 
   const results = query ? searchPlaces(query).slice(0, 7) : [];
+  const showResults = Boolean(query.trim() && focused);
 
   const handleSelect = (p: any) => {
     const found = places.find(x => x.id === p.id);
@@ -55,36 +56,61 @@ export function AtlasSearch({
       onQueryChange('');
       onNotice('Filibe / Plovdiv: yalnız yer adı indeksi; tarihsel veri henüz işlenmedi.');
     }
+    setFocused(false);
     setMobileOpen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Escape') {
+      setFocused(false);
+      setMobileOpen(false);
+      inputRef.current?.blur();
+    }
   };
 
   return (
     <>
-      <button 
+      <button
+        type="button"
         className="search-mobile-btn md:hidden"
         onClick={() => setMobileOpen(true)}
-        aria-label="Ara"
+        aria-label="Aramayı aç"
       >
         <Search size={18} />
       </button>
 
       <div className={`search-wrap ${focused ? 'focused' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         {mobileOpen && (
-          <button className="search-back" onClick={() => setMobileOpen(false)} aria-label="Aramayı kapat">
+          <button
+            type="button"
+            className="search-back"
+            onClick={() => {
+              setMobileOpen(false);
+              setFocused(false);
+            }}
+            aria-label="Aramayı kapat"
+          >
             <X size={18} />
           </button>
         )}
-        <Search size={18} className="search-icon-desktop" />
+        <Search size={18} className="search-icon-desktop" aria-hidden="true" />
         <input
           ref={inputRef}
+          role="combobox"
           aria-label="Yer ara"
+          aria-autocomplete="list"
+          aria-expanded={showResults}
+          aria-controls={RESULTS_ID}
+          aria-haspopup="listbox"
           placeholder="Yer veya tarihsel ad ara…"
           value={query}
           onChange={e => onQueryChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setTimeout(() => setFocused(false), 200)}
+          onKeyDown={handleKeyDown}
         />
         <button
+          type="button"
           className="search-clear"
           aria-label="Aramayı temizle"
           onClick={() => {
@@ -96,25 +122,32 @@ export function AtlasSearch({
           <X size={18} />
         </button>
 
-        {query && focused && (
-          <div className="search-results">
+        {showResults && (
+          <div id={RESULTS_ID} className="search-results" role="listbox" aria-label="Yer arama sonuçları">
             {results.length > 0 ? (
               results.map(p => {
                 const found = places.find(x => x.id === p.id);
                 return (
-                  <button key={p.id} onClick={() => handleSelect(p)} onMouseDown={(e) => e.preventDefault()}>
-                    <MapPin size={16} className="shrink-0" />
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={false}
+                    key={p.id}
+                    onClick={() => handleSelect(p)}
+                    onMouseDown={e => e.preventDefault()}
+                  >
+                    <MapPin size={16} className="shrink-0" aria-hidden="true" />
                     <div className="flex flex-col text-left">
                       <span className="font-serif text-base text-primary">{p.name}</span>
                       <span className="text-xs text-gray-500 font-sans">
-                        {p.modern} · {found ? `${found.layer === 'settlement' ? 'Settlement' : 'Heritage'} · ${found.start}–${found.end || 'present'}` : 'Location'}
+                        {p.modern} · {found ? `${found.layer === 'settlement' ? 'Yerleşim' : 'Kültürel miras'} · ${found.start}–${found.end || 'günümüz'}` : 'Yer adı dizini'}
                       </span>
                     </div>
                   </button>
                 );
               })
             ) : (
-              <p className="p-4 text-sm">Eşleşen yer adı yok.</p>
+              <p className="p-4 text-sm" role="status">Eşleşen yer adı yok.</p>
             )}
           </div>
         )}
