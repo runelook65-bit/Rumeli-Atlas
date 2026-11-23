@@ -218,7 +218,7 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
               }}
               onMouseEnter={() => setHoveredEvent(ev)}
               onMouseLeave={() => setHoveredEvent(null)}
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-15 flex h-11 w-11 items-center justify-center rounded-full bg-transparent cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-1"
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-15 group flex h-11 w-11 items-center justify-center rounded-full bg-transparent cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-1"
               style={{ left: getPositionLeft(evFactor) }}
               title={`${ev.title} (${ev.year}) - ${meta.label}\n${ev.blurb}`}
               aria-label={`${ev.year}: ${ev.title} — ${meta.label}`}
