@@ -115,12 +115,12 @@ export function TemporalNavigator({
 
   // Mobil Görünüm (Kompakt Alt Bar + Detaylı Sheet)
   const mobileContent = (
-    <div className="h-[64px] pb-[env(safe-area-inset-bottom,0px)] bg-[#FAF8F3] border-t border-[#C5A059]/40 flex items-center px-3 justify-between w-full select-none shadow-lg z-25 relative">
+    <div className="min-h-[64px] h-auto pb-[env(safe-area-inset-bottom,0px)] bg-[#FAF8F3] border-t border-[#C5A059]/40 flex items-center px-3 justify-between w-full select-none shadow-lg z-25 relative">
       {/* Sol: Adım Geri & Yıl Açıcı */}
       <div className="flex items-center gap-1">
         <button
           type="button"
-          className="p-2 text-[#5C6963] hover:text-[#8B2C21] active:scale-95 cursor-pointer touch-manipulation"
+          className="min-h-11 min-w-11 p-3 flex items-center justify-center text-[#5C6963] hover:text-[#8B2C21] active:scale-95 cursor-pointer touch-manipulation"
           onClick={() => {
             const bp = getAdjacentBreakpoint(year, -1);
             onYearChange(bp !== null ? bp : Math.max(1354, year - (ohmStepAmount || 5)));
@@ -133,7 +133,7 @@ export function TemporalNavigator({
         <button
           type="button"
           onClick={() => setSheetOpen(true)}
-          className="flex flex-col items-center justify-center px-2 py-1 rounded-xl bg-[#FFFDF9] border border-[#C5A059]/40 shadow-xs active:bg-[#F2ECE1] transition-colors cursor-pointer touch-manipulation"
+          className="min-h-11 flex flex-col items-center justify-center px-2 py-1 rounded-xl bg-[#FFFDF9] border border-[#C5A059]/40 shadow-xs active:bg-[#F2ECE1] transition-colors cursor-pointer touch-manipulation"
           title="Tarihsel detayları ve olayları aç"
         >
           <strong className="text-lg font-serif text-[#8B2C21] block leading-none lining-nums">
@@ -185,6 +185,7 @@ export function TemporalNavigator({
           value={year}
           onChange={(e) => onYearChange(Number(e.target.value))}
           aria-label="Zaman tarama rayı"
+          aria-valuetext={`${year}, ${currentEra.name}`}
           className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10 touch-pan-x"
         />
       </div>
@@ -209,7 +210,7 @@ export function TemporalNavigator({
       {/* Mobil Detay Çekmecesi (Sheet) */}
       {!isDesktop && (
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetContent side="bottom" className="p-5 pb-8 bg-[#FAF8F3] rounded-t-[28px] max-h-[85vh] overflow-y-auto border-t border-[#C5A059]/40 shadow-2xl">
+          <SheetContent side="bottom" className="p-5 pb-8 bg-[#FAF8F3] rounded-t-[28px] max-h-[85dvh] overflow-y-auto overscroll-contain border-t border-[#C5A059]/40 shadow-2xl">
             <div className="flex flex-col gap-4 py-1">
               <div className="text-center border-b border-[#C5A059]/25 pb-3">
                 <strong className="text-4xl font-serif text-[#8B2C21] lining-nums">{year}</strong>
@@ -232,15 +233,16 @@ export function TemporalNavigator({
                   value={year}
                   onChange={(e) => onYearChange(Number(e.target.value))}
                   aria-label="Yıl değiştir"
-                  className="w-full accent-[#8B2C21] h-2.5 bg-[#E2DDCF] rounded-lg cursor-pointer"
+                  aria-valuetext={`${year}, ${currentEra.name}`}
+                  className="w-full accent-[#8B2C21] h-11 bg-[#E2DDCF] rounded-lg cursor-pointer touch-manipulation"
                 />
                 <div className="grid grid-cols-6 gap-1 pt-1 font-mono text-[11px]">
-                  <button onClick={() => onYearChange(Math.max(1354, year - 25))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-25</button>
-                  <button onClick={() => onYearChange(Math.max(1354, year - 10))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-10</button>
-                  <button onClick={() => onYearChange(Math.max(1354, year - 1))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-1</button>
-                  <button onClick={() => onYearChange(Math.min(2026, year + 1))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+1</button>
-                  <button onClick={() => onYearChange(Math.min(2026, year + 10))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+10</button>
-                  <button onClick={() => onYearChange(Math.min(2026, year + 25))} className="py-1 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+25</button>
+                  <button type="button" onClick={() => onYearChange(Math.max(1354, year - 25))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-25</button>
+                  <button type="button" onClick={() => onYearChange(Math.max(1354, year - 10))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-10</button>
+                  <button type="button" onClick={() => onYearChange(Math.max(1354, year - 1))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">-1</button>
+                  <button type="button" onClick={() => onYearChange(Math.min(2026, year + 1))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+1</button>
+                  <button type="button" onClick={() => onYearChange(Math.min(2026, year + 10))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+10</button>
+                  <button type="button" onClick={() => onYearChange(Math.min(2026, year + 25))} className="min-h-11 py-2 bg-[#FAF6EC] border border-[#C5A059]/30 rounded text-center active:bg-[#E2DDCF]">+25</button>
                 </div>
               </div>
 
@@ -282,7 +284,8 @@ export function TemporalNavigator({
                         onYearChange(era.from);
                         setSheetOpen(false);
                       }}
-                      className={`p-2.5 rounded-xl text-left text-xs border transition-all cursor-pointer ${
+                      aria-pressed={year >= era.from && year < era.to}
+                      className={`min-h-11 p-2.5 rounded-xl text-left text-xs border transition-all cursor-pointer ${
                         year >= era.from && year < era.to
                           ? 'border-[#8B2C21] bg-[#FAF6EC] font-bold ring-1 ring-[#8B2C21]/30'
                           : 'border-[#C5A059]/30 bg-white hover:bg-[#FAF6EC]'
@@ -307,7 +310,8 @@ export function TemporalNavigator({
                     <button
                       key={m.year}
                       type="button"
-                      className={`py-2 text-xs rounded-xl border font-mono transition-colors cursor-pointer ${
+                      aria-pressed={m.year === year}
+                      className={`min-h-11 py-2 text-xs rounded-xl border font-mono transition-colors cursor-pointer ${
                         m.year === year
                           ? 'border-[#8B2C21] bg-[#8B2C21] text-white font-bold'
                           : 'border-[#C5A059]/30 bg-white text-[#1C2623] hover:bg-[#FAF6EC]'
@@ -327,7 +331,8 @@ export function TemporalNavigator({
               <div className="flex items-center justify-center bg-white border border-[#C5A059]/35 rounded-full p-1 text-sm shadow-xs mx-auto w-full max-w-xs mt-2">
                 <button
                   type="button"
-                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
+                  aria-pressed={temporalMode === 'snapshot'}
+                  className={`flex-1 min-h-11 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
                     temporalMode === 'snapshot'
                       ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
                       : 'text-[#74766F]'
@@ -338,7 +343,8 @@ export function TemporalNavigator({
                 </button>
                 <button
                   type="button"
-                  className={`flex-1 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
+                  aria-pressed={temporalMode === 'history'}
+                  className={`flex-1 min-h-11 py-1.5 rounded-full transition-colors font-medium text-xs cursor-pointer ${
                     temporalMode === 'history'
                       ? 'bg-[#FAF6EC] text-[#8B2C21] font-bold border border-[#8B2C21]/30 shadow-2xs'
                       : 'text-[#74766F]'
