@@ -122,6 +122,16 @@ export function LayerDrawer({
   const settlementCount = places.filter(p => p.layer === 'settlement').length;
   const heritageCount = places.filter(p => p.layer === 'heritage').length;
   const sourceCount = sources.length;
+  const categoryLayerIds: Partial<Record<string, Layer[]>> = {
+    human: ['settlement', 'ethnicity', 'religion', 'language', 'community'],
+    ottoman: ['administration'],
+    heritage: ['heritage'],
+    change: ['migration']
+  };
+  const activeCategoryLayerIds = categoryLayerIds[activeCategory];
+  const activeCategoryLayerCount = activeCategoryLayerIds?.filter((id) =>
+    mode === 'lost' ? id === 'heritage' : activeLayers.includes(id)
+  ).length ?? 0;
 
   if (!activeCategory) return null;
 
@@ -165,6 +175,12 @@ export function LayerDrawer({
       </button>
 
       <div className="drawer-content">
+        {activeCategoryLayerIds && (
+          <div className="layer-status" role="status" aria-live="polite">
+            <span>Etkin katman</span>
+            <strong>{activeCategoryLayerCount} / {activeCategoryLayerIds.length}</strong>
+          </div>
+        )}
         {activeCategory === 'human' && (
           <>
             <h3>İnsan Coğrafyası</h3>
