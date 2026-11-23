@@ -128,8 +128,10 @@ export function LayerDrawer({
     heritage: ['heritage'],
     change: ['migration']
   };
-  const activeCategoryLayerIds = categoryLayerIds[activeCategory];
-  const activeCategoryLayerCount = activeCategoryLayerIds?.filter((id) =>
+  const activeCategoryLayerIds = activeCategory
+    ? categoryLayerIds[activeCategory]
+    : undefined;
+  const activeCategoryLayerCount = activeCategoryLayerIds?.filter((id: Layer) =>
     mode === 'lost' ? id === 'heritage' : activeLayers.includes(id)
   ).length ?? 0;
 

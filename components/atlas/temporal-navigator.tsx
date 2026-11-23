@@ -37,6 +37,7 @@ export function TemporalNavigator({
   const storeSetYear = useStore((s) => s.setYear);
   const storePlaying = useStore((s) => s.playing);
   const storeSetPlaying = useStore((s) => s.setPlaying);
+  const setPlaying = storeSetPlaying;
   const storeTemporalMode = useStore((s) => s.temporalMode);
   const storeSetTemporalMode = useStore((s) => s.setTemporalMode);
   const ohmStepAmount = useStore((s) => s.ohmStepAmount);
