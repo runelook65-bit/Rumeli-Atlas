@@ -103,7 +103,7 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
       {/* 2. Sürekli Zaman Tarama Rayı (Continuous Pointer Scrub Track) */}
       <div
         ref={trackRef}
-        className="relative h-[32px] flex items-center cursor-crosshair touch-none select-none group mt-1"
+        className="relative h-[32px] flex items-center cursor-crosshair touch-none select-none group mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-2"
         onPointerDown={(e) => {
           dragging.current = true;
           (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
@@ -136,7 +136,6 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
         aria-valuemin={1354}
         aria-valuemax={2026}
         aria-valuenow={year}
-        className="relative h-[32px] flex items-center cursor-crosshair touch-none select-none group mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-2"
         onKeyDown={(e) => {
           let nextYear = year;
           switch (e.key) {
