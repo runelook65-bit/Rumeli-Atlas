@@ -146,7 +146,7 @@ export function TimelineControlsZone({
 
               {/* Olay Listesi */}
               <div
-                className="overflow-y-auto p-2 space-y-1.5 divide-y divide-[#C5A059]/15"
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2 space-y-1.5 divide-y divide-[#C5A059]/15"
                 aria-label="Filtrelenmiş tarihsel olaylar"
                 aria-live="polite"
               >
