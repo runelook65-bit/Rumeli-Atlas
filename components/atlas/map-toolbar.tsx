@@ -35,7 +35,7 @@ export function MapToolbar({
   ];
 
   return (
-    <div className="map-toolbar" role="toolbar" aria-label="Atlas katman çubuğu">
+    <div className="map-toolbar" role="toolbar" aria-label="Atlas araçları" aria-orientation="vertical">
       {categories.map(c => {
         const Icon = c.icon;
         const isActive = activeCategory === c.id;
@@ -45,6 +45,10 @@ export function MapToolbar({
             className={`toolbar-btn ${isActive ? 'active' : ''}`}
             onClick={() => onSelectCategory(isActive ? null : c.id)}
             aria-label={c.label}
+            title={c.label}
+            aria-pressed={isActive}
+            aria-expanded={isActive}
+            aria-controls={isActive ? "atlas-layer-drawer" : undefined}
           >
             <Icon size={20} />
             <span>{c.label}</span>
