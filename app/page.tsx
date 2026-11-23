@@ -360,7 +360,7 @@ export default function Atlas() {
             )}
           </div>
 
-          <PlaceStoryDrawer />
+          <PlaceStoryDrawer isVisible={Boolean(selectedPlace && filtered.some((place) => place.id === selectedPlace.id))} />
         </section>
       </div>
 
