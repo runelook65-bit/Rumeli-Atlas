@@ -29,12 +29,14 @@ import { useStore } from '@/lib/store';
 interface PlaceStoryDrawerProps {
   place?: Place | null;
   year?: number;
+  isVisible?: boolean;
   onClose?: () => void;
 }
 
 export function PlaceStoryDrawer({
   place: propPlace,
   year: propYear,
+  isVisible = true,
   onClose: propOnClose
 }: PlaceStoryDrawerProps = {}) {
   const storePlace = useStore(s => s.selectedPlace);
@@ -233,6 +235,17 @@ export function PlaceStoryDrawer({
 
         {/* Kaydırılabilir Ana İçerik */}
         <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-5 space-y-6">
+          {!isVisible && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2.5 text-xs leading-relaxed text-amber-950"
+            >
+              <b className="block mb-1">Kayıt mevcut harita filtrelerinde görünmüyor.</b>
+              Seçili yıl, katman veya bölge kapsamı bu kaydı dışarıda bırakıyor. Ayrıntılar ve kaynaklar inceleme için açık tutuluyor.
+            </div>
+          )}
+
           {/* 1. ÖZET & TARİHSEL GÜVEN */}
           <section id="sec-summary" className="space-y-3">
             <div className="flex items-center justify-between text-xs py-2 px-3 rounded-lg bg-white border border-[#25352F]/10 shadow-xs">
