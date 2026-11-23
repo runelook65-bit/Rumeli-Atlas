@@ -159,7 +159,7 @@ export function LayerDrawer({
   };
 
   return (
-    <div className={`layer-drawer ${activeCategory ? 'open' : ''}`}>
+    <div id="atlas-layer-drawer" className={`layer-drawer ${activeCategory ? 'open' : ''}`} role="region" aria-label={`${({ human: "İnsan coğrafyası", ottoman: "Osmanlı coğrafyası", heritage: "Kültürel miras", change: "Tarihsel değişim", basemap: "Harita ayarları", research: "Araştırma kaynakları" } as Record<string, string>)[activeCategory] || "Atlas katmanları"} paneli`}>
       <button className="drawer-close" onClick={onClose} aria-label="Kapat">
         <X size={20} />
       </button>
