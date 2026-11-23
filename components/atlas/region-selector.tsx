@@ -135,6 +135,7 @@ export function RegionSelector({
               </span>
             </div>
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
               className="p-1 text-[#829088] hover:text-[#1C2623] rounded-full hover:bg-black/5"
               aria-label="Kapat"
@@ -158,8 +159,10 @@ export function RegionSelector({
               />
               {search && (
                 <button
+                  type="button"
                   onClick={() => setSearch('')}
                   className="absolute right-2 text-[#829088] hover:text-[#1C2623]"
+                  aria-label="Aramayı temizle"
                 >
                   <X size={12} />
                 </button>
@@ -206,6 +209,7 @@ export function RegionSelector({
 
               return (
                 <button
+                  type="button"
                   key={preset.id}
                   onClick={() => handleSelect(preset)}
                   aria-pressed={isSelected}
