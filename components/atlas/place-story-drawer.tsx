@@ -202,7 +202,7 @@ export function PlaceStoryDrawer({
           <button 
             type="button"
             onClick={() => scrollToSection('sec-timeline')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Clock size={12} className="text-[#9D493A]" /> Kronoloji
           </button>
@@ -218,14 +218,14 @@ export function PlaceStoryDrawer({
           <button 
             type="button"
             onClick={() => scrollToSection('sec-evidence')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Layers size={12} className="text-[#9D493A]" /> {year} Yılı
           </button>
           <button 
             type="button"
             onClick={() => scrollToSection('sec-sources')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <BookOpen size={12} className="text-[#9D493A]" /> Kaynaklar
           </button>
