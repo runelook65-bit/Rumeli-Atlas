@@ -32,6 +32,7 @@ export function TimelineControlsZone({
   const setOhmStepAmount = useStore((s) => s.setOhmStepAmount);
   const setMenuOpen = useStore((s) => s.setMenuOpen);
   const mapHandle = useStore((s) => s.mapHandle);
+  const setPlaying = useStore((s) => s.setPlaying);
 
   const [eventsOpen, setEventsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<EventCategoryKey | 'all'>('all');
@@ -166,6 +167,7 @@ export function TimelineControlsZone({
                       key={ev.id}
                       type="button"
                       onClick={() => {
+                        setPlaying(false);
                         onYearChange(ev.year);
                         mapHandle?.flyTo({ center: ev.coordinates, zoom: 8, duration: 800 });
                         setEventsOpen(false);
