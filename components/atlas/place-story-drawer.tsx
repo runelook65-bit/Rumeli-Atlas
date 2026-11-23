@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { 
-  ShieldCheck, 
   ArrowUpRight, 
   X, 
   MapPin, 
