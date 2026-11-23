@@ -87,7 +87,7 @@ export function TimelineControlsZone({
               id="rumelia-timeline-events"
               role="dialog"
               aria-label="Rumeli tarihsel olaylarını keşfet"
-              className="absolute left-0 bottom-full mb-2 w-80 sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-96"
+              className="absolute left-0 bottom-full mb-2 w-[min(24rem,calc(100vw-2rem))] sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-[min(24rem,calc(100dvh-8rem))]"
             >
               <div className="p-3 bg-[#FAF6EC] border-b border-[#C5A059]/25 flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -99,7 +99,7 @@ export function TimelineControlsZone({
                 <button
                   type="button"
                   onClick={() => setEventsOpen(false)}
-                  className="text-[#74766F] hover:text-[#1C2623] p-1 rounded-full hover:bg-black/5"
+                  className="min-h-11 min-w-11 flex items-center justify-center text-[#74766F] hover:text-[#1C2623] rounded-full hover:bg-black/5"
                   aria-label="Kapat"
                 >
                   <X size={14} />
@@ -112,7 +112,7 @@ export function TimelineControlsZone({
                   type="button"
                   onClick={() => setSelectedCategory('all')}
                   aria-pressed={selectedCategory === 'all'}
-                  className={`px-2 py-0.5 rounded-full whitespace-nowrap transition-colors ${
+                  className={`min-h-11 px-3 py-2 rounded-full whitespace-nowrap transition-colors ${
                     selectedCategory === 'all'
                       ? 'bg-[#1C2623] text-white font-bold'
                       : 'text-[#5C6963] hover:bg-[#FAF6EC]'
@@ -126,7 +126,7 @@ export function TimelineControlsZone({
                     type="button"
                     onClick={() => setSelectedCategory(cat.key)}
                     aria-pressed={selectedCategory === cat.key}
-                    className={`px-2 py-0.5 rounded-full flex items-center gap-1 whitespace-nowrap transition-colors ${
+                    className={`min-h-11 px-3 py-2 rounded-full flex items-center gap-1 whitespace-nowrap transition-colors ${
                       selectedCategory === cat.key
                         ? 'font-bold text-white shadow-2xs'
                         : 'text-[#5C6963] hover:bg-[#FAF6EC]'
@@ -173,7 +173,7 @@ export function TimelineControlsZone({
                         setEventsOpen(false);
                       }}
                       aria-current={isCurrent ? 'date' : undefined}
-                      className={`w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] ${
+                      className={`min-h-11 w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] ${
                         isCurrent
                           ? 'bg-[#FAF6EC] border border-[#C5A059]/60 shadow-xs'
                           : 'hover:bg-[#FAF6EC]/60'
