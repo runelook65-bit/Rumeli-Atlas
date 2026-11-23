@@ -237,6 +237,7 @@ export function TimelineControlsZone({
                 key={step}
                 type="button"
                 onClick={() => setOhmStepAmount(step)}
+                aria-pressed={isActive}
                 style={isActive ? { backgroundColor: '#FAF6EC', borderColor: '#C5A059', color: '#8B2C21' } : undefined}
                 className={`px-2 py-0.5 rounded-full transition-all cursor-pointer font-mono border ${
                   isActive
@@ -266,7 +267,8 @@ export function TimelineControlsZone({
                 : 'border-transparent text-[#5C6963] hover:text-[#1C2623]'
             }`}
             onClick={() => onTemporalModeChange('snapshot')}
-            title="Snapshot: Yalnızca seçili yılın tarihsel durumunu gösterir"
+            aria-pressed={temporalMode === 'snapshot'}
+            title="Snapshot: Seçili yılın dönem filtresini gösterir"
           >
             <ImageIcon size={12} className={temporalMode === 'snapshot' ? 'text-[#8B2C21]' : 'text-[#74766F]'} />
             <span>Snapshot</span>
@@ -280,7 +282,8 @@ export function TimelineControlsZone({
                 : 'border-transparent text-[#5C6963] hover:text-[#1C2623]'
             }`}
             onClick={() => onTemporalModeChange('history')}
-            title="History: Bütün tarihsel dönemlerin kümülatif katmanlarını gösterir"
+            aria-pressed={temporalMode === 'history'}
+            title="History: Seçili yıla kadar biriken tarihsel kayıtları gösterir"
           >
             <BarChart2 size={12} className={temporalMode === 'history' ? 'text-[#8B2C21]' : 'text-[#74766F]'} />
             <span>History</span>
