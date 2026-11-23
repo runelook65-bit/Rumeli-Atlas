@@ -127,7 +127,8 @@ export function PlaceStoryDrawer({
 
             <div className="flex items-center gap-1">
               <button
-                className="p-1.5 text-stone-500 hover:text-[#00694C] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-[#00694C] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
                 onClick={() => useStore.getState().setOhmInspectorPlace(p)}
                 title="OpenHistoricalMap (OHM) Etiketleri & GeoJSON İncele"
                 aria-label="OpenHistoricalMap Etiketleri"
@@ -135,7 +136,8 @@ export function PlaceStoryDrawer({
                 <Layers size={17} />
               </button>
               <button
-                className="p-1.5 text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
                 onClick={() => useStore.getState().setHistoriaTextPlace(p)}
                 title="HistoriaText Kanıt Formatını İncele / Kopyala"
                 aria-label="HistoriaText Formatı"
@@ -143,7 +145,8 @@ export function PlaceStoryDrawer({
                 <FileCode size={17} />
               </button>
               <button 
-                className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
                 onClick={onClose}
                 aria-label="Kapat"
               >
@@ -185,14 +188,14 @@ export function PlaceStoryDrawer({
           <button 
             type="button"
             onClick={() => scrollToSection('sec-summary')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Info size={12} className="text-[#9D493A]" /> Özet
           </button>
           <button 
             type="button"
             onClick={() => scrollToSection('sec-gallery')}
-            className="px-2.5 py-1 rounded-lg text-[#9D493A] bg-[#fbf5f4] border border-[#9D493A]/20 hover:bg-[#f6eae8] hover:shadow-xs transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#9D493A] bg-[#fbf5f4] border border-[#9D493A]/20 hover:bg-[#f6eae8] hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <ImageIcon size={12} className="text-[#9D493A]" /> Görsel ({p.images?.length ?? 0})
           </button>
@@ -207,7 +210,7 @@ export function PlaceStoryDrawer({
             <button 
               type="button"
               onClick={() => scrollToSection('sec-demographics')}
-              className="px-2.5 py-1 rounded-lg text-[#00694C] bg-[#f0fdf7] border border-[#00694C]/20 hover:bg-[#e1f9ee] hover:shadow-xs transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
+              className="min-h-11 px-3 py-2 rounded-lg text-[#00694C] bg-[#f0fdf7] border border-[#00694C]/20 hover:bg-[#e1f9ee] hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00694C] transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
             >
               <PieIcon size={12} className="text-[#00694C]" /> Demografi (Pasta)
             </button>
@@ -229,7 +232,7 @@ export function PlaceStoryDrawer({
         </div>
 
         {/* Kaydırılabilir Ana İçerik */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-5 space-y-6">
           {/* 1. ÖZET & TARİHSEL GÜVEN */}
           <section id="sec-summary" className="space-y-3">
             <div className="flex items-center justify-between text-xs py-2 px-3 rounded-lg bg-white border border-[#25352F]/10 shadow-xs">
