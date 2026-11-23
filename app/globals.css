@@ -463,6 +463,25 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   color: var(--atlas-text);
   margin-bottom: 20px;
 }
+.layer-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 9px 12px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 10px;
+  background: rgba(244, 239, 226, 0.58);
+  color: var(--atlas-text-secondary);
+  font-size: 12px;
+}
+.layer-status strong {
+  color: var(--atlas-burgundy);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
 
 /* ── Map Surface & Canvas ── */
 .map-surface {
