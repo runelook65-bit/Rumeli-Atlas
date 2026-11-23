@@ -248,12 +248,14 @@ export function PlaceStoryDrawer({
 
           {/* 1. ÖZET & TARİHSEL GÜVEN */}
           <section id="sec-summary" className="space-y-3">
-            <div className="flex items-center justify-between text-xs py-2 px-3 rounded-lg bg-white border border-[#25352F]/10 shadow-xs">
-              <div className="flex items-center gap-1.5 font-medium text-[#25352F]">
-                <ShieldCheck size={15} className="text-[#00694C]" />
-                <span>{p.confidence === 'high' ? 'Yüksek Tarihsel Güven' : 'Orta Düzey Güven'}</span>
+            <div className="rounded-lg bg-white border border-[#25352F]/10 shadow-xs p-3 space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-[#25352F]">
+                <Info size={14} className="text-[#6F786F]" />
+                <span>Kaynak güven notu: {p.confidence === 'high' ? 'Yüksek' : 'Orta'}</span>
               </div>
-              <span className="text-[11px] text-[#6F786F]">BOA & Salnâme Doğrulamalı</span>
+              <p className="text-[11px] leading-relaxed text-[#6F786F]">
+                Kaynak / araştırma paketi metadatasıdır; her tarihsel iddianın bağımsız olarak doğrulandığı anlamına gelmez. Tarih hassasiyeti ve konum doğruluğu ayrıca değerlendirilmelidir.
+              </p>
             </div>
 
             {/* OHM Temporal GIS Lifespan Kartı */}
