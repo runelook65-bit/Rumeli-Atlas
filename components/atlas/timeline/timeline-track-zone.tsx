@@ -8,7 +8,7 @@ import {
   EVENT_CATEGORIES,
   type TimelineHistoricalEvent 
 } from './timeline-types';
-import { yearToTrackPercent, trackPercentToYear } from '@/lib/chrono-timeline';
+import { getEraForYear, yearToTrackPercent, trackPercentToYear } from '@/lib/chrono-timeline';
 import { useStore } from '@/lib/store';
 
 interface TimelineTrackZoneProps {
@@ -130,10 +130,43 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
           dragging.current = false;
         }}
         role="slider"
+        tabIndex={0}
         aria-label="Tarihsel Zaman Çizelgesi"
+        aria-valuetext={`${year}, ${getEraForYear(year).name}`}
         aria-valuemin={1354}
         aria-valuemax={2026}
         aria-valuenow={year}
+        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-2"
+        onKeyDown={(e) => {
+          let nextYear = year;
+          switch (e.key) {
+            case 'ArrowLeft':
+            case 'ArrowDown':
+              nextYear = year - 1;
+              break;
+            case 'ArrowRight':
+            case 'ArrowUp':
+              nextYear = year + 1;
+              break;
+            case 'PageDown':
+              nextYear = year - 10;
+              break;
+            case 'PageUp':
+              nextYear = year + 10;
+              break;
+            case 'Home':
+              nextYear = 1354;
+              break;
+            case 'End':
+              nextYear = 2026;
+              break;
+            default:
+              return;
+          }
+          e.preventDefault();
+          setPlaying(false);
+          onYearChange(Math.max(1354, Math.min(2026, nextYear)));
+        }}
       >
         {/* Ray Tabanı (Track Base Rail) */}
         <div 
