@@ -31,7 +31,7 @@ export function AtlasRecordsSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="max-h-[75dvh] bg-[#FAF8F2] border-t border-[#dddcd1] rounded-t-2xl p-0 flex flex-col sm:max-w-xl sm:mx-auto sm:rounded-t-2xl">
+      <SheetContent side="bottom" className="max-h-[min(75dvh,42rem)] bg-[#FAF8F2] border-t border-[#dddcd1] rounded-t-2xl p-0 flex flex-col sm:max-w-xl sm:mx-auto sm:rounded-t-2xl">
         <SheetHeader className="p-6 pb-3 text-left">
           <SheetTitle className="font-serif text-2xl text-primary">{title}</SheetTitle>
           <SheetDescription className="text-xs text-gray-500">
@@ -39,12 +39,14 @@ export function AtlasRecordsSheet({
           </SheetDescription>
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto px-6 pb-6 divide-y divide-[#e3e7db]">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 divide-y divide-[#e3e7db]" aria-label="Atlas kayıtları">
           {currentList.map(p => (
             <button
               key={p.id}
+              type="button"
               onClick={() => onSelectPlace(p)}
-              className="flex items-center gap-3 py-3 w-full text-left hover:bg-black/[0.03] transition-colors rounded-lg px-2 -mx-2"
+              aria-label={`${p.name}, ${p.modern}, ${p.layer === 'heritage' ? 'Kültürel miras' : 'Tarihsel yerleşim'}`}
+              className="min-h-11 flex items-center gap-3 py-3 w-full text-left hover:bg-black/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-colors rounded-lg px-2 -mx-2"
             >
               <span
                 className={`w-2.5 h-2.5 rounded-full shrink-0 ${
@@ -63,12 +65,12 @@ export function AtlasRecordsSheet({
                   {p.modern} · {p.layer === 'heritage' ? 'Kültürel miras' : 'Yerleşim'}
                 </small>
               </span>
-              <MapPin size={16} className="text-[#6F786F] shrink-0" />
+              <MapPin size={16} aria-hidden="true" className="text-[#6F786F] shrink-0" />
             </button>
           ))}
 
           {!currentList.length && (
-            <p className="py-6 text-sm text-gray-500 text-center">
+            <p role="status" className="py-6 text-sm text-gray-500 text-center">
               Bu yıl ve katmanlarda kayıt yok. Yılı veya katmanları değiştirin.
             </p>
           )}
