@@ -463,6 +463,25 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   color: var(--atlas-text);
   margin-bottom: 20px;
 }
+.layer-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 9px 12px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 10px;
+  background: rgba(244, 239, 226, 0.58);
+  color: var(--atlas-text-secondary);
+  font-size: 12px;
+}
+.layer-status strong {
+  color: var(--atlas-burgundy);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
 
 /* ── Map Surface & Canvas ── */
 .map-surface {
@@ -584,6 +603,17 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   background: rgba(197, 160, 89, 0.12);
   color: var(--atlas-burgundy);
 }
+.map-controls button:focus-visible,
+.count-pill:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 2px solid var(--atlas-burgundy);
+  outline-offset: 2px;
+}
+.map-controls button {
+  min-width: 44px;
+  min-height: 44px;
+}
 
 .compass {
   position: absolute;
@@ -629,6 +659,13 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   content: '✦';
   color: var(--atlas-gold);
   font-size: 11px;
+}
+.count-pill-value {
+  color: var(--atlas-burgundy);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
 }
 .count-pill:hover {
   background: #ffffff;
@@ -1138,6 +1175,26 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
 .layer-row label { flex: 1; font-size: 14px; cursor: pointer; }
 .layer-row b { font-weight: 500; display: block; font-size: 14px; }
 .layer-row small { display: block; font-size: 11px; color: #91958c; margin-top: 2px; }
+.layer-list > .layer-row {
+  min-height: 58px;
+  margin-bottom: 7px;
+  padding: 9px 11px;
+  border: 1px solid var(--atlas-border-subtle);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.72);
+  transition: border-color var(--transition-hover), background var(--transition-hover), box-shadow var(--transition-hover);
+}
+.layer-list > .layer-row:hover {
+  border-color: rgba(197, 160, 89, 0.55);
+  background: #ffffff;
+}
+.layer-list > .layer-row:focus-within {
+  border-color: var(--atlas-gold);
+  box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.14);
+}
+.layer-list > .layer-row.unavailable {
+  background: rgba(244, 239, 226, 0.42);
+}
 .view-row {
   display: flex;
   justify-content: space-between;
@@ -1282,8 +1339,27 @@ h2, h3 { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font
   .region-mobile { display: inline; }
   .map-controls { right: 12px; top: 12px; }
   .compass { display: none; }
-  .count-pill { bottom: 16px; left: 12px; }
-  .map-legend { bottom: 64px; left: 12px; }
+  .count-pill {
+    bottom: 12px;
+    left: 12px;
+    min-height: 40px;
+    padding: 8px 13px;
+    font-size: 12px;
+    max-width: calc(100vw - 104px);
+  }
+  .count-pill span { white-space: nowrap; }
+  .map-legend {
+    bottom: 62px;
+    left: 12px;
+    max-width: min(210px, calc(100vw - 24px));
+  }
+  .map-credits {
+    right: 10px;
+    bottom: 5px;
+    max-width: calc(100% - 150px);
+    font-size: 9px;
+    text-align: right;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

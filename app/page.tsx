@@ -316,14 +316,14 @@ export default function Atlas() {
             </div>
           )}
 
-          <div className="map-controls">
-            <button aria-label="Yakınlaştır" onClick={() => mapInstanceRef.current?.zoomIn()}>
+          <div className="map-controls" role="group" aria-label="Harita gezinme kontrolleri">
+            <button type="button" aria-label="Yakınlaştır" title="Yakınlaştır" onClick={() => mapInstanceRef.current?.zoomIn()}>
               <Plus size={19} />
             </button>
-            <button aria-label="Uzaklaştır" onClick={() => mapInstanceRef.current?.zoomOut()}>
+            <button type="button" aria-label="Uzaklaştır" title="Uzaklaştır" onClick={() => mapInstanceRef.current?.zoomOut()}>
               <Minus size={19} />
             </button>
-            <button aria-label="Pilot bölgeye odaklan" onClick={flyToPilot}>
+            <button type="button" aria-label="Pilot bölgeye odaklan" title="Pilot bölgeye odaklan" onClick={flyToPilot}>
               <LocateFixed size={19} />
             </button>
           </div>
@@ -333,13 +333,16 @@ export default function Atlas() {
           </div>
 
           <button
+            type="button"
             className="count-pill"
+            aria-label={`Haritada ${filtered.length} kayıt görünüyor. Kayıt listesini aç.`}
             onClick={() => {
               setClusterPlaces(null);
               setRecordsOpen(true);
             }}
           >
-            {filtered.length} kayıt görünümde
+            <span className="count-pill-value">{filtered.length}</span>
+            <span>kayıt görünümde</span>
           </button>
 
           <div className="map-credits">
@@ -357,7 +360,7 @@ export default function Atlas() {
             )}
           </div>
 
-          <PlaceStoryDrawer />
+          <PlaceStoryDrawer isVisible={Boolean(selectedPlace && filtered.some((place) => place.id === selectedPlace.id))} />
         </section>
       </div>
 

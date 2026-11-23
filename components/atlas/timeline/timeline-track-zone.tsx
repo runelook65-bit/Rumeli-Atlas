@@ -8,7 +8,7 @@ import {
   EVENT_CATEGORIES,
   type TimelineHistoricalEvent 
 } from './timeline-types';
-import { yearToTrackPercent, trackPercentToYear } from '@/lib/chrono-timeline';
+import { getEraForYear, yearToTrackPercent, trackPercentToYear } from '@/lib/chrono-timeline';
 import { useStore } from '@/lib/store';
 
 interface TimelineTrackZoneProps {
@@ -130,10 +130,43 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
           dragging.current = false;
         }}
         role="slider"
+        tabIndex={0}
         aria-label="Tarihsel Zaman Çizelgesi"
+        aria-valuetext={`${year}, ${getEraForYear(year).name}`}
         aria-valuemin={1354}
         aria-valuemax={2026}
         aria-valuenow={year}
+        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-2"
+        onKeyDown={(e) => {
+          let nextYear = year;
+          switch (e.key) {
+            case 'ArrowLeft':
+            case 'ArrowDown':
+              nextYear = year - 1;
+              break;
+            case 'ArrowRight':
+            case 'ArrowUp':
+              nextYear = year + 1;
+              break;
+            case 'PageDown':
+              nextYear = year - 10;
+              break;
+            case 'PageUp':
+              nextYear = year + 10;
+              break;
+            case 'Home':
+              nextYear = 1354;
+              break;
+            case 'End':
+              nextYear = 2026;
+              break;
+            default:
+              return;
+          }
+          e.preventDefault();
+          setPlaying(false);
+          onYearChange(Math.max(1354, Math.min(2026, nextYear)));
+        }}
       >
         {/* Ray Tabanı (Track Base Rail) */}
         <div 
@@ -185,19 +218,25 @@ export function TimelineTrackZone({ year, onYearChange }: TimelineTrackZoneProps
               }}
               onMouseEnter={() => setHoveredEvent(ev)}
               onMouseLeave={() => setHoveredEvent(null)}
-              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full transition-transform cursor-pointer z-15 ${
-                isNearActive
-                  ? 'w-2.5 h-2.5 ring-2 ring-white scale-125'
-                  : 'w-1.5 h-1.5 hover:scale-175'
-              }`}
-              style={{
-                left: getPositionLeft(evFactor),
-                backgroundColor: meta.color,
-                boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
-              }}
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-15 group flex h-11 w-11 items-center justify-center rounded-full bg-transparent cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] focus-visible:ring-offset-1"
+              style={{ left: getPositionLeft(evFactor) }}
               title={`${ev.title} (${ev.year}) - ${meta.label}\n${ev.blurb}`}
-              aria-label={`${ev.year}: ${ev.title}`}
-            />
+              aria-label={`${ev.year}: ${ev.title} — ${meta.label}`}
+              aria-pressed={year === ev.year}
+            >
+              <span
+                aria-hidden="true"
+                className={`block rounded-full transition-transform ${
+                  isNearActive
+                    ? 'h-2.5 w-2.5 ring-2 ring-white scale-125'
+                    : 'h-1.5 w-1.5 group-hover:scale-150'
+                }`}
+                style={{
+                  backgroundColor: meta.color,
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
+                }}
+              />
+            </button>
           );
         })}
 

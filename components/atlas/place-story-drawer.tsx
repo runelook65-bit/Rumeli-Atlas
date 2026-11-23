@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { 
-  ShieldCheck, 
   ArrowUpRight, 
   X, 
   MapPin, 
@@ -29,12 +28,14 @@ import { useStore } from '@/lib/store';
 interface PlaceStoryDrawerProps {
   place?: Place | null;
   year?: number;
+  isVisible?: boolean;
   onClose?: () => void;
 }
 
 export function PlaceStoryDrawer({
   place: propPlace,
   year: propYear,
+  isVisible = true,
   onClose: propOnClose
 }: PlaceStoryDrawerProps = {}) {
   const storePlace = useStore(s => s.selectedPlace);
@@ -127,7 +128,8 @@ export function PlaceStoryDrawer({
 
             <div className="flex items-center gap-1">
               <button
-                className="p-1.5 text-stone-500 hover:text-[#00694C] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-[#00694C] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
                 onClick={() => useStore.getState().setOhmInspectorPlace(p)}
                 title="OpenHistoricalMap (OHM) Etiketleri & GeoJSON İncele"
                 aria-label="OpenHistoricalMap Etiketleri"
@@ -135,7 +137,8 @@ export function PlaceStoryDrawer({
                 <Layers size={17} />
               </button>
               <button
-                className="p-1.5 text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-[#9D493A] hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0"
                 onClick={() => useStore.getState().setHistoriaTextPlace(p)}
                 title="HistoriaText Kanıt Formatını İncele / Kopyala"
                 aria-label="HistoriaText Formatı"
@@ -143,7 +146,8 @@ export function PlaceStoryDrawer({
                 <FileCode size={17} />
               </button>
               <button 
-                className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
+                type="button"
+                className="min-h-11 min-w-11 flex items-center justify-center text-stone-500 hover:text-stone-900 hover:bg-stone-200/60 rounded-full transition-colors cursor-pointer shrink-0" 
                 onClick={onClose}
                 aria-label="Kapat"
               >
@@ -185,21 +189,21 @@ export function PlaceStoryDrawer({
           <button 
             type="button"
             onClick={() => scrollToSection('sec-summary')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Info size={12} className="text-[#9D493A]" /> Özet
           </button>
           <button 
             type="button"
             onClick={() => scrollToSection('sec-gallery')}
-            className="px-2.5 py-1 rounded-lg text-[#9D493A] bg-[#fbf5f4] border border-[#9D493A]/20 hover:bg-[#f6eae8] hover:shadow-xs transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#9D493A] bg-[#fbf5f4] border border-[#9D493A]/20 hover:bg-[#f6eae8] hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <ImageIcon size={12} className="text-[#9D493A]" /> Görsel ({p.images?.length ?? 0})
           </button>
           <button 
             type="button"
             onClick={() => scrollToSection('sec-timeline')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Clock size={12} className="text-[#9D493A]" /> Kronoloji
           </button>
@@ -207,7 +211,7 @@ export function PlaceStoryDrawer({
             <button 
               type="button"
               onClick={() => scrollToSection('sec-demographics')}
-              className="px-2.5 py-1 rounded-lg text-[#00694C] bg-[#f0fdf7] border border-[#00694C]/20 hover:bg-[#e1f9ee] hover:shadow-xs transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
+              className="min-h-11 px-3 py-2 rounded-lg text-[#00694C] bg-[#f0fdf7] border border-[#00694C]/20 hover:bg-[#e1f9ee] hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00694C] transition-all font-bold shrink-0 flex items-center gap-1 cursor-pointer"
             >
               <PieIcon size={12} className="text-[#00694C]" /> Demografi (Pasta)
             </button>
@@ -215,29 +219,42 @@ export function PlaceStoryDrawer({
           <button 
             type="button"
             onClick={() => scrollToSection('sec-evidence')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <Layers size={12} className="text-[#9D493A]" /> {year} Yılı
           </button>
           <button 
             type="button"
             onClick={() => scrollToSection('sec-sources')}
-            className="px-2.5 py-1 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
+            className="min-h-11 px-3 py-2 rounded-lg text-[#25352F] hover:bg-white hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9D493A] transition-all font-medium shrink-0 flex items-center gap-1 cursor-pointer"
           >
             <BookOpen size={12} className="text-[#9D493A]" /> Kaynaklar
           </button>
         </div>
 
         {/* Kaydırılabilir Ana İçerik */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-5 space-y-6">
+          {!isVisible && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2.5 text-xs leading-relaxed text-amber-950"
+            >
+              <b className="block mb-1">Kayıt mevcut harita filtrelerinde görünmüyor.</b>
+              Seçili yıl, katman veya bölge kapsamı bu kaydı dışarıda bırakıyor. Ayrıntılar ve kaynaklar inceleme için açık tutuluyor.
+            </div>
+          )}
+
           {/* 1. ÖZET & TARİHSEL GÜVEN */}
           <section id="sec-summary" className="space-y-3">
-            <div className="flex items-center justify-between text-xs py-2 px-3 rounded-lg bg-white border border-[#25352F]/10 shadow-xs">
-              <div className="flex items-center gap-1.5 font-medium text-[#25352F]">
-                <ShieldCheck size={15} className="text-[#00694C]" />
-                <span>{p.confidence === 'high' ? 'Yüksek Tarihsel Güven' : 'Orta Düzey Güven'}</span>
+            <div className="rounded-lg bg-white border border-[#25352F]/10 shadow-xs p-3 space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-[#25352F]">
+                <Info size={14} className="text-[#6F786F]" />
+                <span>Kaynak güven notu: {p.confidence === 'high' ? 'Yüksek' : 'Orta'}</span>
               </div>
-              <span className="text-[11px] text-[#6F786F]">BOA & Salnâme Doğrulamalı</span>
+              <p className="text-[11px] leading-relaxed text-[#6F786F]">
+                Kaynak / araştırma paketi metadatasıdır; her tarihsel iddianın bağımsız olarak doğrulandığı anlamına gelmez. Tarih hassasiyeti ve konum doğruluğu ayrıca değerlendirilmelidir.
+              </p>
             </div>
 
             {/* OHM Temporal GIS Lifespan Kartı */}

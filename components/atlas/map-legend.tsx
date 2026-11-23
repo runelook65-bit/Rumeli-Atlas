@@ -16,6 +16,7 @@ export function MapLegend() {
   return (
     <aside 
       aria-label="Harita lejantı"
+      role="region"
       className="absolute bottom-[118px] md:bottom-[80px] left-3 md:left-5 bg-[#FFFDF9]/95 backdrop-blur-md shadow-md border border-[#C5A059]/30 rounded-xl p-2.5 md:p-3 z-15 text-sm max-w-[210px] select-none transition-all"
     >
       <button 
@@ -23,6 +24,7 @@ export function MapLegend() {
         className="flex justify-between items-center w-full font-serif font-semibold text-xs text-[#8B2C21] cursor-pointer gap-2" 
         onClick={() => setOpen(!open)}
         aria-expanded={open}
+        aria-controls="atlas-map-legend-content"
       >
         <span className="flex items-center gap-1.5">
           <Layers size={13} className="text-[#8B6E32]" />
@@ -32,7 +34,7 @@ export function MapLegend() {
       </button>
 
       {open && (
-        <div className="space-y-2 text-xs text-[#1C2623] mt-2.5 pt-2 border-t border-[#C5A059]/20">
+        <div id="atlas-map-legend-content" className="space-y-2 text-xs text-[#1C2623] mt-2.5 pt-2 border-t border-[#C5A059]/20">
           <div className="flex items-center gap-2">
             <span className="w-3.5 h-3.5 rounded-full block shadow-xs shrink-0" style={{ backgroundColor: '#00694C', borderColor: '#004d38', borderWidth: 1 }}></span>
             <span className="text-[11px] leading-tight font-medium" style={{ color: '#00694C' }}>🟢 Osmanlı Kuruluşu (Saraybosna, Tiran vb.)</span>

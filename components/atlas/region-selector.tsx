@@ -104,7 +104,8 @@ export function RegionSelector({
         }`}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        aria-haspopup="true"
+        aria-haspopup="dialog"
+        aria-controls="atlas-region-dialog"
         aria-label="Bölge ve coğrafya seçimi"
       >
         <span className={`w-2 h-2 rounded-full ${selectedRegionId !== 'all' ? 'bg-[#005A3E] ring-2 ring-[#005A3E]/20' : 'bg-[#8B2C21] ring-2 ring-[#8B2C21]/20'}`} />
@@ -121,7 +122,9 @@ export function RegionSelector({
       {isOpen && (
         <div 
           className="absolute left-0 mt-2 w-[340px] sm:w-[380px] max-w-[calc(100vw-24px)] max-h-[480px] flex flex-col bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in zoom-in-95 duration-150 backdrop-blur-xl"
-          role="menu"
+          id="atlas-region-dialog"
+          role="dialog"
+          aria-label="Coğrafya ve araştırma bölgeleri"
         >
           {/* Header */}
           <div className="p-3.5 bg-[#FAF6EC] border-b border-[#C5A059]/25 flex items-center justify-between">
@@ -132,6 +135,7 @@ export function RegionSelector({
               </span>
             </div>
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
               className="p-1 text-[#829088] hover:text-[#1C2623] rounded-full hover:bg-black/5"
               aria-label="Kapat"
@@ -146,6 +150,7 @@ export function RegionSelector({
               <Search size={14} className="absolute left-2.5 text-[#C5A059]" />
               <input
                 type="text"
+                aria-label="Bölge veya şehir ara"
                 placeholder="Bölge veya şehir ara (örn. Selanik, Rodoplar, Kosova)..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
@@ -154,8 +159,10 @@ export function RegionSelector({
               />
               {search && (
                 <button
+                  type="button"
                   onClick={() => setSearch('')}
                   className="absolute right-2 text-[#829088] hover:text-[#1C2623]"
+                  aria-label="Aramayı temizle"
                 >
                   <X size={12} />
                 </button>
@@ -168,18 +175,21 @@ export function RegionSelector({
             <button
               className={`flex-1 py-1.5 px-2 text-center transition-colors ${activeTab === 'all' ? 'text-[#8B2C21] font-bold border-b-2 border-[#8B2C21] bg-white/50' : 'text-[#5C6963] hover:text-[#1C2623]'}`}
               onClick={() => setActiveTab('all')}
+              aria-pressed={activeTab === 'all'}
             >
               Tümü ({regionPresets.length})
             </button>
             <button
               className={`flex-1 py-1.5 px-2 text-center transition-colors ${activeTab === 'historical' ? 'text-[#8B2C21] font-bold border-b-2 border-[#8B2C21] bg-white/50' : 'text-[#5C6963] hover:text-[#1C2623]'}`}
               onClick={() => setActiveTab('historical')}
+              aria-pressed={activeTab === 'historical'}
             >
               Tarihsel (13 Modül)
             </button>
             <button
               className={`flex-1 py-1.5 px-2 text-center transition-colors ${activeTab === 'modern' ? 'text-[#8B2C21] font-bold border-b-2 border-[#8B2C21] bg-white/50' : 'text-[#5C6963] hover:text-[#1C2623]'}`}
               onClick={() => setActiveTab('modern')}
+              aria-pressed={activeTab === 'modern'}
             >
               Modern Ülkeler
             </button>
@@ -187,6 +197,11 @@ export function RegionSelector({
 
           {/* List of Regions */}
           <div className="flex-1 overflow-y-auto divide-y divide-[#C5A059]/10 p-1.5 max-h-[320px]">
+            {filteredPresets.length === 0 && (
+              <p className="px-4 py-8 text-center text-xs text-[#6F786F]" role="status">
+                Aramanızla eşleşen bölge bulunamadı.
+              </p>
+            )}
             {filteredPresets.map(preset => {
               const isSelected = selectedRegionId ? preset.id === selectedRegionId : selectedName === preset.name;
               const isHistorical = preset.category === 'historical';
@@ -194,8 +209,10 @@ export function RegionSelector({
 
               return (
                 <button
+                  type="button"
                   key={preset.id}
                   onClick={() => handleSelect(preset)}
+                  aria-pressed={isSelected}
                   className={`w-full text-left px-3 py-2 rounded-lg flex items-start justify-between gap-2 hover:bg-[#FAF6EC] transition-colors ${isSelected ? 'bg-[#8B2C21]/8 border border-[#8B2C21]/20' : ''}`}
                 >
                   <div className="flex flex-col">

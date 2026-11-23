@@ -39,3 +39,11 @@ The internal browser reproduced GPUInitializationError: WebGL2 is required. MapL
 - 10 migration claims and 3 cultural regions retain null geometry. No routes or boundaries are fabricated. Administrative claims use reference centers only.
 - Source confidence is retained as package metadata; import is not independent verification. Component demolition or flood damage is not converted to whole-building destruction.
 - Browser verified 35 records at 1894, catalog tabs, all 10 migration claims and downloadable reports/data.
+
+## 2026-11-23: discovery, selection and provenance UI
+- Record-list buttons expose a composed accessible name, visible keyboard focus, and 44px minimum touch height. The list has bounded height, contained scrolling and an announced empty state.
+- Place-detail navigation and header actions use larger touch targets and visible keyboard focus. Detail content scrolling is contained within its panel.
+- The selected-place detail panel now reports when the selected record is outside the current map result set. The message is driven by the same filtered place IDs passed to the map.
+- Cluster record lists are intersected with the current filtered IDs so stale cluster entries are not presented after filters change.
+- The confidence label is explicitly described as source/research-package metadata, not independent verification of every historical claim. Date precision and location accuracy remain separate fields.
+- Source-level checks were performed for the above conditions. A local TypeScript build, lint run and fresh rendered-browser/mobile QA were not performed as part of this change set.

@@ -32,6 +32,7 @@ export function TimelineControlsZone({
   const setOhmStepAmount = useStore((s) => s.setOhmStepAmount);
   const setMenuOpen = useStore((s) => s.setMenuOpen);
   const mapHandle = useStore((s) => s.mapHandle);
+  const setPlaying = useStore((s) => s.setPlaying);
 
   const [eventsOpen, setEventsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<EventCategoryKey | 'all'>('all');
@@ -44,8 +45,15 @@ export function TimelineControlsZone({
       }
     }
     if (eventsOpen) {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setEventsOpen(false);
+      };
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleKeyDown);
+      };
     }
   }, [eventsOpen]);
 
@@ -65,7 +73,8 @@ export function TimelineControlsZone({
             style={{ backgroundColor: '#FFFDF9' }}
             className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#C5A059]/40 text-[#1C2623] hover:text-[#8B2C21] hover:border-[#8B2C21] font-medium text-xs shadow-2xs transition-all cursor-pointer"
             aria-expanded={eventsOpen}
-            aria-haspopup="true"
+            aria-controls="rumelia-timeline-events"
+            aria-haspopup="dialog"
           >
             <ListFilter size={13} className="text-[#8B2C21]" />
             <span className="font-serif font-semibold">Önemli Olaylar</span>
@@ -74,7 +83,12 @@ export function TimelineControlsZone({
 
           {/* Olaylar Açılır Kartı (Yukarı Açılır) */}
           {eventsOpen && (
-            <div className="absolute left-0 bottom-full mb-2 w-80 sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-96">
+            <div
+              id="rumelia-timeline-events"
+              role="dialog"
+              aria-label="Rumeli tarihsel olaylarını keşfet"
+              className="absolute left-0 bottom-full mb-2 w-[min(24rem,calc(100vw-2rem))] sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-[min(24rem,calc(100dvh-8rem))]"
+            >
               <div className="p-3 bg-[#FAF6EC] border-b border-[#C5A059]/25 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Calendar size={15} className="text-[#8B2C21]" />
@@ -85,7 +99,7 @@ export function TimelineControlsZone({
                 <button
                   type="button"
                   onClick={() => setEventsOpen(false)}
-                  className="text-[#74766F] hover:text-[#1C2623] p-1 rounded-full hover:bg-black/5"
+                  className="min-h-11 min-w-11 flex items-center justify-center text-[#74766F] hover:text-[#1C2623] rounded-full hover:bg-black/5"
                   aria-label="Kapat"
                 >
                   <X size={14} />
@@ -97,7 +111,8 @@ export function TimelineControlsZone({
                 <button
                   type="button"
                   onClick={() => setSelectedCategory('all')}
-                  className={`px-2 py-0.5 rounded-full whitespace-nowrap transition-colors ${
+                  aria-pressed={selectedCategory === 'all'}
+                  className={`min-h-11 px-3 py-2 rounded-full whitespace-nowrap transition-colors ${
                     selectedCategory === 'all'
                       ? 'bg-[#1C2623] text-white font-bold'
                       : 'text-[#5C6963] hover:bg-[#FAF6EC]'
@@ -110,7 +125,8 @@ export function TimelineControlsZone({
                     key={cat.key}
                     type="button"
                     onClick={() => setSelectedCategory(cat.key)}
-                    className={`px-2 py-0.5 rounded-full flex items-center gap-1 whitespace-nowrap transition-colors ${
+                    aria-pressed={selectedCategory === cat.key}
+                    className={`min-h-11 px-3 py-2 rounded-full flex items-center gap-1 whitespace-nowrap transition-colors ${
                       selectedCategory === cat.key
                         ? 'font-bold text-white shadow-2xs'
                         : 'text-[#5C6963] hover:bg-[#FAF6EC]'
@@ -129,21 +145,35 @@ export function TimelineControlsZone({
               </div>
 
               {/* Olay Listesi */}
-              <div className="overflow-y-auto p-2 space-y-1.5 divide-y divide-[#C5A059]/15">
+              <div
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2 space-y-1.5 divide-y divide-[#C5A059]/15"
+                aria-label="Filtrelenmiş tarihsel olaylar"
+                aria-live="polite"
+              >
+                <p className="px-2 pb-1 text-[10px] text-[#74766F]" role="status">
+                  {filteredEvents.length} olay gösteriliyor
+                </p>
+                {filteredEvents.length === 0 && (
+                  <p className="px-2 py-4 text-xs text-[#5C6963]">
+                    Bu kategoride gösterilecek olay bulunmuyor.
+                  </p>
+                )}
                 {filteredEvents.map((ev) => {
                   const meta = EVENT_CATEGORIES[ev.category];
-                  const isCurrent = Math.abs(ev.year - year) <= 1;
+                  const isCurrent = ev.year === year;
 
                   return (
                     <button
                       key={ev.id}
                       type="button"
                       onClick={() => {
+                        setPlaying(false);
                         onYearChange(ev.year);
                         mapHandle?.flyTo({ center: ev.coordinates, zoom: 8, duration: 800 });
                         setEventsOpen(false);
                       }}
-                      className={`w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 ${
+                      aria-current={isCurrent ? 'date' : undefined}
+                      className={`min-h-11 w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] ${
                         isCurrent
                           ? 'bg-[#FAF6EC] border border-[#C5A059]/60 shadow-xs'
                           : 'hover:bg-[#FAF6EC]/60'
@@ -207,6 +237,7 @@ export function TimelineControlsZone({
                 key={step}
                 type="button"
                 onClick={() => setOhmStepAmount(step)}
+                aria-pressed={isActive}
                 style={isActive ? { backgroundColor: '#FAF6EC', borderColor: '#C5A059', color: '#8B2C21' } : undefined}
                 className={`px-2 py-0.5 rounded-full transition-all cursor-pointer font-mono border ${
                   isActive
@@ -236,7 +267,8 @@ export function TimelineControlsZone({
                 : 'border-transparent text-[#5C6963] hover:text-[#1C2623]'
             }`}
             onClick={() => onTemporalModeChange('snapshot')}
-            title="Snapshot: Yalnızca seçili yılın tarihsel durumunu gösterir"
+            aria-pressed={temporalMode === 'snapshot'}
+            title="Snapshot: Seçili yılın dönem filtresini gösterir"
           >
             <ImageIcon size={12} className={temporalMode === 'snapshot' ? 'text-[#8B2C21]' : 'text-[#74766F]'} />
             <span>Snapshot</span>
@@ -250,7 +282,8 @@ export function TimelineControlsZone({
                 : 'border-transparent text-[#5C6963] hover:text-[#1C2623]'
             }`}
             onClick={() => onTemporalModeChange('history')}
-            title="History: Bütün tarihsel dönemlerin kümülatif katmanlarını gösterir"
+            aria-pressed={temporalMode === 'history'}
+            title="History: Seçili yıla kadar biriken tarihsel kayıtları gösterir"
           >
             <BarChart2 size={12} className={temporalMode === 'history' ? 'text-[#8B2C21]' : 'text-[#74766F]'} />
             <span>History</span>

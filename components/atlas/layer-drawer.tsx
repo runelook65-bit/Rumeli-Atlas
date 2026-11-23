@@ -122,6 +122,16 @@ export function LayerDrawer({
   const settlementCount = places.filter(p => p.layer === 'settlement').length;
   const heritageCount = places.filter(p => p.layer === 'heritage').length;
   const sourceCount = sources.length;
+  const categoryLayerIds: Partial<Record<string, Layer[]>> = {
+    human: ['settlement', 'ethnicity', 'religion', 'language', 'community'],
+    ottoman: ['administration'],
+    heritage: ['heritage'],
+    change: ['migration']
+  };
+  const activeCategoryLayerIds = categoryLayerIds[activeCategory];
+  const activeCategoryLayerCount = activeCategoryLayerIds?.filter((id) =>
+    mode === 'lost' ? id === 'heritage' : activeLayers.includes(id)
+  ).length ?? 0;
 
   if (!activeCategory) return null;
 
@@ -159,12 +169,18 @@ export function LayerDrawer({
   };
 
   return (
-    <div className={`layer-drawer ${activeCategory ? 'open' : ''}`}>
+    <div id="atlas-layer-drawer" className={`layer-drawer ${activeCategory ? 'open' : ''}`} role="region" aria-label={`${({ human: "İnsan coğrafyası", ottoman: "Osmanlı coğrafyası", heritage: "Kültürel miras", change: "Tarihsel değişim", basemap: "Harita ayarları", research: "Araştırma kaynakları" } as Record<string, string>)[activeCategory] || "Atlas katmanları"} paneli`}>
       <button className="drawer-close" onClick={onClose} aria-label="Kapat">
         <X size={20} />
       </button>
 
       <div className="drawer-content">
+        {activeCategoryLayerIds && (
+          <div className="layer-status" role="status" aria-live="polite">
+            <span>Etkin katmanlar</span>
+            <strong>{activeCategoryLayerCount} / {activeCategoryLayerIds.length}</strong>
+          </div>
+        )}
         {activeCategory === 'human' && (
           <>
             <h3>İnsan Coğrafyası</h3>
