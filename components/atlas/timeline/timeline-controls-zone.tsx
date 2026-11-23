@@ -44,8 +44,15 @@ export function TimelineControlsZone({
       }
     }
     if (eventsOpen) {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setEventsOpen(false);
+      };
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleKeyDown);
+      };
     }
   }, [eventsOpen]);
 
@@ -65,7 +72,8 @@ export function TimelineControlsZone({
             style={{ backgroundColor: '#FFFDF9' }}
             className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#C5A059]/40 text-[#1C2623] hover:text-[#8B2C21] hover:border-[#8B2C21] font-medium text-xs shadow-2xs transition-all cursor-pointer"
             aria-expanded={eventsOpen}
-            aria-haspopup="true"
+            aria-controls="rumelia-timeline-events"
+            aria-haspopup="dialog"
           >
             <ListFilter size={13} className="text-[#8B2C21]" />
             <span className="font-serif font-semibold">Önemli Olaylar</span>
@@ -74,7 +82,12 @@ export function TimelineControlsZone({
 
           {/* Olaylar Açılır Kartı (Yukarı Açılır) */}
           {eventsOpen && (
-            <div className="absolute left-0 bottom-full mb-2 w-80 sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-96">
+            <div
+              id="rumelia-timeline-events"
+              role="dialog"
+              aria-label="Rumeli tarihsel olaylarını keşfet"
+              className="absolute left-0 bottom-full mb-2 w-80 sm:w-96 bg-[#FFFDF9] border border-[#C5A059]/40 rounded-2xl shadow-2xl z-[2000] overflow-hidden animate-in fade-in duration-100 flex flex-col max-h-96"
+            >
               <div className="p-3 bg-[#FAF6EC] border-b border-[#C5A059]/25 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Calendar size={15} className="text-[#8B2C21]" />
@@ -97,6 +110,7 @@ export function TimelineControlsZone({
                 <button
                   type="button"
                   onClick={() => setSelectedCategory('all')}
+                  aria-pressed={selectedCategory === 'all'}
                   className={`px-2 py-0.5 rounded-full whitespace-nowrap transition-colors ${
                     selectedCategory === 'all'
                       ? 'bg-[#1C2623] text-white font-bold'
@@ -110,6 +124,7 @@ export function TimelineControlsZone({
                     key={cat.key}
                     type="button"
                     onClick={() => setSelectedCategory(cat.key)}
+                    aria-pressed={selectedCategory === cat.key}
                     className={`px-2 py-0.5 rounded-full flex items-center gap-1 whitespace-nowrap transition-colors ${
                       selectedCategory === cat.key
                         ? 'font-bold text-white shadow-2xs'
@@ -129,10 +144,22 @@ export function TimelineControlsZone({
               </div>
 
               {/* Olay Listesi */}
-              <div className="overflow-y-auto p-2 space-y-1.5 divide-y divide-[#C5A059]/15">
+              <div
+                className="overflow-y-auto p-2 space-y-1.5 divide-y divide-[#C5A059]/15"
+                aria-label="Filtrelenmiş tarihsel olaylar"
+                aria-live="polite"
+              >
+                <p className="px-2 pb-1 text-[10px] text-[#74766F]" role="status">
+                  {filteredEvents.length} olay gösteriliyor
+                </p>
+                {filteredEvents.length === 0 && (
+                  <p className="px-2 py-4 text-xs text-[#5C6963]">
+                    Bu kategoride gösterilecek olay bulunmuyor.
+                  </p>
+                )}
                 {filteredEvents.map((ev) => {
                   const meta = EVENT_CATEGORIES[ev.category];
-                  const isCurrent = Math.abs(ev.year - year) <= 1;
+                  const isCurrent = ev.year === year;
 
                   return (
                     <button
@@ -143,7 +170,8 @@ export function TimelineControlsZone({
                         mapHandle?.flyTo({ center: ev.coordinates, zoom: 8, duration: 800 });
                         setEventsOpen(false);
                       }}
-                      className={`w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 ${
+                      aria-current={isCurrent ? 'date' : undefined}
+                      className={`w-full text-left pt-1.5 first:pt-0 p-2 rounded-xl transition-all cursor-pointer flex flex-col gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C21] ${
                         isCurrent
                           ? 'bg-[#FAF6EC] border border-[#C5A059]/60 shadow-xs'
                           : 'hover:bg-[#FAF6EC]/60'
